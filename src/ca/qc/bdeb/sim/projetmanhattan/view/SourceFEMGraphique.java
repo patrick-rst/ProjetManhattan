@@ -12,7 +12,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
  *
  * @author blood_000
  */
-public class SourceFEMGraphique extends SourceFEM implements Connectable {
+public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
 
     private int orientation;
     private SourceFEMAbstraite sourceFEM;
@@ -22,6 +22,26 @@ public class SourceFEMGraphique extends SourceFEM implements Connectable {
     @Override
     public byte[] getCotesConnectes() {
         return cotesConnectes;
+    }
+
+    @Override
+    public double getForceElectroMotrice() {
+        return sourceFEM.getForceElectroMotrice();
+    }
+
+    @Override
+    public void setForceElectroMotrice(double forceElectroMotrice) {
+        this.sourceFEM.setForceElectroMotrice(forceElectroMotrice);
+    }
+
+    @Override
+    public double getCourant() {
+        return sourceFEM.getCourant();
+    }
+
+    @Override
+    public void setCourant(double courant) {
+        this.sourceFEM.setCourant(courant);
     }
 
 }

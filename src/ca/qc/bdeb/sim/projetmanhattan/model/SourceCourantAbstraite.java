@@ -10,6 +10,8 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  * @author blood_000
  */
 public interface SourceCourantAbstraite {
+
     public double getCourant();
-    public void setCourant(double Courant);
+
+    public void setCourant(double courant);
 }

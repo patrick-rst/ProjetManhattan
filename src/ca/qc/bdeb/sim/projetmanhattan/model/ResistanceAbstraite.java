@@ -10,8 +10,12 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  * @author blood_000
  */
 public interface ResistanceAbstraite {
+
     public double getResistance();
+
     public void setResistance(double resistance);
+
     public double getCourant();
+
     public void setCourant(double Courant);
 }

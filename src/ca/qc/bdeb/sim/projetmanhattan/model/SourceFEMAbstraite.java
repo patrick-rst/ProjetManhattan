@@ -10,8 +10,12 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  * @author blood_000
  */
 public interface SourceFEMAbstraite {
+
     public double getForceElectroMotrice();
+
     public void setForceElectroMotrice(double forceElectroMotrice);
+
     public double getCourant();
+
     public void setCourant(double Courant);
 }

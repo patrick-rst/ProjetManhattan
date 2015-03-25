@@ -5,33 +5,32 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model;
 
-
-
 /**
  *
  * @author blood_000
  */
-public class SourceFEM implements Composant, SourceFEMAbstraite{
+public class SourceFEM implements Composant, SourceFEMAbstraite {
+
     private double forceElectroMotrice;
     private double courant;
 
     @Override
     public double getForceElectroMotrice() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return forceElectroMotrice;
     }
 
     @Override
     public void setForceElectroMotrice(double forceElectroMotrice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.forceElectroMotrice = forceElectroMotrice;
     }
 
     @Override
     public double getCourant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return courant;
     }
 
     @Override
     public void setCourant(double courant) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.courant = courant;
     }
 }

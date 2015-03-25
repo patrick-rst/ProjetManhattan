@@ -5,22 +5,21 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model;
 
-
-
 /**
  *
  * @author blood_000
  */
-public class SourceCourant implements Composant, SourceCourantAbstraite{
+public class SourceCourant implements Composant, SourceCourantAbstraite {
+
     private double courant;
 
     @Override
     public double getCourant() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return courant;
     }
 
     @Override
     public void setCourant(double courant) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.courant = courant;
     }
 }
