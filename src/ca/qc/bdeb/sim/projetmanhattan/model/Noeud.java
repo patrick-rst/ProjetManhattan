@@ -1,6 +1,6 @@
-package breadboard;
+package ca.qc.bdeb.sim.projetmanhattan.model;
 
-import Vue.Fil;
+import ca.qc.bdeb.sim.projetmanhattan.view.Fil;
 import java.util.ArrayList;
 
 /**

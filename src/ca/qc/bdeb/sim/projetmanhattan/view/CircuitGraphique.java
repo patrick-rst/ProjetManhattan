@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vue;
+package ca.qc.bdeb.sim.projetmanhattan.view;
 
-import breadboard.Noeud;
+
+import ca.qc.bdeb.sim.projetmanhattan.model.Noeud;
 import java.util.ArrayList;
 
 /**
