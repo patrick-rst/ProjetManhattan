@@ -16,12 +16,11 @@ public class ResistanceGraphique extends Resistance implements Connectable {
 
     private int orientation;
     private ResistanceAbstraite resistance;
+    private byte[] cotesConnectes;
 
     @Override
-    public Byte[] getCotesConnectes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public byte[] getCotesConnectes() {
+        return cotesConnectes;
     }
-
-
 
 }

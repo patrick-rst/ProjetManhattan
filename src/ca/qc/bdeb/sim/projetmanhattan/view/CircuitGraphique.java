@@ -6,7 +6,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.Noeud;
-import java.awt.Point;
 import java.util.ArrayList;
 
 /**

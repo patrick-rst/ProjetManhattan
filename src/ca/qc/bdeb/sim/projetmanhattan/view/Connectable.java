@@ -11,5 +11,5 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  */
 public interface Connectable {
     
-    public Byte[] getCotesConnectes();
+    public byte[] getCotesConnectes();
 }

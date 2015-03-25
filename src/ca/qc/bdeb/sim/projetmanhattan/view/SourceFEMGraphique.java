@@ -17,10 +17,11 @@ public class SourceFEMGraphique extends SourceFEM implements Connectable {
     private int orientation;
     private SourceFEMAbstraite sourceFEM;
 
-    @Override
-    public Byte[] getCotesConnectes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private byte[] cotesConnectes;
 
+    @Override
+    public byte[] getCotesConnectes() {
+        return cotesConnectes;
+    }
 
 }

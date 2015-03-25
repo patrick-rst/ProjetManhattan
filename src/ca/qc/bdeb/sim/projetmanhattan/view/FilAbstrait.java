@@ -11,13 +11,13 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  */
 public abstract class FilAbstrait implements Connectable {
 
-    protected Byte[] cotesConnectes;
+    protected byte[] cotesConnectes;
 
     public FilAbstrait() {
-        cotesConnectes = new Byte[4];
+        cotesConnectes = new byte[4];
     }
 
-    public Byte[] getCotesConnectes() {
+    public byte[] getCotesConnectes() {
         return cotesConnectes;
     }
     
