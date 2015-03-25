@@ -5,11 +5,13 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
+
 /**
  *
  * @author blood_000
  */
-public class SourceFEMGraphique implements Connectable {
+public class SourceFEMGraphique extends SourceFEM implements Connectable {
 
     private int orientation;
 
