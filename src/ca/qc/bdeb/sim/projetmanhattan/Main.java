@@ -17,7 +17,6 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/FXMLDocument.fxml"));
         
-        
         Scene scene = new Scene(root);
         
         stage.setTitle("Simtronique");

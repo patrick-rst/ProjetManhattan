@@ -157,22 +157,22 @@
                      <content>
                         <FlowPane prefWidth="180.0">
                            <children>
-                              <ImageView onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/fil.png" />
                                  </image>
                               </ImageView>
-                              <ImageView onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/filT.png" />
                                  </image>
                               </ImageView>
-                              <ImageView onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="filCroix" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/filCroix.png" />
                                  </image>
                               </ImageView>
-                              <ImageView onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/filCoin.png" />
                                  </image>
@@ -185,12 +185,12 @@
                      <content>
                         <FlowPane prefWidth="184.0">
                            <children>
-                              <ImageView onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="battery" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/battery.png" />
                                  </image>
                               </ImageView>
-                              <ImageView onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/resistor.png" />
                                  </image>
