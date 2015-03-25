@@ -6,6 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
+import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
 
 /**
  *
@@ -14,6 +15,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
 public class SourceFEMGraphique extends SourceFEM implements Connectable {
 
     private int orientation;
+    private SourceFEMAbstraite sourceFEM;
 
     @Override
     public int getOrientation() {

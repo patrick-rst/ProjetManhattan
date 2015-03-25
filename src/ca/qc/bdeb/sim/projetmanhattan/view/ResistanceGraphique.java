@@ -5,13 +5,17 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Resistance;
+import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
+
 /**
  *
  * @author blood_000
  */
-public class ResistanceGraphique implements Connectable {
+public class ResistanceGraphique extends Resistance implements Connectable {
 
     private int orientation;
+    private ResistanceAbstraite resistance;
 
     @Override
     public int getOrientation() {
