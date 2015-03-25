@@ -36,6 +36,7 @@ public class FXMLDocumentController implements Initializable {
         
         ClipboardContent content = new ClipboardContent();
         content.putImage(source.getImage());
+        content.putString(source.getId());
         db.setContent(content);
         
         event.consume();
@@ -43,7 +44,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void overComposant(DragEvent event) {
-        if (event.getDragboard().hasImage()) {
+        if (event.getDragboard().hasImage() && event.getDragboard().hasString()) {
             event.acceptTransferModes(TransferMode.MOVE);
         }
         
@@ -54,9 +55,14 @@ public class FXMLDocumentController implements Initializable {
     private void dropComposant(DragEvent event) {
         Dragboard db = event.getDragboard();
         boolean success = false;
-        if (db.hasImage()) {
+        if (db.hasImage() && db.hasString()) {
             ImageView target = (ImageView) event.getGestureTarget();
             target.setImage(db.getImage());
+            
+            String id = db.getString();
+            addComposant(id);
+            
+            
             success = true;
         }
 
@@ -91,6 +97,29 @@ public class FXMLDocumentController implements Initializable {
         source.setRotate(source.getRotate()+90);
     }
     
+    private void addComposant(String id) {
+        if (id.equals("source")) {
+            
+        }
+        else if (id.equals("resistance")) {
+            
+        }
+        else if (id.equals("filDroit")) {
+            
+        }
+        else if (id.equals("filCoin")) {
+            
+        }
+        else if (id.equals("filT")) {
+            
+        }
+        else if (id.equals("filCroix")) {
+            
+        }
+        else {
+            System.out.println("ERROR:Composant not implemented");
+        }
+    }
 
     
    
