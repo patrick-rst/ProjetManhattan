@@ -17,6 +17,8 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
     private SourceCourantAbstraite sourceCourant;
 
     private byte[] cotesConnectes;
+    
+    
 
     @Override
     public byte[] getCotesConnectes() {
