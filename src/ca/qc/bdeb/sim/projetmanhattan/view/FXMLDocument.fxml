@@ -198,16 +198,24 @@
                      <content>
                         <FlowPane prefWidth="184.0">
                            <children>
-                              <ImageView id="battery" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/battery.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/resistor.png" />
-                                 </image>
-                              </ImageView>
+                              <StackPane fx:id="source">
+                                 <children>
+                                    <ImageView id="source" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/battery.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="resistance">
+                                 <children>
+                                    <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/resistor.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
                            </children>
                         </FlowPane>
                      </content>

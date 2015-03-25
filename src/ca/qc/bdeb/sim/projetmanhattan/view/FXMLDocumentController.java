@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.StackPane;
 
 
 /**
@@ -22,11 +23,19 @@ import javafx.scene.input.TransferMode;
 public class FXMLDocumentController implements Initializable {
     
     
+    @FXML
+    StackPane resistance;
     
+    @FXML
+    StackPane source;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        resistance.setStyle("-fx-padding: 10;\n" +
+                            "-fx-background-color: firebrick;");
         
+        source.setStyle("-fx-padding: 10;\n" +
+                            "-fx-background-color: blue;");        
     } 
     
     @FXML
