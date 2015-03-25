@@ -1,6 +1,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.model;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.Fil;
+import ca.qc.bdeb.sim.projetmanhattan.view.FilAbstrait;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author blood_000
  */
 public class Noeud {
-    private ArrayList<Fil> fils;
+    private ArrayList<FilAbstrait> fils;
     private ArrayList<Byte> connexions;
     private ArrayList<Composant> composants;
 
@@ -18,7 +18,7 @@ public class Noeud {
         composants = new ArrayList<>();
     }
     
-    public void ajouterFil(Fil fil){
+    public void ajouterFil(FilAbstrait fil){
         fils.add(fil);
     }
     

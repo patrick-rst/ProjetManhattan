@@ -18,8 +18,10 @@ public class ResistanceGraphique extends Resistance implements Connectable {
     private ResistanceAbstraite resistance;
 
     @Override
-    public int getOrientation() {
-        return orientation;
+    public Byte[] getCotesConnectes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
 }

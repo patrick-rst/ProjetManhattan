@@ -9,7 +9,12 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  *
  * @author blood_000
  */
-public interface Connectable {
-    
-    public Byte[] getCotesConnectes();
+public class FilT extends FilAbstrait{
+    public FilT() {
+        super();
+        cotesConnectes[1] = 1;
+        cotesConnectes[2] = 1;
+        cotesConnectes[3] = 1;
+        
+    }
 }
