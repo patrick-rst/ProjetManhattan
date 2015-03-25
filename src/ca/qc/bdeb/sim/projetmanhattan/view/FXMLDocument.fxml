@@ -162,6 +162,11 @@
                                     <Image url="@img/fil.png" />
                                  </image>
                               </ImageView>
+                              <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                 <image>
+                                    <Image url="@img/filCoin.png" />
+                                 </image>
+                              </ImageView>
                               <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/filT.png" />
@@ -170,11 +175,6 @@
                               <ImageView id="filCroix" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/filCroix.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/filCoin.png" />
                                  </image>
                               </ImageView>
                            </children>
