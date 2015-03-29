@@ -15,10 +15,14 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
  */
 public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
 
-    private int orientation;
     private SourceFEMAbstraite sourceFEM;
-
     private byte[] cotesConnectes;
+
+    public SourceFEMGraphique() {
+        sourceFEM = new SourceFEM();
+        cotesConnectes[0] = 1;
+        cotesConnectes[2] = -1;
+    }
 
     @Override
     public byte[] getCotesConnectes() {

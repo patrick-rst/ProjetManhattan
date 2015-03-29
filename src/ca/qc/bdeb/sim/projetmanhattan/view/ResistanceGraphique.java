@@ -6,6 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.model.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
 
 /**
@@ -14,9 +15,14 @@ import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
  */
 public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
 
-    private int orientation;
     private ResistanceAbstraite resistance;
     private byte[] cotesConnectes;
+
+    public ResistanceGraphique() {
+        this.resistance = new Resistance();
+        cotesConnectes[0] = 1;
+        cotesConnectes[2] = 1;
+    }
 
     @Override
     public byte[] getCotesConnectes() {
@@ -55,7 +61,7 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
         cotesConnectes[1] = cotesConnectes[0];
         cotesConnectes[0] = temp;
     }
-    
+
     public Composant getEnfant() {
         return (Composant) this.resistance;
     }

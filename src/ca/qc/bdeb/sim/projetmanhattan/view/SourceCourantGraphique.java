@@ -6,6 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourantAbstraite;
 
 /**
@@ -14,10 +15,14 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourantAbstraite;
  */
 public class SourceCourantGraphique implements SourceCourantAbstraite, Connectable {
 
-    private int orientation;
     private SourceCourantAbstraite sourceCourant;
-
     private byte[] cotesConnectes;
+
+    public SourceCourantGraphique() {
+        this.sourceCourant = new SourceCourant();
+        cotesConnectes[0] = 1;
+        cotesConnectes[2] = 1;
+    }
 
     @Override
     public byte[] getCotesConnectes() {
