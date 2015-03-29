@@ -5,6 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
 
 /**
@@ -53,6 +54,10 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
         cotesConnectes[2] = cotesConnectes[1];
         cotesConnectes[1] = cotesConnectes[0];
         cotesConnectes[0] = temp;
+    }
+    
+    public Composant getEnfant() {
+        return (Composant) this.resistance;
     }
 
 }

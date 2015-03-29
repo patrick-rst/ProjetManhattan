@@ -115,4 +115,16 @@ public class Circuit {
         noeuds.add(noeud);
     }
 
+    public void ajouterResistance(Resistance resistance) {
+        resistances.add(resistance);
+    }
+
+    public void ajouterSourceFEM(SourceFEM sourceFEM) {
+        sourcesFEM.add(sourceFEM);
+    }
+
+    public void ajouterSourceCourant(SourceCourant sourceCourant) {
+        sourcesCourant.add(sourceCourant);
+    }
+
 }

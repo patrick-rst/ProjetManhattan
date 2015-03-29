@@ -5,6 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourantAbstraite;
 
 /**
@@ -39,6 +40,10 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
         cotesConnectes[2] = cotesConnectes[1];
         cotesConnectes[1] = cotesConnectes[0];
         cotesConnectes[0] = temp;
+    }
+
+    public Composant getEnfant() {
+        return (Composant) this.sourceCourant;
     }
 
 }
