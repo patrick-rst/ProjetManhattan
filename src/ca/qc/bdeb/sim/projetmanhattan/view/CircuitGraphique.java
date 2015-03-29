@@ -27,7 +27,6 @@ public class CircuitGraphique {
     }
 
     public void creerLiens() {
-
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 1; j < connectables[i].length; ++j) {
                 if (!connectablesPasses[i][j]) {
@@ -46,7 +45,6 @@ public class CircuitGraphique {
                             }
                         }
                         circuit.ajouterNoeud(noeud);
-
                     }
                 }
             }

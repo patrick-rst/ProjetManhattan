@@ -6,6 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.model;
 
 import java.util.ArrayList;
+import org.ejml.simple.SimpleMatrix;
 
 /**
  *
@@ -29,8 +30,7 @@ public class Circuit {
     private double[][] matriceC;
     private double[][] matriceD;
     private double[] matriceZ;
-    private double[] matriceI;
-    private double[] matriceE;
+
     private double[] matriceX;
 
     public Circuit() {
@@ -50,10 +50,92 @@ public class Circuit {
         matriceC = new double[nombreSourcesFEM][nombreNoeuds];
         matriceD = new double[nombreSourcesFEM][nombreSourcesFEM];
         matriceZ = new double[nombreNoeuds + nombreSourcesFEM];
-        matriceI = new double[nombreSourcesCourant];
-        matriceE = new double[nombreSourcesFEM];
         matriceX = new double[nombreNoeuds + nombreSourcesFEM];
 
+    }
+
+    public void analyserCircuit() {
+        construireMatriceG();
+        construireMatriceBetC();
+        construireMatriceZ();
+        combinerMatriceA();
+        resoudreCircuitAnalogue();
+    }
+
+    public void resoudreCircuitAnalogue() {
+        SimpleMatrix matA = new SimpleMatrix(nombreNoeuds + nombreSourcesFEM, nombreNoeuds + nombreSourcesFEM);
+        for (int i = 0; i < matriceA.length; ++i) {
+            for (int j = 0; j < matriceA[i].length; ++j) {
+                matA.set(i, j, matriceA[i][j]);
+            }
+        }
+
+        SimpleMatrix matZ = new SimpleMatrix(nombreNoeuds + nombreSourcesFEM, 1);
+        for (int i = 0; i < matriceZ.length; ++i) {
+            matZ.set(i, matriceZ[i]);
+        }
+
+        try {
+            SimpleMatrix matX = matA.solve(matZ);
+
+            for (int i = 0; i < nombreNoeuds + nombreSourcesFEM; ++i) {
+                matriceX[i] = matX.get(i);
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de ls resolution de la matrice");
+        }
+
+    }
+
+    public void construireMatriceZ() {
+        for (int i = 0; i < nombreNoeuds; ++i) {
+            for (Composant composant : noeuds.get(i).getComposants()) {
+                if (composant instanceof SourceCourant) {
+                    matriceZ[i] += ((SourceCourant) composant).getCourant();
+                }
+            }
+        }
+
+        for (int i = 0; i < nombreSourcesFEM; ++i) {
+            matriceZ[i + nombreNoeuds] = sourcesFEM.get(i).getForceElectroMotrice();
+        }
+    }
+
+    public void construireMatriceBetC() {
+        int n1 = -1;
+        int n2 = -2;
+        for (int i = 0; i < nombreSourcesFEM; ++i) {
+            for (int j = 0; j < nombreNoeuds; ++j) {
+                if (noeuds.get(j).getComposants().contains(sourcesFEM.get(i))) {
+                    //if (sourcesFEM.get(i).)
+                }
+            }
+        }
+
+    }
+
+    public void construireMatriceG() {
+        int n1 = -1;
+        int n2 = -1;
+        for (int i = 0; i < resistances.size(); ++i) {
+            double valeurAAjouter = 1 / resistances.get(i).getResistance();
+            for (int j = 0; j < noeuds.size(); ++j) {
+                if (noeuds.get(j).getComposants().contains(resistances.get(i))) {
+                    if (n1 == -1) {
+                        n1 = j;
+                    } else {
+                        n2 = j;
+                    }
+                }
+            }
+            matriceG[n1][n1] += valeurAAjouter;
+            if (n2 != -1) {
+                matriceG[n2][n2] += valeurAAjouter;
+                matriceG[n1][n2] -= valeurAAjouter;
+                matriceG[n2][n1] -= valeurAAjouter;
+            }
+
+        }
     }
 
     public void selectionnerNoeudGround() {
@@ -69,28 +151,11 @@ public class Circuit {
         }
     }
 
-    public void combinerMatriceZ() {
-        ajouterMatriceI();
-        ajouterMatriceE();
-    }
-
     public void combinerMatriceA() {
         ajouterMatriceG();
         ajouterMatriceB();
         ajouterMatriceC();
         ajouterMatriceD();
-    }
-
-    public void ajouterMatriceI() {
-        for (int i = 0; i < matriceI.length; ++i) {
-            matriceZ[i] = matriceI[i];
-        }
-    }
-
-    public void ajouterMatriceE() {
-        for (int i = 0; i < matriceE.length; ++i) {
-            matriceZ[i + nombreSourcesCourant] = matriceE[i];
-        }
     }
 
     public void ajouterMatriceG() {
