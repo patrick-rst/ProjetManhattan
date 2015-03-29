@@ -9,16 +9,17 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  *
  * @author blood_000
  */
-public class FilCoin extends FilAbstrait{
+public class FilCoin extends FilAbstrait {
+
     public FilCoin() {
         super();
         cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
-        
+
     }
-    
+
     @Override
     public String toString() {
         return "FilCoin";
-    }    
+    }
 }

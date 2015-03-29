@@ -17,8 +17,6 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
     private SourceCourantAbstraite sourceCourant;
 
     private byte[] cotesConnectes;
-    
-    
 
     @Override
     public byte[] getCotesConnectes() {
@@ -33,6 +31,14 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
     @Override
     public void setCourant(double courant) {
         this.sourceCourant.setCourant(courant);
+    }
+
+    public void rotater() {
+        byte temp = cotesConnectes[4];
+        cotesConnectes[3] = cotesConnectes[2];
+        cotesConnectes[2] = cotesConnectes[1];
+        cotesConnectes[1] = cotesConnectes[0];
+        cotesConnectes[0] = temp;
     }
 
 }

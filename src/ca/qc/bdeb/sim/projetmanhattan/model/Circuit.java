@@ -7,7 +7,6 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
 
 import java.util.ArrayList;
 
-
 /**
  *
  * @author blood_000
@@ -56,11 +55,11 @@ public class Circuit {
 
     }
 
-    public void combinerMatriceZ(){
+    public void combinerMatriceZ() {
         ajouterMatriceI();
         ajouterMatriceE();
     }
-    
+
     public void combinerMatriceA() {
         ajouterMatriceG();
         ajouterMatriceB();
@@ -111,8 +110,8 @@ public class Circuit {
             }
         }
     }
-    
-    public void ajouterNoeud(Noeud noeud){
+
+    public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 

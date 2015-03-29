@@ -10,11 +10,12 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  * @author blood_000
  */
 public interface Connectable {
-    
+
     public byte[] getCotesConnectes();
 
     @Override
     public String toString();
-    
-    
+
+    public void rotater();
+
 }
