@@ -35,6 +35,10 @@ public class FXMLDocumentController implements Initializable {
 
     Connectable[][] circuit = new Connectable[10][10];
 
+    
+    PopOver composantEditor = new PopOver();
+    
+    
     @FXML
     GridPane grid;
 
@@ -134,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
         if (event.getButton().equals(MouseButton.PRIMARY)) { 
             source.setRotate(source.getRotate()+90);            
         } 
-        else if(event.getButton().equals(MouseButton.SECONDARY)) {
+        else if(event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null) {
             String id = source.getId();
             
             int row = grid.getRowIndex(source);
@@ -150,22 +154,14 @@ public class FXMLDocumentController implements Initializable {
             if (id.equals("source")) {
                 lblComposant.setText("Source");
                 lblUnite.setText("Volt");
+                SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit[row][column];
+                txtValeur.setText(sourceFEM.getForceElectroMotrice()+"");
             }
             else if (id.equals("resistance")) {
                 lblComposant.setText("Resistance");
-                lblUnite.setText("Ohm");                
-            }
-            else if (id.equals("filDroit")) {
-                
-            }
-            else if (id.equals("filCoin")) {
-                
-            }
-            else if (id.equals("filT")) {
-                
-            }
-            else if (id.equals("filCroix")) {
-                
+                lblUnite.setText("Ohm");     
+                ResistanceGraphique resistance = (ResistanceGraphique) circuit[row][column];
+                txtValeur.setText(resistance.getResistance()+"");
             }
             else {
                 System.out.println("ERROR:Composant not implemented");
@@ -200,9 +196,10 @@ public class FXMLDocumentController implements Initializable {
             });
             
             
-            PopOver composantEditor = new PopOver(box);
-            //composantEditor.setContentNode(box);
-            composantEditor.setArrowLocation(ArrowLocation.BOTTOM_LEFT);
+            
+            composantEditor.setDetachable(false);
+            composantEditor.setContentNode(box);
+            //composantEditor.setArrowLocation(ArrowLocation.BOTTOM_LEFT);
             //composantEditor.setCornerRadius(4);
             //composantEditor.setDetachedTitle("Composant");
             composantEditor.show((ImageView) event.getSource(), 15);           
