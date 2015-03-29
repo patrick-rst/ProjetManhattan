@@ -17,4 +17,9 @@ public class FilT extends FilAbstrait{
         cotesConnectes[3] = 1;
         
     }
+    
+    @Override
+    public String toString() {
+        return "FilT";
+    }      
 }

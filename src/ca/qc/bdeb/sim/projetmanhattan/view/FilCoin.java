@@ -16,4 +16,9 @@ public class FilCoin extends FilAbstrait{
         cotesConnectes[2] = 1;
         
     }
+    
+    @Override
+    public String toString() {
+        return "FilCoin";
+    }    
 }

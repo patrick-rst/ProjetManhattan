@@ -41,5 +41,10 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
     public void setCourant(double courant) {
         this.resistance.setCourant(courant);
     }
+    
+    @Override
+    public String toString() {
+        return "Resistance";
+    }    
 
 }

@@ -44,4 +44,11 @@ public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
         this.sourceFEM.setCourant(courant);
     }
 
+    @Override
+    public String toString() {
+        return "SourceFEM";
+    }
+    
+    
+
 }

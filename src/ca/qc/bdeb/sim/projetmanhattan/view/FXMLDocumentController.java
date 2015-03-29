@@ -106,8 +106,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void keyPressed(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER)) {
-            System.out.println("Enter pressed");
+        if (event.getCode().equals(KeyCode.P)) {
+            System.out.println("P pressed");
+            printCircuitArray();
         }        
     }
     
@@ -145,6 +146,15 @@ public class FXMLDocumentController implements Initializable {
         else {
             System.out.println("ERROR:Composant not implemented");
         }
+    }
+    
+    private void printCircuitArray() {
+        for (Connectable[] c : circuit) {
+            for (Connectable elem : c) {
+                System.out.print(elem.toString()+"-");
+            }
+            System.out.println("");
+        }        
     }
 
     
