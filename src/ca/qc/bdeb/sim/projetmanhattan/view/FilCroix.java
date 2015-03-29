@@ -13,10 +13,10 @@ public class FilCroix extends FilAbstrait {
 
     public FilCroix() {
         super();
+        cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
         cotesConnectes[2] = 1;
         cotesConnectes[3] = 1;
-        cotesConnectes[4] = 1;
     }
     
     @Override

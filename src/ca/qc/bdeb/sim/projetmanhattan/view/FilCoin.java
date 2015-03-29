@@ -12,8 +12,8 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 public class FilCoin extends FilAbstrait{
     public FilCoin() {
         super();
+        cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
-        cotesConnectes[2] = 1;
         
     }
     

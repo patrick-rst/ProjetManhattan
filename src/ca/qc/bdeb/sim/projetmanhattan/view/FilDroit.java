@@ -13,8 +13,8 @@ public class FilDroit extends FilAbstrait {
 
     public FilDroit() {
         super();
-        cotesConnectes[1] = 1;
-        cotesConnectes[3] = 1;
+        cotesConnectes[0] = 1;
+        cotesConnectes[2] = 1;
 
     }
     

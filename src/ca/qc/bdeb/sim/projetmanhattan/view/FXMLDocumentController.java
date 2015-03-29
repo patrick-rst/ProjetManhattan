@@ -157,9 +157,11 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void printCircuitArray() {
-        for (Connectable[] c : circuit) {
-            for (Connectable elem : c) {
-                System.out.print(elem+"-");
+        int separateur;
+        for (Connectable[] tab : circuit) {
+            for (Connectable c : tab) {
+                separateur = (10-c.toString().length())/2;
+                System.out.print(new String(new char[separateur]).replace("\0", "-")+c+new String(new char[separateur]).replace("\0", "-"));
             }
             System.out.println("");
         }        

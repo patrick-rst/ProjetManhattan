@@ -12,9 +12,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 public class FilT extends FilAbstrait{
     public FilT() {
         super();
+        cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
         cotesConnectes[2] = 1;
-        cotesConnectes[3] = 1;
         
     }
     

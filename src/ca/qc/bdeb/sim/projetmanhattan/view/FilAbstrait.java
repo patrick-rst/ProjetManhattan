@@ -23,10 +23,10 @@ public abstract class FilAbstrait implements Connectable {
     
     public void rotater(){
         byte temp = cotesConnectes[4];
-        cotesConnectes[4] = cotesConnectes[3];
         cotesConnectes[3] = cotesConnectes[2];
         cotesConnectes[2] = cotesConnectes[1];
-        cotesConnectes[1] = temp;
+        cotesConnectes[1] = cotesConnectes[0];
+        cotesConnectes[0] = temp;
     }
 
 }
