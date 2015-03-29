@@ -131,7 +131,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
-<<<<<<< HEAD
         if (event.getButton().equals(MouseButton.PRIMARY)) { 
             source.setRotate(source.getRotate()+90);            
         } 
@@ -211,12 +210,7 @@ public class FXMLDocumentController implements Initializable {
             
         }
     }     
-    
-=======
-        source.setRotate(source.getRotate() + 90);
-    }
 
->>>>>>> origin/master
     private void addComposant(String id, int row, int column) {
         if (id.equals("source")) {
             SourceFEMGraphique source = new SourceFEMGraphique();
