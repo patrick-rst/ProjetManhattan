@@ -23,15 +23,15 @@ public class Circuit {
     private int nombreSourcesFEM;
     private int nombreSourcesCourant;
 
-    private int[][] matriceA;
-    private int[][] matriceG;
-    private int[][] matriceB;
-    private int[][] matriceC;
-    private int[][] matriceD;
-    private int[] matriceZ;
-    private int[] matriceI;
-    private int[] matriceE;
-    private int[] matriceX;
+    private double[][] matriceA;
+    private double[][] matriceG;
+    private double[][] matriceB;
+    private double[][] matriceC;
+    private double[][] matriceD;
+    private double[] matriceZ;
+    private double[] matriceI;
+    private double[] matriceE;
+    private double[] matriceX;
 
     public Circuit() {
         resistances = new ArrayList<>();
@@ -44,23 +44,23 @@ public class Circuit {
         nombreSourcesFEM = sourcesFEM.size();
         nombreSourcesCourant = sourcesCourant.size();
 
-        matriceA = new int[nombreNoeuds + nombreSourcesFEM][nombreNoeuds + nombreSourcesFEM];
-        matriceG = new int[nombreNoeuds][nombreNoeuds];
-        matriceB = new int[nombreNoeuds][nombreSourcesFEM];
-        matriceC = new int[nombreSourcesFEM][nombreNoeuds];
-        matriceD = new int[nombreSourcesFEM][nombreSourcesFEM];
-        matriceZ = new int[nombreNoeuds + nombreSourcesFEM];
-        matriceI = new int[nombreSourcesCourant];
-        matriceE = new int[nombreSourcesFEM];
-        matriceX = new int[nombreNoeuds + nombreSourcesFEM];
+        matriceA = new double[nombreNoeuds + nombreSourcesFEM][nombreNoeuds + nombreSourcesFEM];
+        matriceG = new double[nombreNoeuds][nombreNoeuds];
+        matriceB = new double[nombreNoeuds][nombreSourcesFEM];
+        matriceC = new double[nombreSourcesFEM][nombreNoeuds];
+        matriceD = new double[nombreSourcesFEM][nombreSourcesFEM];
+        matriceZ = new double[nombreNoeuds + nombreSourcesFEM];
+        matriceI = new double[nombreSourcesCourant];
+        matriceE = new double[nombreSourcesFEM];
+        matriceX = new double[nombreNoeuds + nombreSourcesFEM];
 
     }
-    
-    public void selectionnerNoeudGround(){
-        for(int i = 0; i < noeuds.size(); ++i){
+
+    public void selectionnerNoeudGround() {
+        for (int i = 0; i < noeuds.size(); ++i) {
             Noeud noeud = noeuds.get(i);
-            for(int j = 0; j < noeuds.get(i).getComposants().size(); ++j){
-                if (noeuds.get(i).getComposants().get(j) instanceof Ground){
+            for (int j = 0; j < noeuds.get(i).getComposants().size(); ++j) {
+                if (noeuds.get(i).getComposants().get(j) instanceof Ground) {
                     noeudGround = noeuds.get(i);
                     noeuds.remove(i);
                     break;
