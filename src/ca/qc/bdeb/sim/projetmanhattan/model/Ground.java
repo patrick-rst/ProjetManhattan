@@ -9,7 +9,7 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  *
  * @author blood_000
  */
-public class Ground extends Composant implements GroundAbstrait{
+public class Ground implements Composant, GroundAbstrait{
 
     public Ground() {
     }

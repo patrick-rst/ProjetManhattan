@@ -9,31 +9,6 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  *
  * @author blood_000
  */
-public class Composant {
-    private Noeud noeudA;
-    private Noeud noeudB;
+public interface Composant {
 
-    public Composant() {
-        
-    }
-
-    public Noeud getNoeudA() {
-        return noeudA;
-    }
-
-    public Noeud getNoeudB() {
-        return noeudB;
-    }
-
-    public void setNoeudA(Noeud noeudA) {
-        this.noeudA = noeudA;
-    }
-
-    public void setNoeudB(Noeud noeudB) {
-        this.noeudB = noeudB;
-    }
-    
-    
-    
-    
 }

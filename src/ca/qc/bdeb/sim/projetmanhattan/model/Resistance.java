@@ -9,7 +9,7 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  *
  * @author blood_000
  */
-public class Resistance extends Composant implements ResistanceAbstraite {
+public class Resistance implements Composant,ResistanceAbstraite {
 
     private double resistance;
     private double courant;

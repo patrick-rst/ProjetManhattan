@@ -106,8 +106,12 @@ public class Circuit {
         int n2 = -2;
         for (int i = 0; i < nombreSourcesFEM; ++i) {
             for (int j = 0; j < nombreNoeuds; ++j) {
-                if (noeuds.get(j).getComposants().contains(sourcesFEM.get(i))) {
-                    //if (sourcesFEM.get(i).)
+                if (noeuds.get(j).getSourcesFEMPos().contains(sourcesFEM.get(i))) {
+                    matriceB[j][i] = 1;
+                    matriceC[i][j] = 1;
+                } else if (noeuds.get(j).getSourcesFEMNeg().contains(sourcesFEM.get(i))) {
+                    matriceB[j][i] = -1;
+                    matriceC[i][j] = -1;
                 }
             }
         }
@@ -120,7 +124,7 @@ public class Circuit {
         for (int i = 0; i < resistances.size(); ++i) {
             double valeurAAjouter = 1 / resistances.get(i).getResistance();
             for (int j = 0; j < noeuds.size(); ++j) {
-                if (noeuds.get(j).getComposants().contains(resistances.get(i))) {
+                if (noeuds.get(j).getResistances().contains(resistances.get(i))) {
                     if (n1 == -1) {
                         n1 = j;
                     } else {

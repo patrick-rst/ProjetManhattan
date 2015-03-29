@@ -9,7 +9,7 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  *
  * @author blood_000
  */
-public class SourceCourant extends Composant implements SourceCourantAbstraite {
+public class SourceCourant implements Composant, SourceCourantAbstraite {
 
     private double courant;
 

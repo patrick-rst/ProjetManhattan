@@ -9,7 +9,7 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  *
  * @author blood_000
  */
-public class SourceFEM extends Composant implements SourceFEMAbstraite {
+public class SourceFEM implements Composant, SourceFEMAbstraite {
 
     private double forceElectroMotrice;
     private double courant;

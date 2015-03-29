@@ -8,6 +8,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.Noeud;
+import ca.qc.bdeb.sim.projetmanhattan.model.Resistance;
+import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourant;
+import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
 import java.util.ArrayList;
 
 /**
@@ -27,16 +30,18 @@ public class CircuitGraphique {
     }
 
     public void creerLiens() {
+        int compteNoeuds = 0;
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 1; j < connectables[i].length; ++j) {
                 if (!connectablesPasses[i][j]) {
                     connectablesPasses[i][j] = true;
                     if (connectables[i][j] instanceof FilAbstrait) {
+                        Noeud noeud = new Noeud();
                         ArrayList<Connectable> membresDuNoeud = new ArrayList<>();
                         membresDuNoeud.add(connectables[i][j]);
-                        membresDuNoeud.addAll(retournerEnfants((FilAbstrait) connectables[i][j], i, j));
+                        membresDuNoeud.addAll(retournerEnfants((FilAbstrait) connectables[i][j], i, j, noeud));
                         filtrerMembresDuNoeud(membresDuNoeud);
-                        Noeud noeud = new Noeud();
+
                         for (Connectable connectable : membresDuNoeud) {
                             if (connectable instanceof FilAbstrait) {
                                 noeud.ajouterFil((FilAbstrait) connectable);
@@ -62,36 +67,38 @@ public class CircuitGraphique {
         return membresDuNoeud;
     }
 
-    public ArrayList<Connectable> retournerEnfants(FilAbstrait fil, int i, int j) {
+    public void gererLienDetecte(int i, int j, Noeud noeud) {
+        if (connectables[i][j] instanceof ResistanceGraphique) {
+            noeud.getResistances().add((Resistance) ((ResistanceGraphique) connectables[i][j]).getEnfant());
+        } else if (connectables[i][j] instanceof SourceCourantGraphique) {
+            noeud.getSourcesCourant().add((SourceCourant) ((SourceCourantGraphique) connectables[i][j]).getEnfant());
+        } else if (connectables[i][j] instanceof SourceFEMGraphique) {
+            if (connectables[i][j].getCotesConnectes()[2] == -1) {
+                noeud.getSourcesFEMNeg().add((SourceFEM) ((SourceFEMGraphique) connectables[i][j]).getEnfant());
+            } else {
+                noeud.getSourcesFEMPos().add((SourceFEM) ((SourceFEMGraphique) connectables[i][j]).getEnfant());
+            }
+        } else if (connectables[i][j] instanceof FilAbstrait) {
+            noeud.getFils().add((FilAbstrait) connectables[i][j]);
+            retournerEnfants(((FilAbstrait) connectables[i][j]), i, j, noeud);
+        }
+        connectablesPasses[i][j] = false;
+    }
+
+    public ArrayList<Connectable> retournerEnfants(FilAbstrait fil, int i, int j, Noeud noeud) {
         ArrayList<Connectable> membresDuNoeud = new ArrayList<>();
 
-        if (fil.getCotesConnectes()[0] == 1 && i > 0) {
-            membresDuNoeud.add(connectables[i - 1][j]);
-            connectablesPasses[i - 1][j] = false;
-            if (connectables[i - 1][j] instanceof FilAbstrait) {
-                membresDuNoeud.addAll(retournerEnfants(((FilAbstrait) connectables[i - 1][j]), i - 1, j));
-            }
+        if (fil.getCotesConnectes()[0] == 1 && i > 0 && connectables[i - 1][j].getCotesConnectes()[2] != 0) {
+            gererLienDetecte(i - 1, j, noeud);
         }
-        if (fil.getCotesConnectes()[1] == 1 && j < connectables[i].length - 1) {
-            membresDuNoeud.add(connectables[i][j + j]);
-            connectablesPasses[i][j + 1] = false;
-            if (connectables[i][j + 1] instanceof FilAbstrait) {
-                membresDuNoeud.addAll(retournerEnfants(((FilAbstrait) connectables[i][j + 1]), i, j + 1));
-            }
+        if (fil.getCotesConnectes()[1] == 1 && j < connectables[i].length - 1 && connectables[i][j + 1].getCotesConnectes()[3] != 0) {
+            gererLienDetecte(i, j + 1, noeud);
         }
-        if (fil.getCotesConnectes()[2] == 1 && i < connectables.length - 1) {
-            membresDuNoeud.add(connectables[i + 1][j]);
-            connectablesPasses[i + 1][j] = false;
-            if (connectables[i + 1][j] instanceof FilAbstrait) {
-                membresDuNoeud.addAll(retournerEnfants(((FilAbstrait) connectables[i + 1][j]), i + 1, j));
-            }
+        if (fil.getCotesConnectes()[2] == 1 && i < connectables.length - 1 && connectables[i + 1][j].getCotesConnectes()[0] != 0) {
+            gererLienDetecte(i + i, j, noeud);
         }
-        if (fil.getCotesConnectes()[3] == 1 && j > 0) {
-            membresDuNoeud.add(connectables[i][j - 1]);
-            connectablesPasses[i][j - 1] = false;
-            if (connectables[i][j - 1] instanceof FilAbstrait) {
-                membresDuNoeud.addAll(retournerEnfants(((FilAbstrait) connectables[i][j - 1]), i, j - 1));
-            }
+        if (fil.getCotesConnectes()[3] == 1 && j > 0 && connectables[i][j - 1].getCotesConnectes()[1] != 0) {
+            gererLienDetecte(i, j - 1, noeud);
         }
         return membresDuNoeud;
     }
