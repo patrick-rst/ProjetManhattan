@@ -23,6 +23,9 @@ import javafx.scene.layout.StackPane;
  */
 public class FXMLDocumentController implements Initializable {
     
+    Connectable[][] circuit = new Connectable[10][10];
+    
+    
     @FXML
     GridPane grid;
     
@@ -116,22 +119,28 @@ public class FXMLDocumentController implements Initializable {
     
     private void addComposant(String id, int row, int column) {
         if (id.equals("source")) {
-            
+            SourceFEMGraphique source = new SourceFEMGraphique();
+            circuit[row][column] = source;
         }
         else if (id.equals("resistance")) {
-            
+            ResistanceGraphique resistance = new ResistanceGraphique();
+            circuit[row][column] = resistance;
         }
         else if (id.equals("filDroit")) {
-            
+            FilDroit filDroit = new FilDroit();
+            circuit[row][column] = filDroit;
         }
         else if (id.equals("filCoin")) {
-            
+            FilCoin filCoin = new FilCoin();
+            circuit[row][column] = filCoin;
         }
         else if (id.equals("filT")) {
-            
+            FilT filT = new FilT();
+            circuit[row][column] = filT;
         }
         else if (id.equals("filCroix")) {
-            
+            FilCroix filCroix = new FilCroix();
+            circuit[row][column] = filCroix;
         }
         else {
             System.out.println("ERROR:Composant not implemented");
