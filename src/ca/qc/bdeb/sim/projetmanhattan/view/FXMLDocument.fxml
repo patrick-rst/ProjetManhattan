@@ -158,7 +158,7 @@
                             <content>
                                 <FlowPane prefWidth="180.0">
                                     <children>
-                                        <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                        <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@img/fil.png" />
                                             </image>
@@ -166,7 +166,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                             </FlowPane.margin>
                                         </ImageView>
-                                        <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                        <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@img/filCoin.png" />
                                             </image>
@@ -174,7 +174,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                             </FlowPane.margin>
                                         </ImageView>
-                                        <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                        <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@img/filT.png" />
                                             </image>
