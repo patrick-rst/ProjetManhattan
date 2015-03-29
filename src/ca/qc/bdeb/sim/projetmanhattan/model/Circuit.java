@@ -111,5 +111,9 @@ public class Circuit {
             }
         }
     }
+    
+    public void ajouterNoeud(Noeud noeud){
+        noeuds.add(noeud);
+    }
 
 }

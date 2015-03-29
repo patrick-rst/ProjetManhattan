@@ -22,5 +22,9 @@ public class Noeud {
         fils.add(fil);
     }
     
+    public void ajouterComposant(Composant composant){
+        composants.add(composant);
+    }
+    
     
 }
