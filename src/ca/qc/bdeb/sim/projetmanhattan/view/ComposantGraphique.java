@@ -5,12 +5,13 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
+
 /**
  *
  * @author blood_000
  */
-public class Lien {
-    private Connectable connectableA;
-    private Connectable connectableB;
-    private int connexion;
+public interface ComposantGraphique {
+
+    public Composant getEnfant();
 }

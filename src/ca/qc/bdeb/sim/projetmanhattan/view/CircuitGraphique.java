@@ -42,7 +42,7 @@ public class CircuitGraphique {
                             if (connectable instanceof FilAbstrait) {
                                 noeud.ajouterFil((FilAbstrait) connectable);
                             } else if (connectable instanceof Composant) {
-                                noeud.ajouterComposant((Composant) connectable);
+                                noeud.ajouterComposant(((ComposantGraphique) connectable).getEnfant());
                             }
                         }
                         circuit.ajouterNoeud(noeud);

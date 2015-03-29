@@ -21,7 +21,7 @@ public abstract class FilAbstrait implements Connectable {
         return cotesConnectes;
     }
     
-    public void rotater(){
+    public void rotater() {
         byte temp = cotesConnectes[4];
         cotesConnectes[3] = cotesConnectes[2];
         cotesConnectes[2] = cotesConnectes[1];

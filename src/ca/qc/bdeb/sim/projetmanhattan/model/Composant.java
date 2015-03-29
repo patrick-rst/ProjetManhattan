@@ -9,6 +9,6 @@ package ca.qc.bdeb.sim.projetmanhattan.model;
  *
  * @author blood_000
  */
-public interface Composant{
-    
+public interface Composant {
+
 }

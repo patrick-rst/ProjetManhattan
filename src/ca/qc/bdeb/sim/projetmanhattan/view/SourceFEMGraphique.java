@@ -5,6 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
 
@@ -48,7 +49,17 @@ public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
     public String toString() {
         return "SourceFEM";
     }
-    
-    
+
+    public void rotater() {
+        byte temp = cotesConnectes[4];
+        cotesConnectes[3] = cotesConnectes[2];
+        cotesConnectes[2] = cotesConnectes[1];
+        cotesConnectes[1] = cotesConnectes[0];
+        cotesConnectes[0] = temp;
+    }
+
+    public Composant getEnfant() {
+        return (Composant) this.sourceFEM;
+    }
 
 }

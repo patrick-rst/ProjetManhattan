@@ -9,220 +9,220 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="pane" onKeyPressed="#keyPressed" prefHeight="510.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.qc.bdeb.sim.projetmanhattan.view.FXMLDocumentController">
-   <center>
-      <GridPane fx:id="grid" gridLinesVisible="true" maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+    <center>
+        <GridPane fx:id="grid" gridLinesVisible="true" maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="9" />
              
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="0" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="4" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="5" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="6" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="7" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="8" />
-             <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="0" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#dragComposantFromGrid" onDragDropped="#dropComposant" onDragOver="#overComposant" onMouseClicked="#mouseClickCase" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="9" />
              
-         </children>
-      </GridPane>
-   </center>
-   <left>
-      <AnchorPane>
-         <children>
-            <Accordion prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <panes>
-                  <TitledPane text="Fils">
-                     <content>
-                        <FlowPane prefWidth="180.0">
-                           <children>
-                              <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                                 <image>
-                                    <Image url="@img/fil.png" />
-                                 </image>
-                                 <FlowPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </FlowPane.margin>
-                              </ImageView>
-                              <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-                                 <image>
-                                    <Image url="@img/filCoin.png" />
-                                 </image>
-                                 <FlowPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </FlowPane.margin>
-                              </ImageView>
-                              <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                                 <image>
-                                    <Image url="@img/filT.png" />
-                                 </image>
-                                 <FlowPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </FlowPane.margin>
-                              </ImageView>
-                              <ImageView id="filCroix" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/filCroix.png" />
-                                 </image>
-                                 <FlowPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </FlowPane.margin>
-                              </ImageView>
-                           </children>
-                        </FlowPane>
-                     </content>
-                  </TitledPane>
-                  <TitledPane text="Composants">
-                     <content>
-                        <FlowPane prefWidth="184.0">
-                           <children>
-                              <StackPane fx:id="source">
-                                 <children>
-                                    <ImageView id="source" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@img/battery.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="resistance">
-                                 <children>
-                                    <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@img/resistor.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </FlowPane>
-                     </content>
-                  </TitledPane>
-              </panes>
-            </Accordion>
-         </children>
-      </AnchorPane>
-   </left>
+            </children>
+        </GridPane>
+    </center>
+    <left>
+        <AnchorPane>
+            <children>
+                <Accordion prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <panes>
+                        <TitledPane text="Fils">
+                            <content>
+                                <FlowPane prefWidth="180.0">
+                                    <children>
+                                        <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                            <image>
+                                                <Image url="@img/fil.png" />
+                                            </image>
+                                            <FlowPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                            </FlowPane.margin>
+                                        </ImageView>
+                                        <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                            <image>
+                                                <Image url="@img/filCoin.png" />
+                                            </image>
+                                            <FlowPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                            </FlowPane.margin>
+                                        </ImageView>
+                                        <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                            <image>
+                                                <Image url="@img/filT.png" />
+                                            </image>
+                                            <FlowPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                            </FlowPane.margin>
+                                        </ImageView>
+                                        <ImageView id="filCroix" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@img/filCroix.png" />
+                                            </image>
+                                            <FlowPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                            </FlowPane.margin>
+                                        </ImageView>
+                                    </children>
+                                </FlowPane>
+                            </content>
+                        </TitledPane>
+                        <TitledPane text="Composants">
+                            <content>
+                                <FlowPane prefWidth="184.0">
+                                    <children>
+                                        <StackPane fx:id="source">
+                                            <children>
+                                                <ImageView id="source" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@img/battery.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </StackPane>
+                                        <StackPane fx:id="resistance">
+                                            <children>
+                                                <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@img/resistor.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </FlowPane>
+                            </content>
+                        </TitledPane>
+                    </panes>
+                </Accordion>
+            </children>
+        </AnchorPane>
+    </left>
 </BorderPane>
