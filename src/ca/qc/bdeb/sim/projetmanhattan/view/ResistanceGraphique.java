@@ -20,6 +20,7 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
 
     public ResistanceGraphique() {
         this.resistance = new Resistance();
+        this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
     }

@@ -14,7 +14,7 @@ public abstract class FilAbstrait implements Connectable {
     protected byte[] cotesConnectes;
 
     public FilAbstrait() {
-        cotesConnectes = new byte[4];
+        this.cotesConnectes = new byte[4];
     }
 
     public byte[] getCotesConnectes() {

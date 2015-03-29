@@ -20,6 +20,7 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
 
     public SourceCourantGraphique() {
         this.sourceCourant = new SourceCourant();
+        this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
     }

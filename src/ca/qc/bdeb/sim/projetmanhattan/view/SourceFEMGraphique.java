@@ -19,7 +19,8 @@ public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
     private byte[] cotesConnectes;
 
     public SourceFEMGraphique() {
-        sourceFEM = new SourceFEM();
+        this.sourceFEM = new SourceFEM();
+        this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;
     }

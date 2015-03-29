@@ -152,7 +152,8 @@ public class FXMLDocumentController implements Initializable {
                 lblUnite.setText("Volt");
             }
             else if (id.equals("resistance")) {
-                
+                lblComposant.setText("Resistance");
+                lblUnite.setText("Ohm");                
             }
             else if (id.equals("filDroit")) {
                 
@@ -201,7 +202,7 @@ public class FXMLDocumentController implements Initializable {
             
             PopOver composantEditor = new PopOver(box);
             //composantEditor.setContentNode(box);
-            //composantEditor.setArrowLocation(ArrowLocation.BOTTOM_LEFT);
+            composantEditor.setArrowLocation(ArrowLocation.BOTTOM_LEFT);
             //composantEditor.setCornerRadius(4);
             //composantEditor.setDetachedTitle("Composant");
             composantEditor.show((ImageView) event.getSource(), 15);           
