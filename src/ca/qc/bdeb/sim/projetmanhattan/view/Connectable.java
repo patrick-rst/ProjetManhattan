@@ -12,4 +12,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 public interface Connectable {
     
     public byte[] getCotesConnectes();
+
+    @Override
+    public String toString();
+    
+    
 }

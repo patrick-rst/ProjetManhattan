@@ -76,9 +76,8 @@ public class FXMLDocumentController implements Initializable {
             target.setId(db.getString());
 
             String id = db.getString();
-            int row = grid.getColumnIndex(target);
-            int column = grid.getRowIndex(target);
-            
+            int row = grid.getRowIndex(target);
+            int column = grid.getColumnIndex(target);
             addComposant(id, row, column);
             
             success = true;
@@ -98,10 +97,19 @@ public class FXMLDocumentController implements Initializable {
         content.putString(source.getId());
         db.setContent(content);
         
+        int row = grid.getRowIndex(source);
+        int column = grid.getColumnIndex(source);        
+        removeComposant(row, column);
+        
+        
         source.setImage(null);
         source.setId(null);
         
         event.consume();    
+    }
+    
+    private void removeComposant(int row, int column) {
+        circuit[row][column] = null;
     }
     
     @FXML
@@ -151,7 +159,7 @@ public class FXMLDocumentController implements Initializable {
     private void printCircuitArray() {
         for (Connectable[] c : circuit) {
             for (Connectable elem : c) {
-                System.out.print(elem.toString()+"-");
+                System.out.print(elem+"-");
             }
             System.out.println("");
         }        
