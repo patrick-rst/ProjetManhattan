@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
@@ -22,6 +23,8 @@ import javafx.scene.layout.StackPane;
  */
 public class FXMLDocumentController implements Initializable {
     
+    @FXML
+    GridPane grid;
     
     @FXML
     StackPane resistance;
@@ -68,10 +71,12 @@ public class FXMLDocumentController implements Initializable {
             ImageView target = (ImageView) event.getGestureTarget();
             target.setImage(db.getImage());
             target.setId(db.getString());
-            
+
             String id = db.getString();
-            addComposant(id);
+            int row = grid.getColumnIndex(target);
+            int column = grid.getRowIndex(target);
             
+            addComposant(id, row, column);
             
             success = true;
         }
@@ -109,7 +114,7 @@ public class FXMLDocumentController implements Initializable {
         source.setRotate(source.getRotate()+90);
     }
     
-    private void addComposant(String id) {
+    private void addComposant(String id, int row, int column) {
         if (id.equals("source")) {
             
         }
