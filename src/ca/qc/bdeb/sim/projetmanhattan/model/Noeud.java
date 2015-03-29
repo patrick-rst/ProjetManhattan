@@ -27,4 +27,10 @@ public class Noeud {
         composants.add(composant);
     }
 
+    public ArrayList<Composant> getComposants() {
+        return composants;
+    }
+    
+    
+
 }

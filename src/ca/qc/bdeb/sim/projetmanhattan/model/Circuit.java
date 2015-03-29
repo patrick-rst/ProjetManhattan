@@ -17,6 +17,7 @@ public class Circuit {
     private ArrayList<Noeud> noeuds;
     private ArrayList<SourceFEM> sourcesFEM;
     private ArrayList<SourceCourant> sourcesCourant;
+    private Noeud noeudGround;
 
     private int nombreNoeuds;
     private int nombreSourcesFEM;
@@ -53,6 +54,19 @@ public class Circuit {
         matriceE = new int[nombreSourcesFEM];
         matriceX = new int[nombreNoeuds + nombreSourcesFEM];
 
+    }
+    
+    public void selectionnerNoeudGround(){
+        for(int i = 0; i < noeuds.size(); ++i){
+            Noeud noeud = noeuds.get(i);
+            for(int j = 0; j < noeuds.get(i).getComposants().size(); ++j){
+                if (noeuds.get(i).getComposants().get(j) instanceof Ground){
+                    noeudGround = noeuds.get(i);
+                    noeuds.remove(i);
+                    break;
+                }
+            }
+        }
     }
 
     public void combinerMatriceZ() {
