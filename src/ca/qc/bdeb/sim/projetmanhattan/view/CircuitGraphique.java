@@ -26,7 +26,7 @@ public class CircuitGraphique {
     public CircuitGraphique(Connectable[][] connectables, Circuit circuit) {
         this.connectables = connectables;
         this.circuit = circuit;
-        connectablesPasses = new boolean[connectables.length][connectables[0].length];
+        connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
     }
 
     public void creerLiens() {

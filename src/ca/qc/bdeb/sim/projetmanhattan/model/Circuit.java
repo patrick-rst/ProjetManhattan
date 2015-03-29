@@ -39,11 +39,6 @@ public class Circuit {
         sourcesFEM = new ArrayList<>();
         sourcesCourant = new ArrayList<>();
 
-        //methode qui remplit les listes
-        nombreNoeuds = noeuds.size();
-        nombreSourcesFEM = sourcesFEM.size();
-        nombreSourcesCourant = sourcesCourant.size();
-
         matriceA = new double[nombreNoeuds + nombreSourcesFEM][nombreNoeuds + nombreSourcesFEM];
         matriceG = new double[nombreNoeuds][nombreNoeuds];
         matriceB = new double[nombreNoeuds][nombreSourcesFEM];
@@ -55,6 +50,10 @@ public class Circuit {
     }
 
     public void analyserCircuit() {
+        nombreNoeuds = noeuds.size();
+        nombreSourcesFEM = sourcesFEM.size();
+        nombreSourcesCourant = sourcesCourant.size();
+
         construireMatriceG();
         construireMatriceBetC();
         construireMatriceZ();
