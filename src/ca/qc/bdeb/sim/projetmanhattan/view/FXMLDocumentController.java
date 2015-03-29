@@ -67,6 +67,7 @@ public class FXMLDocumentController implements Initializable {
         if (db.hasImage() && db.hasString()) {
             ImageView target = (ImageView) event.getGestureTarget();
             target.setImage(db.getImage());
+            target.setId(db.getString());
             
             String id = db.getString();
             addComposant(id);
@@ -86,9 +87,11 @@ public class FXMLDocumentController implements Initializable {
         
         ClipboardContent content = new ClipboardContent();
         content.putImage(source.getImage());
+        content.putString(source.getId());
         db.setContent(content);
         
         source.setImage(null);
+        source.setId(null);
         
         event.consume();    
     }
