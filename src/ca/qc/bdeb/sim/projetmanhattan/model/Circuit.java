@@ -59,6 +59,17 @@ public class Circuit {
         construireMatriceZ();
         combinerMatriceA();
         resoudreCircuitAnalogue();
+
+        distribuerInfos();
+    }
+
+    public void distribuerInfos() {
+        for (int i = 0; i < nombreNoeuds; ++i) {
+            noeuds.get(i).setTension(matriceX[i]);
+        }
+        for (int i = 0; i < nombreSourcesFEM; ++i) {
+            sourcesFEM.get(i).setCourant(matriceX[nombreNoeuds + i]);
+        }
     }
 
     public void resoudreCircuitAnalogue() {
@@ -88,10 +99,8 @@ public class Circuit {
 
     public void construireMatriceZ() {
         for (int i = 0; i < nombreNoeuds; ++i) {
-            for (Composant composant : noeuds.get(i).getComposants()) {
-                if (composant instanceof SourceCourant) {
-                    matriceZ[i] += ((SourceCourant) composant).getCourant();
-                }
+            for (SourceCourant sourceCourant : noeuds.get(i).getSourcesCourant()) {
+                matriceZ[i] += sourceCourant.getCourant();
             }
         }
 
@@ -143,13 +152,10 @@ public class Circuit {
 
     public void selectionnerNoeudGround() {
         for (int i = 0; i < noeuds.size(); ++i) {
-            Noeud noeud = noeuds.get(i);
-            for (int j = 0; j < noeuds.get(i).getComposants().size(); ++j) {
-                if (noeuds.get(i).getComposants().get(j) instanceof Ground) {
-                    noeudGround = noeuds.get(i);
-                    noeuds.remove(i);
-                    break;
-                }
+            if (noeuds.get(i).getGround() != null) {
+                noeudGround = noeuds.get(i);
+                noeuds.remove(i);
+                break;
             }
         }
     }

@@ -9,30 +9,23 @@ import java.util.ArrayList;
  */
 public class Noeud {
 
+    private double tension;
+    
     private ArrayList<FilAbstrait> fils;
     private ArrayList<Byte> connexions;
-    private ArrayList<Composant> composants;
     private ArrayList<SourceFEM> sourcesFEMNeg;
     private ArrayList<SourceFEM> sourcesFEMPos;
     private ArrayList<Resistance> resistances;
     private ArrayList<SourceCourant> sourcesCourant;
+    private Ground ground;
 
     public Noeud() {
         fils = new ArrayList<>();
         connexions = new ArrayList<>();
-        composants = new ArrayList<>();
     }
 
     public void ajouterFil(FilAbstrait fil) {
         fils.add(fil);
-    }
-
-    public void ajouterComposant(Composant composant) {
-        composants.add(composant);
-    }
-
-    public ArrayList<Composant> getComposants() {
-        return composants;
     }
 
     public ArrayList<Resistance> getResistances() {
@@ -54,8 +47,22 @@ public class Noeud {
     public ArrayList<SourceCourant> getSourcesCourant() {
         return sourcesCourant;
     }
-    
-    
+
+    public double getTension() {
+        return tension;
+    }
+
+    public void setTension(double tension) {
+        this.tension = tension;
+    }
+
+    public Ground getGround() {
+        return ground;
+    }
+
+    public void setGround(Ground ground) {
+        this.ground = ground;
+    }
     
     
 

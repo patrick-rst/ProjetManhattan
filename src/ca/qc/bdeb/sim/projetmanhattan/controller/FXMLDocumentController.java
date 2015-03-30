@@ -1,5 +1,12 @@
-package ca.qc.bdeb.sim.projetmanhattan.view;
+package ca.qc.bdeb.sim.projetmanhattan.controller;
 
+import ca.qc.bdeb.sim.projetmanhattan.view.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.FilCoin;
+import ca.qc.bdeb.sim.projetmanhattan.view.FilCroix;
+import ca.qc.bdeb.sim.projetmanhattan.view.FilDroit;
+import ca.qc.bdeb.sim.projetmanhattan.view.FilT;
+import ca.qc.bdeb.sim.projetmanhattan.view.ResistanceGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.SourceFEMGraphique;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -23,7 +30,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.PopOver;
-import org.controlsfx.control.PopOver.ArrowLocation;
 
 /**
  * Controlleur
@@ -35,10 +41,8 @@ public class FXMLDocumentController implements Initializable {
 
     Connectable[][] circuit = new Connectable[10][10];
 
-    
     PopOver composantEditor = new PopOver();
-    
-    
+
     @FXML
     GridPane grid;
 
@@ -47,6 +51,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     StackPane source;
+
+    public FXMLDocumentController() {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -135,55 +142,51 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
-        if (event.getButton().equals(MouseButton.PRIMARY)) { 
-            source.setRotate(source.getRotate()+90);            
-        } 
-        else if(event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null) {
+        if (event.getButton().equals(MouseButton.PRIMARY)) {
+            source.setRotate(source.getRotate() + 90);
+        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null) {
             String id = source.getId();
-            
+
             int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);             
-            
+            int column = grid.getColumnIndex(source);
+
             Label lblComposant = new Label();
             Label lblUnite = new Label();
             TextField txtValeur = new TextField();
             txtValeur.setPrefWidth(50);
             Button btn = new Button("Ok");
-            btn.setId(row+","+column);
-            
+            btn.setId(row + "," + column);
+
             if (id.equals("source")) {
                 lblComposant.setText("Source");
                 lblUnite.setText("Volt");
                 SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit[row][column];
-                txtValeur.setText(sourceFEM.getForceElectroMotrice()+"");
-            }
-            else if (id.equals("resistance")) {
+                txtValeur.setText(sourceFEM.getForceElectroMotrice() + "");
+            } else if (id.equals("resistance")) {
                 lblComposant.setText("Resistance");
-                lblUnite.setText("Ohm");     
+                lblUnite.setText("Ohm");
                 ResistanceGraphique resistance = (ResistanceGraphique) circuit[row][column];
-                txtValeur.setText(resistance.getResistance()+"");
-            }
-            else {
+                txtValeur.setText(resistance.getResistance() + "");
+            } else {
                 System.out.println("ERROR:Composant not implemented");
-            }     
- 
+            }
+
             HBox box = new HBox();
             box.setPadding(new Insets(15, 15, 15, 15));
             box.setSpacing(10);
             box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
-            
-            
+
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Button source = (Button) event.getSource();
                     String id = source.getId();
-                    
+
                     int row = Integer.parseInt(id.split(",")[0]);
                     int column = Integer.parseInt(id.split(",")[1]);
-                    
+
                     String composant = circuit[row][column].toString();
-                    
+
                     if (composant.equals("Resistance")) {
                         ResistanceGraphique resistance = (ResistanceGraphique) circuit[row][column];
                         resistance.setResistance(Double.parseDouble(txtValeur.getText()));
@@ -191,23 +194,19 @@ public class FXMLDocumentController implements Initializable {
                         SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit[row][column];
                         sourceFEM.setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
                     }
-                    
+
                 }
             });
-            
-            
-            
+
             composantEditor.setDetachable(false);
             composantEditor.setContentNode(box);
             //composantEditor.setArrowLocation(ArrowLocation.BOTTOM_LEFT);
             //composantEditor.setCornerRadius(4);
             //composantEditor.setDetachedTitle("Composant");
-            composantEditor.show((ImageView) event.getSource(), 15);           
-            
-            
-            
+            composantEditor.show((ImageView) event.getSource(), 15);
+
         }
-    }     
+    }
 
     private void addComposant(String id, int row, int column) {
         if (id.equals("source")) {
@@ -240,6 +239,10 @@ public class FXMLDocumentController implements Initializable {
             }
             System.out.println("");
         }
+    }
+
+    public Connectable[][] getCircuit() {
+        return circuit;
     }
 
 }
