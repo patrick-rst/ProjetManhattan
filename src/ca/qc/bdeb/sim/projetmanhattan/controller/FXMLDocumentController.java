@@ -174,6 +174,11 @@ public class FXMLDocumentController implements Initializable {
             System.out.println("P pressed");
             printCircuitArray();
         }
+        else if (event.getCode().equals(KeyCode.R)) {
+            System.out.println("R pressed");
+            cg.preparerAnalyse(circuit);
+            c.analyserCircuit();            
+        } 
     }
 
     @FXML
