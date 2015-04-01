@@ -11,7 +11,6 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  */
 public abstract class FilAbstrait extends Connectable {
 
-    protected byte[] cotesConnectes;
     protected double tension;
 
     public FilAbstrait() {

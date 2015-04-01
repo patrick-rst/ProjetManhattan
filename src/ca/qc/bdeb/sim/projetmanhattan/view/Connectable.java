@@ -18,10 +18,6 @@ public class Connectable {
     }
 
     public byte[] getCotesConnectes() {
-        for(int i = 0; i < 4; ++i){
-            System.out.print(cotesConnectes[i]);
-        }
-        System.out.println("");
         return cotesConnectes;
     }
 

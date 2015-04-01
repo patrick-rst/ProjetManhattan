@@ -57,6 +57,7 @@ public class Circuit {
     }
 
     public void analyserCircuit() {
+        selectionnerNoeudGround();
         nombreNoeuds = noeuds.size();
         nombreSourcesFEM = sourcesFEM.size();
         nombreSourcesCourant = sourcesCourant.size();
@@ -122,42 +123,31 @@ public class Circuit {
             matZ.set(i, matriceZ[i]);
         }
 
-        for (int i = 0; i < matriceA.length; ++i) {
-            for (int j = 0; j < matriceA[i].length; ++j) {
-                System.out.print(matriceA[i][j] + " ");
-            }
-            System.out.println("");
-        }
-
-        /* for(int i = 0; i < matA.numRows; ++i){
-         for(int j = 0; j < matA.numCols; ++j){
-         System.out.print(matA.get(i, j) + " ");
-         }
-         System.out.println("");
-         }
-         for(int i = 0; i < matZ.numRows; ++i){
-         for(int j = 0; j < matZ.numCols; ++j){
-         System.out.print(matZ.get(i, j) + " ");
-         }
-         System.out.println("");
-         }*/
         DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
         if (!CommonOps.solve(matA, matZ, matX)) {
             throw new IllegalArgumentException("Singular matrix");
         }
-        for (int i = 0; i < matX.numRows; ++i) {
-            System.out.println(matX.get(i));
+        //------------
+
+        for (int i = 0; i < matA.numRows; ++i) {
+            for (int j = 0; j < matA.numCols; ++j) {
+                System.out.print(matA.get(i, j) + " ");
+            }
+            System.out.println("a");
         }
-
-        /*try {
-         DenseMatrix64F matX = matA.solve(matZ);
-
-         for (int i = 0; i < nombreNoeuds + nombreSourcesFEM; ++i) {
-         matriceX[i] = matX.get(i);
-         }
-         } catch (Exception e) {
-         System.out.println("Erreur lors de ls resolution de la matrice");
-         }*/
+        for (int i = 0; i < matZ.numRows; ++i) {
+            for (int j = 0; j < matZ.numCols; ++j) {
+                System.out.print(matZ.get(i, j) + " ");
+            }
+            System.out.println("z");
+        }
+        for (int i = 0; i < matX.numRows; ++i) {
+            for (int j = 0; j < matX.numCols; ++j) {
+                System.out.print(matX.get(i, j) + " ");
+            }
+            System.out.println("z");
+        }
+        //------------
     }
 
     public void construireMatriceZ() {
@@ -173,8 +163,6 @@ public class Circuit {
     }
 
     public void construireMatriceBetC() {
-        int n1 = -1;
-        int n2 = -2;
         for (int i = 0; i < nombreSourcesFEM; ++i) {
             for (int j = 0; j < nombreNoeuds; ++j) {
                 if (noeuds.get(j).getSourcesFEMPos().contains(sourcesFEM.get(i))) {
@@ -206,6 +194,7 @@ public class Circuit {
             if (n1 != -1) {
                 matriceG[n1][n1] += valeurAAjouter;
             }
+
             if (n2 != -1) {
                 matriceG[n2][n2] += valeurAAjouter;
                 matriceG[n1][n2] -= valeurAAjouter;
@@ -216,12 +205,18 @@ public class Circuit {
     }
 
     public void selectionnerNoeudGround() {
+        boolean enleve = false;
         for (int i = 0; i < noeuds.size(); ++i) {
             if (noeuds.get(i).getGround() != null) {
                 noeudGround = noeuds.get(i);
                 noeuds.remove(i);
+                enleve = true;
                 break;
             }
+        }
+        if (!enleve) {
+            noeudGround = noeuds.get(0);
+            noeuds.remove(0);
         }
     }
 
@@ -251,7 +246,7 @@ public class Circuit {
     public void ajouterMatriceC() {
         for (int i = 0; i < matriceC.length; ++i) {
             for (int j = 0; j < matriceC[i].length; ++j) {
-                matriceA[i + nombreNoeuds][j] = matriceG[i][j];
+                matriceA[i + nombreNoeuds][j] = matriceC[i][j];
             }
         }
     }
@@ -259,7 +254,7 @@ public class Circuit {
     public void ajouterMatriceD() {
         for (int i = 0; i < matriceD.length; ++i) {
             for (int j = 0; j < matriceD[i].length; ++j) {
-                matriceA[i + nombreNoeuds][j + nombreNoeuds] = matriceG[i][j];
+                matriceA[i + nombreNoeuds][j + nombreNoeuds] = matriceD[i][j];
             }
         }
     }

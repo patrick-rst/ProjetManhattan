@@ -16,7 +16,6 @@ public class Resistance implements Composant, ResistanceAbstraite {
 
     @Override
     public double getResistance() {
-        System.out.println(resistance);
         return resistance;
     }
 
