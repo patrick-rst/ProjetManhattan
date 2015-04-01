@@ -22,6 +22,10 @@ public class Noeud {
     public Noeud() {
         fils = new ArrayList<>();
         connexions = new ArrayList<>();
+        resistances = new ArrayList<>();
+        sourcesCourant = new ArrayList<>();
+        sourcesFEMNeg = new ArrayList<>();
+        sourcesFEMPos = new ArrayList<>();
     }
 
     public void ajouterFil(FilAbstrait fil) {

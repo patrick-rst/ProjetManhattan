@@ -5,6 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourantAbstraite;
@@ -18,8 +19,9 @@ public class SourceCourantGraphique extends Connectable implements SourceCourant
     private SourceCourantAbstraite sourceCourant;
     private byte[] cotesConnectes;
 
-    public SourceCourantGraphique() {
+    public SourceCourantGraphique(Circuit c) {
         this.sourceCourant = new SourceCourant();
+        c.ajouterSourceCourant((SourceCourant) sourceCourant);
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;

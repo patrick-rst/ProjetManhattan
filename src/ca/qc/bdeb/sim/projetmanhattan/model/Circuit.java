@@ -6,7 +6,8 @@
 package ca.qc.bdeb.sim.projetmanhattan.model;
 
 import java.util.ArrayList;
-import org.ejml.simple.SimpleMatrix;
+import org.ejml.data.DenseMatrix64F;
+import org.ejml.ops.CommonOps;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Circuit {
     private ArrayList<SourceFEM> sourcesFEM;
     private ArrayList<SourceCourant> sourcesCourant;
     private Noeud noeudGround;
+    private ArrayList<Ground> grounds;
 
     private int nombreNoeuds;
     private int nombreSourcesFEM;
@@ -38,6 +40,18 @@ public class Circuit {
         noeuds = new ArrayList<>();
         sourcesFEM = new ArrayList<>();
         sourcesCourant = new ArrayList<>();
+        grounds = new ArrayList<>();
+
+    }
+
+    public void ajouterGround(Ground g) {
+        grounds.add(g);
+    }
+
+    public void analyserCircuit() {
+        nombreNoeuds = noeuds.size();
+        nombreSourcesFEM = sourcesFEM.size();
+        nombreSourcesCourant = sourcesCourant.size();
 
         matriceA = new double[nombreNoeuds + nombreSourcesFEM][nombreNoeuds + nombreSourcesFEM];
         matriceG = new double[nombreNoeuds][nombreNoeuds];
@@ -46,13 +60,6 @@ public class Circuit {
         matriceD = new double[nombreSourcesFEM][nombreSourcesFEM];
         matriceZ = new double[nombreNoeuds + nombreSourcesFEM];
         matriceX = new double[nombreNoeuds + nombreSourcesFEM];
-
-    }
-
-    public void analyserCircuit() {
-        nombreNoeuds = noeuds.size();
-        nombreSourcesFEM = sourcesFEM.size();
-        nombreSourcesCourant = sourcesCourant.size();
 
         construireMatriceG();
         construireMatriceBetC();
@@ -95,27 +102,35 @@ public class Circuit {
     }
 
     public void resoudreCircuitAnalogue() {
-        SimpleMatrix matA = new SimpleMatrix(nombreNoeuds + nombreSourcesFEM, nombreNoeuds + nombreSourcesFEM);
+        DenseMatrix64F matA = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, nombreNoeuds + nombreSourcesFEM);
         for (int i = 0; i < matriceA.length; ++i) {
             for (int j = 0; j < matriceA[i].length; ++j) {
                 matA.set(i, j, matriceA[i][j]);
             }
         }
 
-        SimpleMatrix matZ = new SimpleMatrix(nombreNoeuds + nombreSourcesFEM, 1);
+        DenseMatrix64F matZ = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
         for (int i = 0; i < matriceZ.length; ++i) {
             matZ.set(i, matriceZ[i]);
         }
 
-        try {
-            SimpleMatrix matX = matA.solve(matZ);
+        DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
+        if (!CommonOps.solve(matA, matZ, matX)) {
+            throw new IllegalArgumentException("Singular matrix");
+        }
+        for(int i = 0; i < matX.numRows; ++i){
+            System.out.println(matX.get(i));
+        }
+
+        /*try {
+            DenseMatrix64F matX = matA.solve(matZ);
 
             for (int i = 0; i < nombreNoeuds + nombreSourcesFEM; ++i) {
                 matriceX[i] = matX.get(i);
             }
         } catch (Exception e) {
             System.out.println("Erreur lors de ls resolution de la matrice");
-        }
+        }*/
 
     }
 
@@ -162,7 +177,9 @@ public class Circuit {
                     }
                 }
             }
-            matriceG[n1][n1] += valeurAAjouter;
+            if (n1 != -1) {
+                matriceG[n1][n1] += valeurAAjouter;
+            }
             if (n2 != -1) {
                 matriceG[n2][n2] += valeurAAjouter;
                 matriceG[n1][n2] -= valeurAAjouter;
@@ -223,14 +240,17 @@ public class Circuit {
 
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
+        System.out.println("n " + noeuds.size());
     }
 
     public void ajouterResistance(Resistance resistance) {
         resistances.add(resistance);
+        System.out.println("r " + resistances.size());
     }
 
     public void ajouterSourceFEM(SourceFEM sourceFEM) {
         sourcesFEM.add(sourceFEM);
+        System.out.println("v " + sourcesFEM.size());
     }
 
     public void ajouterSourceCourant(SourceCourant sourceCourant) {
