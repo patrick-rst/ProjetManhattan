@@ -248,10 +248,10 @@ public class FXMLDocumentController implements Initializable {
 
     private void addComposant(String id, int row, int column) {
         if (id.equals("source")) {
-            SourceFEMGraphique source = new SourceFEMGraphique(c);
+            SourceFEMGraphique source = new SourceFEMGraphique();
             circuit[row][column] = source;
         } else if (id.equals("resistance")) {
-            ResistanceGraphique resistance = new ResistanceGraphique(c);
+            ResistanceGraphique resistance = new ResistanceGraphique();
             circuit[row][column] = resistance;
         } else if (id.equals("filDroit")) {
             FilDroit filDroit = new FilDroit();

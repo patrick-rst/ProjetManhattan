@@ -19,9 +19,9 @@ public class SourceCourantGraphique extends Connectable implements SourceCourant
     private SourceCourantAbstraite sourceCourant;
     private byte[] cotesConnectes;
 
-    public SourceCourantGraphique(Circuit c) {
+    public SourceCourantGraphique() {
         this.sourceCourant = new SourceCourant();
-        c.ajouterSourceCourant((SourceCourant) sourceCourant);
+
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;

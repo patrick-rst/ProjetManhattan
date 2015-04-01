@@ -19,10 +19,9 @@ public class GroundGraphique extends Connectable implements GroundAbstrait, Comp
     private byte[] cotesConnectes;
     private Ground ground;
 
-    public GroundGraphique(Circuit c) {
+    public GroundGraphique() {
         this.ground = new Ground();
         cotesConnectes[0] = 1;
-        c.ajouterGround(ground);
     }
 
     @Override

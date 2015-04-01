@@ -19,9 +19,8 @@ public class SourceFEMGraphique extends Connectable implements SourceFEMAbstrait
     private SourceFEMAbstraite sourceFEM;
     private byte[] cotesConnectes;
 
-    public SourceFEMGraphique(Circuit c) {
+    public SourceFEMGraphique() {
         this.sourceFEM = new SourceFEM();
-        c.ajouterSourceFEM((SourceFEM) sourceFEM);
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;

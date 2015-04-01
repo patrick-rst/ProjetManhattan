@@ -28,9 +28,23 @@ public class CircuitGraphique {
     }
 
     public void preparerAnalyse(Connectable[][] connectables) {
-        circuit.wipe();
         this.connectables = connectables;
+        circuit.wipe();
         connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
+        for (int i = 0; i < connectables.length; ++i) {
+            for (int j = 0; j < connectables[i].length; ++j) {
+
+                if (connectables[i][j] instanceof ResistanceGraphique) {
+                    circuit.ajouterResistance((Resistance) ((ResistanceGraphique) connectables[i][j]).getEnfant());
+                } else if (connectables[i][j] instanceof SourceCourantGraphique) {
+                    circuit.ajouterSourceCourant((SourceCourant) ((SourceCourantGraphique) connectables[i][j]).getEnfant());
+                } else if (connectables[i][j] instanceof SourceFEMGraphique) {
+                    circuit.ajouterSourceFEM((SourceFEM) ((SourceFEMGraphique) connectables[i][j]).getEnfant());
+                } else if (connectables[i][j] instanceof GroundGraphique) {
+                    circuit.ajouterGround((Ground) ((GroundGraphique) connectables[i][j]).getEnfant());
+                }
+            }
+        }
         creerLiens();
     }
 
