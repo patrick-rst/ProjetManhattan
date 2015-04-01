@@ -70,6 +70,28 @@ public class Circuit {
         for (int i = 0; i < nombreSourcesFEM; ++i) {
             sourcesFEM.get(i).setCourant(matriceX[nombreNoeuds + i]);
         }
+
+        donnerCourantAuxResistances();
+    }
+
+    public void donnerCourantAuxResistances() {
+        double v1 = 0;
+        double v2 = 0;
+
+        for (Resistance resistance : resistances) {
+            for (Noeud noeud : noeuds) {
+                if (noeud.getResistances().contains(resistance)) {
+                    if (v1 == 0) {
+                        v1 = noeud.getTension();
+                    } else {
+                        v2 = noeud.getTension();
+                    }
+                }
+            }
+            double deltaV = Math.abs(v2 - v1);
+            resistance.setCourant(deltaV / resistance.getResistance());
+
+        }
     }
 
     public void resoudreCircuitAnalogue() {

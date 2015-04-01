@@ -22,14 +22,12 @@ public class CircuitGraphique {
     private Connectable[][] connectables;
     private boolean[][] connectablesPasses;
     private Circuit circuit;
-    private Controleur controleur;
 
-    public CircuitGraphique(Circuit circuit, Controleur controleur) {
+    public CircuitGraphique(Circuit circuit) {
         this.circuit = circuit;
-        this.controleur = controleur;
     }
 
-    public void preparerAnalyse() {
+    public void preparerAnalyse(Connectable[][] connectables) {
         this.connectables = connectables;
         connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
         creerLiens();

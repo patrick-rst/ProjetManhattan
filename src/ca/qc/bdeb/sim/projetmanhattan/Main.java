@@ -22,8 +22,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         Circuit circuit = new Circuit();
-        Controleur controleur = new Controleur(circuit);
-        CircuitGraphique circuitGraphique = new CircuitGraphique(circuit, controleur);
+        CircuitGraphique circuitGraphique = new CircuitGraphique(circuit);
 
 //        Parent root = FXMLLoader.load(getClass().getResource("view/FXMLDocument.fxml"));
         
