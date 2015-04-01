@@ -28,6 +28,7 @@ public class CircuitGraphique {
     }
 
     public void preparerAnalyse(Connectable[][] connectables) {
+        circuit.wipe();
         this.connectables = connectables;
         connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
         creerLiens();

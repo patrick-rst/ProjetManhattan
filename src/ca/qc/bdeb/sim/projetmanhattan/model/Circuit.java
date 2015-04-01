@@ -43,6 +43,14 @@ public class Circuit {
         grounds = new ArrayList<>();
 
     }
+    
+    public void wipe(){
+        resistances.clear();
+        noeuds.clear();
+        sourcesFEM.clear();
+        sourcesCourant.clear();
+        grounds.clear();
+    }
 
     public void ajouterGround(Ground g) {
         grounds.add(g);
