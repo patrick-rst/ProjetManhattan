@@ -5,6 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import ca.qc.bdeb.sim.projetmanhattan.controller.Controleur;
 import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.Ground;
 import ca.qc.bdeb.sim.projetmanhattan.model.Noeud;
@@ -21,11 +22,17 @@ public class CircuitGraphique {
     private Connectable[][] connectables;
     private boolean[][] connectablesPasses;
     private Circuit circuit;
+    private Controleur controleur;
 
-    public CircuitGraphique(Connectable[][] connectables, Circuit circuit) {
-        this.connectables = connectables;
+    public CircuitGraphique(Circuit circuit, Controleur controleur) {
         this.circuit = circuit;
+        this.controleur = controleur;
+    }
+
+    public void preparerAnalyse() {
+        this.connectables = connectables;
         connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
+        creerLiens();
     }
 
     public void creerLiens() {

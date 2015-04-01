@@ -54,6 +54,9 @@ public class Noeud {
 
     public void setTension(double tension) {
         this.tension = tension;
+        for(FilAbstrait fil: fils){
+            fil.setTension(tension);
+        }
     }
 
     public Ground getGround() {

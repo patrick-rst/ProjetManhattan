@@ -1,5 +1,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.view.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.FilCoin;
 import ca.qc.bdeb.sim.projetmanhattan.view.FilCroix;

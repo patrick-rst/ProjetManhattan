@@ -12,6 +12,7 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 public abstract class FilAbstrait implements Connectable {
 
     protected byte[] cotesConnectes;
+    protected double tension;
 
     public FilAbstrait() {
         this.cotesConnectes = new byte[4];
@@ -28,5 +29,15 @@ public abstract class FilAbstrait implements Connectable {
         cotesConnectes[1] = cotesConnectes[0];
         cotesConnectes[0] = temp;
     }
+
+    public double getTension() {
+        return tension;
+    }
+
+    public void setTension(double tension) {
+        this.tension = tension;
+    }
+    
+    
 
 }

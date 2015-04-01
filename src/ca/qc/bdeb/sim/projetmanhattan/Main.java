@@ -1,6 +1,6 @@
 package ca.qc.bdeb.sim.projetmanhattan;
 
-import ca.qc.bdeb.sim.projetmanhattan.controller.FXMLDocumentController;
+import ca.qc.bdeb.sim.projetmanhattan.controller.Controleur;
 import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.view.CircuitGraphique;
 import javafx.application.Application;
@@ -21,8 +21,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         Circuit circuit = new Circuit();
-        FXMLDocumentController controller = new FXMLDocumentController();
-        CircuitGraphique circuitGraphique = new CircuitGraphique(controller.getCircuit(), circuit);
+        Controleur controleur = new Controleur(circuit);
+        CircuitGraphique circuitGraphique = new CircuitGraphique(circuit, controleur);
 
         Parent root = FXMLLoader.load(getClass().getResource("view/FXMLDocument.fxml"));
         Scene scene = new Scene(root);
