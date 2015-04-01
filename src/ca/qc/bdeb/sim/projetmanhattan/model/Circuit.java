@@ -43,8 +43,8 @@ public class Circuit {
         grounds = new ArrayList<>();
 
     }
-    
-    public void wipe(){
+
+    public void wipe() {
         resistances.clear();
         noeuds.clear();
         sourcesFEM.clear();
@@ -121,25 +121,38 @@ public class Circuit {
         for (int i = 0; i < matriceZ.length; ++i) {
             matZ.set(i, matriceZ[i]);
         }
+        
+        for(int i = 0; i < matA.numRows; ++i){
+            for(int j = 0; j < matA.numCols; ++j){
+                System.out.print(matA.get(i, j) + " ");
+            }
+            System.out.println("");
+        }
+        for(int i = 0; i < matZ.numRows; ++i){
+            for(int j = 0; j < matZ.numCols; ++j){
+                System.out.print(matZ.get(i, j) + " ");
+            }
+            System.out.println("");
+        }
+        
 
         DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
         if (!CommonOps.solve(matA, matZ, matX)) {
             throw new IllegalArgumentException("Singular matrix");
         }
-        for(int i = 0; i < matX.numRows; ++i){
+        for (int i = 0; i < matX.numRows; ++i) {
             System.out.println(matX.get(i));
         }
 
         /*try {
-            DenseMatrix64F matX = matA.solve(matZ);
+         DenseMatrix64F matX = matA.solve(matZ);
 
-            for (int i = 0; i < nombreNoeuds + nombreSourcesFEM; ++i) {
-                matriceX[i] = matX.get(i);
-            }
-        } catch (Exception e) {
-            System.out.println("Erreur lors de ls resolution de la matrice");
-        }*/
-
+         for (int i = 0; i < nombreNoeuds + nombreSourcesFEM; ++i) {
+         matriceX[i] = matX.get(i);
+         }
+         } catch (Exception e) {
+         System.out.println("Erreur lors de ls resolution de la matrice");
+         }*/
     }
 
     public void construireMatriceZ() {
