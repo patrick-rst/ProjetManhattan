@@ -25,7 +25,6 @@ public class ResistanceGraphique extends Connectable implements ResistanceAbstra
         cotesConnectes[2] = 1;
     }
 
-
     @Override
     public double getResistance() {
         return resistance.getResistance();
@@ -50,7 +49,6 @@ public class ResistanceGraphique extends Connectable implements ResistanceAbstra
     public String toString() {
         return "Resistance";
     }
-
 
     public Composant getEnfant() {
         return (Composant) this.resistance;
