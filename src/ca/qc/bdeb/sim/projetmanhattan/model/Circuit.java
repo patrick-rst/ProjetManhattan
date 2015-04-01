@@ -121,21 +121,26 @@ public class Circuit {
         for (int i = 0; i < matriceZ.length; ++i) {
             matZ.set(i, matriceZ[i]);
         }
-        
-        for(int i = 0; i < matA.numRows; ++i){
-            for(int j = 0; j < matA.numCols; ++j){
-                System.out.print(matA.get(i, j) + " ");
-            }
-            System.out.println("");
-        }
-        for(int i = 0; i < matZ.numRows; ++i){
-            for(int j = 0; j < matZ.numCols; ++j){
-                System.out.print(matZ.get(i, j) + " ");
-            }
-            System.out.println("");
-        }
-        
 
+        for (int i = 0; i < matriceA.length; ++i) {
+            for (int j = 0; j < matriceA[i].length; ++j) {
+                System.out.print(matriceA[i][j] + " ");
+            }
+            System.out.println("");
+        }
+
+        /* for(int i = 0; i < matA.numRows; ++i){
+         for(int j = 0; j < matA.numCols; ++j){
+         System.out.print(matA.get(i, j) + " ");
+         }
+         System.out.println("");
+         }
+         for(int i = 0; i < matZ.numRows; ++i){
+         for(int j = 0; j < matZ.numCols; ++j){
+         System.out.print(matZ.get(i, j) + " ");
+         }
+         System.out.println("");
+         }*/
         DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
         if (!CommonOps.solve(matA, matZ, matX)) {
             throw new IllegalArgumentException("Singular matrix");
