@@ -50,11 +50,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     GridPane grid;
 
-    @FXML
-    StackPane resistance;
-
-    @FXML
-    StackPane source;
+//    @FXML
+//    StackPane resistance;
+//
+//    @FXML
+//    StackPane source;
     
     Circuit c;
     CircuitGraphique cg;
@@ -122,6 +122,8 @@ public class FXMLDocumentController implements Initializable {
             String id = db.getString();
             int row = grid.getRowIndex(target);
             int column = grid.getColumnIndex(target);
+            removeComposant(row, column);
+            target.setRotate(0);
             addComposant(id, row, column);
 
             success = true;
@@ -140,7 +142,7 @@ public class FXMLDocumentController implements Initializable {
         content.putImage(source.getImage());
         content.putString(source.getId());
         db.setContent(content);
-
+        
         int row = grid.getRowIndex(source);
         int column = grid.getColumnIndex(source);
         removeComposant(row, column);
@@ -168,6 +170,7 @@ public class FXMLDocumentController implements Initializable {
         ImageView source = (ImageView) event.getSource();
         if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
             source.setRotate(source.getRotate() + 90);
+            
             
             int row = grid.getRowIndex(source);
             int column = grid.getColumnIndex(source);
