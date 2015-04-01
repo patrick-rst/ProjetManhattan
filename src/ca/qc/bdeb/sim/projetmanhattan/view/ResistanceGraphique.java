@@ -56,7 +56,7 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
     }
 
     public void rotater() {
-        byte temp = cotesConnectes[4];
+        byte temp = cotesConnectes[3];
         cotesConnectes[3] = cotesConnectes[2];
         cotesConnectes[2] = cotesConnectes[1];
         cotesConnectes[1] = cotesConnectes[0];
