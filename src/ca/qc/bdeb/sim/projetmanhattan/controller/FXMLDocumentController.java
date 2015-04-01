@@ -18,6 +18,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -28,9 +31,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 
 import org.controlsfx.control.PopOver;
 
@@ -48,21 +51,13 @@ public class FXMLDocumentController implements Initializable {
     PopOver composantEditor = new PopOver();
 
     @FXML
+    BorderPane pane;
+    
+    @FXML
     GridPane grid;
 
-//    @FXML
-//    StackPane resistance;
-//
-//    @FXML
-//    StackPane source;
-    
     Circuit c;
     CircuitGraphique cg;
-
-//    public FXMLDocumentController(Circuit c, CircuitGraphique cg) {
-//        this.c = c;
-//        this.cg = cg;
-//    }
 
     public void setC(Circuit c) {
         this.c = c;
@@ -72,13 +67,28 @@ public class FXMLDocumentController implements Initializable {
         this.cg = cg;
     }
     
-    public void print() {
-        System.out.println(".............");
-    }
-    
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        MenuBar mnuBar = new MenuBar();
+        Menu mnuRun = new Menu("Run");
+        
+        MenuItem mnuItemRun = new MenuItem("Run");
+        
+        mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                System.out.println("RUN!");
+            }
+        });        
+ 
+        mnuRun.getItems().addAll(mnuItemRun);        
+        mnuBar.getMenus().addAll(mnuRun);
+        
+        
+        pane.setTop(mnuBar);
+        
         
     }
 
