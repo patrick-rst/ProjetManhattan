@@ -227,6 +227,8 @@ public class FXMLDocumentController implements Initializable {
                         SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit[row][column];
                         sourceFEM.setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
                     }
+                    
+                    composantEditor.hide();
 
                 }
             });
