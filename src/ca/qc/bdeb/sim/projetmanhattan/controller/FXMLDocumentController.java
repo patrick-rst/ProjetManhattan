@@ -30,6 +30,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+
 import org.controlsfx.control.PopOver;
 
 /**
@@ -58,13 +59,14 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        resistance.setStyle("-fx-padding: 10;\n"
-                + "-fx-background-color: firebrick;");
-
-        source.setStyle("-fx-padding: 10;\n"
-                + "-fx-background-color: blue;");
+        
     }
 
+    @FXML
+    private void analyserCircuit(ActionEvent event) {
+        
+    }
+    
     @FXML
     private void dragComposant(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();

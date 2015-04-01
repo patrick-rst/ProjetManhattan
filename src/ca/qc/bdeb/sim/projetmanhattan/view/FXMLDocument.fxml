@@ -225,4 +225,11 @@
             </children>
         </AnchorPane>
     </left>
+   <bottom>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="324.0" layoutY="88.0" mnemonicParsing="false" onAction="#analyserCircuit" text="Run" />
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>
