@@ -122,13 +122,7 @@ public class Circuit {
         for (int i = 0; i < matriceZ.length; ++i) {
             matZ.set(i, matriceZ[i]);
         }
-
-        DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
-        if (!CommonOps.solve(matA, matZ, matX)) {
-            throw new IllegalArgumentException("Singular matrix");
-        }
-        //------------
-
+        //-------------------------
         for (int i = 0; i < matA.numRows; ++i) {
             for (int j = 0; j < matA.numCols; ++j) {
                 System.out.print(matA.get(i, j) + " ");
@@ -141,13 +135,20 @@ public class Circuit {
             }
             System.out.println("z");
         }
+        //--------------------------------
+        DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
+        if (!CommonOps.solve(matA, matZ, matX)) {
+            throw new IllegalArgumentException("Singular matrix");
+        }
+        //-------------------------
+
         for (int i = 0; i < matX.numRows; ++i) {
             for (int j = 0; j < matX.numCols; ++j) {
                 System.out.print(matX.get(i, j) + " ");
             }
-            System.out.println("z");
+            System.out.println("x");
         }
-        //------------
+        //---------------------
     }
 
     public void construireMatriceZ() {
@@ -178,9 +179,9 @@ public class Circuit {
     }
 
     public void construireMatriceG() {
-        int n1 = -1;
-        int n2 = -1;
         for (int i = 0; i < resistances.size(); ++i) {
+            int n1 = -1;
+            int n2 = -1;
             double valeurAAjouter = 1 / resistances.get(i).getResistance();
             for (int j = 0; j < noeuds.size(); ++j) {
                 if (noeuds.get(j).getResistances().contains(resistances.get(i))) {
@@ -191,9 +192,8 @@ public class Circuit {
                     }
                 }
             }
-            if (n1 != -1) {
-                matriceG[n1][n1] += valeurAAjouter;
-            }
+
+            matriceG[n1][n1] += valeurAAjouter;
 
             if (n2 != -1) {
                 matriceG[n2][n2] += valeurAAjouter;
@@ -261,17 +261,14 @@ public class Circuit {
 
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
-        System.out.println("n " + noeuds.size());
     }
 
     public void ajouterResistance(Resistance resistance) {
         resistances.add(resistance);
-        System.out.println("r " + resistances.size());
     }
 
     public void ajouterSourceFEM(SourceFEM sourceFEM) {
         sourcesFEM.add(sourceFEM);
-        System.out.println("v " + sourcesFEM.size());
     }
 
     public void ajouterSourceCourant(SourceCourant sourceCourant) {
