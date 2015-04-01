@@ -79,7 +79,8 @@ public class FXMLDocumentController implements Initializable {
         
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                System.out.println("RUN!");
+                cg.preparerAnalyse(circuit);
+                c.analyserCircuit();                
             }
         });        
  
