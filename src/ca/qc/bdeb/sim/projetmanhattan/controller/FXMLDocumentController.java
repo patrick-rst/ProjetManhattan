@@ -84,7 +84,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void analyserCircuit(ActionEvent event) {
-        cg.preparerAnalyse();
+        cg.preparerAnalyse(circuit);
         c.analyserCircuit();
     }
     

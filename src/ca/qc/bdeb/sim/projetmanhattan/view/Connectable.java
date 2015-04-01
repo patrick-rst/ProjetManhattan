@@ -9,13 +9,29 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  *
  * @author blood_000
  */
-public interface Connectable {
+public class Connectable {
 
-    public byte[] getCotesConnectes();
+    private byte[] cotesConnectes;
+
+    public Connectable() {
+        cotesConnectes = new byte[4];
+    }
+
+    public byte[] getCotesConnectes() {
+        return cotesConnectes;
+    }
 
     @Override
-    public String toString();
+    public String toString() {
+        return null;
+    }
 
-    public void rotater();
+    public void rotater() {
+        byte temp = cotesConnectes[3];
+        cotesConnectes[3] = cotesConnectes[2];
+        cotesConnectes[2] = cotesConnectes[1];
+        cotesConnectes[1] = cotesConnectes[0];
+        cotesConnectes[0] = temp;
+    }
 
 }

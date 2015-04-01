@@ -13,7 +13,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
  *
  * @author blood_000
  */
-public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
+public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite {
 
     private SourceFEMAbstraite sourceFEM;
     private byte[] cotesConnectes;
@@ -23,11 +23,6 @@ public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;
-    }
-
-    @Override
-    public byte[] getCotesConnectes() {
-        return cotesConnectes;
     }
 
     @Override
@@ -53,14 +48,6 @@ public class SourceFEMGraphique implements SourceFEMAbstraite, Connectable {
     @Override
     public String toString() {
         return "SourceFEM";
-    }
-
-    public void rotater() {
-        byte temp = cotesConnectes[4];
-        cotesConnectes[3] = cotesConnectes[2];
-        cotesConnectes[2] = cotesConnectes[1];
-        cotesConnectes[1] = cotesConnectes[0];
-        cotesConnectes[0] = temp;
     }
 
     public Composant getEnfant() {

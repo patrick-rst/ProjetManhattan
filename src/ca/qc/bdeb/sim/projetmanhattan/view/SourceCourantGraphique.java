@@ -13,7 +13,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourantAbstraite;
  *
  * @author blood_000
  */
-public class SourceCourantGraphique implements SourceCourantAbstraite, Connectable {
+public class SourceCourantGraphique extends Connectable implements SourceCourantAbstraite {
 
     private SourceCourantAbstraite sourceCourant;
     private byte[] cotesConnectes;
@@ -26,11 +26,6 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
     }
 
     @Override
-    public byte[] getCotesConnectes() {
-        return cotesConnectes;
-    }
-
-    @Override
     public double getCourant() {
         return sourceCourant.getCourant();
     }
@@ -38,14 +33,6 @@ public class SourceCourantGraphique implements SourceCourantAbstraite, Connectab
     @Override
     public void setCourant(double courant) {
         this.sourceCourant.setCourant(courant);
-    }
-
-    public void rotater() {
-        byte temp = cotesConnectes[4];
-        cotesConnectes[3] = cotesConnectes[2];
-        cotesConnectes[2] = cotesConnectes[1];
-        cotesConnectes[1] = cotesConnectes[0];
-        cotesConnectes[0] = temp;
     }
 
     public Composant getEnfant() {

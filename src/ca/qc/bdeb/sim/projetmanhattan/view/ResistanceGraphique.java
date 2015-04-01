@@ -13,7 +13,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
  *
  * @author blood_000
  */
-public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
+public class ResistanceGraphique extends Connectable implements ResistanceAbstraite {
 
     private ResistanceAbstraite resistance;
     private byte[] cotesConnectes;
@@ -25,10 +25,6 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
         cotesConnectes[2] = 1;
     }
 
-    @Override
-    public byte[] getCotesConnectes() {
-        return cotesConnectes;
-    }
 
     @Override
     public double getResistance() {
@@ -55,13 +51,6 @@ public class ResistanceGraphique implements ResistanceAbstraite, Connectable {
         return "Resistance";
     }
 
-    public void rotater() {
-        byte temp = cotesConnectes[4];
-        cotesConnectes[3] = cotesConnectes[2];
-        cotesConnectes[2] = cotesConnectes[1];
-        cotesConnectes[1] = cotesConnectes[0];
-        cotesConnectes[0] = temp;
-    }
 
     public Composant getEnfant() {
         return (Composant) this.resistance;

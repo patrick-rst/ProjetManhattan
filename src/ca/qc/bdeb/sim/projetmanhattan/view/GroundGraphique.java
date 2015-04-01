@@ -13,7 +13,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.GroundAbstrait;
  *
  * @author blood_000
  */
-public class GroundGraphique implements GroundAbstrait, Connectable, ComposantGraphique {
+public class GroundGraphique extends Connectable implements GroundAbstrait, ComposantGraphique {
 
     private byte[] cotesConnectes;
     private Ground ground;
@@ -21,19 +21,6 @@ public class GroundGraphique implements GroundAbstrait, Connectable, ComposantGr
     public GroundGraphique() {
         this.ground = new Ground();
         cotesConnectes[0] = 1;
-    }
-
-    @Override
-    public byte[] getCotesConnectes() {
-        return cotesConnectes;
-    }
-
-    public void rotater() {
-        byte temp = cotesConnectes[4];
-        cotesConnectes[3] = cotesConnectes[2];
-        cotesConnectes[2] = cotesConnectes[1];
-        cotesConnectes[1] = cotesConnectes[0];
-        cotesConnectes[0] = temp;
     }
 
     @Override

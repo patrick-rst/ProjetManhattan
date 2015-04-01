@@ -9,25 +9,13 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
  *
  * @author blood_000
  */
-public abstract class FilAbstrait implements Connectable {
+public abstract class FilAbstrait extends Connectable {
 
     protected byte[] cotesConnectes;
     protected double tension;
 
     public FilAbstrait() {
         this.cotesConnectes = new byte[4];
-    }
-
-    public byte[] getCotesConnectes() {
-        return cotesConnectes;
-    }
-    
-    public void rotater() {
-        byte temp = cotesConnectes[4];
-        cotesConnectes[3] = cotesConnectes[2];
-        cotesConnectes[2] = cotesConnectes[1];
-        cotesConnectes[1] = cotesConnectes[0];
-        cotesConnectes[0] = temp;
     }
 
     public double getTension() {
@@ -37,7 +25,5 @@ public abstract class FilAbstrait implements Connectable {
     public void setTension(double tension) {
         this.tension = tension;
     }
-    
-    
 
 }
