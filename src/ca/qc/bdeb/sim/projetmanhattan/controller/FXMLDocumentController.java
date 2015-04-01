@@ -196,7 +196,6 @@ public class FXMLDocumentController implements Initializable {
             
             
             
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null) {
             String id = source.getId();
 
             int row = grid.getRowIndex(source);
