@@ -1,6 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.view.CircuitGraphique;
 import ca.qc.bdeb.sim.projetmanhattan.view.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.FilCoin;
 import ca.qc.bdeb.sim.projetmanhattan.view.FilCroix;
@@ -41,6 +42,7 @@ import org.controlsfx.control.PopOver;
  */
 public class FXMLDocumentController implements Initializable {
 
+
     Connectable[][] circuit = new Connectable[10][10];
 
     PopOver composantEditor = new PopOver();
@@ -53,9 +55,27 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     StackPane source;
+    
+    Circuit c;
+    CircuitGraphique cg;
 
-    public FXMLDocumentController() {
+//    public FXMLDocumentController(Circuit c, CircuitGraphique cg) {
+//        this.c = c;
+//        this.cg = cg;
+//    }
+
+    public void setC(Circuit c) {
+        this.c = c;
     }
+
+    public void setCg(CircuitGraphique cg) {
+        this.cg = cg;
+    }
+    
+    public void print() {
+        System.out.println(".............");
+    }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,7 +84,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void analyserCircuit(ActionEvent event) {
-        
+        cg.preparerAnalyse();
+        c.analyserCircuit();
     }
     
     @FXML
@@ -147,6 +168,15 @@ public class FXMLDocumentController implements Initializable {
         ImageView source = (ImageView) event.getSource();
         if (event.getButton().equals(MouseButton.PRIMARY)) {
             source.setRotate(source.getRotate() + 90);
+            
+            int row = grid.getRowIndex(source);
+            int column = grid.getColumnIndex(source);
+            
+            
+            ((Connectable) circuit[row][column]).rotater();
+            
+            
+            
         } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null) {
             String id = source.getId();
 
