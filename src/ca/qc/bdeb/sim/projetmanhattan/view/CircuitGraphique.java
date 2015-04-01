@@ -51,13 +51,11 @@ public class CircuitGraphique {
     public void creerLiens() {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 1; j < connectables[i].length; ++j) {
-                if (!connectablesPasses[i][j]) {
+                if (connectables[i][j] instanceof FilAbstrait && !connectablesPasses[i][j]) {
                     connectablesPasses[i][j] = true;
-                    if (connectables[i][j] instanceof FilAbstrait) {
-                        Noeud noeud = new Noeud();
-                        retournerEnfants((FilAbstrait) connectables[i][j], i, j, noeud);
-                        circuit.ajouterNoeud(noeud);
-                    }
+                    Noeud noeud = new Noeud();
+                    retournerEnfants((FilAbstrait) connectables[i][j], i, j, noeud);
+                    circuit.ajouterNoeud(noeud);
                 }
             }
         }
@@ -77,10 +75,11 @@ public class CircuitGraphique {
         } else if (connectables[i][j] instanceof FilAbstrait) {
             noeud.getFils().add((FilAbstrait) connectables[i][j]);
             retournerEnfants(((FilAbstrait) connectables[i][j]), i, j, noeud);
+            connectablesPasses[i][j] = true;
         } else if (connectables[i][j] instanceof GroundGraphique) {
             noeud.setGround((Ground) ((GroundGraphique) connectables[i][j]).getEnfant());
         }
-        connectablesPasses[i][j] = false;
+
     }
 
     public void retournerEnfants(FilAbstrait fil, int i, int j, Noeud noeud) {

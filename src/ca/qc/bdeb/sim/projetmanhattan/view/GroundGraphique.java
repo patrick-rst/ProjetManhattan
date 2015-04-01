@@ -5,7 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.Ground;
 import ca.qc.bdeb.sim.projetmanhattan.model.GroundAbstrait;
@@ -16,7 +15,6 @@ import ca.qc.bdeb.sim.projetmanhattan.model.GroundAbstrait;
  */
 public class GroundGraphique extends Connectable implements GroundAbstrait, ComposantGraphique {
 
-    private byte[] cotesConnectes;
     private Ground ground;
 
     public GroundGraphique() {

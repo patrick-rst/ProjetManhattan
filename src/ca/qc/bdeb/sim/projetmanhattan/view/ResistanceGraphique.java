@@ -5,7 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
@@ -17,7 +16,6 @@ import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
 public class ResistanceGraphique extends Connectable implements ResistanceAbstraite {
 
     private ResistanceAbstraite resistance;
-    private byte[] cotesConnectes;
 
     public ResistanceGraphique() {
         this.resistance = new Resistance();

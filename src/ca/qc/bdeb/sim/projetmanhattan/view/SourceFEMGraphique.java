@@ -5,7 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
@@ -17,7 +16,6 @@ import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
 public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite {
 
     private SourceFEMAbstraite sourceFEM;
-    private byte[] cotesConnectes;
 
     public SourceFEMGraphique() {
         this.sourceFEM = new SourceFEM();
