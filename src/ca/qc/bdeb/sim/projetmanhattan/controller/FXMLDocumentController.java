@@ -166,7 +166,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
-        if (event.getButton().equals(MouseButton.PRIMARY)) {
+        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
             source.setRotate(source.getRotate() + 90);
             
             int row = grid.getRowIndex(source);
