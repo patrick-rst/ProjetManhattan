@@ -194,7 +194,6 @@ public class Circuit {
             }
 
             matriceG[n1][n1] += valeurAAjouter;
-
             if (n2 != -1) {
                 matriceG[n2][n2] += valeurAAjouter;
                 matriceG[n1][n2] -= valeurAAjouter;
