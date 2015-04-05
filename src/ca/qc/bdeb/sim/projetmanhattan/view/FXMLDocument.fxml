@@ -156,68 +156,94 @@
                     <panes>
                         <TitledPane text="Fils">
                             <content>
-                                <FlowPane prefWidth="180.0">
-                                    <children>
-                                        <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@img/fil.png" />
-                                            </image>
-                                            <FlowPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </FlowPane.margin>
-                                        </ImageView>
-                                        <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@img/filCoin.png" />
-                                            </image>
-                                            <FlowPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </FlowPane.margin>
-                                        </ImageView>
-                                        <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@img/filT.png" />
-                                            </image>
-                                            <FlowPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </FlowPane.margin>
-                                        </ImageView>
-                                        <ImageView id="filCroix" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@img/filCroix.png" />
-                                            </image>
-                                            <FlowPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </FlowPane.margin>
-                                        </ImageView>
-                                    </children>
-                                </FlowPane>
+                        <ScrollPane prefViewportHeight="572.0" prefViewportWidth="184.0">
+                           <content>
+                                      <FlowPane prefWidth="180.0">
+                                          <children>
+                                              <ImageView id="filDroit" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@img/fil_droit.png" />
+                                                  </image>
+                                                  <FlowPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                  </FlowPane.margin>
+                                              </ImageView>
+                                              <ImageView id="filCoin" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@img/fil_coin.png" />
+                                                  </image>
+                                                  <FlowPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                  </FlowPane.margin>
+                                              </ImageView>
+                                              <ImageView id="filT" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@img/fil_t.png" />
+                                                  </image>
+                                                  <FlowPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                  </FlowPane.margin>
+                                              </ImageView>
+                                              <ImageView id="filCroix" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@img/fil_croix.png" />
+                                                  </image>
+                                                  <FlowPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                  </FlowPane.margin>
+                                              </ImageView>
+                                          </children>
+                                      </FlowPane>
+                           </content>
+                        </ScrollPane>
                             </content>
                         </TitledPane>
                         <TitledPane text="Composants">
                             <content>
-                                <FlowPane prefWidth="184.0">
-                                    <children>
-                                        <StackPane fx:id="source">
-                                            <children>
-                                                <ImageView id="source" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@img/battery.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </children>
-                                        </StackPane>
-                                        <StackPane fx:id="resistance">
-                                            <children>
-                                                <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@img/resistor.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </children>
-                                        </StackPane>
-                                    </children>
-                                </FlowPane>
+                        <ScrollPane prefViewportHeight="449.0" prefViewportWidth="184.0">
+                           <content>
+                                      <FlowPane prefWidth="184.0">
+                                          <children>
+                                              <StackPane fx:id="source">
+                                                  <children>
+                                                      <ImageView id="source" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                          <image>
+                                                              <Image url="@img/source_tension.png" />
+                                                          </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                                      </ImageView>
+                                                  </children>
+                                              </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/source_courant.png" />
+                                             </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
+                                              <StackPane fx:id="resistance">
+                                                  <children>
+                                                      <ImageView id="resistance" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                          <image>
+                                                              <Image url="@img/resistance.png" />
+                                                          </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                                      </ImageView>
+                                                  </children>
+                                              </StackPane>
+                                          </children>
+                                      </FlowPane>
+                           </content>
+                        </ScrollPane>
                             </content>
                         </TitledPane>
                     </panes>
