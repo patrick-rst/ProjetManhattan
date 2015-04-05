@@ -19,9 +19,9 @@ public class FilCroix extends FilAbstrait {
         cotesConnectes[3] = 1;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "FilCroix";
-    }
+    }*/
 
 }

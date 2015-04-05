@@ -24,5 +24,10 @@ public abstract class FilAbstrait extends Connectable {
     public void setTension(double tension) {
         this.tension = tension;
     }
+    
+    @Override
+    public String toString(){
+        return cotesConnectes[0] + " " + cotesConnectes[1] + " " +cotesConnectes[2] + " " +cotesConnectes[3] + " ";
+    }
 
 }

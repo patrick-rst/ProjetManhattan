@@ -18,8 +18,8 @@ public class FilCoin extends FilAbstrait {
 
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "FilCoin";
-    }
+    }*/
 }
