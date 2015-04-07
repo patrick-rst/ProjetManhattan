@@ -110,7 +110,7 @@ public class CircuitGraphique {
             System.out.println("Case: (" + i + "," + j + ")");
             System.out.println("Enfant: (" + (i + 1) + "," + j + ")");
             System.out.println("*****");
-            gererLienDetecte((i + i), j, noeud, 0);
+            gererLienDetecte((i + 1), j, noeud, 0);
         }
         if (fil.getCotesConnectes()[3] == 1 && j > 0 && connectables[i][j - 1] != null && connectables[i][j - 1].getCotesConnectes()[1] != 0 && !connectablesPasses[i][j - 1]) {
 

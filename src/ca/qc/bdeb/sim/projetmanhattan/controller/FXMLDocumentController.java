@@ -45,14 +45,13 @@ import org.controlsfx.control.PopOver;
  */
 public class FXMLDocumentController implements Initializable {
 
-
     Connectable[][] circuit = new Connectable[10][10];
 
     PopOver composantEditor = new PopOver();
 
     @FXML
     BorderPane pane;
-    
+
     @FXML
     GridPane grid;
 
@@ -66,31 +65,27 @@ public class FXMLDocumentController implements Initializable {
     public void setCg(CircuitGraphique cg) {
         this.cg = cg;
     }
-    
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         MenuBar mnuBar = new MenuBar();
         Menu mnuRun = new Menu("Run");
-        
+
         MenuItem mnuItemRun = new MenuItem("Run");
-        
+
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
                 cg.preparerAnalyse(circuit);
-                c.analyserCircuit();                
+                c.analyserCircuit();
             }
-        });        
- 
-        mnuRun.getItems().addAll(mnuItemRun);        
+        });
+
+        mnuRun.getItems().addAll(mnuItemRun);
         mnuBar.getMenus().addAll(mnuRun);
-        
-        
+
         pane.setTop(mnuBar);
-        
-        
+
     }
 
     @FXML
@@ -98,7 +93,7 @@ public class FXMLDocumentController implements Initializable {
         cg.preparerAnalyse(circuit);
         c.analyserCircuit();
     }
-    
+
     @FXML
     private void dragComposant(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
@@ -153,7 +148,7 @@ public class FXMLDocumentController implements Initializable {
         content.putImage(source.getImage());
         content.putString(source.getId());
         db.setContent(content);
-        
+
         int row = grid.getRowIndex(source);
         int column = grid.getColumnIndex(source);
         removeComposant(row, column);
@@ -173,12 +168,11 @@ public class FXMLDocumentController implements Initializable {
         if (event.getCode().equals(KeyCode.P)) {
             System.out.println("P pressed");
             printCircuitArray();
-        }
-        else if (event.getCode().equals(KeyCode.R)) {
+        } else if (event.getCode().equals(KeyCode.R)) {
             System.out.println("R pressed");
             cg.preparerAnalyse(circuit);
-            c.analyserCircuit();            
-        } 
+            c.analyserCircuit();
+        }
     }
 
     @FXML
@@ -186,16 +180,12 @@ public class FXMLDocumentController implements Initializable {
         ImageView source = (ImageView) event.getSource();
         if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
             source.setRotate(source.getRotate() + 90);
-            
-            
+
             int row = grid.getRowIndex(source);
             int column = grid.getColumnIndex(source);
-            
-            
+
             ((Connectable) circuit[row][column]).rotater();
-            
-            
-            
+
         } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+")) {
             String id = source.getId();
 
@@ -240,13 +230,11 @@ public class FXMLDocumentController implements Initializable {
                     String composant = circuit[row][column].toString();
 
                     if (composant.equals("Resistance")) {
-                        ResistanceGraphique resistance = (ResistanceGraphique) circuit[row][column];
-                        resistance.setResistance(Double.parseDouble(txtValeur.getText()));
+                        ((ResistanceGraphique) circuit[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
                     } else if (composant.equals("SourceFEM")) {
-                        SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit[row][column];
-                        sourceFEM.setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                        ((SourceFEMGraphique) circuit[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
                     }
-                    
+
                     composantEditor.hide();
 
                 }
