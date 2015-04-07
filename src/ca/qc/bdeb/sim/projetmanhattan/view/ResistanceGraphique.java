@@ -44,10 +44,10 @@ public class ResistanceGraphique extends Connectable implements ResistanceAbstra
         this.resistance.setCourant(courant);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Resistance";
-    }
+    }*/
 
     public Composant getEnfant() {
         return (Composant) this.resistance;

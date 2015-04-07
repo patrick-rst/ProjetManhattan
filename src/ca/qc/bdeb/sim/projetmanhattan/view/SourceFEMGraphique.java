@@ -44,10 +44,10 @@ public class SourceFEMGraphique extends Connectable implements SourceFEMAbstrait
         this.sourceFEM.setCourant(courant);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "SourceFEM";
-    }
+    }*/
 
     public Composant getEnfant() {
         return (Composant) this.sourceFEM;
