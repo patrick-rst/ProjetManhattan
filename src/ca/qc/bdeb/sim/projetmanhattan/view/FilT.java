@@ -19,8 +19,8 @@ public class FilT extends FilAbstrait {
 
     }
 
-    /*@Override
+    @Override
     public String toString() {
         return "FilT";
-    }*/
+    }
 }

@@ -52,7 +52,6 @@ public class CircuitGraphique {
                 if (connectables[i][j] instanceof FilAbstrait && !connectablesPasses[i][j]) {
 
                     connectablesPasses[i][j] = true;
-                    System.out.println(" - " + i + "," + j + "  " + connectables[i][j] + connectablesPasses[i][j]);
                     Noeud noeud = new Noeud();
                     noeud.ajouterFil((FilAbstrait) connectables[i][j]);
                     retournerEnfants((FilAbstrait) connectables[i][j], i, j, noeud);
@@ -66,7 +65,6 @@ public class CircuitGraphique {
         if (connectables[i][j] instanceof FilAbstrait) {
 
             connectablesPasses[i][j] = true;
-            System.out.println(i + "," + j + "  " + connectables[i][j] + connectablesPasses[i][j]);
             noeud.ajouterFil((FilAbstrait) connectables[i][j]);
             retournerEnfants(((FilAbstrait) connectables[i][j]), i, j, noeud);
 
@@ -76,10 +74,8 @@ public class CircuitGraphique {
             noeud.getSourcesCourant().add((SourceCourant) ((SourceCourantGraphique) connectables[i][j]).getEnfant());
         } else if (connectables[i][j] instanceof SourceFEMGraphique) {
             if (connectables[i][j].getCotesConnectes()[origine] == -1) { // PROBLEME TROUVE??
-                System.out.println("source neg");
                 noeud.getSourcesFEMNeg().add((SourceFEM) ((SourceFEMGraphique) connectables[i][j]).getEnfant());
             } else {
-                System.out.println("source pos");
                 noeud.getSourcesFEMPos().add((SourceFEM) ((SourceFEMGraphique) connectables[i][j]).getEnfant());
             }
         } else if (connectables[i][j] instanceof GroundGraphique) {
@@ -91,33 +87,16 @@ public class CircuitGraphique {
     public void retournerEnfants(FilAbstrait fil, int i, int j, Noeud noeud) {
 
         if (fil.getCotesConnectes()[0] == 1 && i > 0 && connectables[i - 1][j] != null && connectables[i - 1][j].getCotesConnectes()[2] != 0 && !connectablesPasses[i - 1][j]) {
-            System.out.println("*****");
-            System.out.println("Case: (" + i + "," + j + ")");
-            System.out.println("Enfant: (" + (i - 1) + "," + j + ")");
-            System.out.println("*****");
             gererLienDetecte((i - 1), j, noeud, 2);
 
         }
         if (fil.getCotesConnectes()[1] == 1 && j < connectables[i].length - 1 && connectables[i][j + 1] != null && connectables[i][j + 1].getCotesConnectes()[3] != 0 && !connectablesPasses[i][j + 1]) {
-            System.out.println("*****");
-            System.out.println("Case: (" + i + "," + j + ")");
-            System.out.println("Enfant: (" + (i) + "," + (j + 1) + ")");
-            System.out.println("*****");
             gererLienDetecte(i, (j + 1), noeud, 3);
         }
         if (fil.getCotesConnectes()[2] == 1 && i < connectables.length - 1 && connectables[i + 1][j] != null && connectables[i + 1][j].getCotesConnectes()[0] != 0 && !connectablesPasses[i + 1][j]) {
-            System.out.println("*****");
-            System.out.println("Case: (" + i + "," + j + ")");
-            System.out.println("Enfant: (" + (i + 1) + "," + j + ")");
-            System.out.println("*****");
             gererLienDetecte((i + 1), j, noeud, 0);
         }
         if (fil.getCotesConnectes()[3] == 1 && j > 0 && connectables[i][j - 1] != null && connectables[i][j - 1].getCotesConnectes()[1] != 0 && !connectablesPasses[i][j - 1]) {
-
-            System.out.println("*****");
-            System.out.println("Case: (" + i + "," + j + ")");
-            System.out.println("Enfant: (" + (i) + "," + (j - 1) + ")");
-            System.out.println("*****");
             gererLienDetecte(i, (j - 1), noeud, 1);
         }
     }
