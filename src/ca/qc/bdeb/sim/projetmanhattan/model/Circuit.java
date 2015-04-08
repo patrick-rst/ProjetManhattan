@@ -70,6 +70,7 @@ public class Circuit {
         matriceZ = new double[nombreNoeuds + nombreSourcesFEM];
         matriceX = new double[nombreNoeuds + nombreSourcesFEM];
 
+        try{
         construireMatriceG();
         construireMatriceBetC();
         construireMatriceZ();
@@ -77,6 +78,11 @@ public class Circuit {
         resoudreCircuitAnalogue();
 
         distribuerInfos();
+        
+        } catch(Exception e){
+            System.out.println("Erreur lors de l'analyse du circuit");
+        }
+        
     }
 
     public void distribuerInfos() {

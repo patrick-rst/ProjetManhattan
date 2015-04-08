@@ -27,6 +27,7 @@ public class CircuitGraphique {
     }
 
     public void preparerAnalyse(Connectable[][] connectables) {
+        try{
         this.connectables = connectables;
         circuit.wipe();
         connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
@@ -44,6 +45,9 @@ public class CircuitGraphique {
             }
         }
         creerLiens();
+        } catch(Exception e){
+            System.out.println("Erreur: Circuit invalide");
+        }
     }
 
     public void creerLiens() {
