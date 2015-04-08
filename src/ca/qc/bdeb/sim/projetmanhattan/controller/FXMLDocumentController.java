@@ -87,6 +87,37 @@ public class FXMLDocumentController implements Initializable {
         
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
+                writeFile();
+            }
+        });        
+        
+        mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                readFile();
+            }
+        });        
+        
+        
+
+        MenuItem mnuItemRun = new MenuItem("Run");
+
+        mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+                cg.preparerAnalyse(circuit);
+                c.analyserCircuit();
+            }
+
+        });        
+ 
+        mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
+        mnuRun.getItems().addAll(mnuItemRun);        
+        mnuBar.getMenus().addAll(mnuFile,mnuRun);
+
+        pane.setTop(mnuBar);
+
+    }
+    
+    private void writeFile() {
                Sauvegarde save = new Sauvegarde();
                save.setCircuit(circuit);
                
@@ -112,7 +143,6 @@ public class FXMLDocumentController implements Initializable {
 //                    }            
 //                } 
                
-               
                 try {
                     FileOutputStream fout = new FileOutputStream("save2.ser");
                     ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -122,19 +152,10 @@ public class FXMLDocumentController implements Initializable {
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                }              
-               
-               
-               
-               
-               
-               
-               
-            }
-        });        
-        
-        mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
+                }         
+    }    
+    
+    private void readFile() {
 //                Sauvegarde save = null;
 //                ObjectInputStream fichier = null;
 //                try {
@@ -196,9 +217,7 @@ public class FXMLDocumentController implements Initializable {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_droit.png"));
                             tmp.setId("filDroit");
-                            //grid.add(tmp, i, j);
-                            GridPane.setConstraints(tmp, j, i);
-                            grid.getChildren().add(tmp);                            
+                            grid.add(tmp, i, j);                       
                         } 
                         else if (circuit[i][j] instanceof FilCoin) {
                             ImageView tmp = new ImageView();
@@ -217,56 +236,26 @@ public class FXMLDocumentController implements Initializable {
                             tmp.setImage(new Image("file:img/fil_croix.png"));
                             tmp.setId("filCroix");
                             grid.add(tmp, i, j);
-                        }                        
-                        
-                        
+                        }                         
                     }
                 }
                
-                System.out.println("Done reading");
-                
-            }
-        });        
-        
-        
-
-        MenuItem mnuItemRun = new MenuItem("Run");
-
-        mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                cg.preparerAnalyse(circuit);
-                c.analyserCircuit();
-            }
-
-        });        
- 
-        mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
-        mnuRun.getItems().addAll(mnuItemRun);        
-        mnuBar.getMenus().addAll(mnuFile,mnuRun);
-        
-        
-
-
-        mnuRun.getItems().addAll(mnuItemRun);
-        mnuBar.getMenus().addAll(mnuRun);
-
-
-        pane.setTop(mnuBar);
-
+                System.out.println("Done reading");        
     }
     
-    public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+
+    
+    private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
         Node result = null;
-        ObservableList<Node> childrens = gridPane.getChildren();
+        ObservableList<Node> childrens = grid.getChildren();
         for (Node node : childrens) {
-            if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+            if (grid.getRowIndex(node) == row && grid.getColumnIndex(node) == column) {
                 result = node;
                 break;
             }
         }
         return result;
     }   
-    
 
     @FXML
     private void analyserCircuit(ActionEvent event) {
@@ -463,8 +452,8 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
-    private void printCircuitArray(Connectable[][] test) {
-        for (Connectable[] tab : test) {
+    private void printCircuitArray(Connectable[][] array) {
+        for (Connectable[] tab : array) {
             for (Connectable c : tab) {
                 System.out.print(String.format("%12s", c));
             }
