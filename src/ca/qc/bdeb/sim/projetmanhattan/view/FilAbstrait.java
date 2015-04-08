@@ -5,11 +5,13 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import java.io.Serializable;
+
 /**
  *
  * @author blood_000
  */
-public abstract class FilAbstrait extends Connectable {
+public abstract class FilAbstrait extends Connectable implements Serializable {
 
     protected double tension;
 

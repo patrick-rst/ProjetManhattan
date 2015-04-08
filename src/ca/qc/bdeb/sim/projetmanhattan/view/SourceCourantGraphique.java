@@ -8,12 +8,13 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourantAbstraite;
+import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class SourceCourantGraphique extends Connectable implements SourceCourantAbstraite {
+public class SourceCourantGraphique extends Connectable implements SourceCourantAbstraite, Serializable {
 
     private SourceCourantAbstraite sourceCourant;
 

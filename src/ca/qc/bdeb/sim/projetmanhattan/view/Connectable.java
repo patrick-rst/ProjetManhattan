@@ -5,11 +5,13 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
+import java.io.Serializable;
+
 /**
  *
  * @author blood_000
  */
-public class Connectable {
+public class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
 

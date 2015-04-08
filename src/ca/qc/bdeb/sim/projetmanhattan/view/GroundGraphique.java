@@ -8,12 +8,13 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.Ground;
 import ca.qc.bdeb.sim.projetmanhattan.model.GroundAbstrait;
+import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class GroundGraphique extends Connectable implements GroundAbstrait, ComposantGraphique {
+public class GroundGraphique extends Connectable implements GroundAbstrait, ComposantGraphique, Serializable {
 
     private Ground ground;
 

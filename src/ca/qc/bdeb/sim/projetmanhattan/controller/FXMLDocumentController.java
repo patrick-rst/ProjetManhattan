@@ -8,20 +8,29 @@ import ca.qc.bdeb.sim.projetmanhattan.view.FilCroix;
 import ca.qc.bdeb.sim.projetmanhattan.view.FilDroit;
 import ca.qc.bdeb.sim.projetmanhattan.view.FilT;
 import ca.qc.bdeb.sim.projetmanhattan.view.ResistanceGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.SourceCourantGraphique;
 import ca.qc.bdeb.sim.projetmanhattan.view.SourceFEMGraphique;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -73,7 +82,155 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         MenuBar mnuBar = new MenuBar();
+        Menu mnuFile = new Menu("File");
         Menu mnuRun = new Menu("Run");
+        
+        MenuItem mnuItemSave = new MenuItem("Save");
+        MenuItem mnuItemLoad = new MenuItem("Load");
+        
+        mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+               Sauvegarde save = new Sauvegarde();
+               save.setCircuit(circuit);
+               
+//                ObjectOutputStream fichier = null;
+//                try {
+//                    File f = new File("save1.ser");
+//                    f.delete();
+//                    fichier = new ObjectOutputStream(new FileOutputStream("save1.ser"));
+//                    fichier.writeObject(save);
+//                    fichier.close();
+//                } catch (FileNotFoundException e) {
+//                    System.out.println("Erreur: Impossible de créer le fichier pour l'écriture");
+//                } catch (IOException e) {
+//                    System.out.println("Erreur: I/O durant l'écriture");
+//                    printCircuitArray(save.getCircuit());
+//                } finally {
+//                    try {
+//                        if (fichier != null) {
+//                            fichier.close();
+//                        }  
+//                    } catch (IOException e) {
+//                        System.out.println("Erreur: I/O durant la fermeture");
+//                    }            
+//                } 
+               
+               
+                try {
+                    FileOutputStream fout = new FileOutputStream("save2.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fout);
+                    oos.writeObject(save);
+                    oos.close();
+                    System.out.println("Done");
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }              
+               
+               
+               
+               
+               
+               
+               
+            }
+        });        
+        
+        mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+//                Sauvegarde save = null;
+//                ObjectInputStream fichier = null;
+//                try {
+//                    fichier = new ObjectInputStream(new FileInputStream("save1.ser"));
+//                    Object contenu = fichier.readObject();
+//                    save = (Sauvegarde) contenu;
+//                } catch (EOFException e) {
+//                } catch (FileNotFoundException e) {
+//                    System.out.println("Erreur: Impossible de lire le fichier");
+//                } catch (IOException e) {
+//                    System.out.println("Erreur: I/O durant la lecture");
+//                } catch (ClassNotFoundException e) {
+//                    System.out.println("Erreur: Le contenu n'appartient pas à la classe Sauvegarde");
+//                } finally {
+//                    try {
+//                        if (fichier != null) {
+//                            fichier.close();
+//                        }  
+//                    } catch (IOException e) {
+//                        System.out.println("Erreur: I/O durant la fermeture");
+//                    }
+//                }
+//                circuit = save.getCircuit();
+                
+                Sauvegarde save = null;
+                
+                try {
+                    FileInputStream fin = new FileInputStream("save2.ser");
+                    ObjectInputStream ois = new ObjectInputStream(fin);
+                    save = (Sauvegarde) ois.readObject();
+                    ois.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }                
+                
+                circuit = save.getCircuit();
+
+                for (int i=0; i<10; i++) {
+                    for (int j=0; j<10; j++) {
+                        if (circuit[i][j] instanceof ResistanceGraphique) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/resistance.png"));
+                            tmp.setId("resistance");
+                            grid.add(tmp, i, j);
+                        }
+                        else if (circuit[i][j] instanceof SourceFEMGraphique) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/source_tension.png"));
+                            tmp.setId("sourceTension");
+                            grid.add(tmp, i, j);
+                        }
+                        else if (circuit[i][j] instanceof SourceCourantGraphique) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/source_courant.png"));
+                            tmp.setId("sourceCourant");
+                            grid.add(tmp, i, j);
+                        }      
+                        else if (circuit[i][j] instanceof FilDroit) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/fil_droit.png"));
+                            tmp.setId("filDroit");
+                            //grid.add(tmp, i, j);
+                            GridPane.setConstraints(tmp, j, i);
+                            grid.getChildren().add(tmp);                            
+                        } 
+                        else if (circuit[i][j] instanceof FilCoin) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/fil_coin.png"));
+                            tmp.setId("filCoin");
+                            grid.add(tmp, i, j);
+                        }
+                        else if (circuit[i][j] instanceof FilT) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/fil_t.png"));
+                            tmp.setId("filT");
+                            grid.add(tmp, i, j);
+                        }
+                        else if (circuit[i][j] instanceof FilCroix) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image("file:img/fil_croix.png"));
+                            tmp.setId("filCroix");
+                            grid.add(tmp, i, j);
+                        }                        
+                        
+                        
+                    }
+                }
+               
+                System.out.println("Done reading");
+                
+            }
+        });        
+        
         
         MenuItem mnuItemRun = new MenuItem("Run");
         
@@ -84,14 +241,28 @@ public class FXMLDocumentController implements Initializable {
             }
         });        
  
+        mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
         mnuRun.getItems().addAll(mnuItemRun);        
-        mnuBar.getMenus().addAll(mnuRun);
+        mnuBar.getMenus().addAll(mnuFile,mnuRun);
         
         
         pane.setTop(mnuBar);
         
         
     }
+    
+    public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+        for (Node node : childrens) {
+            if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+        return result;
+    }   
+    
 
     @FXML
     private void analyserCircuit(ActionEvent event) {
@@ -294,6 +465,15 @@ public class FXMLDocumentController implements Initializable {
             System.out.println("");
         }
     }
+    
+    private void printCircuitArray(Connectable[][] test) {
+        for (Connectable[] tab : test) {
+            for (Connectable c : tab) {
+                System.out.print(String.format("%12s", c));
+            }
+            System.out.println("");
+        }
+    }    
 
     public Connectable[][] getCircuit() {
         return circuit;

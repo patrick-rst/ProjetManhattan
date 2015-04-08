@@ -8,12 +8,13 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.model.ResistanceAbstraite;
+import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class ResistanceGraphique extends Connectable implements ResistanceAbstraite {
+public class ResistanceGraphique extends Connectable implements ResistanceAbstraite, Serializable {
 
     private ResistanceAbstraite resistance;
 

@@ -8,12 +8,13 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
+import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite {
+public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite, Serializable {
 
     private SourceFEMAbstraite sourceFEM;
 
