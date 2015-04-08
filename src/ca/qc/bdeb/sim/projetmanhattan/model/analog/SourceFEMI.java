@@ -9,11 +9,11 @@ package ca.qc.bdeb.sim.projetmanhattan.model.analog;
  *
  * @author blood_000
  */
-public interface ResistanceAbstraite {
+public interface SourceFEMI {
 
-    public double getResistance();
+    public double getForceElectroMotrice();
 
-    public void setResistance(double resistance);
+    public void setForceElectroMotrice(double forceElectroMotrice);
 
     public double getCourant();
 

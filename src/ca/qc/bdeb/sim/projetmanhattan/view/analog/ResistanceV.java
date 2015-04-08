@@ -5,24 +5,24 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Resistance;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceI;
 import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class ResistanceGraphique extends Connectable implements ResistanceAbstraite {
+public class ResistanceV extends ConnectableV implements ResistanceI {
 
-    private ResistanceAbstraite resistance;
+    private ResistanceI resistance;
 
-    public ResistanceGraphique() {
-        super(TypeComposant.RESISTANCE);
-        this.resistance = new Resistance();
+    public ResistanceV() {
+        super(TypeComposantE.RESISTANCE);
+        this.resistance = new ResistanceM();
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
@@ -53,8 +53,8 @@ public class ResistanceGraphique extends Connectable implements ResistanceAbstra
         return "resistance";
     }
 
-    public Composant getEnfant() {
-        return (Composant) this.resistance;
+    public ComposantI getEnfant() {
+        return (ComposantI) this.resistance;
     }
 
 }

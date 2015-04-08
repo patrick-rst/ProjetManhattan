@@ -5,17 +5,12 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
+import java.io.Serializable;
+
 /**
  *
  * @author blood_000
  */
-public interface SourceFEMAbstraite {
+public interface ComposantI extends Serializable {
 
-    public double getForceElectroMotrice();
-
-    public void setForceElectroMotrice(double forceElectroMotrice);
-
-    public double getCourant();
-
-    public void setCourant(double Courant);
 }

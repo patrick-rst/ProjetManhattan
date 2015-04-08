@@ -14,14 +14,14 @@ import org.ejml.ops.CommonOps;
  *
  * @author blood_000
  */
-public class Circuit {
+public class CircuitAnalogueM {
 
-    private ArrayList<Resistance> resistances;
+    private ArrayList<ResistanceM> resistances;
     private ArrayList<Noeud> noeuds;
-    private ArrayList<SourceFEM> sourcesFEM;
-    private ArrayList<SourceCourant> sourcesCourant;
+    private ArrayList<SourceFEMM> sourcesFEM;
+    private ArrayList<SourceCourantM> sourcesCourant;
     private Noeud noeudGround;
-    private ArrayList<Ground> grounds;
+    private ArrayList<GroundM> grounds;
 
     private int nombreNoeuds;
     private int nombreSourcesFEM;
@@ -36,7 +36,7 @@ public class Circuit {
 
     private double[] matriceX;
 
-    public Circuit() {
+    public CircuitAnalogueM() {
         resistances = new ArrayList<>();
         noeuds = new ArrayList<>();
         sourcesFEM = new ArrayList<>();
@@ -53,7 +53,7 @@ public class Circuit {
         grounds.clear();
     }
 
-    public void ajouterGround(Ground g) {
+    public void ajouterGround(GroundM g) {
         grounds.add(g);
     }
 
@@ -101,7 +101,7 @@ public class Circuit {
         double v1 = 0;
         double v2 = 0;
 
-        for (Resistance resistance : resistances) {
+        for (ResistanceM resistance : resistances) {
             for (Noeud noeud : noeuds) {
                 if (noeud.getResistances().contains(resistance)) {
                     if (v1 == 0) {
@@ -160,7 +160,7 @@ public class Circuit {
 
     public void construireMatriceZ() {
         for (int i = 0; i < nombreNoeuds; ++i) {
-            for (SourceCourant sourceCourant : noeuds.get(i).getSourcesCourant()) {
+            for (SourceCourantM sourceCourant : noeuds.get(i).getSourcesCourant()) {
                 matriceZ[i] += sourceCourant.getCourant();
             }
         }
@@ -270,15 +270,15 @@ public class Circuit {
         noeuds.add(noeud);
     }
 
-    public void ajouterResistance(Resistance resistance) {
+    public void ajouterResistance(ResistanceM resistance) {
         resistances.add(resistance);
     }
 
-    public void ajouterSourceFEM(SourceFEM sourceFEM) {
+    public void ajouterSourceFEM(SourceFEMM sourceFEM) {
         sourcesFEM.add(sourceFEM);
     }
 
-    public void ajouterSourceCourant(SourceCourant sourceCourant) {
+    public void ajouterSourceCourant(SourceCourantM sourceCourant) {
         sourcesCourant.add(sourceCourant);
     }
 

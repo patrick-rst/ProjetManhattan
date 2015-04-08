@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
-
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
+package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 /**
  *
  * @author blood_000
  */
-public interface ComposantGraphique {
-
-    public Composant getEnfant();
+public class DiodeV {
+    
 }

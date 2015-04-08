@@ -5,13 +5,13 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
 
 /**
  *
  * @author blood_000
  */
-public class FilT extends FilAbstrait {
+public class FilT extends FilA {
 
     public FilT() {
         super();

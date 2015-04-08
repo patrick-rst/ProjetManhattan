@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.model.digital;
+package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 /**
  *
  * @author blood_000
  */
-public class Diode {
+public class SourceDigitaleV {
     
 }

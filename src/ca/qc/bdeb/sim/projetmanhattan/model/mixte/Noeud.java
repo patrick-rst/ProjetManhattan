@@ -1,14 +1,14 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Resistance;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Ground;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Ground;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Resistance;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
 import java.util.ArrayList;
 
 /**
@@ -19,13 +19,13 @@ public class Noeud {
 
     private double tension;
     
-    private ArrayList<FilAbstrait> fils;
+    private ArrayList<FilA> fils;
     private ArrayList<Byte> connexions;
-    private ArrayList<SourceFEM> sourcesFEMNeg;
-    private ArrayList<SourceFEM> sourcesFEMPos;
-    private ArrayList<Resistance> resistances;
-    private ArrayList<SourceCourant> sourcesCourant;
-    private Ground ground;
+    private ArrayList<SourceFEMM> sourcesFEMNeg;
+    private ArrayList<SourceFEMM> sourcesFEMPos;
+    private ArrayList<ResistanceM> resistances;
+    private ArrayList<SourceCourantM> sourcesCourant;
+    private GroundM ground;
 
     public Noeud() {
         fils = new ArrayList<>();
@@ -36,11 +36,11 @@ public class Noeud {
         sourcesFEMPos = new ArrayList<>();
     }
 
-    public void ajouterFil(FilAbstrait fil) {
+    public void ajouterFil(FilA fil) {
         fils.add(fil);
     }
 
-    public ArrayList<Resistance> getResistances() {
+    public ArrayList<ResistanceM> getResistances() {
         return resistances;
     }
 
@@ -48,15 +48,15 @@ public class Noeud {
         return fils;
     }*/
 
-    public ArrayList<SourceFEM> getSourcesFEMNeg() {
+    public ArrayList<SourceFEMM> getSourcesFEMNeg() {
         return sourcesFEMNeg;
     }
 
-    public ArrayList<SourceFEM> getSourcesFEMPos() {
+    public ArrayList<SourceFEMM> getSourcesFEMPos() {
         return sourcesFEMPos;
     }
 
-    public ArrayList<SourceCourant> getSourcesCourant() {
+    public ArrayList<SourceCourantM> getSourcesCourant() {
         return sourcesCourant;
     }
 
@@ -66,16 +66,16 @@ public class Noeud {
 
     public void setTension(double tension) {
         this.tension = tension;
-        for(FilAbstrait fil: fils){
+        for(FilA fil: fils){
             fil.setTension(tension);
         }
     }
 
-    public Ground getGround() {
+    public GroundM getGround() {
         return ground;
     }
 
-    public void setGround(Ground ground) {
+    public void setGround(GroundM ground) {
         this.ground = ground;
     }
     

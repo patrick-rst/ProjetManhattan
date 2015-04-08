@@ -5,12 +5,17 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
-import java.io.Serializable;
-
 /**
  *
  * @author blood_000
  */
-public interface Composant extends Serializable {
+public interface ResistanceI {
 
+    public double getResistance();
+
+    public void setResistance(double resistance);
+
+    public double getCourant();
+
+    public void setCourant(double Courant);
 }

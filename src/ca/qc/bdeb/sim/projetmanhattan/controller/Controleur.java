@@ -5,16 +5,16 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
 
 /**
  *
  * @author blood_000
  */
 public class Controleur {
-    private Circuit circuit;
+    private CircuitAnalogueM circuit;
 
-    public Controleur(Circuit circuit) {
+    public Controleur(CircuitAnalogueM circuit) {
         this.circuit = circuit;
     }
     

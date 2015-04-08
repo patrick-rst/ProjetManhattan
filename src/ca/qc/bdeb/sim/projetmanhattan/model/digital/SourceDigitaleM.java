@@ -9,6 +9,6 @@ package ca.qc.bdeb.sim.projetmanhattan.model.digital;
  *
  * @author blood_000
  */
-public class SourceDigitale {
+public class SourceDigitaleM {
     
 }

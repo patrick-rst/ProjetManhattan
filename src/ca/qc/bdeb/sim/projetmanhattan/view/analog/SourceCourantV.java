@@ -5,23 +5,23 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantI;
 
 /**
  *
  * @author blood_000
  */
-public class SourceCourantGraphique extends Connectable implements SourceCourantAbstraite {
+public class SourceCourantV extends ConnectableV implements SourceCourantI {
 
-    private SourceCourantAbstraite sourceCourant;
+    private SourceCourantI sourceCourant;
 
-    public SourceCourantGraphique() {
-        super(TypeComposant.SOURCE_COURANT);
-        this.sourceCourant = new SourceCourant();
+    public SourceCourantV() {
+        super(TypeComposantE.SOURCE_COURANT);
+        this.sourceCourant = new SourceCourantM();
 
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
@@ -38,8 +38,8 @@ public class SourceCourantGraphique extends Connectable implements SourceCourant
         this.sourceCourant.setCourant(courant);
     }
 
-    public Composant getEnfant() {
-        return (Composant) this.sourceCourant;
+    public ComposantI getEnfant() {
+        return (ComposantI) this.sourceCourant;
     }
     
     @Override

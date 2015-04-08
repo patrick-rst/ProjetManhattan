@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.model.analog;
+package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 
 /**
  *
  * @author blood_000
  */
-public class Ground implements Composant, GroundAbstrait{
+public interface ComposantVI {
 
-    public Ground() {
-    }
-    
-    
-    
+    public ComposantI getEnfant();
 }

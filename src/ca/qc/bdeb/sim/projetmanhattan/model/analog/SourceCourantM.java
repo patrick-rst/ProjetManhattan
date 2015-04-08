@@ -5,26 +5,15 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 
 /**
  *
  * @author blood_000
  */
-public class Resistance implements Composant, ResistanceAbstraite {
+public class SourceCourantM implements ComposantI, SourceCourantI {
 
-    private double resistance;
     private double courant;
-
-    @Override
-    public double getResistance() {
-        return resistance;
-    }
-
-    @Override
-    public void setResistance(double resistance) {
-        this.resistance = resistance;
-    }
 
     @Override
     public double getCourant() {
@@ -35,5 +24,4 @@ public class Resistance implements Composant, ResistanceAbstraite {
     public void setCourant(double courant) {
         this.courant = courant;
     }
-
 }

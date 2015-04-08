@@ -5,25 +5,25 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 
 /**
  *
  * @author blood_000
  */
-public class SourceFEM implements Composant, SourceFEMAbstraite {
+public class ResistanceM implements ComposantI, ResistanceI {
 
-    private double forceElectroMotrice;
+    private double resistance;
     private double courant;
 
     @Override
-    public double getForceElectroMotrice() {
-        return forceElectroMotrice;
+    public double getResistance() {
+        return resistance;
     }
 
     @Override
-    public void setForceElectroMotrice(double forceElectroMotrice) {
-        this.forceElectroMotrice = forceElectroMotrice;
+    public void setResistance(double resistance) {
+        this.resistance = resistance;
     }
 
     @Override
@@ -35,4 +35,5 @@ public class SourceFEM implements Composant, SourceFEMAbstraite {
     public void setCourant(double courant) {
         this.courant = courant;
     }
+
 }

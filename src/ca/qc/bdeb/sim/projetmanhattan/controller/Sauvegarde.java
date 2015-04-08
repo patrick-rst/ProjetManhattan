@@ -6,7 +6,7 @@
 
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import java.io.Serializable;
 
 /**
@@ -15,17 +15,17 @@ import java.io.Serializable;
  */
 public class Sauvegarde implements Serializable {
     
-    private Connectable[][] circuit;
+    private ConnectableV[][] circuit;
 
     public Sauvegarde() {
-        circuit = new Connectable[10][10];
+        circuit = new ConnectableV[10][10];
     }
 
-    public void setCircuit(Connectable[][] circuit) {
+    public void setCircuit(ConnectableV[][] circuit) {
         this.circuit = circuit;
         
-//        for (Connectable[] tab : this.circuit) {
-//            for (Connectable c : tab) {
+//        for (ConnectableV[] tab : this.circuit) {
+//            for (ConnectableV c : tab) {
 //                if (c == null) {
 //                    c = new Empty();
 //                }
@@ -34,9 +34,9 @@ public class Sauvegarde implements Serializable {
         
     }
 
-    public Connectable[][] getCircuit() {
-//        for (Connectable[] tab : this.circuit) {
-//            for (Connectable c : tab) {
+    public ConnectableV[][] getCircuit() {
+//        for (ConnectableV[] tab : this.circuit) {
+//            for (ConnectableV c : tab) {
 //                if (c instanceof Empty) {
 //                    c = null;
 //                }

@@ -5,24 +5,24 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMI;
 import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite {
+public class SourceFEMV extends ConnectableV implements SourceFEMI {
 
-    private SourceFEMAbstraite sourceFEM;
+    private SourceFEMI sourceFEM;
 
-    public SourceFEMGraphique() {
-        super(TypeComposant.SOURCE_TENSION);
-        this.sourceFEM = new SourceFEM();
+    public SourceFEMV() {
+        super(TypeComposantE.SOURCE_TENSION);
+        this.sourceFEM = new SourceFEMM();
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;
@@ -53,8 +53,8 @@ public class SourceFEMGraphique extends Connectable implements SourceFEMAbstrait
         return "sourceTension";
     }
 
-    public Composant getEnfant() {
-        return (Composant) this.sourceFEM;
+    public ComposantI getEnfant() {
+        return (ComposantI) this.sourceFEM;
     }
 
 }
