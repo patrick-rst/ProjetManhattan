@@ -54,19 +54,193 @@ import org.controlsfx.control.PopOver;
  */
 public class FXMLDocumentController implements Initializable {
 
+    
+    @FXML
+    BorderPane pane;
+
+    @FXML
+    GridPane grid;
+    
+    
+    
+    
     Connectable[][] circuit2D = new Connectable[10][10];
 
     PopOver composantEditor = new PopOver();
 
     Circuit circuit;
     CircuitGraphique circuitGraphique;
+    
+    
+    
+    
 
     @FXML
-    BorderPane pane;
+    private void analyserCircuit(ActionEvent event) {
+        circuitGraphique.preparerAnalyse(circuit2D);
+        circuit.analyserCircuit();
+    }
 
     @FXML
-    GridPane grid;
+    private void dragComposant(MouseEvent event) {
+        ImageView source = (ImageView) event.getSource();
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(source.getImage());
+        content.putString(source.getId());
+        db.setContent(content);
+
+        event.consume();
+    }
+
+    @FXML
+    private void overComposant(DragEvent event) {
+        if (event.getDragboard().hasImage() && event.getDragboard().hasString()) {
+            event.acceptTransferModes(TransferMode.MOVE);
+        }
+
+        event.consume();
+    }
+
+    @FXML
+    private void dropComposant(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasImage() && db.hasString()) {
+            ImageView target = (ImageView) event.getGestureTarget();
+            target.setImage(db.getImage());
+            target.setId(db.getString());
+
+            String id = db.getString();
+            int row = grid.getRowIndex(target);
+            int column = grid.getColumnIndex(target);
+            removeComposant(row, column);
+            target.setRotate(0);
+            addComposant(id, row, column);
+
+            success = true;
+        }
+
+        event.setDropCompleted(success);
+        event.consume();
+    }
+
+    @FXML
+    private void dragComposantFromGrid(MouseEvent event) {
+        ImageView source = (ImageView) event.getSource();
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(source.getImage());
+        content.putString(source.getId());
+        db.setContent(content);
+
+        int row = grid.getRowIndex(source);
+        int column = grid.getColumnIndex(source);
+        removeComposant(row, column);
+
+        source.setImage(null);
+        source.setId(null);
+
+        event.consume();
+    }
+
+
+
+    @FXML
+    private void keyPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.P)) {
+            System.out.println("P pressed");
+            printCircuitArray();
+        } else if (event.getCode().equals(KeyCode.R)) {
+            System.out.println("R pressed");
+            circuitGraphique.preparerAnalyse(circuit2D);
+            circuit.analyserCircuit();
+        }
+    }
+
+    @FXML
+    private void mouseClickCase(MouseEvent event) {
+        ImageView source = (ImageView) event.getSource();
+        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
+            source.setRotate(source.getRotate() + 90);
+
+            int row = grid.getRowIndex(source);
+            int column = grid.getColumnIndex(source);
+
+            ((Connectable) circuit2D[row][column]).rotater();
+
+        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+")) {
+            String id = source.getId();
+
+            int row = grid.getRowIndex(source);
+            int column = grid.getColumnIndex(source);
+
+            Label lblComposant = new Label();
+            Label lblUnite = new Label();
+            TextField txtValeur = new TextField();
+            txtValeur.setPrefWidth(50);
+            Button btn = new Button("Ok");
+            btn.setId(row + "," + column);
+
+            if (id.equals("sourceTension")) {
+                lblComposant.setText("Source de tension");
+                lblUnite.setText("Volt");
+                SourceFEMGraphique sourceTension = (SourceFEMGraphique) circuit2D[row][column];
+                txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
+            } else if (id.equals("sourceCourant")) { 
+                lblComposant.setText("Source de courant");
+                lblUnite.setText("Ampère");
+                SourceCourantGraphique sourceCourant = (SourceCourantGraphique) circuit2D[row][column];
+                txtValeur.setText(sourceCourant.getCourant() + "");
+            } else if (id.equals("resistance")) {
+                lblComposant.setText("Resistance");
+                lblUnite.setText("Ohm");
+                ResistanceGraphique resistance = (ResistanceGraphique) circuit2D[row][column];
+                txtValeur.setText(resistance.getResistance() + "");
+            } else {
+                System.out.println("ERROR:Composant not implemented");
+            }
+
+            HBox box = new HBox();
+            box.setPadding(new Insets(15, 15, 15, 15));
+            box.setSpacing(10);
+            box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
+
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Button source = (Button) event.getSource();
+                    String id = source.getId();
+
+                    int row = Integer.parseInt(id.split(",")[0]);
+                    int column = Integer.parseInt(id.split(",")[1]);
+
+                    String composantString = circuit2D[row][column].toString();
+
+                    if (composantString.equals("resistance")) {
+                        ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                    } else if (composantString.equals("sourceTension")) {
+                        ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                    } else if (composantString.equals("sourceCourant")) {
+                        ((SourceCourantGraphique) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                    }
+
+                    composantEditor.hide();
+
+                }
+            });
+
+            composantEditor.setDetachable(false);
+            composantEditor.setContentNode(box);
+            composantEditor.show((ImageView) event.getSource(), 15);
+
+        }
+    }
+    
+    
+    
     
     
     
@@ -263,173 +437,11 @@ public class FXMLDocumentController implements Initializable {
         }
         return result;
     }   
-
-    @FXML
-    private void analyserCircuit(ActionEvent event) {
-        circuitGraphique.preparerAnalyse(circuit2D);
-        circuit.analyserCircuit();
-    }
-
-    @FXML
-    private void dragComposant(MouseEvent event) {
-        ImageView source = (ImageView) event.getSource();
-        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
-
-        ClipboardContent content = new ClipboardContent();
-        content.putImage(source.getImage());
-        content.putString(source.getId());
-        db.setContent(content);
-
-        event.consume();
-    }
-
-    @FXML
-    private void overComposant(DragEvent event) {
-        if (event.getDragboard().hasImage() && event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.MOVE);
-        }
-
-        event.consume();
-    }
-
-    @FXML
-    private void dropComposant(DragEvent event) {
-        Dragboard db = event.getDragboard();
-        boolean success = false;
-        if (db.hasImage() && db.hasString()) {
-            ImageView target = (ImageView) event.getGestureTarget();
-            target.setImage(db.getImage());
-            target.setId(db.getString());
-
-            String id = db.getString();
-            int row = grid.getRowIndex(target);
-            int column = grid.getColumnIndex(target);
-            removeComposant(row, column);
-            target.setRotate(0);
-            addComposant(id, row, column);
-
-            success = true;
-        }
-
-        event.setDropCompleted(success);
-        event.consume();
-    }
-
-    @FXML
-    private void dragComposantFromGrid(MouseEvent event) {
-        ImageView source = (ImageView) event.getSource();
-        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
-
-        ClipboardContent content = new ClipboardContent();
-        content.putImage(source.getImage());
-        content.putString(source.getId());
-        db.setContent(content);
-
-        int row = grid.getRowIndex(source);
-        int column = grid.getColumnIndex(source);
-        removeComposant(row, column);
-
-        source.setImage(null);
-        source.setId(null);
-
-        event.consume();
-    }
-
+    
     private void removeComposant(int row, int column) {
         circuit2D[row][column] = null;
-    }
-
-    @FXML
-    private void keyPressed(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.P)) {
-            System.out.println("P pressed");
-            printCircuitArray();
-        } else if (event.getCode().equals(KeyCode.R)) {
-            System.out.println("R pressed");
-            circuitGraphique.preparerAnalyse(circuit2D);
-            circuit.analyserCircuit();
-        }
-    }
-
-    @FXML
-    private void mouseClickCase(MouseEvent event) {
-        ImageView source = (ImageView) event.getSource();
-        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
-            source.setRotate(source.getRotate() + 90);
-
-            int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);
-
-            ((Connectable) circuit2D[row][column]).rotater();
-
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+")) {
-            String id = source.getId();
-
-            int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);
-
-            Label lblComposant = new Label();
-            Label lblUnite = new Label();
-            TextField txtValeur = new TextField();
-            txtValeur.setPrefWidth(50);
-            Button btn = new Button("Ok");
-            btn.setId(row + "," + column);
-
-            if (id.equals("sourceTension")) {
-                lblComposant.setText("Source de tension");
-                lblUnite.setText("Volt");
-                SourceFEMGraphique sourceTension = (SourceFEMGraphique) circuit2D[row][column];
-                txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
-            } else if (id.equals("sourceCourant")) { 
-                lblComposant.setText("Source de courant");
-                lblUnite.setText("Ampère");
-                SourceCourantGraphique sourceCourant = (SourceCourantGraphique) circuit2D[row][column];
-                txtValeur.setText(sourceCourant.getCourant() + "");
-            } else if (id.equals("resistance")) {
-                lblComposant.setText("Resistance");
-                lblUnite.setText("Ohm");
-                ResistanceGraphique resistance = (ResistanceGraphique) circuit2D[row][column];
-                txtValeur.setText(resistance.getResistance() + "");
-            } else {
-                System.out.println("ERROR:Composant not implemented");
-            }
-
-            HBox box = new HBox();
-            box.setPadding(new Insets(15, 15, 15, 15));
-            box.setSpacing(10);
-            box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
-
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Button source = (Button) event.getSource();
-                    String id = source.getId();
-
-                    int row = Integer.parseInt(id.split(",")[0]);
-                    int column = Integer.parseInt(id.split(",")[1]);
-
-                    String composantString = circuit2D[row][column].toString();
-
-                    if (composantString.equals("resistance")) {
-                        ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                    } else if (composantString.equals("sourceTension")) {
-                        ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
-                    } else if (composantString.equals("sourceCourant")) {
-                        ((SourceCourantGraphique) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
-                    }
-
-                    composantEditor.hide();
-
-                }
-            });
-
-            composantEditor.setDetachable(false);
-            composantEditor.setContentNode(box);
-            composantEditor.show((ImageView) event.getSource(), 15);
-
-        }
-    }
-
+    }    
+    
     private void addComposant(String id, int row, int column) {
         if (id.equals("sourceTension")) {
             SourceFEMGraphique sourceTension = new SourceFEMGraphique();
@@ -477,6 +489,9 @@ public class FXMLDocumentController implements Initializable {
 
     public Connectable[][] getCircuit() {
         return circuit2D;
-    }
+    }        
+    
+
+
 
 }
