@@ -36,6 +36,8 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -156,12 +158,8 @@ public class FXMLDocumentController implements Initializable {
         if (event.getCode().equals(KeyCode.P)) {
             System.out.println("P pressed");
             printCircuitArray();
-        } else if (event.getCode().equals(KeyCode.R)) {
-            System.out.println("R pressed");
-            circuitGraphique.preparerAnalyse(circuit, connectables2D);
-            circuit.analyserCircuit();
-        } else if (event.getCode().equals(KeyCode.S)) {
-            System.out.println("S pressed");
+        } else if (event.getCode().equals(KeyCode.M)) {
+            System.out.println("M pressed");
             
             ImageView tmp = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
             Image img = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/digital/and2.png");
@@ -309,7 +307,11 @@ public class FXMLDocumentController implements Initializable {
                 circuit.analyserCircuit();
             }
 
-        });        
+        });  
+        
+        mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+        mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+        mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
  
         mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
         mnuRun.getItems().addAll(mnuItemRun);        
