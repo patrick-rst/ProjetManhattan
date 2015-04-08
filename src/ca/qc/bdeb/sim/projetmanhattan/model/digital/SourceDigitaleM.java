@@ -38,7 +38,16 @@ public class SourceDigitaleM implements SourceDigitaleI {
     public void setOutput(String string) {
         for(int i = 0; i < string.length(); ++i){
             if (string.charAt(i) != '1' && string.charAt(i) != '0'){
-                //string.replace(i, null);
+                string = string.substring(0, i) + string.substring(i+1);
+                --i;
+            }
+        }
+        listeOutput.clear();
+        for(int i =0; i < string.length(); ++i){
+            if (string.charAt(i) == '1'){
+                listeOutput.add(Boolean.TRUE);
+            } else {
+                listeOutput.add(Boolean.FALSE);
             }
         }
     }
