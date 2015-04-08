@@ -23,7 +23,7 @@ public class Main extends Application {
         CircuitAnalogueM circuit = new CircuitAnalogueM();
         CircuitAnalogueV circuitGraphique = new CircuitAnalogueV(circuit);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/mixte/FXMLDocument.fxml"));
         Parent root = (Parent) loader.load();
         FXMLDocumentController ctrl = loader.getController();
         
