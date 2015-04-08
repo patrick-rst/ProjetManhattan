@@ -39,5 +39,10 @@ public class SourceCourantGraphique extends Connectable implements SourceCourant
     public Composant getEnfant() {
         return (Composant) this.sourceCourant;
     }
+    
+    @Override
+    public String toString() {
+        return "sourceCourant";
+    }    
 
 }

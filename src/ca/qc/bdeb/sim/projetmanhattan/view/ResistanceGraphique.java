@@ -47,7 +47,7 @@ public class ResistanceGraphique extends Connectable implements ResistanceAbstra
 
     @Override
     public String toString() {
-        return "Resistance";
+        return "resistance";
     }
 
     public Composant getEnfant() {

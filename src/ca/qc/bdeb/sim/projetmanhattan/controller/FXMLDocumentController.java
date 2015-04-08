@@ -384,6 +384,7 @@ public class FXMLDocumentController implements Initializable {
                 lblComposant.setText("Source de courant");
                 lblUnite.setText("Ampère");
                 SourceCourantGraphique sourceCourant = (SourceCourantGraphique) circuit2D[row][column];
+                txtValeur.setText(sourceCourant.getCourant() + "");
             } else if (id.equals("resistance")) {
                 lblComposant.setText("Resistance");
                 lblUnite.setText("Ohm");
@@ -407,12 +408,14 @@ public class FXMLDocumentController implements Initializable {
                     int row = Integer.parseInt(id.split(",")[0]);
                     int column = Integer.parseInt(id.split(",")[1]);
 
-                    String composant = circuit2D[row][column].toString();
+                    String composantString = circuit2D[row][column].toString();
 
-                    if (composant.equals("Resistance")) {
+                    if (composantString.equals("resistance")) {
                         ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                    } else if (composant.equals("SourceFEM")) {
+                    } else if (composantString.equals("sourceTension")) {
                         ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                    } else if (composantString.equals("sourceCourant")) {
+                        ((SourceCourantGraphique) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
                     }
 
                     composantEditor.hide();
@@ -422,9 +425,6 @@ public class FXMLDocumentController implements Initializable {
 
             composantEditor.setDetachable(false);
             composantEditor.setContentNode(box);
-            //composantEditor.setArrowLocation(ArrowLocation.BOTTOM_LEFT);
-            //composantEditor.setCornerRadius(4);
-            //composantEditor.setDetachedTitle("Composant");
             composantEditor.show((ImageView) event.getSource(), 15);
 
         }

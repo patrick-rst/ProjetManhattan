@@ -47,7 +47,7 @@ public class SourceFEMGraphique extends Connectable implements SourceFEMAbstrait
 
     @Override
     public String toString() {
-        return "SourceFEM";
+        return "sourceTension";
     }
 
     public Composant getEnfant() {
