@@ -378,47 +378,50 @@ public class FXMLDocumentController implements Initializable {
                 
                 circuit2D = save.getCircuit();
 
+                String pathAnalog = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/analog/";
+                String pathMixte = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/";
+                
                 for (int row=0; row<10; row++) {
                     for (int column=0; column<10; column++) {
                         if (circuit2D[row][column] instanceof ResistanceGraphique) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/resistance.png"));
+                            tmp.setImage(new Image(pathAnalog+"resistance.png"));
                             tmp.setId("resistance");
                             grid.add(tmp, column, row);
                         }
                         else if (circuit2D[row][column] instanceof SourceFEMGraphique) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/source_tension.png"));
+                            tmp.setImage(new Image(pathAnalog+"source_tension.png"));
                             tmp.setId("sourceTension");
                             grid.add(tmp, column, row);
                         }
                         else if (circuit2D[row][column] instanceof SourceCourantGraphique) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/source_courant.png"));
+                            tmp.setImage(new Image(pathAnalog+"source_courant.png"));
                             tmp.setId("sourceCourant");
                             grid.add(tmp, column, row);
                         }      
                         else if (circuit2D[row][column] instanceof FilDroit) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/fil_droit.png"));
+                            tmp.setImage(new Image(pathMixte+"fil_droit.png"));
                             tmp.setId("filDroit");
                             grid.add(tmp, column, row);                       
                         } 
                         else if (circuit2D[row][column] instanceof FilCoin) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/fil_coin.png"));
+                            tmp.setImage(new Image(pathMixte+"fil_coin.png"));
                             tmp.setId("filCoin");
                             grid.add(tmp, column, row);
                         }
                         else if (circuit2D[row][column] instanceof FilT) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/fil_t.png"));
+                            tmp.setImage(new Image(pathMixte+"fil_t.png"));
                             tmp.setId("filT");
                             grid.add(tmp, column, row);
                         }
                         else if (circuit2D[row][column] instanceof FilCroix) {
                             ImageView tmp = new ImageView();
-                            tmp.setImage(new Image("file:img/fil_croix.png"));
+                            tmp.setImage(new Image(pathMixte+"fil_croix.png"));
                             tmp.setId("filCroix");
                             grid.add(tmp, column, row);
                         }                         
