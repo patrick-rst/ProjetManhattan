@@ -5,10 +5,12 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
+
 /**
  *
  * @author blood_000
  */
-public class ANDGateM {
+public class ANDGateM implements ComposantI, ANDGateI {
     
 }

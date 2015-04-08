@@ -10,12 +10,13 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMI;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 
 /**
  *
  * @author blood_000
  */
-public class SourceFEMV extends ConnectableV implements SourceFEMI {
+public class SourceFEMV extends ConnectableV implements SourceFEMI, ComposantVI {
 
     private SourceFEMI sourceFEM;
 

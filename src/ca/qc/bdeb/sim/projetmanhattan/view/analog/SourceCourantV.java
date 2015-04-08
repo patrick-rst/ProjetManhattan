@@ -10,12 +10,13 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantI;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 
 /**
  *
  * @author blood_000
  */
-public class SourceCourantV extends ConnectableV implements SourceCourantI {
+public class SourceCourantV extends ConnectableV implements SourceCourantI, ComposantVI {
 
     private SourceCourantI sourceCourant;
 

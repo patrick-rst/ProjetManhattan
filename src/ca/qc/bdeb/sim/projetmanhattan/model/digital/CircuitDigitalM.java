@@ -31,14 +31,39 @@ public class CircuitDigitalM implements Circuit {
         notGates = new ArrayList<>();
     }
 
+    public void ajouterORGate(ORGateM gate) {
+        orGates.add(gate);
+    }
+
+    public void ajouterNOTGate(NOTGateM gate) {
+        notGates.add(gate);
+    }
+
+    public void ajouterSourceDigitale(SourceDigitaleM sourceDigitale) {
+        sourcesDigitales.add(sourceDigitale);
+    }
+
+    public void ajouterANDGate(ANDGateM gate) {
+        andGates.add(gate);
+    }
+
+    public void ajouterDiode(DiodeM diode) {
+        diodes.add(diode);
+    }
+
     @Override
     public void ajouterNoeud(Noeud noeud) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        noeuds.add(noeud);
     }
 
     @Override
     public void wipe() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        noeuds.clear();
+        diodes.clear();
+        sourcesDigitales.clear();
+        andGates.clear();
+        orGates.clear();
+        notGates.clear();
     }
 
 }

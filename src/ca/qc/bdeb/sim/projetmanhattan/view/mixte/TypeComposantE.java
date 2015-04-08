@@ -17,5 +17,8 @@ public enum TypeComposantE {
     SOURCE_TENSION,
     SOURCE_COURANT,
     SOURCE_DIGITALE,
-    DIODE
+    DIODE,
+    ANDGATE,
+    ORGATE,
+    NOTGATE
 }

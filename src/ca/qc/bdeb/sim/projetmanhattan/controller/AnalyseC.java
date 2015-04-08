@@ -11,12 +11,22 @@ import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.ANDGateM;
 import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigitalM;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.DiodeM;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.NOTGateM;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.ORGateM;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.SourceDigitaleM;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.GroundV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.ResistanceV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourantV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEMV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGateV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.DiodeV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGateV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGateV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitaleV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
 
@@ -65,7 +75,22 @@ public class AnalyseC {
     }
 
     public void preparerAnalyseDigitale(CircuitDigitalM circuit, ConnectableV[][] connectables) {
-        
+        for (int i = 0; i < connectables.length; ++i) {
+                for (int j = 0; j < connectables[i].length; ++j) {
+                    if (connectables[i][j] instanceof DiodeV) {
+                        circuit.ajouterDiode((DiodeM) ((DiodeV) connectables[i][j]).getEnfant());
+                    } else if (connectables[i][j] instanceof SourceDigitaleV) {
+                        circuit.ajouterSourceDigitale((SourceDigitaleM) ((SourceDigitaleV) connectables[i][j]).getEnfant());
+                    } else if (connectables[i][j] instanceof ANDGateV) {
+                        circuit.ajouterANDGate((ANDGateM) ((ANDGateV) connectables[i][j]).getEnfant());
+                    } else if (connectables[i][j] instanceof ORGateV) {
+                        circuit.ajouterORGate((ORGateM) ((ORGateV) connectables[i][j]).getEnfant());
+                    }else if (connectables[i][j] instanceof NOTGateV) {
+                        circuit.ajouterNOTGate((NOTGateM) ((NOTGateV) connectables[i][j]).getEnfant());
+                    }
+                }
+            }
+            //creerLiens(circuit);
     }
 
     public void creerLiens(CircuitAnalogueM circuit) {

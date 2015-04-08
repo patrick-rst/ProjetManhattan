@@ -5,13 +5,14 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 import java.util.ArrayList;
 
 /**
  *
  * @author blood_000
  */
-public class SourceDigitaleM implements SourceDigitaleI {
+public class SourceDigitaleM implements SourceDigitaleI, ComposantI {
 
     private ArrayList<Boolean> listeOutput;
     private int indexOutput;
