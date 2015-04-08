@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view;
+package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
+
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 
 /**
  *
  * @author blood_000
  */
-public class FilCroix extends FilAbstrait {
+public class FilCoin extends FilAbstrait {
 
-    public FilCroix() {
+    public FilCoin() {
         super();
         cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
-        cotesConnectes[2] = 1;
-        cotesConnectes[3] = 1;
+
     }
 
     @Override
     public String toString() {
-        return "FilCroix";
+        return "FilCoin";
     }
-
 }

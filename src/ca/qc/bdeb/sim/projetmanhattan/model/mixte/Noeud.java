@@ -1,6 +1,14 @@
-package ca.qc.bdeb.sim.projetmanhattan.model;
+package ca.qc.bdeb.sim.projetmanhattan.model.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.FilAbstrait;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Resistance;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Ground;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Ground;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Resistance;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 import java.util.ArrayList;
 
 /**

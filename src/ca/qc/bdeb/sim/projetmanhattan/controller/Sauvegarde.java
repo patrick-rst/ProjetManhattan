@@ -6,7 +6,7 @@
 
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import java.io.Serializable;
 
 /**

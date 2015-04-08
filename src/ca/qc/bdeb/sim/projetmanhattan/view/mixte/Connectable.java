@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view;
+package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.Serializable;
 
 /**

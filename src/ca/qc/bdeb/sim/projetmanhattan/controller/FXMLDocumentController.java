@@ -1,16 +1,16 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
-import ca.qc.bdeb.sim.projetmanhattan.view.CircuitGraphique;
-import ca.qc.bdeb.sim.projetmanhattan.view.Connectable;
-import ca.qc.bdeb.sim.projetmanhattan.view.FilCoin;
-import ca.qc.bdeb.sim.projetmanhattan.view.FilCroix;
-import ca.qc.bdeb.sim.projetmanhattan.view.FilDroit;
-import ca.qc.bdeb.sim.projetmanhattan.view.FilT;
-import ca.qc.bdeb.sim.projetmanhattan.view.ResistanceGraphique;
-import ca.qc.bdeb.sim.projetmanhattan.view.SourceCourantGraphique;
-import ca.qc.bdeb.sim.projetmanhattan.view.SourceFEMGraphique;
-import ca.qc.bdeb.sim.projetmanhattan.view.TypeComposant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.CircuitGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCoin;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCroix;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilDroit;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilT;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.ResistanceGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourantGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEMGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

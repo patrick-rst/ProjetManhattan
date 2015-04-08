@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.model;
+package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import java.util.ArrayList;
 import org.ejml.data.DenseMatrix64F;
 import org.ejml.ops.CommonOps;

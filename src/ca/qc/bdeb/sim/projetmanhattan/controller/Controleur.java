@@ -5,7 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Circuit;
 
 /**
  *

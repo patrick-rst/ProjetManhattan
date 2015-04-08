@@ -1,8 +1,8 @@
 package ca.qc.bdeb.sim.projetmanhattan;
 
 import ca.qc.bdeb.sim.projetmanhattan.controller.FXMLDocumentController;
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
-import ca.qc.bdeb.sim.projetmanhattan.view.CircuitGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.CircuitGraphique;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

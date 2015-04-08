@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
-package ca.qc.bdeb.sim.projetmanhattan.view;
+import java.io.Serializable;
 
 /**
  *
- * @author 1351077
+ * @author blood_000
  */
-public enum TypeComposant {
-    FIL,
-    GROUND,
-    RESISTANCE,
-    SOURCE_TENSION,
-    SOURCE_COURANT
+public interface Composant extends Serializable {
+
 }

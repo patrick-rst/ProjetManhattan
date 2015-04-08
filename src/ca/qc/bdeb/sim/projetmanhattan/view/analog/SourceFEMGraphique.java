@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view;
+package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
-import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEMAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMAbstraite;
 import java.io.Serializable;
 
 /**

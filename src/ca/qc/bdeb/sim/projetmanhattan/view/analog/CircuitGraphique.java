@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view;
+package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.Circuit;
-import ca.qc.bdeb.sim.projetmanhattan.model.Ground;
-import ca.qc.bdeb.sim.projetmanhattan.model.Noeud;
-import ca.qc.bdeb.sim.projetmanhattan.model.Resistance;
-import ca.qc.bdeb.sim.projetmanhattan.model.SourceCourant;
-import ca.qc.bdeb.sim.projetmanhattan.model.SourceFEM;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Ground;
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Resistance;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourant;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEM;
 
 /**
  *

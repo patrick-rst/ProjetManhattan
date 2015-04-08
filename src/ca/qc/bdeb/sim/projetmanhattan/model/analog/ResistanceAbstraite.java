@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.model;
+package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
 /**
  *
  * @author blood_000
  */
-public interface SourceFEMAbstraite {
+public interface ResistanceAbstraite {
 
-    public double getForceElectroMotrice();
+    public double getResistance();
 
-    public void setForceElectroMotrice(double forceElectroMotrice);
+    public void setResistance(double resistance);
 
     public double getCourant();
 

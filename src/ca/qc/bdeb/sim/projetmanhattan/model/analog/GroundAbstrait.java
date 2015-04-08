@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view;
-
-import ca.qc.bdeb.sim.projetmanhattan.model.Composant;
+package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
 /**
  *
  * @author blood_000
  */
-public interface ComposantGraphique {
-
-    public Composant getEnfant();
+public interface GroundAbstrait {
+    
 }

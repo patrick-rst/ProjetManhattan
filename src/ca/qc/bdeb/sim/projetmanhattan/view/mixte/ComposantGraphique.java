@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.model;
+package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import java.io.Serializable;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.Composant;
 
 /**
  *
  * @author blood_000
  */
-public interface Composant extends Serializable {
+public interface ComposantGraphique {
 
+    public Composant getEnfant();
 }

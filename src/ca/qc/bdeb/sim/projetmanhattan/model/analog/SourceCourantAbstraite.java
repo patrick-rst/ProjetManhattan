@@ -3,19 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.model;
+package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
 /**
  *
  * @author blood_000
  */
-public interface ResistanceAbstraite {
-
-    public double getResistance();
-
-    public void setResistance(double resistance);
+public interface SourceCourantAbstraite {
 
     public double getCourant();
 
-    public void setCourant(double Courant);
+    public void setCourant(double courant);
 }
