@@ -62,6 +62,10 @@ hs_err_pid*
 /UIPrototype1/nbproject/private/
 
 
+# Save file
+*.ser
+
+# libraries
 !EJML*.jar
 !controlsfx*.jar
 
