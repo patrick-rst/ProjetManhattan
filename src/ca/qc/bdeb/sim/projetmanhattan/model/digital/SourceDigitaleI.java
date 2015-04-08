@@ -5,10 +5,18 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author blood_000
  */
 public interface SourceDigitaleI {
+    
+    public boolean lireOutput();
+    
+    public void setListeOutput(ArrayList<Boolean> list);
+    
+    public void setOutput(String string);
     
 }

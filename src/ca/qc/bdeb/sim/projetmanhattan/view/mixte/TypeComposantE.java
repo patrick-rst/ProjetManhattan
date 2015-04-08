@@ -15,5 +15,7 @@ public enum TypeComposantE {
     GROUND,
     RESISTANCE,
     SOURCE_TENSION,
-    SOURCE_COURANT
+    SOURCE_COURANT,
+    SOURCE_DIGITALE,
+    DIODE
 }

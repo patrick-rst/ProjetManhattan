@@ -5,10 +5,39 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.SourceDigitaleI;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.SourceDigitaleM;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import java.util.ArrayList;
+
 /**
  *
  * @author blood_000
  */
-public class SourceDigitaleV {
-    
+public class SourceDigitaleV extends ConnectableV implements SourceDigitaleI {
+
+    private SourceDigitaleI sourceDigitale;
+
+    public SourceDigitaleV() {
+        super(TypeComposantE.SOURCE_DIGITALE);
+        cotesConnectes[0] = 1;
+        sourceDigitale = new SourceDigitaleM();
+    }
+
+    @Override
+    public boolean lireOutput() {
+        return sourceDigitale.lireOutput();
+    }
+
+    @Override
+    public void setListeOutput(ArrayList<Boolean> list) {
+        sourceDigitale.setListeOutput(list);
+    }
+
+    @Override
+    public void setOutput(String string) {
+        sourceDigitale.setOutput(string);
+    }
+
 }

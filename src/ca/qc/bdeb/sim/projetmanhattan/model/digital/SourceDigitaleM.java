@@ -5,10 +5,42 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author blood_000
  */
-public class SourceDigitaleM {
-    
+public class SourceDigitaleM implements SourceDigitaleI {
+
+    private ArrayList<Boolean> listeOutput;
+    private int indexOutput;
+
+    public SourceDigitaleM() {
+        listeOutput = new ArrayList<>();
+        indexOutput = -1;
+    }
+
+    @Override
+    public boolean lireOutput() {
+        ++indexOutput;
+        indexOutput = indexOutput % listeOutput.size();
+        return listeOutput.get(indexOutput);
+
+    }
+
+    @Override
+    public void setListeOutput(ArrayList<Boolean> list) {
+        this.listeOutput = list;
+    }
+
+    @Override
+    public void setOutput(String string) {
+        for(int i = 0; i < string.length(); ++i){
+            if (string.charAt(i) != '1' && string.charAt(i) != '0'){
+                //string.replace(i, null);
+            }
+        }
+    }
+
 }

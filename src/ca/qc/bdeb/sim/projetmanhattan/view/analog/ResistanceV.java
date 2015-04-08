@@ -10,7 +10,6 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceI;
-import java.io.Serializable;
 
 /**
  *
