@@ -2,7 +2,7 @@ package ca.qc.bdeb.sim.projetmanhattan;
 
 import ca.qc.bdeb.sim.projetmanhattan.controller.FXMLDocumentController;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.AnalyseV;
+import ca.qc.bdeb.sim.projetmanhattan.controller.AnalyseV;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

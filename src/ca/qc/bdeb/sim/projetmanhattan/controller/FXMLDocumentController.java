@@ -1,7 +1,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.AnalyseV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCoin;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCroix;

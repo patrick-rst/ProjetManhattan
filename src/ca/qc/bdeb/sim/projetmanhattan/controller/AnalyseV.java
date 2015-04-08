@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
+package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
@@ -17,6 +17,8 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.GroundV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.ResistanceV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourantV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEMV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
 
 /**
  *
