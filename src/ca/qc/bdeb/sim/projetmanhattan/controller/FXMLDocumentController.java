@@ -81,7 +81,6 @@ public class FXMLDocumentController implements Initializable {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
         Menu mnuRun = new Menu("Run");
-<<<<<<< HEAD
         
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
@@ -230,9 +229,7 @@ public class FXMLDocumentController implements Initializable {
         });        
         
         
-=======
 
->>>>>>> origin/master
         MenuItem mnuItemRun = new MenuItem("Run");
 
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
@@ -240,7 +237,7 @@ public class FXMLDocumentController implements Initializable {
                 cg.preparerAnalyse(circuit);
                 c.analyserCircuit();
             }
-<<<<<<< HEAD
+
         });        
  
         mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
@@ -248,13 +245,12 @@ public class FXMLDocumentController implements Initializable {
         mnuBar.getMenus().addAll(mnuFile,mnuRun);
         
         
-=======
-        });
+
 
         mnuRun.getItems().addAll(mnuItemRun);
         mnuBar.getMenus().addAll(mnuRun);
 
->>>>>>> origin/master
+
         pane.setTop(mnuBar);
 
     }
