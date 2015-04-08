@@ -1,6 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.GroundV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCoin;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCroix;
@@ -423,7 +424,14 @@ public class FXMLDocumentController implements Initializable {
                             tmp.setId("sourceCourant");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
-                        }      
+                        }     
+                        else if (connectables2D[row][column] instanceof GroundV) {
+                            ImageView tmp = new ImageView();
+                            tmp.setImage(new Image(pathAnalog+"ground.png"));
+                            tmp.setId("ground");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
+                        }                         
                         else if (connectables2D[row][column] instanceof FilDroit) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_droit.png"));
@@ -495,6 +503,9 @@ public class FXMLDocumentController implements Initializable {
         } else if (id.equals("resistance")) {
             ResistanceV resistance = new ResistanceV();
             connectables2D[row][column] = resistance;
+        } else if (id.equals("ground")) {
+            GroundV ground = new GroundV();
+            connectables2D[row][column] = ground;
         } else if (id.equals("filDroit")) {
             FilDroit filDroit = new FilDroit();
             connectables2D[row][column] = filDroit;
