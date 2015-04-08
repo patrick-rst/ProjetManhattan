@@ -157,7 +157,13 @@ public class FXMLDocumentController implements Initializable {
             System.out.println("R pressed");
             circuitGraphique.preparerAnalyse(circuit, connectables2D);
             circuit.analyserCircuit();
-        }
+        } else if (event.getCode().equals(KeyCode.S)) {
+            System.out.println("S pressed");
+            
+            ImageView tmp = (ImageView) getNodeByRowColumnIndex(grid, row, column);
+            Image img = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/digital/and2.png");
+            tmp.setImage(img);            
+        }    
     }
 
     @FXML
@@ -241,15 +247,20 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
+        
+    
+    
+    
+    int row;
+    int column;
     
     @FXML
-    private void switchInput(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.S)) {
-            System.out.println("S pressed");
-            ImageView source = (ImageView) event.getSource();
-            Image img = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/digital/and2.png");
-            source.setImage(img);            
-        }       
+    private void mouseMoved(MouseEvent event) {
+        double x = event.getX();
+        double y = event.getY();
+
+        row = (int) y/50; 
+        column = (int) x/50;
     }
     
     
