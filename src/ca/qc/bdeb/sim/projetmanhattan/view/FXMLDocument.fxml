@@ -204,9 +204,9 @@
                            <content>
                                       <FlowPane prefWidth="200.0">
                                           <children>
-                                              <StackPane fx:id="source">
+                                              <StackPane>
                                                   <children>
-                                                      <ImageView id="source" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView id="sourceTension" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@img/source_tension.png" />
                                                           </image>
@@ -218,7 +218,7 @@
                                               </StackPane>
                                     <StackPane>
                                        <children>
-                                          <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView id="sourceCourant" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/source_courant.png" />
                                              </image>
@@ -228,7 +228,7 @@
                                           </ImageView>
                                        </children>
                                     </StackPane>
-                                              <StackPane fx:id="resistance">
+                                              <StackPane>
                                                   <children>
                                                       <ImageView id="resistance" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                           <image>

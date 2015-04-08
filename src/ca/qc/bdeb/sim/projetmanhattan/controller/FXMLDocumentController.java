@@ -93,18 +93,21 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemRun = new MenuItem("Run");
         
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
             public void handle(ActionEvent t) {
                 writeFile();
             }
         });        
         
         mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
             public void handle(ActionEvent t) {
                 readFile();
             }
         });        
 
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
             public void handle(ActionEvent t) {
                 circuitGraphique.preparerAnalyse(circuit2D);
                 circuit.analyserCircuit();
@@ -189,55 +192,57 @@ public class FXMLDocumentController implements Initializable {
                     ObjectInputStream ois = new ObjectInputStream(fin);
                     save = (Sauvegarde) ois.readObject();
                     ois.close();
-                } catch (Exception ex) {
+                } catch (IOException ex) {
                     ex.printStackTrace();
-                }                
+                } catch (ClassNotFoundException ex) {                
+                    ex.printStackTrace();
+        }                
                 
                 circuit2D = save.getCircuit();
 
-                for (int i=0; i<10; i++) {
-                    for (int j=0; j<10; j++) {
-                        if (circuit2D[i][j] instanceof ResistanceGraphique) {
+                for (int row=0; row<10; row++) {
+                    for (int column=0; column<10; column++) {
+                        if (circuit2D[row][column] instanceof ResistanceGraphique) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/resistance.png"));
                             tmp.setId("resistance");
-                            grid.add(tmp, i, j);
+                            grid.add(tmp, column, row);
                         }
-                        else if (circuit2D[i][j] instanceof SourceFEMGraphique) {
+                        else if (circuit2D[row][column] instanceof SourceFEMGraphique) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/source_tension.png"));
                             tmp.setId("sourceTension");
-                            grid.add(tmp, i, j);
+                            grid.add(tmp, column, row);
                         }
-                        else if (circuit2D[i][j] instanceof SourceCourantGraphique) {
+                        else if (circuit2D[row][column] instanceof SourceCourantGraphique) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/source_courant.png"));
                             tmp.setId("sourceCourant");
-                            grid.add(tmp, i, j);
+                            grid.add(tmp, column, row);
                         }      
-                        else if (circuit2D[i][j] instanceof FilDroit) {
+                        else if (circuit2D[row][column] instanceof FilDroit) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_droit.png"));
                             tmp.setId("filDroit");
-                            grid.add(tmp, i, j);                       
+                            grid.add(tmp, column, row);                       
                         } 
-                        else if (circuit2D[i][j] instanceof FilCoin) {
+                        else if (circuit2D[row][column] instanceof FilCoin) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_coin.png"));
                             tmp.setId("filCoin");
-                            grid.add(tmp, i, j);
+                            grid.add(tmp, column, row);
                         }
-                        else if (circuit2D[i][j] instanceof FilT) {
+                        else if (circuit2D[row][column] instanceof FilT) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_t.png"));
                             tmp.setId("filT");
-                            grid.add(tmp, i, j);
+                            grid.add(tmp, column, row);
                         }
-                        else if (circuit2D[i][j] instanceof FilCroix) {
+                        else if (circuit2D[row][column] instanceof FilCroix) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_croix.png"));
                             tmp.setId("filCroix");
-                            grid.add(tmp, i, j);
+                            grid.add(tmp, column, row);
                         }                         
                     }
                 }
@@ -370,11 +375,15 @@ public class FXMLDocumentController implements Initializable {
             Button btn = new Button("Ok");
             btn.setId(row + "," + column);
 
-            if (id.equals("source")) {
-                lblComposant.setText("Source");
+            if (id.equals("sourceTension")) {
+                lblComposant.setText("Source de tension");
                 lblUnite.setText("Volt");
-                SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit2D[row][column];
-                txtValeur.setText(sourceFEM.getForceElectroMotrice() + "");
+                SourceFEMGraphique sourceTension = (SourceFEMGraphique) circuit2D[row][column];
+                txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
+            } else if (id.equals("sourceCourant")) { 
+                lblComposant.setText("Source de courant");
+                lblUnite.setText("Ampère");
+                SourceCourantGraphique sourceCourant = (SourceCourantGraphique) circuit2D[row][column];
             } else if (id.equals("resistance")) {
                 lblComposant.setText("Resistance");
                 lblUnite.setText("Ohm");
@@ -422,9 +431,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void addComposant(String id, int row, int column) {
-        if (id.equals("source")) {
-            SourceFEMGraphique source = new SourceFEMGraphique();
-            circuit2D[row][column] = source;
+        if (id.equals("sourceTension")) {
+            SourceFEMGraphique sourceTension = new SourceFEMGraphique();
+            circuit2D[row][column] = sourceTension;
+        } else if (id.equals("sourceCourant")) {
+            SourceCourantGraphique sourceCourant = new SourceCourantGraphique();
+            circuit2D[row][column] = sourceCourant;
         } else if (id.equals("resistance")) {
             ResistanceGraphique resistance = new ResistanceGraphique();
             circuit2D[row][column] = resistance;
