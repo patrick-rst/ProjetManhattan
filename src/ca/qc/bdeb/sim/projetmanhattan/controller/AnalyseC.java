@@ -24,12 +24,12 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
  *
  * @author blood_000
  */
-public class AnalyseV {
+public class AnalyseC {
 
     private ConnectableV[][] connectables;
     private boolean[][] connectablesPasses;
 
-    public AnalyseV() {
+    public AnalyseC() {
     }
 
     public void preparerAnalyse(Circuit circuit, ConnectableV[][] connectables) {
@@ -65,7 +65,7 @@ public class AnalyseV {
     }
 
     public void preparerAnalyseDigitale(CircuitDigitalM circuit, ConnectableV[][] connectables) {
-
+        
     }
 
     public void creerLiens(CircuitAnalogueM circuit) {

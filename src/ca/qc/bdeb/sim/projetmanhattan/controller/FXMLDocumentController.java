@@ -69,7 +69,7 @@ public class FXMLDocumentController implements Initializable {
     PopOver composantEditor = new PopOver();
 
     CircuitAnalogueM circuit;
-    AnalyseV circuitGraphique;
+    AnalyseC circuitGraphique;
     
     
     
@@ -264,7 +264,7 @@ public class FXMLDocumentController implements Initializable {
         this.circuit = c;
     }
 
-    public void setCircuitGraphique(AnalyseV cg) {
+    public void setCircuitGraphique(AnalyseC cg) {
         this.circuitGraphique = cg;
     }    
     

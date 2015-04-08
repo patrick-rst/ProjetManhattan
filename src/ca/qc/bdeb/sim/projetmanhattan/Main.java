@@ -2,7 +2,7 @@ package ca.qc.bdeb.sim.projetmanhattan;
 
 import ca.qc.bdeb.sim.projetmanhattan.controller.FXMLDocumentController;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
-import ca.qc.bdeb.sim.projetmanhattan.controller.AnalyseV;
+import ca.qc.bdeb.sim.projetmanhattan.controller.AnalyseC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Simtronique");
         CircuitAnalogueM circuit = new CircuitAnalogueM();
-        AnalyseV circuitGraphique = new AnalyseV();
+        AnalyseC circuitGraphique = new AnalyseC();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("view/mixte/FXMLDocument.fxml"));
         Parent root = (Parent) loader.load();
