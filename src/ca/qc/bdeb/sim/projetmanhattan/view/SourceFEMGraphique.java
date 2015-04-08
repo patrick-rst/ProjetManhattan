@@ -19,6 +19,7 @@ public class SourceFEMGraphique extends Connectable implements SourceFEMAbstrait
     private SourceFEMAbstraite sourceFEM;
 
     public SourceFEMGraphique() {
+        super(TypeComposant.SOURCE_TENSION);
         this.sourceFEM = new SourceFEM();
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;

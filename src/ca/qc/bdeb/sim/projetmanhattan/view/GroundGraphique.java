@@ -19,6 +19,7 @@ public class GroundGraphique extends Connectable implements GroundAbstrait, Comp
     private Ground ground;
 
     public GroundGraphique() {
+        super(TypeComposant.GROUND);
         this.ground = new Ground();
         cotesConnectes[0] = 1;
     }

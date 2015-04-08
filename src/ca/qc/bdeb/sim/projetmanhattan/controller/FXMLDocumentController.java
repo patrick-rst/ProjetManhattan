@@ -10,6 +10,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.FilT;
 import ca.qc.bdeb.sim.projetmanhattan.view.ResistanceGraphique;
 import ca.qc.bdeb.sim.projetmanhattan.view.SourceCourantGraphique;
 import ca.qc.bdeb.sim.projetmanhattan.view.SourceFEMGraphique;
+import ca.qc.bdeb.sim.projetmanhattan.view.TypeComposant;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -217,13 +218,13 @@ public class FXMLDocumentController implements Initializable {
                     int row = Integer.parseInt(id.split(",")[0]);
                     int column = Integer.parseInt(id.split(",")[1]);
 
-                    String composantString = circuit2D[row][column].toString();
+                    TypeComposant typeComposant  = circuit2D[row][column].getTypeComposant();
 
-                    if (composantString.equals("resistance")) {
+                    if (typeComposant == TypeComposant.RESISTANCE) {
                         ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                    } else if (composantString.equals("sourceTension")) {
+                    } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
                         ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
-                    } else if (composantString.equals("sourceCourant")) {
+                    } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
                         ((SourceCourantGraphique) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
                     }
 

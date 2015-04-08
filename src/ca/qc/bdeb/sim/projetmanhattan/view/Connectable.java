@@ -14,19 +14,21 @@ import java.io.Serializable;
 public class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
+    private TypeComposant typeComposant;
 
-    public Connectable() {
+    public Connectable(TypeComposant typeComposant) {
         cotesConnectes = new byte[4];
+        this.typeComposant = typeComposant;
     }
 
     public byte[] getCotesConnectes() {
         return cotesConnectes;
     }
 
-    @Override
+   @Override
    public String toString(){
         return cotesConnectes[0] + " " + cotesConnectes[1] + " " +cotesConnectes[2] + " " +cotesConnectes[3] + " ";
-    }
+   }
 
 
     public void rotater() {
@@ -36,5 +38,13 @@ public class Connectable implements Serializable {
         cotesConnectes[1] = cotesConnectes[0];
         cotesConnectes[0] = temp;
     }
+
+    public TypeComposant getTypeComposant() {
+        return typeComposant;
+    }
+    
+    
+    
+    
 
 }

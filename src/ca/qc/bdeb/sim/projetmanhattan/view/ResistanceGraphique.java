@@ -19,6 +19,7 @@ public class ResistanceGraphique extends Connectable implements ResistanceAbstra
     private ResistanceAbstraite resistance;
 
     public ResistanceGraphique() {
+        super(TypeComposant.RESISTANCE);
         this.resistance = new Resistance();
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;

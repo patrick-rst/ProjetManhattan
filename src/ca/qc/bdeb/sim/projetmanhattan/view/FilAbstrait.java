@@ -5,7 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view;
 
-import java.io.Serializable;
 
 /**
  *
@@ -14,8 +13,9 @@ import java.io.Serializable;
 public abstract class FilAbstrait extends Connectable {
 
     protected double tension;
-
+    
     public FilAbstrait() {
+        super(TypeComposant.FIL);
         this.cotesConnectes = new byte[4];
     }
 

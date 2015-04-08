@@ -8,8 +8,12 @@ package ca.qc.bdeb.sim.projetmanhattan.view;
 
 /**
  *
- * @author 
+ * @author 1351077
  */
-public class Empty extends Connectable {
-    
+public enum TypeComposant {
+    FIL,
+    GROUND,
+    RESISTANCE,
+    SOURCE_TENSION,
+    SOURCE_COURANT
 }
