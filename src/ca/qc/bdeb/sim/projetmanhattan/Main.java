@@ -27,8 +27,8 @@ public class Main extends Application {
         Parent root = (Parent) loader.load();
         FXMLDocumentController ctrl = loader.getController();
         
-        ctrl.setC(circuit);
-        ctrl.setCg(circuitGraphique);
+        ctrl.setCircuit(circuit);
+        ctrl.setCircuitGraphique(circuitGraphique);
         
         Scene scene = new Scene(root);
         stage.setScene(scene);

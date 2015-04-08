@@ -54,9 +54,12 @@ import org.controlsfx.control.PopOver;
  */
 public class FXMLDocumentController implements Initializable {
 
-    Connectable[][] circuit = new Connectable[10][10];
+    Connectable[][] circuit2D = new Connectable[10][10];
 
     PopOver composantEditor = new PopOver();
+
+    Circuit circuit;
+    CircuitGraphique circuitGraphique;
 
     @FXML
     BorderPane pane;
@@ -64,26 +67,30 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     GridPane grid;
 
-    Circuit c;
-    CircuitGraphique cg;
-
-    public void setC(Circuit c) {
-        this.c = c;
-    }
-
-    public void setCg(CircuitGraphique cg) {
-        this.cg = cg;
-    }
-
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        createMenu();
+    }
+    
+    public void setCircuit(Circuit c) {
+        this.circuit = c;
+    }
 
+    public void setCircuitGraphique(CircuitGraphique cg) {
+        this.circuitGraphique = cg;
+    }    
+    
+    private void createMenu() {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
         Menu mnuRun = new Menu("Run");
         
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
+        MenuItem mnuItemRun = new MenuItem("Run");
         
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
@@ -96,15 +103,11 @@ public class FXMLDocumentController implements Initializable {
                 readFile();
             }
         });        
-        
-        
-
-        MenuItem mnuItemRun = new MenuItem("Run");
 
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
-                cg.preparerAnalyse(circuit);
-                c.analyserCircuit();
+                circuitGraphique.preparerAnalyse(circuit2D);
+                circuit.analyserCircuit();
             }
 
         });        
@@ -113,13 +116,12 @@ public class FXMLDocumentController implements Initializable {
         mnuRun.getItems().addAll(mnuItemRun);        
         mnuBar.getMenus().addAll(mnuFile,mnuRun);
 
-        pane.setTop(mnuBar);
-
+        pane.setTop(mnuBar);        
     }
     
     private void writeFile() {
                Sauvegarde save = new Sauvegarde();
-               save.setCircuit(circuit);
+               save.setCircuit(circuit2D);
                
 //                ObjectOutputStream fichier = null;
 //                try {
@@ -191,47 +193,47 @@ public class FXMLDocumentController implements Initializable {
                     ex.printStackTrace();
                 }                
                 
-                circuit = save.getCircuit();
+                circuit2D = save.getCircuit();
 
                 for (int i=0; i<10; i++) {
                     for (int j=0; j<10; j++) {
-                        if (circuit[i][j] instanceof ResistanceGraphique) {
+                        if (circuit2D[i][j] instanceof ResistanceGraphique) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/resistance.png"));
                             tmp.setId("resistance");
                             grid.add(tmp, i, j);
                         }
-                        else if (circuit[i][j] instanceof SourceFEMGraphique) {
+                        else if (circuit2D[i][j] instanceof SourceFEMGraphique) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/source_tension.png"));
                             tmp.setId("sourceTension");
                             grid.add(tmp, i, j);
                         }
-                        else if (circuit[i][j] instanceof SourceCourantGraphique) {
+                        else if (circuit2D[i][j] instanceof SourceCourantGraphique) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/source_courant.png"));
                             tmp.setId("sourceCourant");
                             grid.add(tmp, i, j);
                         }      
-                        else if (circuit[i][j] instanceof FilDroit) {
+                        else if (circuit2D[i][j] instanceof FilDroit) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_droit.png"));
                             tmp.setId("filDroit");
                             grid.add(tmp, i, j);                       
                         } 
-                        else if (circuit[i][j] instanceof FilCoin) {
+                        else if (circuit2D[i][j] instanceof FilCoin) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_coin.png"));
                             tmp.setId("filCoin");
                             grid.add(tmp, i, j);
                         }
-                        else if (circuit[i][j] instanceof FilT) {
+                        else if (circuit2D[i][j] instanceof FilT) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_t.png"));
                             tmp.setId("filT");
                             grid.add(tmp, i, j);
                         }
-                        else if (circuit[i][j] instanceof FilCroix) {
+                        else if (circuit2D[i][j] instanceof FilCroix) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image("file:img/fil_croix.png"));
                             tmp.setId("filCroix");
@@ -259,8 +261,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void analyserCircuit(ActionEvent event) {
-        cg.preparerAnalyse(circuit);
-        c.analyserCircuit();
+        circuitGraphique.preparerAnalyse(circuit2D);
+        circuit.analyserCircuit();
     }
 
     @FXML
@@ -329,7 +331,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void removeComposant(int row, int column) {
-        circuit[row][column] = null;
+        circuit2D[row][column] = null;
     }
 
     @FXML
@@ -339,8 +341,8 @@ public class FXMLDocumentController implements Initializable {
             printCircuitArray();
         } else if (event.getCode().equals(KeyCode.R)) {
             System.out.println("R pressed");
-            cg.preparerAnalyse(circuit);
-            c.analyserCircuit();
+            circuitGraphique.preparerAnalyse(circuit2D);
+            circuit.analyserCircuit();
         }
     }
 
@@ -353,7 +355,7 @@ public class FXMLDocumentController implements Initializable {
             int row = grid.getRowIndex(source);
             int column = grid.getColumnIndex(source);
 
-            ((Connectable) circuit[row][column]).rotater();
+            ((Connectable) circuit2D[row][column]).rotater();
 
         } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+")) {
             String id = source.getId();
@@ -371,12 +373,12 @@ public class FXMLDocumentController implements Initializable {
             if (id.equals("source")) {
                 lblComposant.setText("Source");
                 lblUnite.setText("Volt");
-                SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit[row][column];
+                SourceFEMGraphique sourceFEM = (SourceFEMGraphique) circuit2D[row][column];
                 txtValeur.setText(sourceFEM.getForceElectroMotrice() + "");
             } else if (id.equals("resistance")) {
                 lblComposant.setText("Resistance");
                 lblUnite.setText("Ohm");
-                ResistanceGraphique resistance = (ResistanceGraphique) circuit[row][column];
+                ResistanceGraphique resistance = (ResistanceGraphique) circuit2D[row][column];
                 txtValeur.setText(resistance.getResistance() + "");
             } else {
                 System.out.println("ERROR:Composant not implemented");
@@ -396,12 +398,12 @@ public class FXMLDocumentController implements Initializable {
                     int row = Integer.parseInt(id.split(",")[0]);
                     int column = Integer.parseInt(id.split(",")[1]);
 
-                    String composant = circuit[row][column].toString();
+                    String composant = circuit2D[row][column].toString();
 
                     if (composant.equals("Resistance")) {
-                        ((ResistanceGraphique) circuit[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                        ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
                     } else if (composant.equals("SourceFEM")) {
-                        ((SourceFEMGraphique) circuit[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                        ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
                     }
 
                     composantEditor.hide();
@@ -422,29 +424,29 @@ public class FXMLDocumentController implements Initializable {
     private void addComposant(String id, int row, int column) {
         if (id.equals("source")) {
             SourceFEMGraphique source = new SourceFEMGraphique();
-            circuit[row][column] = source;
+            circuit2D[row][column] = source;
         } else if (id.equals("resistance")) {
             ResistanceGraphique resistance = new ResistanceGraphique();
-            circuit[row][column] = resistance;
+            circuit2D[row][column] = resistance;
         } else if (id.equals("filDroit")) {
             FilDroit filDroit = new FilDroit();
-            circuit[row][column] = filDroit;
+            circuit2D[row][column] = filDroit;
         } else if (id.equals("filCoin")) {
             FilCoin filCoin = new FilCoin();
-            circuit[row][column] = filCoin;
+            circuit2D[row][column] = filCoin;
         } else if (id.equals("filT")) {
             FilT filT = new FilT();
-            circuit[row][column] = filT;
+            circuit2D[row][column] = filT;
         } else if (id.equals("filCroix")) {
             FilCroix filCroix = new FilCroix();
-            circuit[row][column] = filCroix;
+            circuit2D[row][column] = filCroix;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }
     }
 
     private void printCircuitArray() {
-        for (Connectable[] tab : circuit) {
+        for (Connectable[] tab : circuit2D) {
             for (Connectable c : tab) {
                 System.out.print(String.format("%12s", c));
             }
@@ -462,7 +464,7 @@ public class FXMLDocumentController implements Initializable {
     }    
 
     public Connectable[][] getCircuit() {
-        return circuit;
+        return circuit2D;
     }
 
 }
