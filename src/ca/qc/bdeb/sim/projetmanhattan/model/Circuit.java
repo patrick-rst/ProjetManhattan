@@ -183,6 +183,7 @@ public class Circuit {
             int n1 = -1;
             int n2 = -1;
             double valeurAAjouter = 1 / resistances.get(i).getResistance();
+            System.out.println(valeurAAjouter);
             for (int j = 0; j < noeuds.size(); ++j) {
                 if (noeuds.get(j).getResistances().contains(resistances.get(i))) {
                     if (n1 == -1) {
@@ -194,7 +195,6 @@ public class Circuit {
             }
 
             matriceG[n1][n1] += valeurAAjouter;
-
             if (n2 != -1) {
                 matriceG[n2][n2] += valeurAAjouter;
                 matriceG[n1][n2] -= valeurAAjouter;

@@ -26,5 +26,6 @@ public abstract class FilAbstrait extends Connectable implements Serializable {
     public void setTension(double tension) {
         this.tension = tension;
     }
-
+    
+    
 }
