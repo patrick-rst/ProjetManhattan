@@ -243,7 +243,15 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
-    
+    @FXML
+    private void switchInput(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.S)) {
+            System.out.println("S pressed");
+            ImageView source = (ImageView) event.getSource();
+            Image img = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/digital/and2.png");
+            source.setImage(img);            
+        }       
+    }
     
     
     

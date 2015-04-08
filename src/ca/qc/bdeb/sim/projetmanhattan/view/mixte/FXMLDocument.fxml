@@ -254,7 +254,7 @@
                                  <children>
                                     <StackPane>
                                        <children>
-                                          <ImageView id="andGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView id="andGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" onKeyPressed="#switchInput" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../digital/and1.png" />
                                              </image>
