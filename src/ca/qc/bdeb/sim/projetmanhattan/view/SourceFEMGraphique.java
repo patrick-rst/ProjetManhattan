@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author blood_000
  */
-public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite, Serializable {
+public class SourceFEMGraphique extends Connectable implements SourceFEMAbstraite {
 
     private SourceFEMAbstraite sourceFEM;
 

@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author blood_000
  */
-public abstract class FilAbstrait extends Connectable implements Serializable {
+public abstract class FilAbstrait extends Connectable {
 
     protected double tension;
 

@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author blood_000
  */
-public class ResistanceGraphique extends Connectable implements ResistanceAbstraite, Serializable {
+public class ResistanceGraphique extends Connectable implements ResistanceAbstraite {
 
     private ResistanceAbstraite resistance;
 

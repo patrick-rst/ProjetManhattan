@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author blood_000
  */
-public class GroundGraphique extends Connectable implements GroundAbstrait, ComposantGraphique, Serializable {
+public class GroundGraphique extends Connectable implements GroundAbstrait, ComposantGraphique {
 
     private Ground ground;
 

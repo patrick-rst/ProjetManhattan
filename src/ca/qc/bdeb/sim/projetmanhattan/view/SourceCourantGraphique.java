@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author blood_000
  */
-public class SourceCourantGraphique extends Connectable implements SourceCourantAbstraite, Serializable {
+public class SourceCourantGraphique extends Connectable implements SourceCourantAbstraite {
 
     private SourceCourantAbstraite sourceCourant;
 
