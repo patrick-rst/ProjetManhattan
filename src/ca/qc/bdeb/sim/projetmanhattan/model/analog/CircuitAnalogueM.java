@@ -5,6 +5,7 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import java.util.ArrayList;
 import org.ejml.data.DenseMatrix64F;
@@ -14,7 +15,7 @@ import org.ejml.ops.CommonOps;
  *
  * @author blood_000
  */
-public class CircuitAnalogueM {
+public class CircuitAnalogueM implements Circuit {
 
     private ArrayList<ResistanceM> resistances;
     private ArrayList<Noeud> noeuds;

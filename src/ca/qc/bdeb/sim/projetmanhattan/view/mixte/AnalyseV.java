@@ -3,56 +3,70 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.sim.projetmanhattan.view.analog;
+package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigitalM;
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.GroundV;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.ResistanceV;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourantV;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEMV;
 
 /**
  *
  * @author blood_000
  */
-public class CircuitAnalogueV {
+public class AnalyseV {
 
     private ConnectableV[][] connectables;
     private boolean[][] connectablesPasses;
-    private CircuitAnalogueM circuit;
 
-    public CircuitAnalogueV(CircuitAnalogueM circuit) {
-        this.circuit = circuit;
+    public AnalyseV() {
     }
 
-    public void preparerAnalyse(ConnectableV[][] connectables) {
-        try{
-        this.connectables = connectables;
-        circuit.wipe();
-        connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
-        for (int i = 0; i < connectables.length; ++i) {
-            for (int j = 0; j < connectables[i].length; ++j) {
-                if (connectables[i][j] instanceof ResistanceV) {
-                    circuit.ajouterResistance((ResistanceM) ((ResistanceV) connectables[i][j]).getEnfant());
-                } else if (connectables[i][j] instanceof SourceCourantV) {
-                    circuit.ajouterSourceCourant((SourceCourantM) ((SourceCourantV) connectables[i][j]).getEnfant());
-                } else if (connectables[i][j] instanceof SourceFEMV) {
-                    circuit.ajouterSourceFEM((SourceFEMM) ((SourceFEMV) connectables[i][j]).getEnfant());
-                } else if (connectables[i][j] instanceof GroundV) {
-                    circuit.ajouterGround((GroundM) ((GroundV) connectables[i][j]).getEnfant());
+    public void preparerAnalyse(Circuit circuit, ConnectableV[][] connectables) {
+        if (circuit instanceof CircuitAnalogueM) {
+            preparerAnalyseAnalogue((CircuitAnalogueM) circuit, connectables);
+        } else {
+            preparerAnalyseDigitale((CircuitDigitalM) circuit, connectables);
+        }
+    }
+
+    public void preparerAnalyseAnalogue(CircuitAnalogueM circuit, ConnectableV[][] connectables) {
+        try {
+            this.connectables = connectables;
+            circuit.wipe();
+            connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
+            for (int i = 0; i < connectables.length; ++i) {
+                for (int j = 0; j < connectables[i].length; ++j) {
+                    if (connectables[i][j] instanceof ResistanceV) {
+                        circuit.ajouterResistance((ResistanceM) ((ResistanceV) connectables[i][j]).getEnfant());
+                    } else if (connectables[i][j] instanceof SourceCourantV) {
+                        circuit.ajouterSourceCourant((SourceCourantM) ((SourceCourantV) connectables[i][j]).getEnfant());
+                    } else if (connectables[i][j] instanceof SourceFEMV) {
+                        circuit.ajouterSourceFEM((SourceFEMM) ((SourceFEMV) connectables[i][j]).getEnfant());
+                    } else if (connectables[i][j] instanceof GroundV) {
+                        circuit.ajouterGround((GroundM) ((GroundV) connectables[i][j]).getEnfant());
+                    }
                 }
             }
-        }
-        creerLiens();
-        } catch(Exception e){
+            creerLiens(circuit);
+        } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
         }
     }
 
-    public void creerLiens() {
+    public void preparerAnalyseDigitale(CircuitDigitalM circuit, ConnectableV[][] connectables) {
+
+    }
+
+    public void creerLiens(CircuitAnalogueM circuit) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof FilA && !connectablesPasses[i][j]) {

@@ -1,7 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
-import ca.qc.bdeb.sim.projetmanhattan.view.analog.CircuitAnalogueV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.AnalyseV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCoin;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCroix;
@@ -65,12 +65,12 @@ public class FXMLDocumentController implements Initializable {
     
     
     
-    ConnectableV[][] circuit2D = new ConnectableV[10][10];
+    ConnectableV[][] connectables2D = new ConnectableV[10][10];
 
     PopOver composantEditor = new PopOver();
 
     CircuitAnalogueM circuit;
-    CircuitAnalogueV circuitGraphique;
+    AnalyseV circuitGraphique;
     
     
     
@@ -78,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void analyserCircuit(ActionEvent event) {
-        circuitGraphique.preparerAnalyse(circuit2D);
+        circuitGraphique.preparerAnalyse(circuit, connectables2D);
         circuit.analyserCircuit();
     }
 
@@ -156,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
             printCircuitArray();
         } else if (event.getCode().equals(KeyCode.R)) {
             System.out.println("R pressed");
-            circuitGraphique.preparerAnalyse(circuit2D);
+            circuitGraphique.preparerAnalyse(circuit, connectables2D);
             circuit.analyserCircuit();
         }
     }
@@ -170,7 +170,7 @@ public class FXMLDocumentController implements Initializable {
             int row = grid.getRowIndex(source);
             int column = grid.getColumnIndex(source);
 
-            ((ConnectableV) circuit2D[row][column]).rotater();
+            ((ConnectableV) connectables2D[row][column]).rotater();
 
         } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+")) {
             String id = source.getId();
@@ -188,17 +188,17 @@ public class FXMLDocumentController implements Initializable {
             if (id.equals("sourceTension")) {
                 lblComposant.setText("Source de tension");
                 lblUnite.setText("Volt");
-                SourceFEMV sourceTension = (SourceFEMV) circuit2D[row][column];
+                SourceFEMV sourceTension = (SourceFEMV) connectables2D[row][column];
                 txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
             } else if (id.equals("sourceCourant")) { 
                 lblComposant.setText("Source de courant");
                 lblUnite.setText("Ampère");
-                SourceCourantV sourceCourant = (SourceCourantV) circuit2D[row][column];
+                SourceCourantV sourceCourant = (SourceCourantV) connectables2D[row][column];
                 txtValeur.setText(sourceCourant.getCourant() + "");
             } else if (id.equals("resistance")) {
                 lblComposant.setText("Resistance");
                 lblUnite.setText("Ohm");
-                ResistanceV resistance = (ResistanceV) circuit2D[row][column];
+                ResistanceV resistance = (ResistanceV) connectables2D[row][column];
                 txtValeur.setText(resistance.getResistance() + "");
             } else {
                 System.out.println("ERROR:Composant not implemented");
@@ -218,15 +218,15 @@ public class FXMLDocumentController implements Initializable {
                     int row = Integer.parseInt(id.split(",")[0]);
                     int column = Integer.parseInt(id.split(",")[1]);
 
-                    TypeComposantE typeComposant  = circuit2D[row][column].getTypeComposant();
+                    TypeComposantE typeComposant  = connectables2D[row][column].getTypeComposant();
 
                     try {
                         if (typeComposant == TypeComposantE.RESISTANCE) {
-                            ((ResistanceV) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                            ((ResistanceV) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
                         } else if (typeComposant == TypeComposantE.SOURCE_TENSION) {
-                            ((SourceFEMV) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                            ((SourceFEMV) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
                         } else if (typeComposant == TypeComposantE.SOURCE_COURANT) {
-                            ((SourceCourantV) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                            ((SourceCourantV) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("INPUT ERROR: Pas un nombre");
@@ -257,7 +257,7 @@ public class FXMLDocumentController implements Initializable {
         this.circuit = c;
     }
 
-    public void setCircuitGraphique(CircuitAnalogueV cg) {
+    public void setCircuitGraphique(AnalyseV cg) {
         this.circuitGraphique = cg;
     }    
     
@@ -287,7 +287,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                circuitGraphique.preparerAnalyse(circuit2D);
+                circuitGraphique.preparerAnalyse(circuit, connectables2D);
                 circuit.analyserCircuit();
             }
 
@@ -302,7 +302,7 @@ public class FXMLDocumentController implements Initializable {
     
     private void writeFile() {
                Sauvegarde save = new Sauvegarde();
-               save.setCircuit(circuit2D);
+               save.setCircuit(connectables2D);
                
 //                ObjectOutputStream fichier = null;
 //                try {
@@ -376,56 +376,56 @@ public class FXMLDocumentController implements Initializable {
                     ex.printStackTrace();
                 }                
                 
-                circuit2D = save.getCircuit();
+                connectables2D = save.getCircuit();
 
                 String pathAnalog = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/analog/";
                 String pathMixte = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/";
                 
                 for (int row=0; row<10; row++) {
                     for (int column=0; column<10; column++) {
-                        if (circuit2D[row][column] instanceof ResistanceV) {
+                        if (connectables2D[row][column] instanceof ResistanceV) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathAnalog+"resistance.png"));
                             tmp.setId("resistance");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);
                         }
-                        else if (circuit2D[row][column] instanceof SourceFEMV) {
+                        else if (connectables2D[row][column] instanceof SourceFEMV) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathAnalog+"source_tension.png"));
                             tmp.setId("sourceTension");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
                         }
-                        else if (circuit2D[row][column] instanceof SourceCourantV) {
+                        else if (connectables2D[row][column] instanceof SourceCourantV) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathAnalog+"source_courant.png"));
                             tmp.setId("sourceCourant");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
                         }      
-                        else if (circuit2D[row][column] instanceof FilDroit) {
+                        else if (connectables2D[row][column] instanceof FilDroit) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_droit.png"));
                             tmp.setId("filDroit");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
                         } 
-                        else if (circuit2D[row][column] instanceof FilCoin) {
+                        else if (connectables2D[row][column] instanceof FilCoin) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_coin.png"));
                             tmp.setId("filCoin");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
                         }
-                        else if (circuit2D[row][column] instanceof FilT) {
+                        else if (connectables2D[row][column] instanceof FilT) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_t.png"));
                             tmp.setId("filT");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
                         }
-                        else if (circuit2D[row][column] instanceof FilCroix) {
+                        else if (connectables2D[row][column] instanceof FilCroix) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_croix.png"));
                             tmp.setId("filCroix");
@@ -462,38 +462,38 @@ public class FXMLDocumentController implements Initializable {
     }   
     
     private void removeComposant(int row, int column) {
-        circuit2D[row][column] = null;
+        connectables2D[row][column] = null;
     }    
     
     private void addComposant(String id, int row, int column) {
         if (id.equals("sourceTension")) {
             SourceFEMV sourceTension = new SourceFEMV();
-            circuit2D[row][column] = sourceTension;
+            connectables2D[row][column] = sourceTension;
         } else if (id.equals("sourceCourant")) {
             SourceCourantV sourceCourant = new SourceCourantV();
-            circuit2D[row][column] = sourceCourant;
+            connectables2D[row][column] = sourceCourant;
         } else if (id.equals("resistance")) {
             ResistanceV resistance = new ResistanceV();
-            circuit2D[row][column] = resistance;
+            connectables2D[row][column] = resistance;
         } else if (id.equals("filDroit")) {
             FilDroit filDroit = new FilDroit();
-            circuit2D[row][column] = filDroit;
+            connectables2D[row][column] = filDroit;
         } else if (id.equals("filCoin")) {
             FilCoin filCoin = new FilCoin();
-            circuit2D[row][column] = filCoin;
+            connectables2D[row][column] = filCoin;
         } else if (id.equals("filT")) {
             FilT filT = new FilT();
-            circuit2D[row][column] = filT;
+            connectables2D[row][column] = filT;
         } else if (id.equals("filCroix")) {
             FilCroix filCroix = new FilCroix();
-            circuit2D[row][column] = filCroix;
+            connectables2D[row][column] = filCroix;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }
     }
 
     private void printCircuitArray() {
-        for (ConnectableV[] tab : circuit2D) {
+        for (ConnectableV[] tab : connectables2D) {
             for (ConnectableV c : tab) {
                 System.out.print(String.format("%12s", c));
             }
@@ -511,7 +511,7 @@ public class FXMLDocumentController implements Initializable {
     }    
 
     public ConnectableV[][] getCircuit() {
-        return circuit2D;
+        return connectables2D;
     }        
     
 

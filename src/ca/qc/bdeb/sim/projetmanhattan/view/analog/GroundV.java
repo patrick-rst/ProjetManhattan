@@ -11,7 +11,6 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundAbstrait;
-import java.io.Serializable;
 
 /**
  *
