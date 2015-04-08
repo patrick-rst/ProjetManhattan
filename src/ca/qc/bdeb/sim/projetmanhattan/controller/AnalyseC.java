@@ -68,7 +68,7 @@ public class AnalyseC {
                     }
                 }
             }
-            creerLiens(circuit);
+            creerLiensAnalogues(circuit);
         } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
         }
@@ -93,7 +93,7 @@ public class AnalyseC {
             //creerLiens(circuit);
     }
 
-    public void creerLiens(CircuitAnalogueM circuit) {
+    public void creerLiensAnalogues(CircuitAnalogueM circuit) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof FilA && !connectablesPasses[i][j]) {
@@ -108,7 +108,7 @@ public class AnalyseC {
         }
     }
 
-    public void gererLienDetecte(int i, int j, Noeud noeud, int origine) {
+    public void gererLienDetecteAnalogue(int i, int j, Noeud noeud, int origine) {
         if (connectables[i][j] instanceof FilA) {
 
             connectablesPasses[i][j] = true;
@@ -134,17 +134,17 @@ public class AnalyseC {
     public void retournerEnfants(FilA fil, int i, int j, Noeud noeud) {
 
         if (fil.getCotesConnectes()[0] == 1 && i > 0 && connectables[i - 1][j] != null && connectables[i - 1][j].getCotesConnectes()[2] != 0 && !connectablesPasses[i - 1][j]) {
-            gererLienDetecte((i - 1), j, noeud, 2);
+            gererLienDetecteAnalogue((i - 1), j, noeud, 2);
 
         }
         if (fil.getCotesConnectes()[1] == 1 && j < connectables[i].length - 1 && connectables[i][j + 1] != null && connectables[i][j + 1].getCotesConnectes()[3] != 0 && !connectablesPasses[i][j + 1]) {
-            gererLienDetecte(i, (j + 1), noeud, 3);
+            gererLienDetecteAnalogue(i, (j + 1), noeud, 3);
         }
         if (fil.getCotesConnectes()[2] == 1 && i < connectables.length - 1 && connectables[i + 1][j] != null && connectables[i + 1][j].getCotesConnectes()[0] != 0 && !connectablesPasses[i + 1][j]) {
-            gererLienDetecte((i + 1), j, noeud, 0);
+            gererLienDetecteAnalogue((i + 1), j, noeud, 0);
         }
         if (fil.getCotesConnectes()[3] == 1 && j > 0 && connectables[i][j - 1] != null && connectables[i][j - 1].getCotesConnectes()[1] != 0 && !connectablesPasses[i][j - 1]) {
-            gererLienDetecte(i, (j - 1), noeud, 1);
+            gererLienDetecteAnalogue(i, (j - 1), noeud, 1);
         }
     }
 
