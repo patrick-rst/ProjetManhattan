@@ -63,6 +63,9 @@ public class FXMLDocumentController implements Initializable {
     
     
     
+    int mouseRow;
+    int mouseColumn;
+    
     
     ConnectableV[][] connectables2D = new ConnectableV[10][10];
 
@@ -160,7 +163,7 @@ public class FXMLDocumentController implements Initializable {
         } else if (event.getCode().equals(KeyCode.S)) {
             System.out.println("S pressed");
             
-            ImageView tmp = (ImageView) getNodeByRowColumnIndex(grid, row, column);
+            ImageView tmp = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
             Image img = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/digital/and2.png");
             tmp.setImage(img);            
         }    
@@ -249,18 +252,13 @@ public class FXMLDocumentController implements Initializable {
     }
         
     
-    
-    
-    int row;
-    int column;
-    
     @FXML
     private void mouseMoved(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
 
-        row = (int) y/50; 
-        column = (int) x/50;
+        mouseRow = (int) y/50; 
+        mouseColumn = (int) x/50;
     }
     
     
@@ -286,7 +284,9 @@ public class FXMLDocumentController implements Initializable {
         
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
-        MenuItem mnuItemRun = new MenuItem("Run");
+        MenuItem mnuItemRun = new MenuItem("Run",new ImageView(new Image("file:play.png")));
+        
+        
         
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
