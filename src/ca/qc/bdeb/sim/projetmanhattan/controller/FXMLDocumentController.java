@@ -220,14 +220,17 @@ public class FXMLDocumentController implements Initializable {
 
                     TypeComposant typeComposant  = circuit2D[row][column].getTypeComposant();
 
-                    if (typeComposant == TypeComposant.RESISTANCE) {
-                        ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                    } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
-                        ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
-                    } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
-                        ((SourceCourantGraphique) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                    try {
+                        if (typeComposant == TypeComposant.RESISTANCE) {
+                            ((ResistanceGraphique) circuit2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                        } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
+                            ((SourceFEMGraphique) circuit2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                        } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
+                            ((SourceCourantGraphique) circuit2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("INPUT ERROR: Pas un nombre");
                     }
-
                     composantEditor.hide();
 
                 }
