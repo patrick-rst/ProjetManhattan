@@ -374,7 +374,7 @@ public class FXMLDocumentController implements Initializable {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {                
                     ex.printStackTrace();
-        }                
+                }                
                 
                 circuit2D = save.getCircuit();
 
