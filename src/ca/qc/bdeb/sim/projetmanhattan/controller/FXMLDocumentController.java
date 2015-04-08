@@ -387,48 +387,64 @@ public class FXMLDocumentController implements Initializable {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathAnalog+"resistance.png"));
                             tmp.setId("resistance");
+                            initializeImageView(tmp);
                             grid.add(tmp, column, row);
                         }
                         else if (circuit2D[row][column] instanceof SourceFEMV) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathAnalog+"source_tension.png"));
                             tmp.setId("sourceTension");
-                            grid.add(tmp, column, row);
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
                         }
                         else if (circuit2D[row][column] instanceof SourceCourantV) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathAnalog+"source_courant.png"));
                             tmp.setId("sourceCourant");
-                            grid.add(tmp, column, row);
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
                         }      
                         else if (circuit2D[row][column] instanceof FilDroit) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_droit.png"));
                             tmp.setId("filDroit");
-                            grid.add(tmp, column, row);                       
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
                         } 
                         else if (circuit2D[row][column] instanceof FilCoin) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_coin.png"));
                             tmp.setId("filCoin");
-                            grid.add(tmp, column, row);
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
                         }
                         else if (circuit2D[row][column] instanceof FilT) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_t.png"));
                             tmp.setId("filT");
-                            grid.add(tmp, column, row);
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
                         }
                         else if (circuit2D[row][column] instanceof FilCroix) {
                             ImageView tmp = new ImageView();
                             tmp.setImage(new Image(pathMixte+"fil_croix.png"));
                             tmp.setId("filCroix");
-                            grid.add(tmp, column, row);
-                        }                         
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
+                        }                          
                     }
                 }
                
                 System.out.println("Done reading");        
+    }
+    
+    private void initializeImageView(ImageView imgv) {
+        imgv.setFitWidth(50);
+        imgv.setFitHeight(50);
+        imgv.setOnDragDetected(this::dragComposantFromGrid);
+        imgv.setOnDragDropped(this::dropComposant);
+        imgv.setOnDragOver(this::overComposant);
+        imgv.setOnMouseClicked(this::mouseClickCase);        
     }
     
 
