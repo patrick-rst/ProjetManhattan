@@ -21,7 +21,7 @@ public class CircuitAnalogueM implements Circuit {
     private ArrayList<Noeud> noeuds;
     private ArrayList<SourceFEMM> sourcesFEM;
     private ArrayList<SourceCourantM> sourcesCourant;
-    private Noeud noeudGround;
+    private ArrayList<Noeud> noeudsGround;
     private ArrayList<GroundM> grounds;
 
     private int nombreNoeuds;
@@ -43,6 +43,7 @@ public class CircuitAnalogueM implements Circuit {
         sourcesFEM = new ArrayList<>();
         sourcesCourant = new ArrayList<>();
         grounds = new ArrayList<>();
+        noeudsGround = new ArrayList<>();
 
     }
 
@@ -59,7 +60,8 @@ public class CircuitAnalogueM implements Circuit {
     }
 
     public void analyserCircuit() {
-        selectionnerNoeudGround();
+        boolean grounde = selectionnerNoeudGround();
+        if (grounde){
         nombreNoeuds = noeuds.size();
         nombreSourcesFEM = sourcesFEM.size();
         nombreSourcesCourant = sourcesCourant.size();
@@ -84,7 +86,9 @@ public class CircuitAnalogueM implements Circuit {
         } catch(Exception e){
             System.out.println("Erreur lors de l'analyse du circuit");
         }
-        
+        } else {
+            
+        }
     }
 
     public void distribuerInfos() {
@@ -212,20 +216,17 @@ public class CircuitAnalogueM implements Circuit {
         }
     }
 
-    public void selectionnerNoeudGround() {
+    public boolean selectionnerNoeudGround() {
         boolean enleve = false;
         for (int i = 0; i < noeuds.size(); ++i) {
             if (noeuds.get(i).getGround() != null) {
-                noeudGround = noeuds.get(i);
+                noeudsGround.add(noeuds.get(i));
                 noeuds.remove(i);
                 enleve = true;
                 break;
             }
         }
-        if (!enleve) {
-            noeudGround = noeuds.get(0);
-            noeuds.remove(0);
-        }
+        return enleve;
     }
 
     public void combinerMatriceA() {
