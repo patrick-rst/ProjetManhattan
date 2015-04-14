@@ -7,7 +7,7 @@ package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
-import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
+import ca.qc.bdeb.sim.projetmanhattan.model.analog.NoeudAnalogue;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
@@ -99,7 +99,7 @@ public class AnalyseC {
                 if (connectables[i][j] instanceof FilA && !connectablesPasses[i][j]) {
 
                     connectablesPasses[i][j] = true;
-                    Noeud noeud = new Noeud();
+                    NoeudAnalogue noeud = new NoeudAnalogue();
                     noeud.ajouterFil((FilA) connectables[i][j]);
                     retournerEnfants((FilA) connectables[i][j], i, j, noeud);
                     circuit.ajouterNoeud(noeud);
@@ -108,7 +108,7 @@ public class AnalyseC {
         }
     }
 
-    public void gererLienDetecteAnalogue(int i, int j, Noeud noeud, int origine) {
+    public void gererLienDetecteAnalogue(int i, int j, NoeudAnalogue noeud, int origine) {
         if (connectables[i][j] instanceof FilA) {
 
             connectablesPasses[i][j] = true;
@@ -131,7 +131,7 @@ public class AnalyseC {
 
     }
 
-    public void retournerEnfants(FilA fil, int i, int j, Noeud noeud) {
+    public void retournerEnfants(FilA fil, int i, int j, NoeudAnalogue noeud) {
 
         if (fil.getCotesConnectes()[0] == 1 && i > 0 && connectables[i - 1][j] != null && connectables[i - 1][j].getCotesConnectes()[2] != 0 && !connectablesPasses[i - 1][j]) {
             gererLienDetecteAnalogue((i - 1), j, noeud, 2);

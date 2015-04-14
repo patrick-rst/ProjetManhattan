@@ -6,21 +6,23 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
-import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import java.util.ArrayList;
 
 /**
  *
  * @author blood_000
  */
-public class CircuitDigitalM implements Circuit {
+public class CircuitDigitalM implements Circuit, Runnable {
 
-    private ArrayList<Noeud> noeuds;
+    private ArrayList<NoeudDigital> noeuds;
     private ArrayList<DiodeM> diodes;
     private ArrayList<SourceDigitaleM> sourcesDigitales;
     private ArrayList<ANDGateM> andGates;
     private ArrayList<ORGateM> orGates;
     private ArrayList<NOTGateM> notGates;
+    private boolean run;
+    private Thread thread;
+    private int delaiTic;
 
     public CircuitDigitalM() {
         noeuds = new ArrayList<>();
@@ -29,6 +31,19 @@ public class CircuitDigitalM implements Circuit {
         andGates = new ArrayList<>();
         orGates = new ArrayList<>();
         notGates = new ArrayList<>();
+        thread = new Thread();
+
+        delaiTic = 100;
+    }
+
+    public void analyserCircuit() {
+        run = true;
+
+        thread.start();
+    }
+
+    public void stopAnalyse() {
+        run = false;
     }
 
     public void ajouterORGate(ORGateM gate) {
@@ -51,8 +66,7 @@ public class CircuitDigitalM implements Circuit {
         diodes.add(diode);
     }
 
-    @Override
-    public void ajouterNoeud(Noeud noeud) {
+    public void ajouterNoeud(NoeudDigital noeud) {
         noeuds.add(noeud);
     }
 
@@ -64,6 +78,28 @@ public class CircuitDigitalM implements Circuit {
         andGates.clear();
         orGates.clear();
         notGates.clear();
+    }
+
+    @Override
+    public void run() {
+        boolean[] noeudsPasses = new boolean[noeuds.size()];
+        boolean allTrue = true;
+        long tempsDebut;
+        long tempsSleep;
+        while (run) {
+            for (boolean bool : noeudsPasses) {
+                bool = false;
+            }
+            while (!allTrue) {
+            ///bla bla bla
+                for (int i = 0; i < noeudsPasses.length && allTrue; ++i) {
+                    if (!noeudsPasses[i]) {
+                        allTrue = false;
+                    }
+                }
+            }
+
+        }
     }
 
 }

@@ -6,7 +6,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
-import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import java.util.ArrayList;
 import org.ejml.data.DenseMatrix64F;
 import org.ejml.ops.CommonOps;
@@ -18,10 +17,10 @@ import org.ejml.ops.CommonOps;
 public class CircuitAnalogueM implements Circuit {
 
     private ArrayList<ResistanceM> resistances;
-    private ArrayList<Noeud> noeuds;
+    private ArrayList<NoeudAnalogue> noeuds;
     private ArrayList<SourceFEMM> sourcesFEM;
     private ArrayList<SourceCourantM> sourcesCourant;
-    private ArrayList<Noeud> noeudsGround;
+    private ArrayList<NoeudAnalogue> noeudsGround;
     private ArrayList<GroundM> grounds;
 
     private int nombreNoeuds;
@@ -61,33 +60,33 @@ public class CircuitAnalogueM implements Circuit {
 
     public void analyserCircuit() {
         boolean grounde = selectionnerNoeudGround();
-        if (grounde){
-        nombreNoeuds = noeuds.size();
-        nombreSourcesFEM = sourcesFEM.size();
-        nombreSourcesCourant = sourcesCourant.size();
+        if (grounde) {
+            nombreNoeuds = noeuds.size();
+            nombreSourcesFEM = sourcesFEM.size();
+            nombreSourcesCourant = sourcesCourant.size();
 
-        matriceA = new double[nombreNoeuds + nombreSourcesFEM][nombreNoeuds + nombreSourcesFEM];
-        matriceG = new double[nombreNoeuds][nombreNoeuds];
-        matriceB = new double[nombreNoeuds][nombreSourcesFEM];
-        matriceC = new double[nombreSourcesFEM][nombreNoeuds];
-        matriceD = new double[nombreSourcesFEM][nombreSourcesFEM];
-        matriceZ = new double[nombreNoeuds + nombreSourcesFEM];
-        matriceX = new double[nombreNoeuds + nombreSourcesFEM];
+            matriceA = new double[nombreNoeuds + nombreSourcesFEM][nombreNoeuds + nombreSourcesFEM];
+            matriceG = new double[nombreNoeuds][nombreNoeuds];
+            matriceB = new double[nombreNoeuds][nombreSourcesFEM];
+            matriceC = new double[nombreSourcesFEM][nombreNoeuds];
+            matriceD = new double[nombreSourcesFEM][nombreSourcesFEM];
+            matriceZ = new double[nombreNoeuds + nombreSourcesFEM];
+            matriceX = new double[nombreNoeuds + nombreSourcesFEM];
 
-        try{
-        construireMatriceG();
-        construireMatriceBetC();
-        construireMatriceZ();
-        combinerMatriceA();
-        resoudreCircuitAnalogue();
+            try {
+                construireMatriceG();
+                construireMatriceBetC();
+                construireMatriceZ();
+                combinerMatriceA();
+                resoudreCircuitAnalogue();
 
-        distribuerInfos();
-        
-        } catch(Exception e){
-            System.out.println("Erreur lors de l'analyse du circuit");
-        }
+                distribuerInfos();
+
+            } catch (Exception e) {
+                System.out.println("Erreur lors de l'analyse du circuit");
+            }
         } else {
-            
+            System.out.println("Circuit non groundé!");
         }
     }
 
@@ -107,7 +106,7 @@ public class CircuitAnalogueM implements Circuit {
         double v2 = 0;
 
         for (ResistanceM resistance : resistances) {
-            for (Noeud noeud : noeuds) {
+            for (NoeudAnalogue noeud : noeuds) {
                 if (noeud.getResistances().contains(resistance)) {
                     if (v1 == 0) {
                         v1 = noeud.getTension();
@@ -268,7 +267,7 @@ public class CircuitAnalogueM implements Circuit {
         }
     }
 
-    public void ajouterNoeud(Noeud noeud) {
+    public void ajouterNoeud(NoeudAnalogue noeud) {
         noeuds.add(noeud);
     }
 

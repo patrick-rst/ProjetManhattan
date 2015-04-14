@@ -1,9 +1,5 @@
-package ca.qc.bdeb.sim.projetmanhattan.model.mixte;
+package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
@@ -15,10 +11,10 @@ import java.util.ArrayList;
  *
  * @author blood_000
  */
-public class Noeud {
+public class NoeudAnalogue {
 
     private double tension;
-    
+
     private ArrayList<FilA> fils;
     private ArrayList<Byte> connexions;
     private ArrayList<SourceFEMM> sourcesFEMNeg;
@@ -27,7 +23,7 @@ public class Noeud {
     private ArrayList<SourceCourantM> sourcesCourant;
     private GroundM ground;
 
-    public Noeud() {
+    public NoeudAnalogue() {
         fils = new ArrayList<>();
         connexions = new ArrayList<>();
         resistances = new ArrayList<>();
@@ -45,9 +41,8 @@ public class Noeud {
     }
 
     /*public ArrayList<FilAbstrait> getFils() {
-        return fils;
-    }*/
-
+     return fils;
+     }*/
     public ArrayList<SourceFEMM> getSourcesFEMNeg() {
         return sourcesFEMNeg;
     }
@@ -66,7 +61,7 @@ public class Noeud {
 
     public void setTension(double tension) {
         this.tension = tension;
-        for(FilA fil: fils){
+        for (FilA fil : fils) {
             fil.setTension(tension);
         }
     }
@@ -78,7 +73,5 @@ public class Noeud {
     public void setGround(GroundM ground) {
         this.ground = ground;
     }
-    
-    
 
 }

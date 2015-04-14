@@ -10,10 +10,7 @@ package ca.qc.bdeb.sim.projetmanhattan.model.mixte;
  * @author blood_000
  */
 public interface Circuit {
-    
-    public void ajouterNoeud(Noeud noeud);
-    
+
     public void wipe();
-    
-    
+
 }
