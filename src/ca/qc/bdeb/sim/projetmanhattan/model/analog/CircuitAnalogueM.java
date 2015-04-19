@@ -5,7 +5,12 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.GroundV;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.ResistanceV;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourantV;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEMV;
 import java.util.ArrayList;
 import org.ejml.data.DenseMatrix64F;
 import org.ejml.ops.CommonOps;
@@ -16,12 +21,12 @@ import org.ejml.ops.CommonOps;
  */
 public class CircuitAnalogueM implements Circuit {
 
-    private ArrayList<ResistanceM> resistances;
-    private ArrayList<NoeudAnalogue> noeuds;
-    private ArrayList<SourceFEMM> sourcesFEM;
-    private ArrayList<SourceCourantM> sourcesCourant;
-    private ArrayList<NoeudAnalogue> noeudsGround;
-    private ArrayList<GroundM> grounds;
+    private ArrayList<ResistanceV> resistances;
+    private ArrayList<Noeud> noeuds;
+    private ArrayList<SourceFEMV> sourcesFEM;
+    private ArrayList<SourceCourantV> sourcesCourant;
+    private ArrayList<Noeud> noeudsGround;
+    private ArrayList<GroundV> grounds;
 
     private int nombreNoeuds;
     private int nombreSourcesFEM;
@@ -54,7 +59,7 @@ public class CircuitAnalogueM implements Circuit {
         grounds.clear();
     }
 
-    public void ajouterGround(GroundM g) {
+    public void ajouterGround(GroundV g) {
         grounds.add(g);
     }
 
@@ -105,8 +110,8 @@ public class CircuitAnalogueM implements Circuit {
         double v1 = 0;
         double v2 = 0;
 
-        for (ResistanceM resistance : resistances) {
-            for (NoeudAnalogue noeud : noeuds) {
+        for (ResistanceV resistance : resistances) {
+            for (Noeud noeud : noeuds) {
                 if (noeud.getResistances().contains(resistance)) {
                     if (v1 == 0) {
                         v1 = noeud.getTension();
@@ -164,7 +169,7 @@ public class CircuitAnalogueM implements Circuit {
 
     public void construireMatriceZ() {
         for (int i = 0; i < nombreNoeuds; ++i) {
-            for (SourceCourantM sourceCourant : noeuds.get(i).getSourcesCourant()) {
+            for (SourceCourantV sourceCourant : noeuds.get(i).getSourcesCourant()) {
                 matriceZ[i] += sourceCourant.getCourant();
             }
         }
@@ -267,19 +272,19 @@ public class CircuitAnalogueM implements Circuit {
         }
     }
 
-    public void ajouterNoeud(NoeudAnalogue noeud) {
+    public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 
-    public void ajouterResistance(ResistanceM resistance) {
+    public void ajouterResistance(ResistanceV resistance) {
         resistances.add(resistance);
     }
 
-    public void ajouterSourceFEM(SourceFEMM sourceFEM) {
+    public void ajouterSourceFEM(SourceFEMV sourceFEM) {
         sourcesFEM.add(sourceFEM);
     }
 
-    public void ajouterSourceCourant(SourceCourantM sourceCourant) {
+    public void ajouterSourceCourant(SourceCourantV sourceCourant) {
         sourcesCourant.add(sourceCourant);
     }
 

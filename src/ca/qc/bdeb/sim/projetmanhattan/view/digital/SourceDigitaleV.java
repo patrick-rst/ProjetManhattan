@@ -5,9 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.SourceDigitaleI;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.SourceDigitaleM;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
@@ -17,33 +14,54 @@ import java.util.ArrayList;
  *
  * @author blood_000
  */
-public class SourceDigitaleV extends ConnectableV implements SourceDigitaleI, ComposantVI {
+public class SourceDigitaleV extends ConnectableV implements ComposantVI {
 
-    private SourceDigitaleI sourceDigitale;
+    private ArrayList<Boolean> listeOutput;
+    private int indexOutput;
+    private boolean repeter;
 
     public SourceDigitaleV() {
         super(TypeComposantE.SOURCE_DIGITALE);
+        listeOutput = new ArrayList<>();
         cotesConnectes[0] = 1;
-        sourceDigitale = new SourceDigitaleM();
-    }
-    
-    public ComposantI getEnfant(){
-        return (ComposantI)sourceDigitale;
     }
 
-    @Override
+    public void flipRepeter() {
+        repeter = !repeter;
+    }
+
+    public boolean isRepeter() {
+        return repeter;
+    }
+
     public boolean lireOutput() {
-        return sourceDigitale.lireOutput();
+        ++indexOutput;
+        if (repeter || indexOutput < listeOutput.size()) {
+            indexOutput = indexOutput % listeOutput.size();
+            return listeOutput.get(indexOutput);
+        } else {
+            return false;
+        }
     }
 
-    @Override
     public void setListeOutput(ArrayList<Boolean> list) {
-        sourceDigitale.setListeOutput(list);
+        this.listeOutput = list;
     }
 
-    @Override
     public void setOutput(String string) {
-        sourceDigitale.setOutput(string);
+        for (int i = 0; i < string.length(); ++i) {
+            if (string.charAt(i) != '1' && string.charAt(i) != '0') {
+                string = string.substring(0, i) + string.substring(i + 1);
+                --i;
+            }
+        }
+        listeOutput.clear();
+        for (int i = 0; i < string.length(); ++i) {
+            if (string.charAt(i) == '1') {
+                listeOutput.add(Boolean.TRUE);
+            } else {
+                listeOutput.add(Boolean.FALSE);
+            }
+        }
     }
-
 }

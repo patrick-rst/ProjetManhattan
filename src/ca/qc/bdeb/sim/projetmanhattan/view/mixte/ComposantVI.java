@@ -13,5 +13,4 @@ import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
  */
 public interface ComposantVI {
 
-    public ComposantI getEnfant();
 }

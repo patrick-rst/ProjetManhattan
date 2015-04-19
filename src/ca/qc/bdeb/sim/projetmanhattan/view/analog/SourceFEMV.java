@@ -7,54 +7,44 @@ package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMI;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 
 /**
  *
  * @author blood_000
  */
-public class SourceFEMV extends ConnectableV implements SourceFEMI, ComposantVI {
+public class SourceFEMV extends ConnectableV implements ComposantVI {
 
-    private SourceFEMI sourceFEM;
+    private double forceElectroMotrice;
+    private double courant;
 
     public SourceFEMV() {
         super(TypeComposantE.SOURCE_TENSION);
-        this.sourceFEM = new SourceFEMM();
+
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;
     }
 
-    @Override
     public double getForceElectroMotrice() {
-        return sourceFEM.getForceElectroMotrice();
+        return forceElectroMotrice;
     }
 
-    @Override
     public void setForceElectroMotrice(double forceElectroMotrice) {
-        this.sourceFEM.setForceElectroMotrice(forceElectroMotrice);
+        this.forceElectroMotrice = forceElectroMotrice;
     }
 
-    @Override
     public double getCourant() {
-        return sourceFEM.getCourant();
+        return courant;
     }
 
-    @Override
     public void setCourant(double courant) {
-        this.sourceFEM.setCourant(courant);
+        this.courant = courant;
     }
 
     @Override
     public String toString() {
         return "sourceTension";
-    }
-
-    public ComposantI getEnfant() {
-        return (ComposantI) this.sourceFEM;
     }
 
 }

@@ -6,6 +6,12 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGateV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.DiodeV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGateV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGateV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitaleV;
 import java.util.ArrayList;
 
 /**
@@ -14,12 +20,12 @@ import java.util.ArrayList;
  */
 public class CircuitDigitalM implements Circuit, Runnable {
 
-    private ArrayList<NoeudDigital> noeuds;
-    private ArrayList<DiodeM> diodes;
-    private ArrayList<SourceDigitaleM> sourcesDigitales;
-    private ArrayList<ANDGateM> andGates;
-    private ArrayList<ORGateM> orGates;
-    private ArrayList<NOTGateM> notGates;
+    private ArrayList<Noeud> noeuds;
+    private ArrayList<DiodeV> diodes;
+    private ArrayList<SourceDigitaleV> sourcesDigitales;
+    private ArrayList<ANDGateV> andGates;
+    private ArrayList<ORGateV> orGates;
+    private ArrayList<NOTGateV> notGates;
     private boolean run;
     private Thread thread;
     private int delaiTic;
@@ -46,27 +52,27 @@ public class CircuitDigitalM implements Circuit, Runnable {
         run = false;
     }
 
-    public void ajouterORGate(ORGateM gate) {
+    public void ajouterORGate(ORGateV gate) {
         orGates.add(gate);
     }
 
-    public void ajouterNOTGate(NOTGateM gate) {
+    public void ajouterNOTGate(NOTGateV gate) {
         notGates.add(gate);
     }
 
-    public void ajouterSourceDigitale(SourceDigitaleM sourceDigitale) {
+    public void ajouterSourceDigitale(SourceDigitaleV sourceDigitale) {
         sourcesDigitales.add(sourceDigitale);
     }
 
-    public void ajouterANDGate(ANDGateM gate) {
+    public void ajouterANDGate(ANDGateV gate) {
         andGates.add(gate);
     }
 
-    public void ajouterDiode(DiodeM diode) {
+    public void ajouterDiode(DiodeV diode) {
         diodes.add(diode);
     }
 
-    public void ajouterNoeud(NoeudDigital noeud) {
+    public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 
@@ -91,7 +97,7 @@ public class CircuitDigitalM implements Circuit, Runnable {
                 bool = false;
             }
             while (!allTrue) {
-            ///bla bla bla
+                ///bla bla bla
                 for (int i = 0; i < noeudsPasses.length && allTrue; ++i) {
                     if (!noeudsPasses[i]) {
                         allTrue = false;

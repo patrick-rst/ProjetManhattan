@@ -5,9 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.ORGateI;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.ORGateM;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
@@ -16,15 +13,10 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
  *
  * @author blood_000
  */
-public class ORGateV extends ConnectableV implements ComposantVI, ORGateI {
-
-    private ORGateM orGate;
+public class ORGateV extends ConnectableV implements ComposantVI {
 
     public ORGateV() {
         super(TypeComposantE.ORGATE);
     }
 
-    public ComposantI getEnfant() {
-        return (ComposantI) orGate;
-    }
 }

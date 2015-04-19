@@ -6,17 +6,8 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogueM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.GroundM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.NoeudAnalogue;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceCourantM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.SourceFEMM;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.ANDGateM;
+import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigitalM;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.DiodeM;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.NOTGateM;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.ORGateM;
-import ca.qc.bdeb.sim.projetmanhattan.model.digital.SourceDigitaleM;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.GroundV;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.ResistanceV;
@@ -27,6 +18,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.DiodeV;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGateV;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGateV;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitaleV;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilA;
 
@@ -58,17 +50,17 @@ public class AnalyseC {
             for (int i = 0; i < connectables.length; ++i) {
                 for (int j = 0; j < connectables[i].length; ++j) {
                     if (connectables[i][j] instanceof ResistanceV) {
-                        circuit.ajouterResistance((ResistanceM) ((ResistanceV) connectables[i][j]).getEnfant());
+                        circuit.ajouterResistance((ResistanceV) connectables[i][j]);
                     } else if (connectables[i][j] instanceof SourceCourantV) {
-                        circuit.ajouterSourceCourant((SourceCourantM) ((SourceCourantV) connectables[i][j]).getEnfant());
+                        circuit.ajouterSourceCourant((SourceCourantV) connectables[i][j]);
                     } else if (connectables[i][j] instanceof SourceFEMV) {
-                        circuit.ajouterSourceFEM((SourceFEMM) ((SourceFEMV) connectables[i][j]).getEnfant());
+                        circuit.ajouterSourceFEM((SourceFEMV) connectables[i][j]);
                     } else if (connectables[i][j] instanceof GroundV) {
-                        circuit.ajouterGround((GroundM) ((GroundV) connectables[i][j]).getEnfant());
+                        circuit.ajouterGround((GroundV) connectables[i][j]);
                     }
                 }
             }
-            creerLiensAnalogues(circuit);
+            creerLiens(circuit);
         } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
         }
@@ -76,30 +68,30 @@ public class AnalyseC {
 
     public void preparerAnalyseDigitale(CircuitDigitalM circuit, ConnectableV[][] connectables) {
         for (int i = 0; i < connectables.length; ++i) {
-                for (int j = 0; j < connectables[i].length; ++j) {
-                    if (connectables[i][j] instanceof DiodeV) {
-                        circuit.ajouterDiode((DiodeM) ((DiodeV) connectables[i][j]).getEnfant());
-                    } else if (connectables[i][j] instanceof SourceDigitaleV) {
-                        circuit.ajouterSourceDigitale((SourceDigitaleM) ((SourceDigitaleV) connectables[i][j]).getEnfant());
-                    } else if (connectables[i][j] instanceof ANDGateV) {
-                        circuit.ajouterANDGate((ANDGateM) ((ANDGateV) connectables[i][j]).getEnfant());
-                    } else if (connectables[i][j] instanceof ORGateV) {
-                        circuit.ajouterORGate((ORGateM) ((ORGateV) connectables[i][j]).getEnfant());
-                    }else if (connectables[i][j] instanceof NOTGateV) {
-                        circuit.ajouterNOTGate((NOTGateM) ((NOTGateV) connectables[i][j]).getEnfant());
-                    }
+            for (int j = 0; j < connectables[i].length; ++j) {
+                if (connectables[i][j] instanceof DiodeV) {
+                    circuit.ajouterDiode((DiodeV) connectables[i][j]);
+                } else if (connectables[i][j] instanceof SourceDigitaleV) {
+                    circuit.ajouterSourceDigitale((SourceDigitaleV) connectables[i][j]);
+                } else if (connectables[i][j] instanceof ANDGateV) {
+                    circuit.ajouterANDGate((ANDGateV) connectables[i][j]);
+                } else if (connectables[i][j] instanceof ORGateV) {
+                    circuit.ajouterORGate((ORGateV) connectables[i][j]);
+                } else if (connectables[i][j] instanceof NOTGateV) {
+                    circuit.ajouterNOTGate((NOTGateV) connectables[i][j]);
                 }
             }
-            //creerLiens(circuit);
+        }
+        //creerLiens(circuit);
     }
 
-    public void creerLiensAnalogues(CircuitAnalogueM circuit) {
+    public void creerLiens(CircuitAnalogueM circuit) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof FilA && !connectablesPasses[i][j]) {
 
                     connectablesPasses[i][j] = true;
-                    NoeudAnalogue noeud = new NoeudAnalogue();
+                    Noeud noeud = new Noeud();
                     noeud.ajouterFil((FilA) connectables[i][j]);
                     retournerEnfants((FilA) connectables[i][j], i, j, noeud);
                     circuit.ajouterNoeud(noeud);
@@ -108,7 +100,7 @@ public class AnalyseC {
         }
     }
 
-    public void gererLienDetecteAnalogue(int i, int j, NoeudAnalogue noeud, int origine) {
+    public void gererLienDetecte(int i, int j, Noeud noeud, int origine) {
         if (connectables[i][j] instanceof FilA) {
 
             connectablesPasses[i][j] = true;
@@ -116,35 +108,53 @@ public class AnalyseC {
             retournerEnfants(((FilA) connectables[i][j]), i, j, noeud);
 
         } else if (connectables[i][j] instanceof ResistanceV) {
-            noeud.getResistances().add((ResistanceM) ((ResistanceV) connectables[i][j]).getEnfant());
+            noeud.getResistances().add((ResistanceV) connectables[i][j]);
         } else if (connectables[i][j] instanceof SourceCourantV) {
-            noeud.getSourcesCourant().add((SourceCourantM) ((SourceCourantV) connectables[i][j]).getEnfant());
+            noeud.getSourcesCourant().add((SourceCourantV) connectables[i][j]);
         } else if (connectables[i][j] instanceof SourceFEMV) {
-            if (connectables[i][j].getCotesConnectes()[origine] == -1) { // PROBLEME TROUVE??
-                noeud.getSourcesFEMNeg().add((SourceFEMM) ((SourceFEMV) connectables[i][j]).getEnfant());
+            if (connectables[i][j].getCotesConnectes()[origine] == -1) {
+                noeud.getSourcesFEMNeg().add((SourceFEMV) connectables[i][j]);
             } else {
-                noeud.getSourcesFEMPos().add((SourceFEMM) ((SourceFEMV) connectables[i][j]).getEnfant());
+                noeud.getSourcesFEMPos().add((SourceFEMV) connectables[i][j]);
             }
         } else if (connectables[i][j] instanceof GroundV) {
-            noeud.setGround((GroundM) ((GroundV) connectables[i][j]).getEnfant());
-        }
+            noeud.setGround((GroundV) connectables[i][j]);
+        } else if (connectables[i][j] instanceof DiodeV) {
+            if (connectables[i][j].getCotesConnectes()[origine] == -1) {
+                noeud.ajouterSortie((ComposantVI) connectables[i][j]);
+            } else {
+                noeud.ajouterEntree((ComposantVI) connectables[i][j]);
+            }
+        } else if (connectables[i][j] instanceof NOTGateV) {
+            if (connectables[i][j].getCotesConnectes()[origine] == -1) {
+
+            } else {
+
+            }
+        }/*else if (connectables[i][j] instanceof ){
+         if (connectables[i][j].getCotesConnectes()[origine] == -1) {
+                
+         } else {
+                
+         }
+         }*/
+
 
     }
 
-    public void retournerEnfants(FilA fil, int i, int j, NoeudAnalogue noeud) {
+    public void retournerEnfants(FilA fil, int i, int j, Noeud noeud) {
 
         if (fil.getCotesConnectes()[0] == 1 && i > 0 && connectables[i - 1][j] != null && connectables[i - 1][j].getCotesConnectes()[2] != 0 && !connectablesPasses[i - 1][j]) {
-            gererLienDetecteAnalogue((i - 1), j, noeud, 2);
-
+            gererLienDetecte((i - 1), j, noeud, 2);
         }
         if (fil.getCotesConnectes()[1] == 1 && j < connectables[i].length - 1 && connectables[i][j + 1] != null && connectables[i][j + 1].getCotesConnectes()[3] != 0 && !connectablesPasses[i][j + 1]) {
-            gererLienDetecteAnalogue(i, (j + 1), noeud, 3);
+            gererLienDetecte(i, (j + 1), noeud, 3);
         }
         if (fil.getCotesConnectes()[2] == 1 && i < connectables.length - 1 && connectables[i + 1][j] != null && connectables[i + 1][j].getCotesConnectes()[0] != 0 && !connectablesPasses[i + 1][j]) {
-            gererLienDetecteAnalogue((i + 1), j, noeud, 0);
+            gererLienDetecte((i + 1), j, noeud, 0);
         }
         if (fil.getCotesConnectes()[3] == 1 && j > 0 && connectables[i][j - 1] != null && connectables[i][j - 1].getCotesConnectes()[1] != 0 && !connectablesPasses[i][j - 1]) {
-            gererLienDetecteAnalogue(i, (j - 1), noeud, 1);
+            gererLienDetecte(i, (j - 1), noeud, 1);
         }
     }
 

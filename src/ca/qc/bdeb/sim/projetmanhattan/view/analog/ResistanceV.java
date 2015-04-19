@@ -7,54 +7,44 @@ package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceM;
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ResistanceI;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
 
 /**
  *
  * @author blood_000
  */
-public class ResistanceV extends ConnectableV implements ResistanceI, ComposantVI {
+public class ResistanceV extends ConnectableV implements ComposantVI {
 
-    private ResistanceI resistance;
+    private double resistance;
+    private double courant;
 
     public ResistanceV() {
         super(TypeComposantE.RESISTANCE);
-        this.resistance = new ResistanceM();
+
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
     }
 
-    @Override
     public double getResistance() {
-        return resistance.getResistance();
+        return resistance;
     }
 
-    @Override
     public void setResistance(double resistance) {
-        this.resistance.setResistance(resistance);
+        this.resistance = resistance;
     }
 
-    @Override
     public double getCourant() {
-        return resistance.getCourant();
+        return courant;
     }
 
-    @Override
     public void setCourant(double courant) {
-        this.resistance.setCourant(courant);
+        this.courant = courant;
     }
 
     @Override
     public String toString() {
         return "resistance";
-    }
-
-    public ComposantI getEnfant() {
-        return (ComposantI) this.resistance;
     }
 
 }
