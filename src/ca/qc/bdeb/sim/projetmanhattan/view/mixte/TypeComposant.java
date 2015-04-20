@@ -10,7 +10,7 @@ package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
  *
  * @author 1351077
  */
-public enum TypeComposantE {
+public enum TypeComposant {
     FIL,
     GROUND,
     RESISTANCE,

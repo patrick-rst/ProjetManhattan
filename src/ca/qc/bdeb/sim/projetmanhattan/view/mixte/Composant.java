@@ -5,12 +5,10 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.model.analog.ComposantI;
-
 /**
  *
  * @author blood_000
  */
-public interface ComposantVI {
+public interface Composant {
 
 }

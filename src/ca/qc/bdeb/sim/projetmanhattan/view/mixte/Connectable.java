@@ -5,19 +5,19 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class ConnectableV implements Serializable {
+public class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
-    private TypeComposantE typeComposant;
+    private TypeComposant typeComposant;
 
-    public ConnectableV(TypeComposantE typeComposant) {
+    public Connectable(TypeComposant typeComposant) {
         cotesConnectes = new byte[4];
         this.typeComposant = typeComposant;
     }
@@ -40,7 +40,7 @@ public class ConnectableV implements Serializable {
         cotesConnectes[0] = temp;
     }
 
-    public TypeComposantE getTypeComposant() {
+    public TypeComposant getTypeComposant() {
         return typeComposant;
     }
     

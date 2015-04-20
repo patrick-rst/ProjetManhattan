@@ -10,12 +10,12 @@ package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
  *
  * @author blood_000
  */
-public abstract class FilA extends ConnectableV {
+public abstract class FilAbstrait extends Connectable {
 
     protected double tension;
     
-    public FilA() {
-        super(TypeComposantE.FIL);
+    public FilAbstrait() {
+        super(TypeComposant.FIL);
         this.cotesConnectes = new byte[4];
     }
 

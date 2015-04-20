@@ -7,30 +7,32 @@ package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGateV;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.DiodeV;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGateV;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGateV;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitaleV;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.Diode;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author blood_000
  */
-public class CircuitDigitalM implements Circuit, Runnable {
+public class CircuitDigital implements Circuit, Runnable {
 
     private ArrayList<Noeud> noeuds;
-    private ArrayList<DiodeV> diodes;
-    private ArrayList<SourceDigitaleV> sourcesDigitales;
-    private ArrayList<ANDGateV> andGates;
-    private ArrayList<ORGateV> orGates;
-    private ArrayList<NOTGateV> notGates;
+    private ArrayList<Diode> diodes;
+    private ArrayList<SourceDigitale> sourcesDigitales;
+    private ArrayList<ANDGate> andGates;
+    private ArrayList<ORGate> orGates;
+    private ArrayList<NOTGate> notGates;
     private boolean run;
     private Thread thread;
     private int delaiTic;
 
-    public CircuitDigitalM() {
+    public CircuitDigital() {
         noeuds = new ArrayList<>();
         diodes = new ArrayList<>();
         sourcesDigitales = new ArrayList<>();
@@ -39,7 +41,7 @@ public class CircuitDigitalM implements Circuit, Runnable {
         notGates = new ArrayList<>();
         thread = new Thread();
 
-        delaiTic = 100;
+        delaiTic = 250;
     }
 
     public void analyserCircuit() {
@@ -52,23 +54,23 @@ public class CircuitDigitalM implements Circuit, Runnable {
         run = false;
     }
 
-    public void ajouterORGate(ORGateV gate) {
+    public void ajouterORGate(ORGate gate) {
         orGates.add(gate);
     }
 
-    public void ajouterNOTGate(NOTGateV gate) {
+    public void ajouterNOTGate(NOTGate gate) {
         notGates.add(gate);
     }
 
-    public void ajouterSourceDigitale(SourceDigitaleV sourceDigitale) {
+    public void ajouterSourceDigitale(SourceDigitale sourceDigitale) {
         sourcesDigitales.add(sourceDigitale);
     }
 
-    public void ajouterANDGate(ANDGateV gate) {
+    public void ajouterANDGate(ANDGate gate) {
         andGates.add(gate);
     }
 
-    public void ajouterDiode(DiodeV diode) {
+    public void ajouterDiode(Diode diode) {
         diodes.add(diode);
     }
 
@@ -91,8 +93,10 @@ public class CircuitDigitalM implements Circuit, Runnable {
         boolean[] noeudsPasses = new boolean[noeuds.size()];
         boolean allTrue = true;
         long tempsDebut;
-        long tempsSleep;
+        long delaiSleep;
         while (run) {
+            tempsDebut = System.currentTimeMillis();
+            ////////////////////////////////////////////////////////////////////
             for (boolean bool : noeudsPasses) {
                 bool = false;
             }
@@ -105,6 +109,15 @@ public class CircuitDigitalM implements Circuit, Runnable {
                 }
             }
 
+            ////////////////////////////////////////////////////////////////////
+            delaiSleep = delaiTic - System.currentTimeMillis() + tempsDebut;
+            try {
+                Thread.sleep(delaiSleep);
+            } catch (InterruptedException ex) {
+                System.out.println("InterruptedException");
+                Logger.getLogger(CircuitDigital.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
 

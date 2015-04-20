@@ -5,21 +5,21 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
 
 /**
  *
  * @author blood_000
  */
-public class SourceFEMV extends ConnectableV implements ComposantVI {
+public class SourceFEM extends Connectable implements Composant {
 
     private double forceElectroMotrice;
     private double courant;
 
-    public SourceFEMV() {
-        super(TypeComposantE.SOURCE_TENSION);
+    public SourceFEM() {
+        super(TypeComposant.SOURCE_TENSION);
 
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;

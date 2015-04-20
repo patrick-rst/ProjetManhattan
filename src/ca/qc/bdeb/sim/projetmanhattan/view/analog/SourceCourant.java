@@ -5,33 +5,33 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
 
 /**
  *
  * @author blood_000
  */
-public class ResistanceV extends ConnectableV implements ComposantVI {
+public class SourceCourant extends Connectable implements Composant {
 
-    private double resistance;
+    private double forceElectroMotrice;
     private double courant;
 
-    public ResistanceV() {
-        super(TypeComposantE.RESISTANCE);
+    public SourceCourant() {
+        super(TypeComposant.SOURCE_COURANT);
 
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
     }
 
-    public double getResistance() {
-        return resistance;
+    public double getForceElectroMotrice() {
+        return forceElectroMotrice;
     }
 
-    public void setResistance(double resistance) {
-        this.resistance = resistance;
+    public void setForceElectroMotrice(double forceElectroMotrice) {
+        this.forceElectroMotrice = forceElectroMotrice;
     }
 
     public double getCourant() {
@@ -44,7 +44,7 @@ public class ResistanceV extends ConnectableV implements ComposantVI {
 
     @Override
     public String toString() {
-        return "resistance";
+        return "sourceCourant";
     }
 
 }

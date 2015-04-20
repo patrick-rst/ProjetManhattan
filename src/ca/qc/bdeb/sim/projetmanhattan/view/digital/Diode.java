@@ -5,18 +5,18 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 
 /**
  *
  * @author blood_000
  */
-public class DiodeV extends ConnectableV implements ComposantVI {
+public class Diode extends Connectable implements Composant {
 
-    public DiodeV() {
-        super(TypeComposantE.DIODE);
+    public Diode() {
+        super(TypeComposant.DIODE);
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;
     }

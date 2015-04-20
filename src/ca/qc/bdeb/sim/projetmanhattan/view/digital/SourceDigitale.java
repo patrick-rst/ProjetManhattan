@@ -5,23 +5,23 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ComposantVI;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ConnectableV;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposantE;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.util.ArrayList;
 
 /**
  *
  * @author blood_000
  */
-public class SourceDigitaleV extends ConnectableV implements ComposantVI {
+public class SourceDigitale extends Connectable implements Composant {
 
     private ArrayList<Boolean> listeOutput;
     private int indexOutput;
     private boolean repeter;
 
-    public SourceDigitaleV() {
-        super(TypeComposantE.SOURCE_DIGITALE);
+    public SourceDigitale() {
+        super(TypeComposant.SOURCE_DIGITALE);
         listeOutput = new ArrayList<>();
         cotesConnectes[0] = 1;
     }
