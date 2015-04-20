@@ -22,6 +22,7 @@ public class Noeud {
     private ArrayList<Resistance> resistances;
     private ArrayList<SourceCourant> sourcesCourant;
     private Ground ground;
+    
     private ArrayList<Composant> entrees;
     private ArrayList<Composant> sorties;
 

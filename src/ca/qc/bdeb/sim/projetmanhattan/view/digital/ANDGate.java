@@ -6,17 +6,15 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 
 /**
  *
  * @author blood_000
  */
-public class ANDGate extends Connectable implements Composant {
-
+public class ANDGate extends LogicGateAbstraite implements Composant {
+    
     public ANDGate() {
         super(TypeComposant.ANDGATE);
     }
-
 }

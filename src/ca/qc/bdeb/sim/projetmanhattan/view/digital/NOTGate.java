@@ -6,14 +6,13 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 
 /**
  *
  * @author blood_000
  */
-public class NOTGate extends Connectable implements Composant {
+public class NOTGate extends LogicGateAbstraite implements Composant {
 
     public NOTGate() {
         super(TypeComposant.NOTGATE);

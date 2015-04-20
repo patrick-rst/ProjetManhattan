@@ -5,14 +5,13 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.Serializable;
 
 /**
  *
  * @author blood_000
  */
-public class Connectable implements Serializable {
+public abstract class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
     private TypeComposant typeComposant;
