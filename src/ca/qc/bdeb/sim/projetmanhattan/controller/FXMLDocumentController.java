@@ -47,6 +47,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+
 import org.controlsfx.control.PopOver;
 
 /**
@@ -266,6 +267,10 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
+        
+
+        
+        
     }
     
     public void setCircuit(CircuitAnalogue c) {
