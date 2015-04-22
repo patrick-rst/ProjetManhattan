@@ -484,10 +484,11 @@ public class FXMLDocumentController implements Initializable {
                             grid.add(tmp, column, row);                            
                         }   
                         else if (connectables2D[row][column] instanceof ANDGate) {
-                            ANDGate testGate = new ANDGate();
+                            
                             ANDGate gate = (ANDGate) connectables2D[row][column]; 
                             ImageView tmp = new ImageView();
-                            gate.resetImageIndex();
+                            gate.reset();
+                            ANDGate testGate = new ANDGate();
                             tmp.setImage(gate.getImage());
                             tmp.setId("andGate");
                             initializeImageView(tmp);
@@ -497,7 +498,7 @@ public class FXMLDocumentController implements Initializable {
                             ORGate testGate = new ORGate();
                             ORGate gate = (ORGate) connectables2D[row][column]; 
                             ImageView tmp = new ImageView();
-                            gate.resetImageIndex();
+                            gate.reset();
                             tmp.setImage(gate.getImage());
                             tmp.setId("orGate");
                             initializeImageView(tmp);
@@ -507,7 +508,7 @@ public class FXMLDocumentController implements Initializable {
                             NOTGate testGate = new NOTGate();
                             NOTGate gate = (NOTGate) connectables2D[row][column]; 
                             ImageView tmp = new ImageView();
-                            gate.resetImageIndex();
+                            gate.reset();
                             tmp.setImage(gate.getImage());
                             tmp.setId("notGate");
                             initializeImageView(tmp);

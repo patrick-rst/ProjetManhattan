@@ -7,7 +7,6 @@ package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
-import java.util.ArrayList;
 
 /**
  *
@@ -17,11 +16,6 @@ public class NOTGate extends LogicGateAbstraite implements ComposantDigital {
 
     public NOTGate() {
         super(TypeComposant.NOTGATE);
-        listeImages = new ArrayList();
-        addImage("not1.png");
-    }
-    
-    public void initializeImages() {
         addImage("not1.png");
     }
 

@@ -87,8 +87,9 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         this.noeudSortie = noeud;
     }
 
-    public void resetImageIndex() {
+    public void reset() {
         this.imageIndex = 0;
+        this.listeImages = new ArrayList();
     }
     
     public void nextImage() {
@@ -98,6 +99,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     
     public Image getImage() {
         System.out.println("imageIndex:"+imageIndex);
+        System.out.println("size:"+listeImages.size());
         return listeImages.get(imageIndex);
     }
     

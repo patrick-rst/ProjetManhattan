@@ -6,7 +6,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
-import java.util.ArrayList;
 
 /**
  *
@@ -16,17 +15,11 @@ public class ORGate extends LogicGateAbstraite implements ComposantDigital {
 
     public ORGate() {
         super(TypeComposant.ORGATE);
-        listeImages = new ArrayList();
         addImage("or1.png");
         addImage("or2.png");
         addImage("or3.png");
     }
-    
-    public void initializeImages() {
-        addImage("or1.png");
-        addImage("or2.png");
-        addImage("or3.png");
-    }    
+        
 
     @Override
     public void calculerCourant() {

@@ -7,7 +7,6 @@ package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
-import java.util.ArrayList;
 
 
 /**
@@ -20,17 +19,11 @@ public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
 
     public ANDGate() {
         super(TypeComposant.ANDGATE);
-        listeImages = new ArrayList();
         addImage("and1.png");
         addImage("and2.png");
         addImage("and3.png");
     }
     
-    public void initializeImages() {
-        addImage("and1.png");
-        addImage("and2.png");
-        addImage("and3.png");
-    }
     
     
 
