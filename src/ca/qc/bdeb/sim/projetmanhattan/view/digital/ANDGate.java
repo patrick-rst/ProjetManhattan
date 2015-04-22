@@ -23,14 +23,8 @@ public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
         addImage("and2.png");
         addImage("and3.png");
     }
-
-    
-  
-
-
     
     
-
 
     @Override
     public void calculerCourant() {
