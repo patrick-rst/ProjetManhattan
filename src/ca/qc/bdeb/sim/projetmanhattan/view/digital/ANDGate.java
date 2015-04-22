@@ -6,10 +6,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;;
-
-import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 
 
@@ -17,11 +13,6 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  *
  * @author blood_000
  */
-
-public class ANDGate extends LogicGateAbstraite implements Composant {
-    
-    
-    
 
 public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
 
