@@ -9,6 +9,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.Diode;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
@@ -30,6 +31,9 @@ public class CircuitDigital implements Circuit, Runnable {
     private ArrayList<ORGate> orGates;
     private ArrayList<NOTGate> notGates;
     private ArrayList<LumiereOutput> lumieres;
+    private ArrayList<LogicGateAbstraite> gates;
+    private ArrayList<LogicGateAbstraite> gatesABoucler;
+
     private boolean run;
     private Thread thread;
     private int delaiTic;
@@ -42,10 +46,12 @@ public class CircuitDigital implements Circuit, Runnable {
         orGates = new ArrayList<>();
         notGates = new ArrayList<>();
         lumieres = new ArrayList<>();
+        gates = new ArrayList<>();
+        gatesABoucler = new ArrayList<>();
 
         thread = new Thread();
 
-        delaiTic = 250;
+        delaiTic = 25;
     }
 
     public void analyserCircuit() {
@@ -82,8 +88,8 @@ public class CircuitDigital implements Circuit, Runnable {
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
-    
-    public void ajouterLumiere(LumiereOutput lumiere){
+
+    public void ajouterLumiere(LumiereOutput lumiere) {
         lumieres.add(lumiere);
     }
 
@@ -99,25 +105,30 @@ public class CircuitDigital implements Circuit, Runnable {
 
     @Override
     public void run() {
-        boolean[] noeudsPasses = new boolean[noeuds.size()];
-        boolean allTrue = true;
+        int nombreBouclesParCycle = 10;
+        int compteBoucles = 0;
         long tempsDebut;
         long delaiSleep;
+
         while (run) {
             tempsDebut = System.currentTimeMillis();
             ////////////////////////////////////////////////////////////////////
-            for (boolean bool : noeudsPasses) {
-                bool = false;
-            }
-            while (!allTrue) {
-                ///bla bla bla
-                for (int i = 0; i < noeudsPasses.length && allTrue; ++i) {
-                    if (!noeudsPasses[i]) {
-                        allTrue = false;
-                    }
+            compteBoucles %= nombreBouclesParCycle;
+            if (compteBoucles == 0) {
+                gatesABoucler.clear();
+                for (SourceDigitale source : sourcesDigitales) {
+                    source.updateActif();
+                    ajouterGatesABoucler();
                 }
             }
 
+            for (LogicGateAbstraite gate : gatesABoucler) {
+                gate.updateActif();
+            }
+
+            ajouterGatesABoucler();
+
+            ++compteBoucles;
             ////////////////////////////////////////////////////////////////////
             delaiSleep = delaiTic - System.currentTimeMillis() + tempsDebut;
             try {
@@ -128,6 +139,21 @@ public class CircuitDigital implements Circuit, Runnable {
             }
 
         }
+    }
+
+    public void ajouterGatesABoucler() {
+        for (LogicGateAbstraite gate : gates) {
+            if (gate.isABoucler()) {
+                if (!gatesABoucler.contains(gate)) {
+                    gatesABoucler.add(gate);
+                }
+            }
+            gate.resetBools();
+        }
+    }
+
+    public void ajouterGate(LogicGateAbstraite gate) {
+        gates.add(gate);
     }
 
 }

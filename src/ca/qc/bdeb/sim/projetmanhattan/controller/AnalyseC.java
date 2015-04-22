@@ -19,6 +19,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ComposantDigital;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
@@ -72,19 +73,22 @@ public class AnalyseC {
     public void preparerAnalyseDigitale(CircuitDigital circuit, Connectable[][] connectables) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
-                if (connectables[i][j] instanceof Diode) {
-                    circuit.ajouterDiode((Diode) connectables[i][j]);
+                if (connectables[i][j] instanceof LogicGateAbstraite) {
+                    circuit.ajouterGate((LogicGateAbstraite) connectables[i][j]);
                 } else if (connectables[i][j] instanceof SourceDigitale) {
                     circuit.ajouterSourceDigitale((SourceDigitale) connectables[i][j]);
-                } else if (connectables[i][j] instanceof ANDGate) {
-                    circuit.ajouterANDGate((ANDGate) connectables[i][j]);
-                } else if (connectables[i][j] instanceof ORGate) {
-                    circuit.ajouterORGate((ORGate) connectables[i][j]);
-                } else if (connectables[i][j] instanceof NOTGate) {
-                    circuit.ajouterNOTGate((NOTGate) connectables[i][j]);
                 } else if (connectables[i][j] instanceof LumiereOutput) {
                     circuit.ajouterLumiere((LumiereOutput) connectables[i][j]);
-                }
+                }/*else if (connectables[i][j] instanceof Diode) {
+                 circuit.ajouterDiode((Diode) connectables[i][j]);
+                 } else if (connectables[i][j] instanceof ANDGate) {
+                 circuit.ajouterANDGate((ANDGate) connectables[i][j]);
+                 } else if (connectables[i][j] instanceof ORGate) {
+                 circuit.ajouterORGate((ORGate) connectables[i][j]);
+                 } else if (connectables[i][j] instanceof NOTGate) {
+                 circuit.ajouterNOTGate((NOTGate) connectables[i][j]);
+                 } */
+
             }
         }
         //creerLiens(circuit);

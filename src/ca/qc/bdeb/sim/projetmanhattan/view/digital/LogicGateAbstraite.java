@@ -20,6 +20,8 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     protected Noeud noeudSortie;
     protected boolean actif;
     protected boolean actifTemp;
+    protected boolean passee;
+    protected boolean aBoucler;
 
     public LogicGateAbstraite(TypeComposant typeComposant) {
         super(typeComposant);
@@ -39,12 +41,8 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     public abstract void calculerCourant();
 
     protected void transfererCourant() {
+        passee = true;
         if (actifTemp != actif) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
             if (actif) {
                 noeudSortie.augmenterTensionDigital();
             } else {
@@ -65,14 +63,41 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         return noeudEntreeB;
     }
 
+    public boolean isABoucler() {
+        return aBoucler;
+    }
+
     @Override
     public void updateActif() {
-        calculerCourant();
+        if (passee) {
+            aBoucler = true;
+        } else {
+            calculerCourant();
+        }
     }
 
     @Override
     public void ajouterNoeudSortie(Noeud noeud) {
         this.noeudSortie = noeud;
+    }
+
+    public void setPassee(boolean passee) {
+        this.passee = passee;
+    }
+
+    public void setaBoucler(boolean aBoucler) {
+        this.aBoucler = aBoucler;
+    }
+    
+    public void resetBools(){
+        passee = false;
+        aBoucler = false;
+    }
+
+    
+
+    public boolean isPassee() {
+        return passee;
     }
 
 }

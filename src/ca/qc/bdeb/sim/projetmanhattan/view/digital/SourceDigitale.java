@@ -39,7 +39,7 @@ public class SourceDigitale extends Connectable implements ComposantDigital {
         return repeter;
     }
 
-    public boolean lireOutput() {
+    private boolean lireOutput() {
         ++indexOutput;
         if (repeter || indexOutput < listeOutput.size()) {
             indexOutput = indexOutput % listeOutput.size();

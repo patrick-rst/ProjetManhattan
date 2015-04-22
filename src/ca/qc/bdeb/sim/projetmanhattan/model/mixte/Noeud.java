@@ -4,7 +4,6 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
-import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ComposantDigital;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 import java.util.ArrayList;
@@ -95,10 +94,20 @@ public class Noeud {
 
     public void augmenterTensionDigital() {
         ++tension;
+        if (tension == 1) {
+            for (ComposantDigital comp : sorties) {
+                comp.updateActif();
+            }
+        }
     }
 
     public void diminuerTensionDigital() {
         --tension;
+        if (tension == 0) {
+            for (ComposantDigital comp : sorties) {
+                comp.updateActif();
+            }
+        }
     }
 
     public boolean isActif() {
