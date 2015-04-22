@@ -9,6 +9,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.Diode;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
@@ -28,6 +29,7 @@ public class CircuitDigital implements Circuit, Runnable {
     private ArrayList<ANDGate> andGates;
     private ArrayList<ORGate> orGates;
     private ArrayList<NOTGate> notGates;
+    private ArrayList<LumiereOutput> lumieres;
     private boolean run;
     private Thread thread;
     private int delaiTic;
@@ -39,6 +41,8 @@ public class CircuitDigital implements Circuit, Runnable {
         andGates = new ArrayList<>();
         orGates = new ArrayList<>();
         notGates = new ArrayList<>();
+        lumieres = new ArrayList<>();
+
         thread = new Thread();
 
         delaiTic = 250;
@@ -74,8 +78,13 @@ public class CircuitDigital implements Circuit, Runnable {
         diodes.add(diode);
     }
 
+    @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
+    }
+    
+    public void ajouterLumiere(LumiereOutput lumiere){
+        lumieres.add(lumiere);
     }
 
     @Override
@@ -117,7 +126,7 @@ public class CircuitDigital implements Circuit, Runnable {
                 System.out.println("InterruptedException");
                 Logger.getLogger(CircuitDigital.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
 

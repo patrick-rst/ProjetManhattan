@@ -13,4 +13,5 @@ public interface Circuit {
 
     public void wipe();
 
+    public void ajouterNoeud(Noeud noeud);
 }

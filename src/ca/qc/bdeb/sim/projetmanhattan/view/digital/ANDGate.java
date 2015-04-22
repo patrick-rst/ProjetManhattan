@@ -5,16 +5,26 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 
 /**
  *
  * @author blood_000
  */
-public class ANDGate extends LogicGateAbstraite implements Composant {
-    
+public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
+
     public ANDGate() {
         super(TypeComposant.ANDGATE);
     }
+
+    @Override
+    public void calculerCourant() {
+        actifTemp = actif;
+        actif = noeudEntreeA != null && noeudEntreeA.isActif() && noeudEntreeB != null && noeudEntreeB.isActif();
+
+        transfererCourant();
+    }
+
+
 }

@@ -4,7 +4,8 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ComposantDigital;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 import java.util.ArrayList;
 
@@ -22,9 +23,9 @@ public class Noeud {
     private ArrayList<Resistance> resistances;
     private ArrayList<SourceCourant> sourcesCourant;
     private Ground ground;
-    
-    private ArrayList<Composant> entrees;
-    private ArrayList<Composant> sorties;
+
+    private ArrayList<ComposantDigital> entrees;
+    private ArrayList<ComposantDigital> sorties;
 
     public Noeud() {
         fils = new ArrayList<>();
@@ -34,19 +35,19 @@ public class Noeud {
         sourcesFEMPos = new ArrayList<>();
     }
 
-    public void ajouterEntree(Composant comp) {
+    public void ajouterEntree(ComposantDigital comp) {
         entrees.add(comp);
     }
 
-    public void ajouterSortie(Composant comp) {
+    public void ajouterSortie(ComposantDigital comp) {
         sorties.add(comp);
     }
 
-    public ArrayList<Composant> getEntrees() {
+    public ArrayList<ComposantDigital> getEntrees() {
         return entrees;
     }
 
-    public ArrayList<Composant> getSorties() {
+    public ArrayList<ComposantDigital> getSorties() {
         return sorties;
     }
 
@@ -90,6 +91,18 @@ public class Noeud {
 
     public void setGround(Ground ground) {
         this.ground = ground;
+    }
+
+    public void augmenterTensionDigital() {
+        ++tension;
+    }
+
+    public void diminuerTensionDigital() {
+        --tension;
+    }
+
+    public boolean isActif() {
+        return tension != 0;
     }
 
 }
