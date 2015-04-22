@@ -6,7 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Composant;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;;
 
 /**
  *
@@ -14,7 +14,18 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class ANDGate extends LogicGateAbstraite implements Composant {
     
+    
+    
     public ANDGate() {
         super(TypeComposant.ANDGATE);
+        addImage("and1.png");
+        addImage("and2.png");
+        addImage("and3.png");
     }
+    
+  
+
+
+    
+    
 }

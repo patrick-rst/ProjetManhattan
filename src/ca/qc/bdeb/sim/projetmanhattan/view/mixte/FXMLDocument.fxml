@@ -268,7 +268,7 @@
                                        <children>
                                           <ImageView id="andGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../digital/and1.png" />
+                                                <Image url="@../img/and1.png" />
                                              </image>
                                              <StackPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
