@@ -289,10 +289,6 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
-        
-
-        
-        
     }
     
     public void setCircuit(CircuitAnalogue c) {
@@ -486,6 +482,36 @@ public class FXMLDocumentController implements Initializable {
                             tmp.setId("filCroix");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
+                        }   
+                        else if (connectables2D[row][column] instanceof ANDGate) {
+                            ANDGate testGate = new ANDGate();
+                            ANDGate gate = (ANDGate) connectables2D[row][column]; 
+                            ImageView tmp = new ImageView();
+                            gate.resetImageIndex();
+                            tmp.setImage(gate.getImage());
+                            tmp.setId("andGate");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
+                        }  
+                        else if (connectables2D[row][column] instanceof ORGate) {
+                            ORGate testGate = new ORGate();
+                            ORGate gate = (ORGate) connectables2D[row][column]; 
+                            ImageView tmp = new ImageView();
+                            gate.resetImageIndex();
+                            tmp.setImage(gate.getImage());
+                            tmp.setId("orGate");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                               
+                        }  
+                        else if (connectables2D[row][column] instanceof NOTGate) {
+                            NOTGate testGate = new NOTGate();
+                            NOTGate gate = (NOTGate) connectables2D[row][column]; 
+                            ImageView tmp = new ImageView();
+                            gate.resetImageIndex();
+                            tmp.setImage(gate.getImage());
+                            tmp.setId("notGate");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                              
                         }                          
                     }
                 }

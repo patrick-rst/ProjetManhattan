@@ -21,7 +21,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     protected byte entrees;
     protected static String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
     protected int imageIndex;
-    protected ArrayList<Image> listeImages;
+    protected transient ArrayList<Image> listeImages;
     
 
     protected Noeud noeudEntreeA;
@@ -87,6 +87,9 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         this.noeudSortie = noeud;
     }
 
+    public void resetImageIndex() {
+        this.imageIndex = 0;
+    }
     
     public void nextImage() {
         System.out.println((this.imageIndex+1)%listeImages.size());
@@ -94,6 +97,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     }    
     
     public Image getImage() {
+        System.out.println("imageIndex:"+imageIndex);
         return listeImages.get(imageIndex);
     }
     
