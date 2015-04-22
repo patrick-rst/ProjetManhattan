@@ -272,6 +272,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
+    @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }

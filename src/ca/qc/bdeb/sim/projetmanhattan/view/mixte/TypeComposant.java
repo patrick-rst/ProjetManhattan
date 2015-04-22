@@ -20,5 +20,6 @@ public enum TypeComposant {
     DIODE,
     ANDGATE,
     ORGATE,
-    NOTGATE
+    NOTGATE,
+    LUMIERE_OUTPUT
 }
