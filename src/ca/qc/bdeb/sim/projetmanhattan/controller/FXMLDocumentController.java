@@ -551,6 +551,9 @@ public class FXMLDocumentController implements Initializable {
         } else if (id.equals("orGate")) {
             ORGate orGate = new ORGate();
             connectables2D[row][column] = orGate;
+        } else if (id.equals("notGate")) {
+            NOTGate notGate = new NOTGate();
+            connectables2D[row][column] = notGate;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }
