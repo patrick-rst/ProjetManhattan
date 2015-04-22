@@ -8,12 +8,19 @@ package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import java.util.ArrayList;
+import javafx.scene.image.Image;
 
 /**
  *
  * @author blood_000
  */
 public abstract class LogicGateAbstraite extends Connectable implements ComposantDigital {
+
+    protected byte entrees;
+    protected static String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
+    protected int imageIndex;
+    protected transient ArrayList<Image> listeImages;
 
     protected Noeud noeudEntreeA;
     protected Noeud noeudEntreeB;
@@ -25,6 +32,8 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
 
     public LogicGateAbstraite(TypeComposant typeComposant) {
         super(typeComposant);
+        imageIndex = 0;
+        listeImages = new ArrayList();
     }
 
     @Override
@@ -88,16 +97,34 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     public void setaBoucler(boolean aBoucler) {
         this.aBoucler = aBoucler;
     }
-    
-    public void resetBools(){
+
+    public void resetBools() {
         passee = false;
         aBoucler = false;
     }
 
-    
-
     public boolean isPassee() {
         return passee;
+    }
+
+    public void reset() {
+        this.imageIndex = 0;
+        this.listeImages = new ArrayList();
+    }
+
+    public void nextImage() {
+        System.out.println((this.imageIndex + 1) % listeImages.size());
+        this.imageIndex = (this.imageIndex + 1) % listeImages.size();
+    }
+
+    public Image getImage() {
+        System.out.println("imageIndex:" + imageIndex);
+        System.out.println("size:" + listeImages.size());
+        return listeImages.get(imageIndex);
+    }
+
+    public void addImage(String filename) {
+        listeImages.add(new Image(imageFolder + filename));
     }
 
 }

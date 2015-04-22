@@ -5,18 +5,27 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
+
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+
 
 /**
  *
  * @author blood_000
  */
+
 public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
+
 
     public ANDGate() {
         super(TypeComposant.ANDGATE);
+        addImage("and1.png");
+        addImage("and2.png");
+        addImage("and3.png");
     }
+    
+    
+    
 
     @Override
     public void calculerCourant() {
@@ -25,6 +34,7 @@ public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
 
         transfererCourant();
     }
+
 
 
 }

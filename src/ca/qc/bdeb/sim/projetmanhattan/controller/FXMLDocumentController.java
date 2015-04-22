@@ -10,6 +10,10 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilT;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,6 +50,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
 
 import org.controlsfx.control.PopOver;
 
@@ -162,9 +167,27 @@ public class FXMLDocumentController implements Initializable {
         } else if (event.getCode().equals(KeyCode.M)) {
             System.out.println("M pressed");
             
-            ImageView tmp = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
-            Image img = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/digital/and2.png");
-            tmp.setImage(img);            
+            ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
+            
+            LogicGateAbstraite gate = (LogicGateAbstraite) connectables2D[mouseRow][mouseColumn];
+            
+            
+//            LogicGateAbstraite gate = null;
+            
+//            if (logicGate instanceof ANDGate) {
+//                gate = (ANDGate) logicGate;
+//            } 
+//            else if (logicGate instanceof ORGate) {
+//                gate = (ORGate) logicGate;
+//            }
+//            else if (logicGate instanceof NOTGate) {
+//                gate = (NOTGate) logicGate;
+//            }
+            
+            gate.nextImage();
+            imgView.setImage(gate.getImage());
+            
+           
         }    
     }
 
@@ -459,6 +482,37 @@ public class FXMLDocumentController implements Initializable {
                             tmp.setId("filCroix");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
+                        }   
+                        else if (connectables2D[row][column] instanceof ANDGate) {
+                            
+                            ANDGate gate = (ANDGate) connectables2D[row][column]; 
+                            ImageView tmp = new ImageView();
+                            gate.reset();
+                            ANDGate testGate = new ANDGate();
+                            tmp.setImage(gate.getImage());
+                            tmp.setId("andGate");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                            
+                        }  
+                        else if (connectables2D[row][column] instanceof ORGate) {
+                            ORGate testGate = new ORGate();
+                            ORGate gate = (ORGate) connectables2D[row][column]; 
+                            ImageView tmp = new ImageView();
+                            gate.reset();
+                            tmp.setImage(gate.getImage());
+                            tmp.setId("orGate");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                               
+                        }  
+                        else if (connectables2D[row][column] instanceof NOTGate) {
+                            NOTGate testGate = new NOTGate();
+                            NOTGate gate = (NOTGate) connectables2D[row][column]; 
+                            ImageView tmp = new ImageView();
+                            gate.reset();
+                            tmp.setImage(gate.getImage());
+                            tmp.setId("notGate");
+                            initializeImageView(tmp);
+                            grid.add(tmp, column, row);                              
                         }                          
                     }
                 }
@@ -518,6 +572,15 @@ public class FXMLDocumentController implements Initializable {
         } else if (id.equals("filCroix")) {
             FilCroix filCroix = new FilCroix();
             connectables2D[row][column] = filCroix;
+        } else if (id.equals("andGate")) {
+            ANDGate andGate = new ANDGate();
+            connectables2D[row][column] = andGate;
+        } else if (id.equals("orGate")) {
+            ORGate orGate = new ORGate();
+            connectables2D[row][column] = orGate;
+        } else if (id.equals("notGate")) {
+            NOTGate notGate = new NOTGate();
+            connectables2D[row][column] = notGate;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }

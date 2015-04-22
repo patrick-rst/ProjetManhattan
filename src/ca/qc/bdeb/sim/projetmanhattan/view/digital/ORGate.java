@@ -15,7 +15,11 @@ public class ORGate extends LogicGateAbstraite implements ComposantDigital {
 
     public ORGate() {
         super(TypeComposant.ORGATE);
+        addImage("or1.png");
+        addImage("or2.png");
+        addImage("or3.png");
     }
+        
 
     @Override
     public void calculerCourant() {
