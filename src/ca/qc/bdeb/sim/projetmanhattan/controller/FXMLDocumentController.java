@@ -18,6 +18,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.NANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XNORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
@@ -203,7 +204,7 @@ public class FXMLDocumentController implements Initializable {
 
             ((Connectable) connectables2D[row][column]).rotater();
 
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+") && !source.getId().matches(".+Gate") && !source.getId().matches("light")) {
+        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
             String id = source.getId();
 
             int row = grid.getRowIndex(source);
@@ -368,6 +369,8 @@ public class FXMLDocumentController implements Initializable {
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
+        mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
+        mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
  
         mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue,mnuItemNumerique);
@@ -623,6 +626,9 @@ public class FXMLDocumentController implements Initializable {
         } else if (id.equals("light")) {
             LumiereOutput light = new LumiereOutput();
             connectables2D[row][column] = light;
+        } else if (id.equals("sourceDigitale")) {
+            SourceDigitale sourceDigitale = new SourceDigitale();
+            connectables2D[row][column] = sourceDigitale;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }

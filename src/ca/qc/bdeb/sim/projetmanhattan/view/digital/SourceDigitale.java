@@ -23,6 +23,8 @@ public class SourceDigitale extends Connectable implements ComposantDigital {
     private Noeud noeudSortie;
     private boolean actif;
     private boolean actifTemp;
+    
+    
 
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
