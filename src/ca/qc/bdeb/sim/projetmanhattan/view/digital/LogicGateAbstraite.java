@@ -21,6 +21,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     protected static String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
     protected int imageIndex;
     protected transient ArrayList<Image> listeImages;
+    protected byte typeGate;
 
     protected Noeud noeudEntreeA;
     protected Noeud noeudEntreeB;
@@ -33,7 +34,9 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     public LogicGateAbstraite(TypeComposant typeComposant) {
         super(typeComposant);
         imageIndex = 0;
+        typeGate = -1;
         listeImages = new ArrayList();
+        switchGate();
     }
 
     @Override
@@ -45,6 +48,30 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         } else {
             System.out.println("Erreur: Logic Gate mal connectée");
         }
+    }
+
+    public void switchGate() {
+        ++typeGate;
+        typeGate %= 3;
+
+        if (typeGate == 0) {
+            cotesConnectes[0] = -1;
+            cotesConnectes[1] = 1;
+            cotesConnectes[2] = -1;
+            cotesConnectes[3] = 0;
+        } else if (typeGate == 1) {
+            cotesConnectes[0] = -1;
+            cotesConnectes[1] = 1;
+            cotesConnectes[2] = 0;
+            cotesConnectes[3] = -1;
+        } else if (typeGate == 2) {
+            cotesConnectes[0] = 0;
+            cotesConnectes[1] = 1;
+            cotesConnectes[2] = -1;
+            cotesConnectes[3] = -1;
+        }
+        
+        //showImage
     }
 
     public abstract void calculerCourant();

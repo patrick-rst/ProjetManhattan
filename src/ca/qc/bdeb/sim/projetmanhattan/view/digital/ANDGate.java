@@ -14,11 +14,13 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  * @author blood_000
  */
 
-public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
+public class ANDGate extends LogicGateAbstraite{
 
 
+    
     public ANDGate() {
         super(TypeComposant.ANDGATE);
+        
         addImage("and1.png");
         addImage("and2.png");
         addImage("and3.png");
@@ -34,6 +36,8 @@ public class ANDGate extends LogicGateAbstraite implements ComposantDigital {
 
         transfererCourant();
     }
+
+    
 
 
 

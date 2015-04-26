@@ -12,7 +12,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  *
  * @author blood_000
  */
-public class Diode extends LogicGateAbstraite implements ComposantDigital {
+public class Diode extends LogicGateAbstraite {
 
     public Diode() {
         super(TypeComposant.DIODE);
@@ -35,5 +35,9 @@ public class Diode extends LogicGateAbstraite implements ComposantDigital {
         } else {
             System.out.println("Erreur: Logic Gate mal connectée");
         }
+    }
+    
+    @Override
+    public void switchGate() {
     }
 }
