@@ -179,23 +179,13 @@ public class FXMLDocumentController implements Initializable {
             
             ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
             
-            LogicGateAbstraite gate = (LogicGateAbstraite) connectables2D[mouseRow][mouseColumn];
-            
-            
-//            LogicGateAbstraite gate = null;
-            
-//            if (logicGate instanceof ANDGate) {
-//                gate = (ANDGate) logicGate;
-//            } 
-//            else if (logicGate instanceof ORGate) {
-//                gate = (ORGate) logicGate;
-//            }
-//            else if (logicGate instanceof NOTGate) {
-//                gate = (NOTGate) logicGate;
-//            }
-            
-            gate.nextImage();
-            imgView.setImage(gate.getImage());
+            if (connectables2D[mouseRow][mouseColumn] instanceof LogicGateAbstraite) {
+                LogicGateAbstraite gate = (LogicGateAbstraite) connectables2D[mouseRow][mouseColumn];
+
+                gate.nextImage();
+                imgView.setImage(gate.getImage());                
+            }
+
             
            
         }    
@@ -212,7 +202,7 @@ public class FXMLDocumentController implements Initializable {
 
             ((Connectable) connectables2D[row][column]).rotater();
 
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+")) {
+        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+") && !source.getId().matches(".+Gate")) {
             String id = source.getId();
 
             int row = grid.getRowIndex(source);
