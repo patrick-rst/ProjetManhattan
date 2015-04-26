@@ -13,6 +13,8 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class ORGate extends LogicGateAbstraite implements ComposantDigital {
 
+
+    
     public ORGate() {
         super(TypeComposant.ORGATE);
         addImage("or1.png");

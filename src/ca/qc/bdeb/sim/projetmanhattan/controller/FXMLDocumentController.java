@@ -69,7 +69,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     GridPane grid;
     
-    
+    @FXML
+    ImageView andGate;
     
     int mouseRow;
     int mouseColumn;
@@ -424,6 +425,7 @@ public class FXMLDocumentController implements Initializable {
 
                 String pathAnalog = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/analog/";
                 String pathMixte = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/";
+                String pathImg = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
                 
                 for (int row=0; row<10; row++) {
                     for (int column=0; column<10; column++) {
@@ -484,32 +486,25 @@ public class FXMLDocumentController implements Initializable {
                             grid.add(tmp, column, row);                            
                         }   
                         else if (connectables2D[row][column] instanceof ANDGate) {
-                            
-                            ANDGate gate = (ANDGate) connectables2D[row][column]; 
+                            //ANDGate gate = (ANDGate) connectables2D[row][column]; 
                             ImageView tmp = new ImageView();
-                            gate.reset();
-                            ANDGate testGate = new ANDGate();
-                            tmp.setImage(gate.getImage());
+                            tmp.setImage(new Image(pathImg+"and1.png"));
                             tmp.setId("andGate");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                            
                         }  
                         else if (connectables2D[row][column] instanceof ORGate) {
-                            ORGate testGate = new ORGate();
-                            ORGate gate = (ORGate) connectables2D[row][column]; 
+                            //ORGate gate = (ORGate) connectables2D[row][column]; 
                             ImageView tmp = new ImageView();
-                            gate.reset();
-                            tmp.setImage(gate.getImage());
+                            tmp.setImage(new Image(pathImg+"or1.png"));
                             tmp.setId("orGate");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                               
                         }  
                         else if (connectables2D[row][column] instanceof NOTGate) {
-                            NOTGate testGate = new NOTGate();
-                            NOTGate gate = (NOTGate) connectables2D[row][column]; 
+                            //NOTGate gate = (NOTGate) connectables2D[row][column]; 
                             ImageView tmp = new ImageView();
-                            gate.reset();
-                            tmp.setImage(gate.getImage());
+                            tmp.setImage(new Image(pathImg+"not1.png"));
                             tmp.setId("notGate");
                             initializeImageView(tmp);
                             grid.add(tmp, column, row);                              

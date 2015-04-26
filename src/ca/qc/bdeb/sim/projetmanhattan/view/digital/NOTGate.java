@@ -14,6 +14,8 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class NOTGate extends LogicGateAbstraite implements ComposantDigital {
 
+
+    
     public NOTGate() {
         super(TypeComposant.NOTGATE);
         addImage("not1.png");

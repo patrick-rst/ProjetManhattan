@@ -18,9 +18,11 @@ import javafx.scene.image.Image;
 public abstract class LogicGateAbstraite extends Connectable implements ComposantDigital {
 
     protected byte entrees;
-    protected static String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
-    protected int imageIndex;
+    
+    protected String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
     protected transient ArrayList<Image> listeImages;
+    protected int imageIndex;
+    
 
     protected Noeud noeudEntreeA;
     protected Noeud noeudEntreeB;
@@ -32,8 +34,8 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
 
     public LogicGateAbstraite(TypeComposant typeComposant) {
         super(typeComposant);
-        imageIndex = 0;
-        listeImages = new ArrayList();
+        this.listeImages = new ArrayList();
+        this.imageIndex = 0;   
     }
 
     @Override
@@ -107,24 +109,20 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         return passee;
     }
 
-    public void reset() {
-        this.imageIndex = 0;
-        this.listeImages = new ArrayList();
+    
+    
+    public void addImage(String filename) {
+        this.listeImages.add(new Image(this.imageFolder + filename));
     }
-
+    
     public void nextImage() {
-        System.out.println((this.imageIndex + 1) % listeImages.size());
-        this.imageIndex = (this.imageIndex + 1) % listeImages.size();
+        this.imageIndex = (this.imageIndex + 1) % this.listeImages.size();
     }
 
     public Image getImage() {
-        System.out.println("imageIndex:" + imageIndex);
-        System.out.println("size:" + listeImages.size());
-        return listeImages.get(imageIndex);
+        return this.listeImages.get(this.imageIndex);
     }
 
-    public void addImage(String filename) {
-        listeImages.add(new Image(imageFolder + filename));
-    }
+
 
 }
