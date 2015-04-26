@@ -154,7 +154,7 @@
             <children>
                 <Accordion prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <panes>
-                        <TitledPane prefWidth="200.0" text="Fils">
+                        <TitledPane fx:id="mixte" prefWidth="200.0" text="Fils">
                             <content>
                         <ScrollPane prefViewportHeight="572.0" prefViewportWidth="184.0" prefWidth="200.0">
                            <content>
@@ -198,7 +198,7 @@
                         </ScrollPane>
                             </content>
                         </TitledPane>
-                        <TitledPane prefWidth="200.0" text="Composants">
+                        <TitledPane fx:id="analogue" prefWidth="200.0" text="Composants">
                             <content>
                         <ScrollPane prefViewportHeight="449.0" prefViewportWidth="184.0" prefWidth="200.0">
                            <content>
@@ -258,7 +258,7 @@
                         </ScrollPane>
                             </content>
                         </TitledPane>
-                  <TitledPane prefWidth="200.0" text="Numérique">
+                  <TitledPane fx:id="numerique" prefWidth="200.0" text="Numérique">
                      <content>
                         <ScrollPane prefViewportHeight="449.0" prefViewportWidth="184.0" prefWidth="200.0">
                            <content>
