@@ -12,7 +12,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  *
  * @author blood_000
  */
-public class NOTGate extends LogicGateAbstraite implements ComposantDigital {
+public class NOTGate extends LogicGateAbstraite  {
 
 
     

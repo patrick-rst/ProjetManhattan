@@ -11,22 +11,17 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  *
  * @author blood_000
  */
-public class ORGate extends LogicGateAbstraite  {
+public class NORGate extends LogicGateAbstraite {
 
+    public NORGate() {
+        super(TypeComposant.NOR_GATE);
 
-    
-    public ORGate() {
-        super(TypeComposant.ORGATE);
-        addImage("or1.png");
-        addImage("or2.png");
-        addImage("or3.png");
     }
-        
 
     @Override
     public void calculerCourant() {
         actifTemp = actif;
-        actif = (noeudEntreeA != null && noeudEntreeA.isActif()) || (noeudEntreeB != null && noeudEntreeB.isActif());
+        actif = !((noeudEntreeA != null && noeudEntreeA.isActif()) || (noeudEntreeB != null && noeudEntreeB.isActif()));
 
         transfererCourant();
     }

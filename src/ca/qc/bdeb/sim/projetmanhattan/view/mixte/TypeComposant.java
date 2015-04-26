@@ -21,5 +21,9 @@ public enum TypeComposant {
     ANDGATE,
     ORGATE,
     NOTGATE,
+    NAND_GATE,
+    NOR_GATE,
+    XOR_GATE,
+    XNOR_GATE,
     LUMIERE_OUTPUT
 }

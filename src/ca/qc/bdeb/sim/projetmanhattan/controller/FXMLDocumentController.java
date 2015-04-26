@@ -1,6 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogue;
+import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigital;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilCoin;
@@ -35,6 +36,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -72,6 +74,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     ImageView andGate;
     
+    @FXML
+    TitledPane analogue;
+    
+    @FXML
+    TitledPane numerique;
+    
+    @FXML
+    TitledPane mixte;    
+    
     int mouseRow;
     int mouseColumn;
     
@@ -80,18 +91,12 @@ public class FXMLDocumentController implements Initializable {
 
     PopOver composantEditor = new PopOver();
 
-    CircuitAnalogue circuit;
+    CircuitAnalogue circuitAnalogue;
+    CircuitDigital circuitNumerique;
     AnalyseC circuitGraphique;
-    
-    
-    
-    
 
-    @FXML
-    private void analyserCircuit(ActionEvent event) {
-        circuitGraphique.preparerAnalyse(circuit, connectables2D);
-        circuit.analyserCircuit();
-    }
+    
+    
 
     @FXML
     private void dragComposant(MouseEvent event) {
@@ -290,11 +295,16 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
+        numerique.setDisable(true);
     }
     
-    public void setCircuit(CircuitAnalogue c) {
-        this.circuit = c;
+    public void setCircuitAnalogue(CircuitAnalogue c) {
+        this.circuitAnalogue = c;
     }
+    
+    public void setCircuitNumerique(CircuitDigital c) {
+        this.circuitNumerique = c;
+    }    
 
     public void setCircuitGraphique(AnalyseC cg) {
         this.circuitGraphique = cg;
@@ -303,10 +313,13 @@ public class FXMLDocumentController implements Initializable {
     private void createMenu() {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
+        Menu mnuMode = new Menu("Mode");
         Menu mnuRun = new Menu("Run");
         
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
+        MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
+        MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
         MenuItem mnuItemRun = new MenuItem("Run",new ImageView(new Image("file:play.png")));
         
         
@@ -328,19 +341,43 @@ public class FXMLDocumentController implements Initializable {
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                circuitGraphique.preparerAnalyse(circuit, connectables2D);
-                circuit.analyserCircuit();
+                if (analogue.isDisabled() == false) {
+                    circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
+                    circuitAnalogue.analyserCircuit();                    
+                } else if (numerique.isDisabled() == false) {
+                    circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
+                    circuitNumerique.analyserCircuit();                      
+                }
             }
 
         });  
+        
+        mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                numerique.setDisable(true);
+                analogue.setDisable(false);
+            }
+
+        }); 
+        
+        mnuItemNumerique.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                analogue.setDisable(true);
+                numerique.setDisable(false);
+            }
+
+        });         
         
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
  
         mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
+        mnuMode.getItems().addAll(mnuItemAnalogue,mnuItemNumerique);
         mnuRun.getItems().addAll(mnuItemRun);        
-        mnuBar.getMenus().addAll(mnuFile,mnuRun);
+        mnuBar.getMenus().addAll(mnuFile,mnuMode,mnuRun);
 
         pane.setTop(mnuBar);        
     }
