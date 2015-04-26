@@ -15,7 +15,9 @@ public class NORGate extends LogicGateAbstraite {
 
     public NORGate() {
         super(TypeComposant.NOR_GATE);
-
+        addImage("nor1.png");
+        addImage("nor2.png");
+        addImage("nor3.png");
     }
 
     @Override

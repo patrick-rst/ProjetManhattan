@@ -15,7 +15,9 @@ public class NANDGate extends LogicGateAbstraite {
 
     public NANDGate() {
         super(TypeComposant.NAND_GATE);
-
+        addImage("nand1.png");
+        addImage("nand2.png");
+        addImage("nand3.png");
     }
 
     @Override

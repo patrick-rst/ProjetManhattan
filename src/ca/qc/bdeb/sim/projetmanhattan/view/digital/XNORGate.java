@@ -15,6 +15,9 @@ public class XNORGate extends LogicGateAbstraite {
 
     public XNORGate() {
         super(TypeComposant.XNOR_GATE);
+        addImage("xnor1.png");
+        addImage("xnor2.png");
+        addImage("xnor3.png");        
     }
 
     @Override

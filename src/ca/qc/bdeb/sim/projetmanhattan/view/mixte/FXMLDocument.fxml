@@ -300,6 +300,54 @@
                                           </ImageView>
                                        </children>
                                     </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <ImageView id="nandGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/nand1.png" />
+                                             </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <ImageView id="norGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/nor1.png" />
+                                             </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <ImageView id="xorGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/xor1.png" />
+                                             </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <ImageView id="xnorGate" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/xnor1.png" />
+                                             </image>
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
                                  </children>
                               </FlowPane>
                            </content>

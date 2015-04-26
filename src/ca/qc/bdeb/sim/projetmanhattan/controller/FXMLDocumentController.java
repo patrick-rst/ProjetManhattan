@@ -13,8 +13,12 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.NANDGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.NORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.XNORGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.XORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -613,6 +617,18 @@ public class FXMLDocumentController implements Initializable {
         } else if (id.equals("notGate")) {
             NOTGate notGate = new NOTGate();
             connectables2D[row][column] = notGate;
+        } else if (id.equals("nandGate")) {
+            NANDGate nandGate = new NANDGate();
+            connectables2D[row][column] = nandGate;
+        } else if (id.equals("norGate")) {
+            NORGate norGate = new NORGate();
+            connectables2D[row][column] = norGate;
+        } else if (id.equals("xorGate")) {
+            XORGate xorGate = new XORGate();
+            connectables2D[row][column] = xorGate;
+        } else if (id.equals("xnorGate")) {
+            XNORGate xnorGate = new XNORGate();
+            connectables2D[row][column] = xnorGate;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }

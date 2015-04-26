@@ -15,6 +15,9 @@ public class XORGate extends LogicGateAbstraite {
 
     public XORGate() {
         super(TypeComposant.XOR_GATE);
+        addImage("xor1.png");
+        addImage("xor2.png");
+        addImage("xor3.png");        
     }
 
     
