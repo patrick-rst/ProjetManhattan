@@ -13,6 +13,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
@@ -202,7 +203,7 @@ public class FXMLDocumentController implements Initializable {
 
             ((Connectable) connectables2D[row][column]).rotater();
 
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+") && !source.getId().matches(".+Gate")) {
+        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+") && !source.getId().matches(".+Gate") && !source.getId().matches("light")) {
             String id = source.getId();
 
             int row = grid.getRowIndex(source);
@@ -619,6 +620,9 @@ public class FXMLDocumentController implements Initializable {
         } else if (id.equals("xnorGate")) {
             XNORGate xnorGate = new XNORGate();
             connectables2D[row][column] = xnorGate;
+        } else if (id.equals("light")) {
+            LumiereOutput light = new LumiereOutput();
+            connectables2D[row][column] = light;
         } else {
             System.out.println("ERROR:Composant not implemented");
         }
