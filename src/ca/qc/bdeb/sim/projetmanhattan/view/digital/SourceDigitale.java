@@ -29,7 +29,6 @@ public class SourceDigitale extends Connectable implements ComposantDigital {
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
         listeOutput = new ArrayList<>();
-        listeOutput.add(true);
         cotesConnectes[0] = 1;
         repeter = true;
     }

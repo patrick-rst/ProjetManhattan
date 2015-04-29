@@ -17,9 +17,7 @@ public class Diode extends LogicGateAbstraite {
     public Diode() {
         super(TypeComposant.DIODE);
         cotesConnectes[0] = 1;
-        cotesConnectes[1] = 0;
         cotesConnectes[2] = -1;
-        cotesConnectes[3] = 0;
     }
 
     @Override

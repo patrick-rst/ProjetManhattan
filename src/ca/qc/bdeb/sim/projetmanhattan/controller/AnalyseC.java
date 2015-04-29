@@ -38,22 +38,22 @@ public class AnalyseC {
 
     public void preparerAnalyse(Circuit circuit, Connectable[][] connectables) {
         try {
-            this.connectables = connectables;
-            circuit.wipe();
-            connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
             if (circuit instanceof CircuitAnalogue) {
-                preparerAnalyseAnalogue((CircuitAnalogue) circuit);
+                preparerAnalyseAnalogue((CircuitAnalogue) circuit, connectables);
             } else {
-                preparerAnalyseDigitale((CircuitDigital) circuit);
+                preparerAnalyseDigitale((CircuitDigital) circuit, connectables);
             }
             creerLiens(circuit);
         } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
-            e.printStackTrace();
         }
     }
 
-    public void preparerAnalyseAnalogue(CircuitAnalogue circuit) {
+    public void preparerAnalyseAnalogue(CircuitAnalogue circuit, Connectable[][] connectables) {
+
+        this.connectables = connectables;
+        circuit.wipe();
+        connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof Resistance) {
@@ -70,7 +70,7 @@ public class AnalyseC {
 
     }
 
-    public void preparerAnalyseDigitale(CircuitDigital circuit) {
+    public void preparerAnalyseDigitale(CircuitDigital circuit, Connectable[][] connectables) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof LogicGateAbstraite) {
@@ -79,7 +79,16 @@ public class AnalyseC {
                     circuit.ajouterSourceDigitale((SourceDigitale) connectables[i][j]);
                 } else if (connectables[i][j] instanceof LumiereOutput) {
                     circuit.ajouterLumiere((LumiereOutput) connectables[i][j]);
-                }
+                }/*else if (connectables[i][j] instanceof Diode) {
+                 circuit.ajouterDiode((Diode) connectables[i][j]);
+                 } else if (connectables[i][j] instanceof ANDGate) {
+                 circuit.ajouterANDGate((ANDGate) connectables[i][j]);
+                 } else if (connectables[i][j] instanceof ORGate) {
+                 circuit.ajouterORGate((ORGate) connectables[i][j]);
+                 } else if (connectables[i][j] instanceof NOTGate) {
+                 circuit.ajouterNOTGate((NOTGate) connectables[i][j]);
+                 } */
+
             }
         }
         //creerLiens(circuit);
