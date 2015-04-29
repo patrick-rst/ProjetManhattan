@@ -7,12 +7,9 @@ package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.Diode;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,9 +24,6 @@ public class CircuitDigital implements Circuit, Runnable {
     private ArrayList<Noeud> noeuds;
     private ArrayList<Diode> diodes;
     private ArrayList<SourceDigitale> sourcesDigitales;
-    private ArrayList<ANDGate> andGates;
-    private ArrayList<ORGate> orGates;
-    private ArrayList<NOTGate> notGates;
     private ArrayList<LumiereOutput> lumieres;
     private ArrayList<LogicGateAbstraite> gates;
     private ArrayList<LogicGateAbstraite> gatesABoucler;
@@ -42,9 +36,6 @@ public class CircuitDigital implements Circuit, Runnable {
         noeuds = new ArrayList<>();
         diodes = new ArrayList<>();
         sourcesDigitales = new ArrayList<>();
-        andGates = new ArrayList<>();
-        orGates = new ArrayList<>();
-        notGates = new ArrayList<>();
         lumieres = new ArrayList<>();
         gates = new ArrayList<>();
         gatesABoucler = new ArrayList<>();
@@ -62,22 +53,20 @@ public class CircuitDigital implements Circuit, Runnable {
 
     public void stopAnalyse() {
         run = false;
+        try {
+            Thread.sleep(delaiTic);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CircuitDigital.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        thread = new Thread();
     }
 
-    public void ajouterORGate(ORGate gate) {
-        orGates.add(gate);
-    }
-
-    public void ajouterNOTGate(NOTGate gate) {
-        notGates.add(gate);
+    public boolean isRun() {
+        return run;
     }
 
     public void ajouterSourceDigitale(SourceDigitale sourceDigitale) {
         sourcesDigitales.add(sourceDigitale);
-    }
-
-    public void ajouterANDGate(ANDGate gate) {
-        andGates.add(gate);
     }
 
     public void ajouterDiode(Diode diode) {
@@ -98,9 +87,11 @@ public class CircuitDigital implements Circuit, Runnable {
         noeuds.clear();
         diodes.clear();
         sourcesDigitales.clear();
-        andGates.clear();
-        orGates.clear();
-        notGates.clear();
+        for (LogicGateAbstraite gate : gates) {
+            gate.reset();
+        }
+        gates.clear();
+        gatesABoucler.clear();
     }
 
     @Override

@@ -18,11 +18,11 @@ import javafx.scene.image.Image;
 public abstract class LogicGateAbstraite extends Connectable implements ComposantDigital {
 
     protected byte entrees;
-    
+
     protected String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
     protected transient ArrayList<Image> listeImages;
     protected int imageIndex;
-    
+
     protected byte typeGate;
 
     protected Noeud noeudEntreeA;
@@ -37,13 +37,19 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         super(typeComposant);
 
         this.listeImages = new ArrayList();
-        this.imageIndex = 0;   
+        this.imageIndex = 0;
 
         imageIndex = 0;
         typeGate = -1;
         listeImages = new ArrayList();
         switchGate();
 
+    }
+    
+    public void reset(){
+        noeudEntreeA = null;
+        noeudEntreeB = null;
+        noeudSortie = null;
     }
 
     @Override
@@ -77,7 +83,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
             cotesConnectes[2] = -1;
             cotesConnectes[3] = -1;
         }
-        
+
         //showImage
     }
 
@@ -141,12 +147,10 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         return passee;
     }
 
-    
-    
     public void addImage(String filename) {
         this.listeImages.add(new Image(this.imageFolder + filename));
     }
-    
+
     public void nextImage() {
         this.imageIndex = (this.imageIndex + 1) % this.listeImages.size();
     }
@@ -154,7 +158,5 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     public Image getImage() {
         return this.listeImages.get(this.imageIndex);
     }
-
-
 
 }
