@@ -350,13 +350,15 @@ public class FXMLDocumentController implements Initializable {
                     for (Connectable con[] : connectables2D) {
                         for (Connectable c : con) {
                             if (c instanceof Resistance) {
+                                System.out.println("RESISTANCE");
                                 Resistance r = (Resistance) c;
-                                System.out.println(r.getResistance());
-                                System.out.println(r.getCourant());
+                                System.out.println("Resistance:"+r.getResistance());
+                                System.out.println("Courant:"+r.getCourant());
                             } else if (c instanceof SourceFEM) {
+                                System.out.println("SOURCE");
                                 SourceFEM s = (SourceFEM) c;
-                                System.out.println(s.getForceElectroMotrice());
-                                System.out.println(s.getCourant());
+                                System.out.println("FEM:"+s.getForceElectroMotrice());
+                                System.out.println("Courant:"+s.getCourant());
                             }
                         }
                     }
