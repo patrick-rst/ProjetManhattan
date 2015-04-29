@@ -57,6 +57,7 @@ public class CircuitDigital implements Circuit, Runnable {
     public void analyserCircuit() {
         run = true;
 
+        thread = new Thread();
         thread.start();
     }
 

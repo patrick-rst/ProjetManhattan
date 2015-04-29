@@ -38,6 +38,10 @@ public class AnalyseC {
     }
 
     public void preparerAnalyse(Circuit circuit, Connectable[][] connectables) {
+        this.connectables = connectables;
+        circuit.wipe();
+        connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
+
         try {
             if (circuit instanceof CircuitAnalogue) {
                 preparerAnalyseAnalogue((CircuitAnalogue) circuit, connectables);
@@ -48,14 +52,11 @@ public class AnalyseC {
             creerLiens(circuit);
         } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
+            e.printStackTrace();
         }
     }
 
     public void preparerAnalyseAnalogue(CircuitAnalogue circuit, Connectable[][] connectables) {
-
-        this.connectables = connectables;
-        circuit.wipe();
-        connectablesPasses = new boolean[this.connectables.length][this.connectables[0].length];
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof Resistance) {
