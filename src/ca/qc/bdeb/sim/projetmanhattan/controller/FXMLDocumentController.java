@@ -296,14 +296,26 @@ public class FXMLDocumentController implements Initializable {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
         Menu mnuMode = new Menu("Mode");
+<<<<<<< HEAD
         Menu mnuRun = new Menu("Run");
 
+=======
+        Menu mnuAction = new Menu("Action");
+        
+>>>>>>> origin/master
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
         MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
+<<<<<<< HEAD
         MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:play.png")));
 
+=======
+        MenuItem mnuItemRun = new MenuItem("Run",new ImageView(new Image("file:play.png")));
+        MenuItem mnuItemWipe = new MenuItem("Wipe");
+        
+        
+>>>>>>> origin/master
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -327,15 +339,68 @@ public class FXMLDocumentController implements Initializable {
 
                 if (analogue.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
+<<<<<<< HEAD
                     circuitAnalogue.analyserCircuit();
+=======
+                    circuitAnalogue.analyserCircuit();    
+                    
+                    
+                    
+                    for (Connectable[] tab : connectables2D) {
+                        for (Connectable c : tab) {
+                            System.out.println(c);
+                        }
+                    }                    
+                    
+                    
+                    
+                    
+//                    for (Connectable con[] : connectables2D) {
+//                        for (Connectable c : con) {
+//                            if (c.getTypeComposant() == TypeComposant.RESISTANCE) {
+//                                Resistance r = (Resistance) c;
+//                                System.out.println(r.getResistance());
+//                                System.out.println(r.getCourant());
+//                            } else if (c.getTypeComposant() == TypeComposant.SOURCE_TENSION) {
+//                                SourceFEM s = (SourceFEM) c;
+//                                System.out.println(s.getForceElectroMotrice());
+//                                System.out.println(s.getCourant());
+//                            }
+//                        }
+//                    }
+                    
+                    
+>>>>>>> origin/master
                 } else if (numerique.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
                     circuitNumerique.analyserCircuit();
                 }
+                
+                
             }
 
+<<<<<<< HEAD
         });
 
+=======
+        });  
+        
+        mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                for (int i=0; i<10; i++) {
+                    for (int j=0; j<10; j++) {
+                        ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
+                        imgV.setImage(null);
+                        imgV.setId(null);
+                        removeComposant(i, j);
+                    }
+                }
+            }
+
+        }); 
+        
+>>>>>>> origin/master
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -357,8 +422,18 @@ public class FXMLDocumentController implements Initializable {
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
+        mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+<<<<<<< HEAD
+=======
+        
+        
+        mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
+        mnuMode.getItems().addAll(mnuItemAnalogue,mnuItemNumerique);
+        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);        
+        mnuBar.getMenus().addAll(mnuFile,mnuMode,mnuAction);
+>>>>>>> origin/master
 
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);

@@ -24,7 +24,7 @@ public class SourceDigitale extends Connectable implements ComposantDigital {
     private boolean actif;
     private boolean actifTemp;
     
-    
+
 
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
