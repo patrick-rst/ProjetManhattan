@@ -198,7 +198,7 @@
                         </ScrollPane>
                             </content>
                         </TitledPane>
-                        <TitledPane fx:id="analogue" prefWidth="200.0" text="Composants">
+                        <TitledPane fx:id="analogue" prefWidth="200.0" text="Analogue">
                             <content>
                         <ScrollPane prefViewportHeight="449.0" prefViewportWidth="184.0" prefWidth="200.0">
                            <content>

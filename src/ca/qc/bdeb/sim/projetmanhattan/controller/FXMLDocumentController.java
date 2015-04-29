@@ -21,6 +21,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XNORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XORGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -361,7 +362,7 @@ public class FXMLDocumentController implements Initializable {
                                 Tooltip.install(imgV, tooltip);
                                 System.out.println("RESISTANCE");
                                 System.out.println("Resistance:"+r.getResistance());
-                                System.out.println("Courant:"+r.getCourant());
+                                System.out.println("Courant:"+Math.abs(r.getCourant()));
                             } else if (connectables2D[i][j] instanceof SourceFEM) {
                                 SourceFEM s = (SourceFEM) connectables2D[i][j];
                                 String info = String.format("Tension: %.2f\nCourant: %.2f",s.getForceElectroMotrice(), s.getCourant());
@@ -370,7 +371,11 @@ public class FXMLDocumentController implements Initializable {
                                 Tooltip.install(imgV, tooltip);                                
                                 System.out.println("SOURCE");
                                 System.out.println("FEM:"+s.getForceElectroMotrice());
-                                System.out.println("Courant:"+s.getCourant());
+                                System.out.println("Courant:"+Math.abs(s.getCourant()));
+                            } else if (connectables2D[i][j] instanceof FilAbstrait) {
+                                FilAbstrait f = (FilAbstrait) connectables2D[i][j];
+                                System.out.println("FIL");
+                                System.out.println("FEM:"+f.getTension());
                             }
                         }
                     }  
