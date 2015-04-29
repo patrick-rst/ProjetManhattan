@@ -160,6 +160,7 @@ public class CircuitAnalogue implements Circuit {
 
         for (int i = 0; i < matX.numRows; ++i) {
             for (int j = 0; j < matX.numCols; ++j) {
+                matriceX[i] = matX.get(i, j);
                 System.out.print(matX.get(i, j) + " ");
             }
             System.out.println("x");
