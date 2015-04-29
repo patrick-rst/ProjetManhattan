@@ -310,37 +310,29 @@ public class FXMLDocumentController implements Initializable {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
         Menu mnuMode = new Menu("Mode");
-<<<<<<< HEAD
         Menu mnuRun = new Menu("Run");
-<<<<<<< HEAD
 
-=======
         Menu mnuAction = new Menu("Action");
+
         
->>>>>>> origin/master
-=======
-        
->>>>>>> parent of 8d80be4... pu de bug a date
+
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
         MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:play.png")));
 
-=======
-        MenuItem mnuItemRun = new MenuItem("Run",new ImageView(new Image("file:play.png")));
         MenuItem mnuItemWipe = new MenuItem("Wipe");
         
         
->>>>>>> origin/master
-=======
-        MenuItem mnuItemRun = new MenuItem("Run",new ImageView(new Image("file:play.png")));
+
+
+
         
         
         
->>>>>>> parent of 8d80be4... pu de bug a date
+
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -360,10 +352,9 @@ public class FXMLDocumentController implements Initializable {
             public void handle(ActionEvent t) {
                 if (analogue.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     circuitAnalogue.analyserCircuit();
-=======
+
                     circuitAnalogue.analyserCircuit();    
                     
                     
@@ -392,10 +383,11 @@ public class FXMLDocumentController implements Initializable {
 //                    }
                     
                     
->>>>>>> origin/master
-=======
+
                     circuitAnalogue.analyserCircuit();                    
->>>>>>> parent of 8d80be4... pu de bug a date
+
+                    circuitAnalogue.analyserCircuit();                    
+
                 } else if (numerique.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
                     circuitNumerique.analyserCircuit();                      
@@ -403,16 +395,10 @@ public class FXMLDocumentController implements Initializable {
                 
                 
             }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         });
 
-=======
-=======
->>>>>>> 30d274607b4d8de5060c627e668b49a5156fa0d2
-        });  
+ 
         
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -428,72 +414,53 @@ public class FXMLDocumentController implements Initializable {
             }
         }); 
         
->>>>>>> origin/master
-=======
-        });  
+
+
         
->>>>>>> parent of 8d80be4... pu de bug a date
+
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 numerique.setDisable(true);
                 analogue.setDisable(false);
             }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
         });
 
-=======
-        }); 
+
         
->>>>>>> 30d274607b4d8de5060c627e668b49a5156fa0d2
-=======
-        }); 
-        
->>>>>>> parent of 8d80be4... pu de bug a date
+
         mnuItemNumerique.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 analogue.setDisable(true);
                 numerique.setDisable(false);
             }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
         });
 
-=======
-        });         
+       
         
->>>>>>> 30d274607b4d8de5060c627e668b49a5156fa0d2
-=======
-        });         
-        
->>>>>>> parent of 8d80be4... pu de bug a date
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
         mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
         
         
         mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue,mnuItemNumerique);
         mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);        
         mnuBar.getMenus().addAll(mnuFile,mnuMode,mnuAction);
->>>>>>> origin/master
-=======
+
  
         mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue,mnuItemNumerique);
         mnuRun.getItems().addAll(mnuItemRun);        
         mnuBar.getMenus().addAll(mnuFile,mnuMode,mnuRun);
->>>>>>> parent of 8d80be4... pu de bug a date
+
 
         pane.setTop(mnuBar);        
     }
