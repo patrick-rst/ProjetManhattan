@@ -378,11 +378,14 @@ public class FXMLDocumentController implements Initializable {
                 
                 
             }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         });
 
 =======
+=======
+>>>>>>> 30d274607b4d8de5060c627e668b49a5156fa0d2
         });  
         
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
@@ -397,7 +400,6 @@ public class FXMLDocumentController implements Initializable {
                     }
                 }
             }
-
         }); 
         
 >>>>>>> origin/master
@@ -407,18 +409,28 @@ public class FXMLDocumentController implements Initializable {
                 numerique.setDisable(true);
                 analogue.setDisable(false);
             }
+<<<<<<< HEAD
 
         });
 
+=======
+        }); 
+        
+>>>>>>> 30d274607b4d8de5060c627e668b49a5156fa0d2
         mnuItemNumerique.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 analogue.setDisable(true);
                 numerique.setDisable(false);
             }
+<<<<<<< HEAD
 
         });
 
+=======
+        });         
+        
+>>>>>>> 30d274607b4d8de5060c627e668b49a5156fa0d2
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
