@@ -18,7 +18,7 @@ public class LumiereOutput extends Connectable implements ComposantDigital {
 
     protected Noeud noeudEntree;
     
-    private boolean on;
+    private boolean actif;
     private transient Image lightOn;
     private transient Image lightOff;
 
@@ -26,7 +26,7 @@ public class LumiereOutput extends Connectable implements ComposantDigital {
         super(TypeComposant.LUMIERE_OUTPUT);
         cotesConnectes[0] = 1;
         
-        on = false;
+        actif = false;
         lightOn = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOn.png");
         lightOff = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOff.png");
     }
@@ -55,15 +55,15 @@ public class LumiereOutput extends Connectable implements ComposantDigital {
     
     
     public void switchOn() {
-        on = true;
+        actif = true;
     }
     
     public void switchOff() {
-        on = false;
+        actif = false;
     }
     
     public Image getImage() {
-        if (on == true) {
+        if (actif == true) {
             return lightOn;
         } else {
             return lightOff;

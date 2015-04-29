@@ -6,12 +6,13 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
+import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
 
 /**
  *
  * @author blood_000
  */
-public interface ComposantDigital {
+public interface ComposantDigital extends Composant {
 
     public void updateActif();
 
