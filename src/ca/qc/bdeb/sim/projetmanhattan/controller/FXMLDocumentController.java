@@ -374,7 +374,6 @@ public class FXMLDocumentController implements Initializable {
                 
                 
             }
-
         });  
         
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
@@ -389,7 +388,6 @@ public class FXMLDocumentController implements Initializable {
                     }
                 }
             }
-
         }); 
         
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
@@ -398,7 +396,6 @@ public class FXMLDocumentController implements Initializable {
                 numerique.setDisable(true);
                 analogue.setDisable(false);
             }
-
         }); 
         
         mnuItemNumerique.setOnAction(new EventHandler<ActionEvent>() {
@@ -407,7 +404,6 @@ public class FXMLDocumentController implements Initializable {
                 analogue.setDisable(true);
                 numerique.setDisable(false);
             }
-
         });         
         
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
