@@ -327,7 +327,7 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemLoad = new MenuItem("Load");
         MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
-        MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:play.png")));
+        MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/play.png")));
         MenuItem mnuItemWipe = new MenuItem("Wipe");
         
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
