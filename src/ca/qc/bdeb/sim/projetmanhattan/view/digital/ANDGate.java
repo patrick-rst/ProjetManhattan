@@ -22,6 +22,10 @@ public class ANDGate extends LogicGateAbstraite{
         addImage("and1.png");
         addImage("and2.png");
         addImage("and3.png");
+        
+        addImageActif("and1on.png");
+        addImageActif("and2on.png");
+        addImageActif("and3on.png");    
     }
     
 

@@ -277,6 +277,10 @@ public class FXMLDocumentController implements Initializable {
             composantEditor.setContentNode(box);
             composantEditor.show((ImageView) event.getSource(), 15);
 
+        } else if (event.getButton().equals(MouseButton.SECONDARY)) {
+            
+            source.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+            
         }
     }
         
@@ -345,13 +349,7 @@ public class FXMLDocumentController implements Initializable {
                 if (analogue.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
                     circuitAnalogue.analyserCircuit();
- 
-//                    for (Connectable[] tab : connectables2D) {
-//                        for (Connectable c : tab) {
-//                            System.out.println(c);
-//                        }
-//                    }                    
-
+                    
                     for (int i=0; i<10; i++) {
                         for (int j=0; j<10; j++) {
                             ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);

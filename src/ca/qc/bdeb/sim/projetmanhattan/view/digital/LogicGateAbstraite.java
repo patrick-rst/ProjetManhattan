@@ -21,6 +21,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     
     protected String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
     protected transient ArrayList<Image> listeImages;
+    protected transient ArrayList<Image> listeImagesActif;
     protected int imageIndex;
     
     protected byte typeGate;
@@ -37,6 +38,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         super(typeComposant);
 
         this.listeImages = new ArrayList();
+        this.listeImagesActif = new ArrayList();
         this.imageIndex = 0;   
 
         imageIndex = 0;
@@ -147,12 +149,21 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
         this.listeImages.add(new Image(this.imageFolder + filename));
     }
     
+    public void addImageActif(String filename) {
+        this.listeImagesActif.add(new Image(this.imageFolder + filename));
+    }    
+    
     public void nextImage() {
         this.imageIndex = (this.imageIndex + 1) % this.listeImages.size();
     }
 
     public Image getImage() {
-        return this.listeImages.get(this.imageIndex);
+        if (actif == true) {
+            return this.listeImagesActif.get(this.imageIndex);
+        } else {
+            return this.listeImages.get(this.imageIndex);
+        }
+        
     }
 
 
