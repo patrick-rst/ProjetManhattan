@@ -360,22 +360,22 @@ public class FXMLDocumentController implements Initializable {
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
-                                System.out.println("RESISTANCE");
-                                System.out.println("Resistance:"+r.getResistance());
-                                System.out.println("Courant:"+Math.abs(r.getCourant()));
+                                //System.out.println("RESISTANCE");
+                                //System.out.println("Resistance:"+r.getResistance());
+                                //System.out.println("Courant:"+Math.abs(r.getCourant()));
                             } else if (connectables2D[i][j] instanceof SourceFEM) {
                                 SourceFEM s = (SourceFEM) connectables2D[i][j];
                                 String info = String.format("Tension: %.2f\nCourant: %.2f",s.getForceElectroMotrice(), s.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);                                
-                                System.out.println("SOURCE");
-                                System.out.println("FEM:"+s.getForceElectroMotrice());
-                                System.out.println("Courant:"+Math.abs(s.getCourant()));
+                                //System.out.println("SOURCE");
+                                //System.out.println("FEM:"+s.getForceElectroMotrice());
+                                //System.out.println("Courant:"+Math.abs(s.getCourant()));
                             } else if (connectables2D[i][j] instanceof FilAbstrait) {
                                 FilAbstrait f = (FilAbstrait) connectables2D[i][j];
-                                System.out.println("FIL");
-                                System.out.println("FEM:"+f.getTension());
+                                //System.out.println("FIL");
+                                //System.out.println("FEM:"+f.getTension());
                             }
                         }
                     }  

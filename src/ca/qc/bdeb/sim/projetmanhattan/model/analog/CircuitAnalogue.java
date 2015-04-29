@@ -111,12 +111,16 @@ public class CircuitAnalogue implements Circuit {
         double v2 = 0;
 
         for (Resistance resistance : resistances) {
+            v1 = 0;
+            v2 = 0;
             for (Noeud noeud : noeuds) {
                 if (noeud.getResistances().contains(resistance)) {
                     if (v1 == 0) {
                         v1 = noeud.getTension();
+                        System.out.println("v1 " + v1);
                     } else {
                         v2 = noeud.getTension();
+                        System.out.println("v2 " + v2);
                     }
                 }
             }
@@ -138,34 +142,17 @@ public class CircuitAnalogue implements Circuit {
         for (int i = 0; i < matriceZ.length; ++i) {
             matZ.set(i, matriceZ[i]);
         }
-        ////////////////////////////////////////////////////////////////////////
-        for (int i = 0; i < matA.numRows; ++i) {
-            for (int j = 0; j < matA.numCols; ++j) {
-                System.out.print(matA.get(i, j) + " ");
-            }
-            System.out.println("a");
-        }
-        for (int i = 0; i < matZ.numRows; ++i) {
-            for (int j = 0; j < matZ.numCols; ++j) {
-                System.out.print(matZ.get(i, j) + " ");
-            }
-            System.out.println("z");
-        }
-        ////////////////////////////////////////////////////////////////////////
+
         DenseMatrix64F matX = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, 1);
         if (!CommonOps.solve(matA, matZ, matX)) {
             throw new IllegalArgumentException("Singular matrix");
         }
-        ////////////////////////////////////////////////////////////////////////
 
         for (int i = 0; i < matX.numRows; ++i) {
             for (int j = 0; j < matX.numCols; ++j) {
                 matriceX[i] = matX.get(i, j);
-                System.out.print(matX.get(i, j) + " ");
             }
-            System.out.println("x");
         }
-        ////////////////////////////////////////////////////////////////////////
     }
 
     public void construireMatriceZ() {
