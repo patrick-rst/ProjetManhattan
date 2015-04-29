@@ -27,8 +27,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -43,6 +46,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -58,6 +62,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 
 import org.controlsfx.control.PopOver;
@@ -347,21 +352,30 @@ public class FXMLDocumentController implements Initializable {
 //                        }
 //                    }                    
 
-                    for (Connectable con[] : connectables2D) {
-                        for (Connectable c : con) {
-                            if (c instanceof Resistance) {
+                    for (int i=0; i<10; i++) {
+                        for (int j=0; j<10; j++) {
+                            ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
+                            if (connectables2D[i][j] instanceof Resistance) {
+                                Resistance r = (Resistance) connectables2D[i][j];
+                                String info = String.format("Résistance: %.2f\nCourant: %.2f",r.getResistance(), r.getCourant());
+                                Tooltip tooltip = new Tooltip(info);
+                                hackTooltipStartTiming(tooltip);
+                                Tooltip.install(imgV, tooltip);
                                 System.out.println("RESISTANCE");
-                                Resistance r = (Resistance) c;
                                 System.out.println("Resistance:"+r.getResistance());
                                 System.out.println("Courant:"+r.getCourant());
-                            } else if (c instanceof SourceFEM) {
+                            } else if (connectables2D[i][j] instanceof SourceFEM) {
+                                SourceFEM s = (SourceFEM) connectables2D[i][j];
+                                String info = String.format("Tension: %.2f\nCourant: %.2f",s.getForceElectroMotrice(), s.getCourant());
+                                Tooltip tooltip = new Tooltip(info);
+                                hackTooltipStartTiming(tooltip);
+                                Tooltip.install(imgV, tooltip);                                
                                 System.out.println("SOURCE");
-                                SourceFEM s = (SourceFEM) c;
                                 System.out.println("FEM:"+s.getForceElectroMotrice());
                                 System.out.println("Courant:"+s.getCourant());
                             }
                         }
-                    }
+                    }  
                     
                 } else if (numerique.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
@@ -693,7 +707,24 @@ public class FXMLDocumentController implements Initializable {
 
     public Connectable[][] getCircuit() {
         return connectables2D;
-    }        
+    }     
+    
+    public static void hackTooltipStartTiming(Tooltip tooltip) {
+        try {
+            Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
+            fieldBehavior.setAccessible(true);
+            Object objBehavior = fieldBehavior.get(tooltip);
+
+            Field fieldTimer = objBehavior.getClass().getDeclaredField("activationTimer");
+            fieldTimer.setAccessible(true);
+            Timeline objTimer = (Timeline) fieldTimer.get(objBehavior);
+
+            objTimer.getKeyFrames().clear();
+            objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }    
     
 
 
