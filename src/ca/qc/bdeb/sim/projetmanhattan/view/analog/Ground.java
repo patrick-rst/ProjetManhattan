@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.qc.bdeb.sim.projetmanhattan.view.analog;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
@@ -11,7 +6,8 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author blood_000
+ * @author Marc-Antoine Lalonde
+ * @author Patrick Richer St-Onge
  */
 public class Ground extends Connectable implements Composant {
 

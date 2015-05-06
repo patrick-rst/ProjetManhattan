@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 /**
  * Main
- *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
  */

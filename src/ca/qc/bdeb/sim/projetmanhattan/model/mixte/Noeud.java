@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author blood_000
+ * @author Marc-Antoine Lalonde
+ * @author Patrick Richer St-Onge
  */
 public class Noeud {
 

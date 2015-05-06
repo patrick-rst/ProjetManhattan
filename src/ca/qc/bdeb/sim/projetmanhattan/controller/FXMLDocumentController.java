@@ -69,7 +69,6 @@ import org.controlsfx.control.PopOver;
 
 /**
  * Controlleur
- *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
  */
@@ -428,7 +427,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void writeFile() {
-        Sauvegarde save = new Sauvegarde();
+        Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
 
 //                ObjectOutputStream fichier = null;
