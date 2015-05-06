@@ -22,6 +22,9 @@ public abstract class ImageChangeable extends Connectable {
 
     public ImageChangeable(TypeComposant typeComposant) {
         super(typeComposant);
+        this.listeImages = new ArrayList();
+        this.listeImagesActif = new ArrayList();
+        this.imageIndex = 0;
     }
 
     public abstract boolean isActif();

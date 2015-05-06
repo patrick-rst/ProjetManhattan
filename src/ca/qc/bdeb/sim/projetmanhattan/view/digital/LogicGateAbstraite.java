@@ -30,13 +30,7 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
     public LogicGateAbstraite(TypeComposant typeComposant) {
         super(typeComposant);
 
-        this.listeImages = new ArrayList();
-        this.listeImagesActif = new ArrayList();
-        this.imageIndex = 0;
-
-        imageIndex = 0;
         typeGate = -1;
-        listeImages = new ArrayList();
         switchGate();
 
     }
@@ -140,11 +134,5 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
     public boolean isPassee() {
         return passee;
     }
-
-
-    
-
-
-
 
 }
