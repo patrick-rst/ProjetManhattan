@@ -63,6 +63,7 @@ public class CircuitAnalogue implements Circuit {
         grounds.add(g);
     }
 
+    @Override
     public void analyserCircuit() {
         boolean grounde = selectionnerNoeudGround();
         if (grounde) {

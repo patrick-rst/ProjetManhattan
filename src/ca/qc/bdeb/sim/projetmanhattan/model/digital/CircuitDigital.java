@@ -54,6 +54,7 @@ public class CircuitDigital implements Circuit, Runnable {
         delaiTic = 25;
     }
 
+    @Override
     public void analyserCircuit() {
         run = true;
 
@@ -106,6 +107,7 @@ public class CircuitDigital implements Circuit, Runnable {
 
     @Override
     public void run() {
+        System.out.println("on++++++");
         int nombreBouclesParCycle = 10;
         int compteBoucles = 0;
         long tempsDebut;
