@@ -23,10 +23,10 @@ public abstract class Connectable implements Serializable {
         return cotesConnectes;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return cotesConnectes[0] + " " + cotesConnectes[1] + " " + cotesConnectes[2] + " " + cotesConnectes[3] + " ";
-    }
+    }*/
 
     public void rotater() {
         byte temp = cotesConnectes[3];
