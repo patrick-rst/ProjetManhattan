@@ -92,6 +92,7 @@ public class CircuitDigital implements Circuit {
     
     public void stopAnalyse() {
         run = false;
+        resetGates();
     }
     
 
@@ -113,6 +114,12 @@ public class CircuitDigital implements Circuit {
     
     public void ajouterLumiere(LumiereOutput lumiere) {
         lumieres.add(lumiere);
+    }
+    
+    public void resetGates(){
+        for(LogicGateAbstraite gate: gates){
+            gate.resetConnexions();
+        }
     }
     
     @Override
