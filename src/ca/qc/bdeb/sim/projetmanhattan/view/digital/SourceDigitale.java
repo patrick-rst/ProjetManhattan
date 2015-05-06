@@ -22,7 +22,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
         listeOutput = new ArrayList<>();
-        listeOutput.add(true);
+        setListeOutput("11110000");
         cotesConnectes[1] = 1;
         repeter = true;
         addImageActif("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/sourceDigitaleon.png");

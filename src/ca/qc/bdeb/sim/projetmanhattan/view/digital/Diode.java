@@ -32,7 +32,7 @@ public class Diode extends LogicGateAbstraite {
             System.out.println("Erreur: Logic Gate mal connectée");
         }
     }
-    
+
     @Override
     public void switchGate() {
     }

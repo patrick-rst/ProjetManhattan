@@ -74,16 +74,15 @@ import org.controlsfx.control.PopOver;
 
 /**
  * Controlleur
+ *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
  */
 public class FXMLDocumentController implements Initializable {
 
- 
-    
     @FXML
     BorderPane pane;
-    
+
     Stage stage;
 
     @FXML
@@ -300,7 +299,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
         numerique.setDisable(true);
-        stage = (Stage) pane.getScene().getWindow(); 
+        // stage = (Stage) pane.getScene().getWindow(); 
     }
 
     public void setCircuitAnalogue(CircuitAnalogue c) {
@@ -437,7 +436,7 @@ public class FXMLDocumentController implements Initializable {
 
         pane.setTop(mnuBar);
     }
-    
+
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Image");
@@ -446,7 +445,6 @@ public class FXMLDocumentController implements Initializable {
             System.out.println("TEST");
         }
     }
-    
 
     private void writeFile() {
         Sauvegarde save = new Sauvegarde(10);

@@ -16,7 +16,7 @@ public class SourceFEM extends Connectable implements Composant {
 
     public SourceFEM() {
         super(TypeComposant.SOURCE_TENSION);
-imageActive = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/source_tension.png");
+        imageActive = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/source_tension.png");
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = -1;

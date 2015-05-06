@@ -16,7 +16,7 @@ public class Resistance extends Connectable implements Composant {
 
     public Resistance() {
         super(TypeComposant.RESISTANCE);
-imageActive = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/resistance.png");
+        imageActive = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/resistance.png");
         this.cotesConnectes = new byte[4];
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
