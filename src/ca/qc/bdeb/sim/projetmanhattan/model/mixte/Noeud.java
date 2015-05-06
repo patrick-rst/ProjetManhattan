@@ -33,6 +33,8 @@ public class Noeud {
         sourcesCourant = new ArrayList<>();
         sourcesFEMNeg = new ArrayList<>();
         sourcesFEMPos = new ArrayList<>();
+        entrees = new ArrayList<>();
+        sorties = new ArrayList<>();
     }
 
     public void ajouterEntree(ComposantDigital comp) {

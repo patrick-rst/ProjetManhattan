@@ -189,7 +189,7 @@ public class FXMLDocumentController implements Initializable {
 
             compAllumable.nextImage();
             imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
-        } 
+        }
     }
 
     @FXML
@@ -372,6 +372,7 @@ public class FXMLDocumentController implements Initializable {
 
                 } else if (numerique.isDisabled() == false) {
                     //Numérique
+
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
                     circuitNumerique.analyserCircuit();
                 }
