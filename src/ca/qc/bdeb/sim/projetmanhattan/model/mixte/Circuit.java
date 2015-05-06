@@ -8,6 +8,8 @@ package ca.qc.bdeb.sim.projetmanhattan.model.mixte;
 public interface Circuit {
 
     public void wipe();
+
     public void analyserCircuit();
+
     public void ajouterNoeud(Noeud noeud);
 }

@@ -14,10 +14,10 @@ public class XNORGate extends LogicGateAbstraite {
         addImage("xnor1.png");
         addImage("xnor2.png");
         addImage("xnor3.png");
-        
+
         addImageActif("xnor1on.png");
         addImageActif("xnor2on.png");
-        addImageActif("xnor3on.png");      
+        addImageActif("xnor3on.png");
         imageActive = listeImages.get(0);
     }
 

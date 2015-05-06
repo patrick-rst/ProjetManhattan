@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 /**
  * Main
+ *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
  */
@@ -27,11 +28,11 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("view/mixte/FXMLDocument.fxml"));
         Parent root = (Parent) loader.load();
         FXMLDocumentController ctrl = loader.getController();
-        
+
         ctrl.setCircuitAnalogue(circuitAnalogue);
         ctrl.setCircuitNumerique(circuitNumerique);
         ctrl.setCircuitGraphique(circuitGraphique);
-        
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

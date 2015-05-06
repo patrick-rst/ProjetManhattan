@@ -19,18 +19,18 @@ import java.util.logging.Logger;
  * @author Patrick Richer St-Onge
  */
 public class CircuitDigital implements Circuit {
-    
+
     private ArrayList<Noeud> noeuds;
     private ArrayList<Diode> diodes;
     private ArrayList<SourceDigitale> sourcesDigitales;
     private ArrayList<LumiereOutput> lumieres;
     private ArrayList<LogicGateAbstraite> gates;
     private ArrayList<LogicGateAbstraite> gatesABoucler;
-    
+
     private boolean run;
     private Thread thread;
     private int delaiTic;
-    
+
     public CircuitDigital() {
         noeuds = new ArrayList<>();
         diodes = new ArrayList<>();
@@ -38,12 +38,12 @@ public class CircuitDigital implements Circuit {
         lumieres = new ArrayList<>();
         gates = new ArrayList<>();
         gatesABoucler = new ArrayList<>();
-        
+
         thread = new Thread();
-        
+
         delaiTic = 25;
     }
-    
+
     @Override
     public void analyserCircuit() {
         run = true;
@@ -54,7 +54,7 @@ public class CircuitDigital implements Circuit {
                 int compteBoucles = 0;
                 long tempsDebut;
                 long delaiSleep;
-                
+
                 while (run) {
                     tempsDebut = System.currentTimeMillis();
                     ////////////////////////////////////////////////////////////////////
@@ -66,13 +66,13 @@ public class CircuitDigital implements Circuit {
                             ajouterGatesABoucler();
                         }
                     }
-                    
+
                     for (LogicGateAbstraite gate : gatesABoucler) {
                         gate.updateActif();
                     }
-                    
+
                     ajouterGatesABoucler();
-                    
+
                     ++compteBoucles;
                     ////////////////////////////////////////////////////////////////////
                     delaiSleep = delaiTic - System.currentTimeMillis() + tempsDebut;
@@ -82,46 +82,42 @@ public class CircuitDigital implements Circuit {
                         System.out.println("InterruptedException");
                         Logger.getLogger(CircuitDigital.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 }
             }
         };
         thread.setDaemon(true);
         thread.start();
     }
-    
+
     public void stopAnalyse() {
         run = false;
         resetGates();
     }
-    
 
-    
     public void ajouterSourceDigitale(SourceDigitale sourceDigitale) {
         sourcesDigitales.add(sourceDigitale);
     }
-    
 
-    
     public void ajouterDiode(Diode diode) {
         diodes.add(diode);
     }
-    
+
     @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
-    
+
     public void ajouterLumiere(LumiereOutput lumiere) {
         lumieres.add(lumiere);
     }
-    
-    public void resetGates(){
-        for(LogicGateAbstraite gate: gates){
+
+    public void resetGates() {
+        for (LogicGateAbstraite gate : gates) {
             gate.resetConnexions();
         }
     }
-    
+
     @Override
     public void wipe() {
         noeuds.clear();
@@ -130,7 +126,7 @@ public class CircuitDigital implements Circuit {
         gates.clear();
         gatesABoucler.clear();
     }
-    
+
     public void ajouterGatesABoucler() {
         for (LogicGateAbstraite gate : gates) {
             if (gate.isABoucler()) {
@@ -141,9 +137,9 @@ public class CircuitDigital implements Circuit {
             gate.resetBools();
         }
     }
-    
+
     public void ajouterGate(LogicGateAbstraite gate) {
         gates.add(gate);
     }
-    
+
 }

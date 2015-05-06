@@ -33,8 +33,8 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
     public boolean isActif() {
         return actif;
     }
-    
-    public void resetConnexions(){
+
+    public void resetConnexions() {
         noeudEntreeA = null;
         noeudEntreeB = null;
         noeudSortie = null;
@@ -79,9 +79,10 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
 
     protected void transfererCourant() {
         passee = true;
+
         if (actifTemp != actif) {
+            System.out.println(this);
             if (actif && noeudSortie != null) {
-                
                 noeudSortie.augmenterTensionDigital();
             } else {
                 noeudSortie.diminuerTensionDigital();
