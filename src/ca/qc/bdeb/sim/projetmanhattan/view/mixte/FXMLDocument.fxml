@@ -162,7 +162,7 @@
                                           <children>
                                               <ImageView id="filDroit" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                   <image>
-                                                      <Image url="@fil_droit.png" />
+                                                      <Image url="@../img/fil_droit.png" />
                                                   </image>
                                                   <FlowPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -170,7 +170,7 @@
                                               </ImageView>
                                               <ImageView id="filCoin" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                   <image>
-                                                      <Image url="@fil_coin.png" />
+                                                      <Image url="@../img/fil_coin.png" />
                                                   </image>
                                                   <FlowPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -178,7 +178,7 @@
                                               </ImageView>
                                               <ImageView id="filT" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                   <image>
-                                                      <Image url="@fil_t.png" />
+                                                      <Image url="@../img/fil_t.png" />
                                                   </image>
                                                   <FlowPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -186,7 +186,7 @@
                                               </ImageView>
                                               <ImageView id="filCroix" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                   <image>
-                                                      <Image url="@fil_croix.png" />
+                                                      <Image url="@../img/fil_croix.png" />
                                                   </image>
                                                   <FlowPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -208,7 +208,7 @@
                                                   <children>
                                                       <ImageView id="sourceTension" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                           <image>
-                                                              <Image url="@../analog/source_tension.png" />
+                                                              <Image url="@../img/source_tension.png" />
                                                           </image>
                                              <StackPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -220,7 +220,7 @@
                                        <children>
                                           <ImageView id="sourceCourant" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../analog/source_courant.png" />
+                                                <Image url="@../img/source_courant.png" />
                                              </image>
                                              <StackPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -232,7 +232,7 @@
                                                   <children>
                                                       <ImageView id="resistance" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                                           <image>
-                                                              <Image url="@../analog/resistance.png" />
+                                                              <Image url="@../img/resistance.png" />
                                                           </image>
                                              <StackPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -244,7 +244,7 @@
                                        <children>
                                           <ImageView id="ground" fitHeight="64.0" fitWidth="64.0" onDragDetected="#dragComposant" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../analog/ground.png" />
+                                                <Image url="@../img/ground.png" />
                                              </image>
                                              <StackPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
