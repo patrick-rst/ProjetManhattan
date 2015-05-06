@@ -81,10 +81,11 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
         passee = true;
 
         if (actifTemp != actif) {
-            System.out.println(this);
             if (actif && noeudSortie != null) {
+                System.out.println("on");
                 noeudSortie.augmenterTensionDigital();
             } else {
+                System.out.println("off");
                 noeudSortie.diminuerTensionDigital();
             }
         }

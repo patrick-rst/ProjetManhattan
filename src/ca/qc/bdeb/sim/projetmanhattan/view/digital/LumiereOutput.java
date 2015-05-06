@@ -26,9 +26,9 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
     @Override
     public void updateActif() {
         if (noeudEntree.isActif()) {
-
+            actif = true;
         } else {
-
+            actif = false;
         }
     }
 
