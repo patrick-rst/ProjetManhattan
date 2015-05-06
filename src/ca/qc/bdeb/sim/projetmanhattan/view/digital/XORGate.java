@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * xor open the template in the editor.
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
@@ -17,7 +17,12 @@ public class XORGate extends LogicGateAbstraite {
         super(TypeComposant.XOR_GATE);
         addImage("xor1.png");
         addImage("xor2.png");
-        addImage("xor3.png");        
+        addImage("xor3.png");
+        
+        addImageActif("xor1on.png");
+        addImageActif("xor2on.png");
+        addImageActif("xor3on.png");        
+        imageActive = listeImages.get(0);
     }
 
     

@@ -19,6 +19,8 @@ public class FilCroix extends FilAbstrait {
         cotesConnectes[1] = 1;
         cotesConnectes[2] = 1;
         cotesConnectes[3] = 1;
+        addImage("fil_croix.png");
+        addImageActif("fil_croixon.png");
     }
 
     @Override

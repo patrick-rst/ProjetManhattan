@@ -5,8 +5,6 @@
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
-
 /**
  *
  * @author blood_000
@@ -17,7 +15,8 @@ public class FilCoin extends FilAbstrait {
         super();
         cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
-
+        addImage("fil_coin.png");
+        addImageActif("fil_coinon.png");
     }
 
     @Override

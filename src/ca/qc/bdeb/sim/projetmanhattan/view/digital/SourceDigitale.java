@@ -28,6 +28,9 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         listeOutput = new ArrayList<>();
         cotesConnectes[0] = 1;
         repeter = true;
+        addImageActif("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/sourceDigitaleon.png");
+        addImage("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/sourceDigitale.png");
+        imageActive = listeImages.get(0);
     }
 
     public void flipRepeter() {

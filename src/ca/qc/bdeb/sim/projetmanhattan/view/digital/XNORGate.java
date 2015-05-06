@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * xnor open the template in the editor.
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
@@ -17,7 +17,12 @@ public class XNORGate extends LogicGateAbstraite {
         super(TypeComposant.XNOR_GATE);
         addImage("xnor1.png");
         addImage("xnor2.png");
-        addImage("xnor3.png");        
+        addImage("xnor3.png");
+        
+        addImageActif("xnor1on.png");
+        addImageActif("xnor2on.png");
+        addImageActif("xnor3on.png");      
+        imageActive = listeImages.get(0);
     }
 
     @Override

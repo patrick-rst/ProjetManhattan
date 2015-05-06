@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * not open the template in the editor.
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
@@ -19,6 +19,13 @@ public class NOTGate extends LogicGateAbstraite  {
     public NOTGate() {
         super(TypeComposant.NOTGATE);
         addImage("not1.png");
+        addImage("not2.png");
+        addImage("not3.png");
+        
+        addImageActif("not1on.png");
+        addImageActif("not2on.png");
+        addImageActif("not3on.png");  
+        imageActive = listeImages.get(0);
     }
 
     @Override

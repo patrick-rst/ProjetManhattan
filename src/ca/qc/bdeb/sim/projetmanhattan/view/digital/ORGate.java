@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * or open the template in the editor.
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
@@ -20,6 +20,11 @@ public class ORGate extends LogicGateAbstraite  {
         addImage("or1.png");
         addImage("or2.png");
         addImage("or3.png");
+        
+        addImageActif("or1on.png");
+        addImageActif("or2on.png");
+        addImageActif("or3on.png");  
+        imageActive = listeImages.get(0);
     }
         
 

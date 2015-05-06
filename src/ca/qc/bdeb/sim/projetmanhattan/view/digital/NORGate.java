@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * nor open the template in the editor.
  */
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
@@ -18,6 +18,11 @@ public class NORGate extends LogicGateAbstraite {
         addImage("nor1.png");
         addImage("nor2.png");
         addImage("nor3.png");
+        
+        addImageActif("nor1on.png");
+        addImageActif("nor2on.png");
+        addImageActif("nor3on.png");  
+        imageActive = listeImages.get(0);
     }
 
     @Override

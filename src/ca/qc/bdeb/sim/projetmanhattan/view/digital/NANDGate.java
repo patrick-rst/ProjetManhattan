@@ -18,6 +18,11 @@ public class NANDGate extends LogicGateAbstraite {
         addImage("nand1.png");
         addImage("nand2.png");
         addImage("nand3.png");
+        
+        addImageActif("nand1on.png");
+        addImageActif("nand2on.png");
+        addImageActif("nand3on.png");  
+        imageActive = listeImages.get(0);
     }
 
     @Override

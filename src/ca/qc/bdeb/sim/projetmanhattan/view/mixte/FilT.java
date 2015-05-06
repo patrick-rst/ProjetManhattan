@@ -18,7 +18,8 @@ public class FilT extends FilAbstrait {
         cotesConnectes[0] = 1;
         cotesConnectes[1] = 1;
         cotesConnectes[2] = 1;
-
+        addImage("fil_t.png");
+        addImageActif("fil_ton.png");
     }
 
     @Override

@@ -7,6 +7,7 @@ package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import javafx.scene.image.Image;
 
 
 /**
@@ -26,6 +27,7 @@ public class ANDGate extends LogicGateAbstraite{
         addImageActif("and1on.png");
         addImageActif("and2on.png");
         addImageActif("and3on.png");    
+        imageActive = listeImages.get(0);
     }
     
 

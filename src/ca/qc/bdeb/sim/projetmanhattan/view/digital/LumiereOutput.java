@@ -18,16 +18,14 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
 
     protected Noeud noeudEntree;
 
-    private transient Image lightOn;
-    private transient Image lightOff;
-
     public LumiereOutput() {
         super(TypeComposant.LUMIERE_OUTPUT);
         cotesConnectes[0] = 1;
 
         actif = false;
-        lightOn = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOn.png");
-        lightOff = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOff.png");
+        addImageActif("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOn.png");
+        addImage("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOff.png");
+        imageActive = listeImages.get(0);
     }
 
     @Override
@@ -55,14 +53,6 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
 
     public void switchOff() {
         actif = false;
-    }
-
-    public Image getImage() {
-        if (actif == true) {
-            return lightOn;
-        } else {
-            return lightOff;
-        }
     }
 
     @Override

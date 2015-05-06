@@ -17,7 +17,8 @@ public class FilDroit extends FilAbstrait {
         super();
         cotesConnectes[0] = 1;
         cotesConnectes[2] = 1;
-
+        addImage("fil_droit.png");
+        addImageActif("fil_droiton.png");
     }
 
     @Override
