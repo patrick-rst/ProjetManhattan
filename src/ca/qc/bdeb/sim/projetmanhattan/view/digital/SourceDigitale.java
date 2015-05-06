@@ -22,7 +22,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
         listeOutput = new ArrayList<>();
-        setListeOutput("11110000");
+        setListeOutput("1100");
         cotesConnectes[1] = 1;
         repeter = true;
         addImageActif("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/sourceDigitaleon.png");
@@ -80,7 +80,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         actifTemp = actif;
         actif = lireOutput();
 
-        if (actifTemp != actif) {
+        if (actifTemp != actif && noeudSortie != null) {
             if (actif) {
                 noeudSortie.augmenterTensionDigital();
             } else {

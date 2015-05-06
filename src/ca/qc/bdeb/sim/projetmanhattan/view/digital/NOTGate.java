@@ -34,7 +34,7 @@ public class NOTGate extends LogicGateAbstraite {
             actif = true;
             System.out.println("actif");
         } else {
-            actif = noeudEntreeA.isActif();
+            actif = !noeudEntreeA.isActif();
         }
         transfererCourant();
     }

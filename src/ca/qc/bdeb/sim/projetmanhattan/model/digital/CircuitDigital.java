@@ -1,17 +1,16 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.digital;
 
+import ca.qc.bdeb.sim.projetmanhattan.controller.FXMLDocumentController;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.Diode;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.NOTGate;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 
 /**
  *
@@ -26,6 +25,7 @@ public class CircuitDigital implements Circuit {
     private ArrayList<LumiereOutput> lumieres;
     private ArrayList<LogicGateAbstraite> gates;
     private ArrayList<LogicGateAbstraite> gatesABoucler;
+    private FXMLDocumentController controller;
 
     private boolean run;
     private Thread thread;
@@ -42,6 +42,10 @@ public class CircuitDigital implements Circuit {
         thread = new Thread();
 
         delaiTic = 25;
+    }
+
+    public void setController(FXMLDocumentController controller) {
+        this.controller = controller;
     }
 
     @Override
@@ -73,6 +77,12 @@ public class CircuitDigital implements Circuit {
 
                     ajouterGatesABoucler();
 
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            controller.updateCircuitNumerique();
+                        }
+                    });
                     ++compteBoucles;
                     ////////////////////////////////////////////////////////////////////
                     delaiSleep = delaiTic - System.currentTimeMillis() + tempsDebut;

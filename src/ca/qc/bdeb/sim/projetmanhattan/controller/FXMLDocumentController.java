@@ -332,6 +332,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void setCircuitNumerique(CircuitDigital c) {
         this.circuitNumerique = c;
+        circuitNumerique.setController(this);
     }
 
     public void setCircuitGraphique(AnalyseC cg) {

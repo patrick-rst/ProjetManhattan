@@ -97,6 +97,7 @@ public class Noeud {
 
     public void augmenterTensionDigital() {
         ++tension;
+        setTension(tension);
         if (tension == 1) {
             for (ComposantDigital comp : sorties) {
                 comp.updateActif();
@@ -106,6 +107,7 @@ public class Noeud {
 
     public void diminuerTensionDigital() {
         --tension;
+        setTension(tension);
         if (tension == 0) {
             for (ComposantDigital comp : sorties) {
                 comp.updateActif();
