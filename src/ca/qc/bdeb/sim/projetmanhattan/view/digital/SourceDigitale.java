@@ -6,7 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.util.ArrayList;
 
@@ -14,17 +14,14 @@ import java.util.ArrayList;
  *
  * @author blood_000
  */
-public class SourceDigitale extends Connectable implements ComposantDigital {
+public class SourceDigitale extends ImageChangeable implements ComposantDigital {
 
     private ArrayList<Boolean> listeOutput;
     private int indexOutput;
     private boolean repeter;
 
     private Noeud noeudSortie;
-    private boolean actif;
     private boolean actifTemp;
-    
-
 
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
@@ -100,6 +97,11 @@ public class SourceDigitale extends Connectable implements ComposantDigital {
     @Override
     public void ajouterNoeudSortie(Noeud noeud) {
         this.noeudSortie = noeud;
+    }
+
+    @Override
+    public boolean isActif() {
+        return actif;
     }
 
 }

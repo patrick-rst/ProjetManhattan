@@ -12,7 +12,6 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
-import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NORGate;
@@ -22,6 +21,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XNORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -65,7 +65,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
-
 import org.controlsfx.control.PopOver;
 
 /**
@@ -76,29 +75,27 @@ import org.controlsfx.control.PopOver;
  */
 public class FXMLDocumentController implements Initializable {
 
-    
     @FXML
     BorderPane pane;
 
     @FXML
     GridPane grid;
-    
+
     @FXML
     ImageView andGate;
-    
+
     @FXML
     TitledPane analogue;
-    
+
     @FXML
     TitledPane numerique;
-    
+
     @FXML
-    TitledPane mixte;    
-    
+    TitledPane mixte;
+
     int mouseRow;
     int mouseColumn;
-    
-    
+
     Connectable[][] connectables2D = new Connectable[10][10];
 
     PopOver composantEditor = new PopOver();
@@ -106,9 +103,6 @@ public class FXMLDocumentController implements Initializable {
     CircuitAnalogue circuitAnalogue;
     CircuitDigital circuitNumerique;
     AnalyseC circuitGraphique;
-
-    
-    
 
     @FXML
     private void dragComposant(MouseEvent event) {
@@ -175,8 +169,6 @@ public class FXMLDocumentController implements Initializable {
         event.consume();
     }
 
-
-
     @FXML
     private void keyPressed(KeyEvent event) {
         if (event.getCode().equals(KeyCode.P)) {
@@ -184,19 +176,21 @@ public class FXMLDocumentController implements Initializable {
             printCircuitArray();
         } else if (event.getCode().equals(KeyCode.M)) {
             System.out.println("M pressed");
-            
-            ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
-            
-            if (connectables2D[mouseRow][mouseColumn] instanceof LogicGateAbstraite) {
-                LogicGateAbstraite gate = (LogicGateAbstraite) connectables2D[mouseRow][mouseColumn];
 
-                gate.nextImage();
-                imgView.setImage(gate.getImage());                
-            }
+            changeImage();
 
-            
-           
-        }    
+        }
+    }
+
+    public void changeImage() {
+        ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
+
+        if (connectables2D[mouseRow][mouseColumn] instanceof ImageChangeable) {
+            ImageChangeable compAllumable = (ImageChangeable) connectables2D[mouseRow][mouseColumn];
+
+            compAllumable.nextImage();
+            imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
+        }
     }
 
     @FXML
@@ -228,7 +222,7 @@ public class FXMLDocumentController implements Initializable {
                 lblUnite.setText("Volt");
                 SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
                 txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
-            } else if (id.equals("sourceCourant")) { 
+            } else if (id.equals("sourceCourant")) {
                 lblComposant.setText("Source de courant");
                 lblUnite.setText("Ampère");
                 SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
@@ -256,7 +250,7 @@ public class FXMLDocumentController implements Initializable {
                     int row = Integer.parseInt(id.split(",")[0]);
                     int column = Integer.parseInt(id.split(",")[1]);
 
-                    TypeComposant typeComposant  = connectables2D[row][column].getTypeComposant();
+                    TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
 
                     try {
                         if (typeComposant == TypeComposant.RESISTANCE) {
@@ -279,43 +273,39 @@ public class FXMLDocumentController implements Initializable {
             composantEditor.show((ImageView) event.getSource(), 15);
 
         } else if (event.getButton().equals(MouseButton.SECONDARY)) {
-            
+
             source.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
-            
+
         }
     }
-        
-    
+
     @FXML
     private void mouseMoved(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
 
-        mouseRow = (int) y/50; 
-        mouseColumn = (int) x/50;
+        mouseRow = (int) y / 50;
+        mouseColumn = (int) x / 50;
     }
-    
-    
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
         numerique.setDisable(true);
     }
-    
+
     public void setCircuitAnalogue(CircuitAnalogue c) {
         this.circuitAnalogue = c;
     }
-    
+
     public void setCircuitNumerique(CircuitDigital c) {
         this.circuitNumerique = c;
-    }    
+    }
 
     public void setCircuitGraphique(AnalyseC cg) {
         this.circuitGraphique = cg;
-    }    
-    
+    }
+
     private void createMenu() {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
@@ -329,20 +319,20 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
         MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/play.png")));
         MenuItem mnuItemWipe = new MenuItem("Wipe");
-        
+
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 writeFile();
             }
-        });        
-        
+        });
+
         mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 readFile();
             }
-        });        
+        });
 
         mnuItemRun.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -350,13 +340,13 @@ public class FXMLDocumentController implements Initializable {
                 if (analogue.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
                     circuitAnalogue.analyserCircuit();
-                    
-                    for (int i=0; i<10; i++) {
-                        for (int j=0; j<10; j++) {
+
+                    for (int i = 0; i < 10; i++) {
+                        for (int j = 0; j < 10; j++) {
                             ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
                             if (connectables2D[i][j] instanceof Resistance) {
                                 Resistance r = (Resistance) connectables2D[i][j];
-                                String info = String.format("Résistance: %.2f\nCourant: %.2f",r.getResistance(), r.getCourant());
+                                String info = String.format("Résistance: %.2f\nCourant: %.2f", r.getResistance(), r.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
@@ -365,10 +355,10 @@ public class FXMLDocumentController implements Initializable {
                                 //System.out.println("Courant:"+Math.abs(r.getCourant()));
                             } else if (connectables2D[i][j] instanceof SourceFEM) {
                                 SourceFEM s = (SourceFEM) connectables2D[i][j];
-                                String info = String.format("Tension: %.2f\nCourant: %.2f",s.getForceElectroMotrice(), s.getCourant());
+                                String info = String.format("Tension: %.2f\nCourant: %.2f", s.getForceElectroMotrice(), s.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
-                                Tooltip.install(imgV, tooltip);                                
+                                Tooltip.install(imgV, tooltip);
                                 //System.out.println("SOURCE");
                                 //System.out.println("FEM:"+s.getForceElectroMotrice());
                                 //System.out.println("Courant:"+Math.abs(s.getCourant()));
@@ -378,22 +368,21 @@ public class FXMLDocumentController implements Initializable {
                                 //System.out.println("FEM:"+f.getTension());
                             }
                         }
-                    }  
-                    
+                    }
+
                 } else if (numerique.isDisabled() == false) {
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
-                    circuitNumerique.analyserCircuit();                      
+                    circuitNumerique.analyserCircuit();
                 }
-                
-                
+
             }
         });
 
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                for (int i=0; i<10; i++) {
-                    for (int j=0; j<10; j++) {
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
                         ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
                         imgV.setImage(null);
                         imgV.setId(null);
@@ -401,7 +390,7 @@ public class FXMLDocumentController implements Initializable {
                     }
                 }
             }
-        }); 
+        });
 
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -428,18 +417,18 @@ public class FXMLDocumentController implements Initializable {
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
 
-        mnuFile.getItems().addAll(mnuItemSave,mnuItemLoad);
-        mnuMode.getItems().addAll(mnuItemAnalogue,mnuItemNumerique);
-        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);        
-        mnuBar.getMenus().addAll(mnuFile,mnuMode,mnuAction);
+        mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
+        mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
+        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);
+        mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction);
 
-        pane.setTop(mnuBar);        
+        pane.setTop(mnuBar);
     }
-    
+
     private void writeFile() {
-               Sauvegarde save = new Sauvegarde();
-               save.setCircuit(connectables2D);
-               
+        Sauvegarde save = new Sauvegarde();
+        save.setCircuit(connectables2D);
+
 //                ObjectOutputStream fichier = null;
 //                try {
 //                    File f = new File("save1.ser");
@@ -461,19 +450,18 @@ public class FXMLDocumentController implements Initializable {
 //                        System.out.println("Erreur: I/O durant la fermeture");
 //                    }            
 //                } 
-               
-                try {
-                    FileOutputStream fout = new FileOutputStream("save2.ser");
-                    ObjectOutputStream oos = new ObjectOutputStream(fout);
-                    oos.writeObject(save);
-                    oos.close();
-                    System.out.println("Done");
+        try {
+            FileOutputStream fout = new FileOutputStream("save2.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(save);
+            oos.close();
+            System.out.println("Done");
 
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }         
-    }    
-    
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void readFile() {
 //                Sauvegarde save = null;
 //                ObjectInputStream fichier = null;
@@ -498,125 +486,113 @@ public class FXMLDocumentController implements Initializable {
 //                    }
 //                }
 //                circuit = save.getCircuit();
-                
-                Sauvegarde save = null;
-                
-                try {
-                    FileInputStream fin = new FileInputStream("save2.ser");
-                    ObjectInputStream ois = new ObjectInputStream(fin);
-                    save = (Sauvegarde) ois.readObject();
-                    ois.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {                
-                    ex.printStackTrace();
-                }                
-                
-                connectables2D = save.getCircuit();
 
-                String pathAnalog = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/analog/";
-                String pathMixte = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/";
-                String pathImg = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
-                
-                for (int row=0; row<10; row++) {
-                    for (int column=0; column<10; column++) {
-                        if (connectables2D[row][column] instanceof Resistance) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathAnalog+"resistance.png"));
-                            tmp.setId("resistance");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);
-                        }
-                        else if (connectables2D[row][column] instanceof SourceFEM) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathAnalog+"source_tension.png"));
-                            tmp.setId("sourceTension");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }
-                        else if (connectables2D[row][column] instanceof SourceCourant) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathAnalog+"source_courant.png"));
-                            tmp.setId("sourceCourant");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }     
-                        else if (connectables2D[row][column] instanceof Ground) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathAnalog+"ground.png"));
-                            tmp.setId("ground");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }                         
-                        else if (connectables2D[row][column] instanceof FilDroit) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathMixte+"fil_droit.png"));
-                            tmp.setId("filDroit");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        } 
-                        else if (connectables2D[row][column] instanceof FilCoin) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathMixte+"fil_coin.png"));
-                            tmp.setId("filCoin");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }
-                        else if (connectables2D[row][column] instanceof FilT) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathMixte+"fil_t.png"));
-                            tmp.setId("filT");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }
-                        else if (connectables2D[row][column] instanceof FilCroix) {
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathMixte+"fil_croix.png"));
-                            tmp.setId("filCroix");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }   
-                        else if (connectables2D[row][column] instanceof ANDGate) {
-                            //ANDGate gate = (ANDGate) connectables2D[row][column]; 
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathImg+"and1.png"));
-                            tmp.setId("andGate");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                            
-                        }  
-                        else if (connectables2D[row][column] instanceof ORGate) {
-                            //ORGate gate = (ORGate) connectables2D[row][column]; 
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathImg+"or1.png"));
-                            tmp.setId("orGate");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                               
-                        }  
-                        else if (connectables2D[row][column] instanceof NOTGate) {
-                            //NOTGate gate = (NOTGate) connectables2D[row][column]; 
-                            ImageView tmp = new ImageView();
-                            tmp.setImage(new Image(pathImg+"not1.png"));
-                            tmp.setId("notGate");
-                            initializeImageView(tmp);
-                            grid.add(tmp, column, row);                              
-                        }                          
-                    }
+        Sauvegarde save = null;
+
+        try {
+            FileInputStream fin = new FileInputStream("save2.ser");
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            save = (Sauvegarde) ois.readObject();
+            ois.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
+        connectables2D = save.getCircuit();
+
+        String pathAnalog = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/analog/";
+        String pathMixte = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/";
+        String pathImg = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
+
+        for (int row = 0; row < 10; row++) {
+            for (int column = 0; column < 10; column++) {
+                if (connectables2D[row][column] instanceof Resistance) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathAnalog + "resistance.png"));
+                    tmp.setId("resistance");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof SourceFEM) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathAnalog + "source_tension.png"));
+                    tmp.setId("sourceTension");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof SourceCourant) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathAnalog + "source_courant.png"));
+                    tmp.setId("sourceCourant");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof Ground) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathAnalog + "ground.png"));
+                    tmp.setId("ground");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof FilDroit) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathMixte + "fil_droit.png"));
+                    tmp.setId("filDroit");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof FilCoin) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathMixte + "fil_coin.png"));
+                    tmp.setId("filCoin");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof FilT) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathMixte + "fil_t.png"));
+                    tmp.setId("filT");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof FilCroix) {
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathMixte + "fil_croix.png"));
+                    tmp.setId("filCroix");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof ANDGate) {
+                    //ANDGate compAllumable = (ANDGate) connectables2D[row][column]; 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "and1.png"));
+                    tmp.setId("andGate");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof ORGate) {
+                    //ORGate compAllumable = (ORGate) connectables2D[row][column]; 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "or1.png"));
+                    tmp.setId("orGate");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
+                } else if (connectables2D[row][column] instanceof NOTGate) {
+                    //NOTGate compAllumable = (NOTGate) connectables2D[row][column]; 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "not1.png"));
+                    tmp.setId("notGate");
+                    initializeImageView(tmp);
+                    grid.add(tmp, column, row);
                 }
-               
-                System.out.println("Done reading");        
+            }
+        }
+
+        System.out.println("Done reading");
     }
-    
+
     private void initializeImageView(ImageView imgv) {
         imgv.setFitWidth(50);
         imgv.setFitHeight(50);
         imgv.setOnDragDetected(this::dragComposantFromGrid);
         imgv.setOnDragDropped(this::dropComposant);
         imgv.setOnDragOver(this::overComposant);
-        imgv.setOnMouseClicked(this::mouseClickCase);        
+        imgv.setOnMouseClicked(this::mouseClickCase);
     }
-    
 
-    
     private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
         Node result = null;
         ObservableList<Node> childrens = grid.getChildren();
@@ -627,12 +603,12 @@ public class FXMLDocumentController implements Initializable {
             }
         }
         return result;
-    }   
-    
+    }
+
     private void removeComposant(int row, int column) {
         connectables2D[row][column] = null;
-    }    
-    
+    }
+
     private void addComposant(String id, int row, int column) {
         if (id.equals("sourceTension")) {
             SourceFEM sourceTension = new SourceFEM();
@@ -698,7 +674,7 @@ public class FXMLDocumentController implements Initializable {
             System.out.println("");
         }
     }
-    
+
     private void printCircuitArray(Connectable[][] array) {
         for (Connectable[] tab : array) {
             for (Connectable c : tab) {
@@ -706,12 +682,12 @@ public class FXMLDocumentController implements Initializable {
             }
             System.out.println("");
         }
-    }    
+    }
 
     public Connectable[][] getCircuit() {
         return connectables2D;
-    }     
-    
+    }
+
     public static void hackTooltipStartTiming(Tooltip tooltip) {
         try {
             Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
@@ -727,9 +703,6 @@ public class FXMLDocumentController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }    
-    
-
-
+    }
 
 }

@@ -6,6 +6,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
 
 import java.io.Serializable;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -15,6 +16,7 @@ public abstract class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
     private TypeComposant typeComposant;
+    protected Image imageActive;
 
     public Connectable(TypeComposant typeComposant) {
         cotesConnectes = new byte[4];

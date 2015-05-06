@@ -6,30 +6,23 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
+import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.util.ArrayList;
-import javafx.scene.image.Image;
 
 /**
  *
  * @author blood_000
  */
-public abstract class LogicGateAbstraite extends Connectable implements ComposantDigital {
+public abstract class LogicGateAbstraite extends ImageChangeable implements ComposantDigital {
 
     protected byte entrees;
-    
-    protected String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
-    protected transient ArrayList<Image> listeImages;
-    protected transient ArrayList<Image> listeImagesActif;
-    protected int imageIndex;
-    
+
     protected byte typeGate;
 
     protected Noeud noeudEntreeA;
     protected Noeud noeudEntreeB;
     protected Noeud noeudSortie;
-    protected boolean actif;
     protected boolean actifTemp;
     protected boolean passee;
     protected boolean aBoucler;
@@ -39,13 +32,17 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
 
         this.listeImages = new ArrayList();
         this.listeImagesActif = new ArrayList();
-        this.imageIndex = 0;   
+        this.imageIndex = 0;
 
         imageIndex = 0;
         typeGate = -1;
         listeImages = new ArrayList();
         switchGate();
 
+    }
+
+    public boolean isActif() {
+        return actif;
     }
 
     @Override
@@ -79,7 +76,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
             cotesConnectes[2] = -1;
             cotesConnectes[3] = -1;
         }
-        
+
         //showImage
     }
 
@@ -88,6 +85,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     protected void transfererCourant() {
         passee = true;
         if (actifTemp != actif) {
+
             if (actif) {
                 noeudSortie.augmenterTensionDigital();
             } else {
@@ -142,30 +140,5 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     public boolean isPassee() {
         return passee;
     }
-
-    
-    
-    public void addImage(String filename) {
-        this.listeImages.add(new Image(this.imageFolder + filename));
-    }
-    
-    public void addImageActif(String filename) {
-        this.listeImagesActif.add(new Image(this.imageFolder + filename));
-    }    
-    
-    public void nextImage() {
-        this.imageIndex = (this.imageIndex + 1) % this.listeImages.size();
-    }
-
-    public Image getImage() {
-        if (actif == true) {
-            return this.listeImagesActif.get(this.imageIndex);
-        } else {
-            return this.listeImages.get(this.imageIndex);
-        }
-        
-    }
-
-
 
 }

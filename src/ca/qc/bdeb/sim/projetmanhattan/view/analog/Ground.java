@@ -17,6 +17,7 @@ public class Ground extends Connectable implements Composant {
     public Ground() {
         super(TypeComposant.GROUND);
         cotesConnectes[0] = 1;
+        //imageActive = new Image("src/ca\\qc\\bdeb\\sim\\projetmanhattan\\view\\img")
     }
 
 }
