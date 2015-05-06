@@ -4,7 +4,6 @@ import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.util.ArrayList;
-import javafx.scene.image.Image;
 
 /**
  *
@@ -104,5 +103,5 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     public boolean isActif() {
         return actif;
     }
-    
+
 }
