@@ -12,7 +12,7 @@ public abstract class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
     private TypeComposant typeComposant;
-    protected Image imageActive;
+    protected transient Image imageActive;
 
     public Connectable(TypeComposant typeComposant) {
         cotesConnectes = new byte[4];

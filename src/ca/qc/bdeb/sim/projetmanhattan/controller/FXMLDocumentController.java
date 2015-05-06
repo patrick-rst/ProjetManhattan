@@ -82,35 +82,35 @@ public class FXMLDocumentController implements Initializable {
  
     
     @FXML
-    BorderPane pane;
+    private BorderPane pane;
     
-    Stage stage;
+    private Stage stage;
 
     @FXML
-    GridPane grid;
+    private GridPane grid;
 
     @FXML
-    ImageView andGate;
+    private ImageView andGate;
 
     @FXML
-    TitledPane analogue;
+    private TitledPane analogue;
 
     @FXML
-    TitledPane numerique;
+    private TitledPane numerique;
 
     @FXML
-    TitledPane mixte;
+    private TitledPane mixte;
 
-    int mouseRow;
-    int mouseColumn;
+    private int mouseRow;
+    private int mouseColumn;
 
-    Connectable[][] connectables2D = new Connectable[10][10];
+    private Connectable[][] connectables2D = new Connectable[10][10];
 
-    PopOver composantEditor = new PopOver();
+    private PopOver composantEditor = new PopOver();
 
-    CircuitAnalogue circuitAnalogue;
-    CircuitDigital circuitNumerique;
-    AnalyseC circuitGraphique;
+    private CircuitAnalogue circuitAnalogue;
+    private CircuitDigital circuitNumerique;
+    private AnalyseC circuitGraphique;
 
     @FXML
     private void dragComposant(MouseEvent event) {
@@ -175,6 +175,13 @@ public class FXMLDocumentController implements Initializable {
         source.setId(null);
 
         event.consume();
+        
+        if (numerique.isDisabled() == false) {
+            //Numérique
+            circuitNumerique.stopAnalyse();
+        }      
+        
+        
     }
 
     @FXML
@@ -300,7 +307,6 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
         numerique.setDisable(true);
-        stage = (Stage) pane.getScene().getWindow(); 
     }
 
     public void setCircuitAnalogue(CircuitAnalogue c) {
@@ -319,7 +325,6 @@ public class FXMLDocumentController implements Initializable {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("File");
         Menu mnuMode = new Menu("Mode");
-        Menu mnuRun = new Menu("Run");
         Menu mnuAction = new Menu("Action");
 
         MenuItem mnuItemSave = new MenuItem("Save");
@@ -440,48 +445,25 @@ public class FXMLDocumentController implements Initializable {
     
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Image");
-        File file = fileChooser.showSaveDialog(stage);
-        if (file != null) {
-            System.out.println("TEST");
+        fileChooser.setTitle("Save Circuit");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));        
+        File file = fileChooser.showSaveDialog(pane.getScene().getWindow());
+        if (file != null) {            
+            writeFile(file);
         }
     }
     
-
-    private void writeFile() {
+    private void writeFile(File file) {
         Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
-//                ObjectOutputStream fichier = null;
-//                try {
-//                    File f = new File("save1.ser");
-//                    f.delete();
-//                    fichier = new ObjectOutputStream(new FileOutputStream("save1.ser"));
-//                    fichier.writeObject(save);
-//                    fichier.close();
-//                } catch (FileNotFoundException e) {
-//                    System.out.println("Erreur: Impossible de créer le fichier pour l'écriture");
-//                } catch (IOException e) {
-//                    System.out.println("Erreur: I/O durant l'écriture");
-//                    printCircuitArray(save.getCircuit());
-//                } finally {
-//                    try {
-//                        if (fichier != null) {
-//                            fichier.close();
-//                        }  
-//                    } catch (IOException e) {
-//                        System.out.println("Erreur: I/O durant la fermeture");
-//                    }            
-//                } 
+ 
         try {
-            FileOutputStream fout = new FileOutputStream("save2.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(save);
             oos.close();
-            System.out.println("Done");
-
         } catch (IOException ex) {
-            //ex.printStackTrace();
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
