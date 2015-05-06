@@ -193,10 +193,19 @@ public class FXMLDocumentController implements Initializable {
                 gate.nextImage();
                 imgView.setImage(gate.getImage());                
             }
-
+        } else if (event.getCode().equals(KeyCode.A)) {
+            System.out.println("A pressed");
             
-           
-        }    
+            ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
+            
+            if (connectables2D[mouseRow][mouseColumn] instanceof SourceDigitale) {
+                SourceDigitale source = (SourceDigitale) connectables2D[mouseRow][mouseColumn];
+
+                source.updateActif();
+                
+            }            
+            
+        }
     }
 
     @FXML

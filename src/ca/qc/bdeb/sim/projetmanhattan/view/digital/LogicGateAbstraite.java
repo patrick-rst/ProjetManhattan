@@ -158,7 +158,7 @@ public abstract class LogicGateAbstraite extends Connectable implements Composan
     }
 
     public Image getImage() {
-        if (actif == true) {
+        if (actif) {
             return this.listeImagesActif.get(this.imageIndex);
         } else {
             return this.listeImages.get(this.imageIndex);
