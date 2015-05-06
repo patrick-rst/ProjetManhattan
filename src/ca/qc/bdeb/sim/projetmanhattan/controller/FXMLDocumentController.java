@@ -362,7 +362,8 @@ public class FXMLDocumentController implements Initializable {
         mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                readFile();
+                //readFile();
+                fileOpener();
             }
         });
 
@@ -480,6 +481,16 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    private void fileOpener() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Circuit");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));
+        File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
+        if (file != null) {
+            readFile(file);
+        }
+    }
+    
     private void writeFile(File file) {
         Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
@@ -494,36 +505,12 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void readFile() {
-//                Sauvegarde save = null;
-//                ObjectInputStream fichier = null;
-//                try {
-//                    fichier = new ObjectInputStream(new FileInputStream("save1.ser"));
-//                    Object contenu = fichier.readObject();
-//                    save = (Sauvegarde) contenu;
-//                } catch (EOFException e) {
-//                } catch (FileNotFoundException e) {
-//                    System.out.println("Erreur: Impossible de lire le fichier");
-//                } catch (IOException e) {
-//                    System.out.println("Erreur: I/O durant la lecture");
-//                } catch (ClassNotFoundException e) {
-//                    System.out.println("Erreur: Le contenu n'appartient pas à la classe Sauvegarde");
-//                } finally {
-//                    try {
-//                        if (fichier != null) {
-//                            fichier.close();
-//                        }  
-//                    } catch (IOException e) {
-//                        System.out.println("Erreur: I/O durant la fermeture");
-//                    }
-//                }
-//                circuit = save.getCircuit();
-
+    private void readFile(File file) {
         Sauvegarde save = null;
 
         try {
-            FileInputStream fin = new FileInputStream("save2.ser");
-            ObjectInputStream ois = new ObjectInputStream(fin);
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
             save = (Sauvegarde) ois.readObject();
             ois.close();
         } catch (IOException ex) {
@@ -534,57 +521,55 @@ public class FXMLDocumentController implements Initializable {
 
         connectables2D = save.getCircuit();
 
-        String pathAnalog = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/analog/";
-        String pathMixte = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/";
         String pathImg = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
 
         for (int row = 0; row < 10; row++) {
             for (int column = 0; column < 10; column++) {
                 if (connectables2D[row][column] instanceof Resistance) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathAnalog + "resistance.png"));
+                    tmp.setImage(new Image(pathImg + "resistance.png"));
                     tmp.setId("resistance");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof SourceFEM) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathAnalog + "source_tension.png"));
+                    tmp.setImage(new Image(pathImg + "source_tension.png"));
                     tmp.setId("sourceTension");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof SourceCourant) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathAnalog + "source_courant.png"));
+                    tmp.setImage(new Image(pathImg + "source_courant.png"));
                     tmp.setId("sourceCourant");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof Ground) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathAnalog + "ground.png"));
+                    tmp.setImage(new Image(pathImg + "ground.png"));
                     tmp.setId("ground");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof FilDroit) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathMixte + "fil_droit.png"));
+                    tmp.setImage(new Image(pathImg + "fil_droit.png"));
                     tmp.setId("filDroit");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof FilCoin) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathMixte + "fil_coin.png"));
+                    tmp.setImage(new Image(pathImg + "fil_coin.png"));
                     tmp.setId("filCoin");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof FilT) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathMixte + "fil_t.png"));
+                    tmp.setImage(new Image(pathImg + "fil_t.png"));
                     tmp.setId("filT");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
                 } else if (connectables2D[row][column] instanceof FilCroix) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathMixte + "fil_croix.png"));
+                    tmp.setImage(new Image(pathImg + "fil_croix.png"));
                     tmp.setId("filCroix");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
@@ -613,7 +598,6 @@ public class FXMLDocumentController implements Initializable {
             }
         }
 
-        System.out.println("Done reading");
     }
 
     private void initializeImageView(ImageView imgv) {
@@ -623,6 +607,8 @@ public class FXMLDocumentController implements Initializable {
         imgv.setOnDragDropped(this::dropComposant);
         imgv.setOnDragOver(this::overComposant);
         imgv.setOnMouseClicked(this::mouseClickCase);
+        imgv.setPickOnBounds(true);
+        imgv.setPreserveRatio(true);
     }
 
     private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
