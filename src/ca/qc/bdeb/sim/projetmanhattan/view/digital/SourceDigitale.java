@@ -4,6 +4,7 @@ import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.util.ArrayList;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -25,8 +26,8 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         setListeOutput("1100");
         cotesConnectes[1] = 1;
         repeter = true;
-        addImageActif("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/sourceDigitaleon.png");
-        addImage("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/sourceDigitale.png");
+        addImageActif("sourceDigitaleon.png");
+        addImage("sourceDigitale.png");
         imageActive = listeImages.get(0);
     }
 
@@ -103,5 +104,5 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     public boolean isActif() {
         return actif;
     }
-
+    
 }

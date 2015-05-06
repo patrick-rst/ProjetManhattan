@@ -17,9 +17,8 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
         super(TypeComposant.LUMIERE_OUTPUT);
         cotesConnectes[3] = 1;
 
-        actif = false;
-        addImageActif("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOn.png");
-        addImage("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/lightOff.png");
+        addImageActif("lightOn.png");
+        addImage("lightOff.png");
         imageActive = listeImages.get(0);
     }
 
