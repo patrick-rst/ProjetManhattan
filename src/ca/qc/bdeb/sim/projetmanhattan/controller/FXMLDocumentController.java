@@ -190,7 +190,7 @@ public class FXMLDocumentController implements Initializable {
 
             compAllumable.nextImage();
             imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
-        }
+        } 
     }
 
     @FXML

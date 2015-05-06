@@ -141,4 +141,10 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
         return passee;
     }
 
+
+    
+
+
+
+
 }
