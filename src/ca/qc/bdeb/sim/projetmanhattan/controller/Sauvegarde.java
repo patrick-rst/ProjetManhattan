@@ -1,48 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.Connectable;
 import java.io.Serializable;
 
 /**
- *
- * @author 
+ * Sauvegarde d'un circuit
+ * @author Marc-Antoine Lalonde
+ * @author Patrick Richer St-Onge
  */
 public class Sauvegarde implements Serializable {
     
     private Connectable[][] circuit;
 
-    public Sauvegarde() {
-        circuit = new Connectable[10][10];
+    /**
+     * Crée un object Sauvegarde pour contenir un circuit
+     * @param size la grandeur du tableau 2D
+     */
+    public Sauvegarde(int size) {
+        circuit = new Connectable[size][size];
     }
 
+    /**
+     * Set le circuit à sauvegarder
+     * @param circuit le circuit à sauvergarder
+     */
     public void setCircuit(Connectable[][] circuit) {
-        this.circuit = circuit;
-        
-//        for (Connectable[] tab : this.circuit) {
-//            for (Connectable c : tab) {
-//                if (c == null) {
-//                    c = new Empty();
-//                }
-//            }
-//        }  
-        
+        this.circuit = circuit; 
     }
 
+    /**
+     * Retourne le circuit dans le sauvegarde
+     * @return le circuit dans la sauvegarde
+     */
     public Connectable[][] getCircuit() {
-//        for (Connectable[] tab : this.circuit) {
-//            for (Connectable c : tab) {
-//                if (c instanceof Empty) {
-//                    c = null;
-//                }
-//            }
-//        }
-        
         return circuit;
     }
     
