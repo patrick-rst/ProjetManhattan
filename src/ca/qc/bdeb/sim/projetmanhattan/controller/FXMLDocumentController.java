@@ -416,20 +416,14 @@ public class FXMLDocumentController implements Initializable {
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
-                        imgV.setImage(null);
-                        imgV.setId(null);
-                        removeComposant(i, j);
-                    }
-                }
+                wipe();
             }
         });
 
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                wipe();
                 numerique.setDisable(true);
                 analogue.setDisable(false);
             }
@@ -439,6 +433,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemNumerique.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                wipe();
                 analogue.setDisable(true);
                 numerique.setDisable(false);
             }
@@ -458,6 +453,17 @@ public class FXMLDocumentController implements Initializable {
         mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction);
 
         pane.setTop(mnuBar);
+    }
+    
+    private void wipe() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
+                imgV.setImage(null);
+                imgV.setId(null);
+                removeComposant(i, j);
+            }
+        }        
     }
     
     private void fileChooser() {
