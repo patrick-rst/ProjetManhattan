@@ -338,6 +338,7 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent t) {
                 if (analogue.isDisabled() == false) {
+                    //Analogue
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
                     circuitAnalogue.analyserCircuit();
 
@@ -371,6 +372,7 @@ public class FXMLDocumentController implements Initializable {
                     }
 
                 } else if (numerique.isDisabled() == false) {
+                    //Numérique
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
                     circuitNumerique.analyserCircuit();
                 }
