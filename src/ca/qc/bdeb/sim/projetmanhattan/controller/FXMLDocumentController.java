@@ -194,6 +194,25 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
+    
+    public void updateCircuitNumerique() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                Connectable c = connectables2D[i][j];
+                if (c instanceof ImageChangeable) {
+                    ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
+
+                    ImageChangeable imgC = (ImageChangeable) c;
+                    if (imgC.isActif()) {
+                        imgV.setImage(imgC.getImage(true));
+                    } else {
+                        imgV.setImage(imgC.getImage(false));
+                    }
+                }
+            }
+        }
+
+    }
 
     public void changeImage() {
         ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
