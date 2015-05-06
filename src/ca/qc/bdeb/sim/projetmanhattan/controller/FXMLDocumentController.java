@@ -175,7 +175,6 @@ public class FXMLDocumentController implements Initializable {
         event.consume();
         
         if (numerique.isDisabled() == false) {
-            //Numérique
             circuitNumerique.stopAnalyse();
         }      
         
@@ -457,6 +456,10 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void wipe() {
+        if (numerique.isDisabled() == false) {
+            circuitNumerique.stopAnalyse();
+        }
+        
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
