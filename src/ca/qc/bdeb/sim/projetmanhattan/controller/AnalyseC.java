@@ -91,14 +91,12 @@ public class AnalyseC {
                         gererLienDetecte(i, j + 1, noeud, 3);
                         gererLienDetecte(i, j, noeud, 1);
                         circuit.ajouterNoeud(noeud);
-                        System.out.println("Lien sans fil");
                     }
                     if (i < connectables.length - 1 && connectables[i][j].getCotesConnectes()[2] != 0 && connectables[i + 1][j] instanceof Composant && connectables[i + 1][j].getCotesConnectes()[0] != 0) {
                         Noeud noeud = new Noeud();
                         gererLienDetecte(i + 1, j, noeud, 0);
                         gererLienDetecte(i, j, noeud, 2);
                         circuit.ajouterNoeud(noeud);
-                        System.out.println("lien sans fil");
                     }
                 }
             }
