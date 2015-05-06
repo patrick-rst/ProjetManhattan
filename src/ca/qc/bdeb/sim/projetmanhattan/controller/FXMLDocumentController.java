@@ -23,6 +23,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.XORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,6 +35,7 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -63,7 +65,10 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 
 import org.controlsfx.control.PopOver;
 
@@ -74,8 +79,12 @@ import org.controlsfx.control.PopOver;
  */
 public class FXMLDocumentController implements Initializable {
 
+ 
+    
     @FXML
     BorderPane pane;
+    
+    Stage stage;
 
     @FXML
     GridPane grid;
@@ -291,6 +300,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
         numerique.setDisable(true);
+        stage = (Stage) pane.getScene().getWindow(); 
     }
 
     public void setCircuitAnalogue(CircuitAnalogue c) {
@@ -322,7 +332,8 @@ public class FXMLDocumentController implements Initializable {
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                writeFile();
+                //writeFile();
+                fileChooser();
             }
         });
 
@@ -372,6 +383,7 @@ public class FXMLDocumentController implements Initializable {
 
                 } else if (numerique.isDisabled() == false) {
                     //Numérique
+                    circuitNumerique.stopAnalyse();
                     circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
                     circuitNumerique.analyserCircuit();
                 }
@@ -425,11 +437,20 @@ public class FXMLDocumentController implements Initializable {
 
         pane.setTop(mnuBar);
     }
+    
+    private void fileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Image");
+        File file = fileChooser.showSaveDialog(stage);
+        if (file != null) {
+            System.out.println("TEST");
+        }
+    }
+    
 
     private void writeFile() {
         Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
-
 //                ObjectOutputStream fichier = null;
 //                try {
 //                    File f = new File("save1.ser");
@@ -459,7 +480,8 @@ public class FXMLDocumentController implements Initializable {
             System.out.println("Done");
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
