@@ -39,5 +39,8 @@ public abstract class Connectable implements Serializable {
     public TypeComposant getTypeComposant() {
         return typeComposant;
     }
-
+    
+    public Image getImageActive() {
+        return imageActive;
+    }
 }

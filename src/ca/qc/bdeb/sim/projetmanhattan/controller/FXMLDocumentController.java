@@ -525,70 +525,73 @@ public class FXMLDocumentController implements Initializable {
 
         for (int row = 0; row < 10; row++) {
             for (int column = 0; column < 10; column++) {
-                if (connectables2D[row][column] instanceof Resistance) {
+                Connectable c = connectables2D[row][column];
+                if (c instanceof Resistance) {
                     ImageView tmp = new ImageView();
-                    tmp.setImage(new Image(pathImg + "resistance.png"));
+                    //tmp.setImage(new Image(pathImg + "resistance.png"));
+                    Resistance r = (Resistance) c;
+                    tmp.setImage(new Image(r.getImgPath()));
                     tmp.setId("resistance");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof SourceFEM) {
+                } else if (c instanceof SourceFEM) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "source_tension.png"));
                     tmp.setId("sourceTension");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof SourceCourant) {
+                } else if (c instanceof SourceCourant) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "source_courant.png"));
                     tmp.setId("sourceCourant");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof Ground) {
+                } else if (c instanceof Ground) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "ground.png"));
                     tmp.setId("ground");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof FilDroit) {
+                } else if (c instanceof FilDroit) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_droit.png"));
                     tmp.setId("filDroit");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof FilCoin) {
+                } else if (c instanceof FilCoin) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_coin.png"));
                     tmp.setId("filCoin");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof FilT) {
+                } else if (c instanceof FilT) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_t.png"));
                     tmp.setId("filT");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof FilCroix) {
+                } else if (c instanceof FilCroix) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_croix.png"));
                     tmp.setId("filCroix");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof ANDGate) {
-                    //ANDGate compAllumable = (ANDGate) connectables2D[row][column]; 
+                } else if (c instanceof ANDGate) {
+                    //ANDGate compAllumable = (ANDGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "and1.png"));
                     tmp.setId("andGate");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof ORGate) {
-                    //ORGate compAllumable = (ORGate) connectables2D[row][column]; 
+                } else if (c instanceof ORGate) {
+                    //ORGate compAllumable = (ORGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "or1.png"));
                     tmp.setId("orGate");
                     initializeImageView(tmp);
                     grid.add(tmp, column, row);
-                } else if (connectables2D[row][column] instanceof NOTGate) {
-                    //NOTGate compAllumable = (NOTGate) connectables2D[row][column]; 
+                } else if (c instanceof NOTGate) {
+                    //NOTGate compAllumable = (NOTGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "not1.png"));
                     tmp.setId("notGate");
