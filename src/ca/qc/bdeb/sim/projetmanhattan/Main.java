@@ -20,7 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Simtronique");
+        stage.setTitle("Projet Manhattan");
         CircuitAnalogue circuitAnalogue = new CircuitAnalogue();
         CircuitDigital circuitNumerique = new CircuitDigital();
         AnalyseC circuitGraphique = new AnalyseC();
