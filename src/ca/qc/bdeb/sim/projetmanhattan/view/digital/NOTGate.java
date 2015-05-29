@@ -10,6 +10,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class NOTGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public NOTGate() {
         super(TypeComposant.NOTGATE);
         addImage("not1.png");

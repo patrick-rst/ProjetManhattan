@@ -11,6 +11,9 @@ import javafx.scene.image.Image;
  */
 public class Ground extends Connectable implements Composant {
 
+    /**
+     * Initialise le Ground et ses variables si nécessaire*
+     */
     public Ground() {
         super(TypeComposant.GROUND);
         cotesConnectes[0] = 1;

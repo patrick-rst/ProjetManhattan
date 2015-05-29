@@ -7,6 +7,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
  */
 public class FilDroit extends FilAbstrait {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public FilDroit() {
         super();
         cotesConnectes[0] = 1;

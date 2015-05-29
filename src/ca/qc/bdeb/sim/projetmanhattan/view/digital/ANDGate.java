@@ -9,6 +9,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class ANDGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public ANDGate() {
         super(TypeComposant.ANDGATE);
 

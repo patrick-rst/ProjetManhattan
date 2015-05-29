@@ -27,6 +27,9 @@ public class Noeud {
     private final ArrayList<ComposantDigital> entrees;
     private final ArrayList<ComposantDigital> sorties;
 
+    /**
+     * Initialise le Noeud et ses variables
+     */
     public Noeud() {
         fils = new ArrayList<>();
         resistances = new ArrayList<>();
@@ -37,46 +40,94 @@ public class Noeud {
         sorties = new ArrayList<>();
     }
 
+    /**
+     * Ajoute un composant qui envoie du courant dans le noeud à la liste de
+     * composants qui envoient du courant dans le noeud
+     *
+     * @param comp le composant qui envoie du courant dans le noeud
+     */
     public void ajouterEntree(ComposantDigital comp) {
         entrees.add(comp);
     }
 
+    /**
+     *
+     * @param comp Ajoute ce composant à la liste de composants qui recoivent du
+     * courant du noeud
+     */
     public void ajouterSortie(ComposantDigital comp) {
         sorties.add(comp);
     }
 
+    /**
+     *
+     * @return la liste de composants qui envoient du courant dans le noeud
+     */
     public ArrayList<ComposantDigital> getEntrees() {
         return entrees;
     }
 
+    /**
+     *
+     * @return la liste de composants qui recoivent du courant du noeud
+     */
     public ArrayList<ComposantDigital> getSorties() {
         return sorties;
     }
 
+    /**
+     *
+     * @param fil ajoute ce fil à la liste de fils
+     */
     public void ajouterFil(FilAbstrait fil) {
         fils.add(fil);
     }
 
+    /**
+     *
+     * @return la liste de résistances connectées au noeud
+     */
     public ArrayList<Resistance> getResistances() {
         return resistances;
     }
 
+    /**
+     *
+     * @return la liste de sourcesFEM connectées au noeud par la borne négative
+     */
     public ArrayList<SourceFEM> getSourcesFEMNeg() {
         return sourcesFEMNeg;
     }
 
+    /**
+     *
+     * @return la liste de sourcesFEM connectées au noeud par la borne positive
+     */
     public ArrayList<SourceFEM> getSourcesFEMPos() {
         return sourcesFEMPos;
     }
 
+    /**
+     *
+     * @return la liste de sources de courant connectées au noeud
+     */
     public ArrayList<SourceCourant> getSourcesCourant() {
         return sourcesCourant;
     }
 
+    /**
+     *
+     * @return la tension présente dans le noeud
+     */
     public double getTension() {
         return tension;
     }
 
+    /**
+     * met à jour la tension présente dans le noeud
+     *
+     * @param tension la tension présente dans le noeud
+     */
     public void setTension(double tension) {
         this.tension = tension;
         for (FilAbstrait fil : fils) {
@@ -84,14 +135,27 @@ public class Noeud {
         }
     }
 
+    /**
+     *
+     * @return le ground connecté au noeud
+     */
     public Ground getGround() {
         return ground;
     }
 
+    /**
+     * Selectionne le ground connecté au noeud
+     *
+     * @param ground Le ground connecté au noeud
+     */
     public void setGround(Ground ground) {
         this.ground = ground;
     }
 
+    /**
+     * Change le statut du noeud de off à on et change la tension dans les noeud
+     * pour actualiser l'image
+     */
     public void augmenterTensionDigital() {
         ++tension;
         setTension(tension);
@@ -102,6 +166,11 @@ public class Noeud {
         }
     }
 
+    /**
+     * Change le statut du noeud de on à off et change la tension dans les noeud
+     * pour actualiser l'image
+     *
+     */
     public void diminuerTensionDigital() {
         --tension;
         setTension(tension);
@@ -112,6 +181,10 @@ public class Noeud {
         }
     }
 
+    /**
+     *
+     * @return indique si le noeud est allumé ou éteint.
+     */
     public boolean isActif() {
         return tension != 0;
     }

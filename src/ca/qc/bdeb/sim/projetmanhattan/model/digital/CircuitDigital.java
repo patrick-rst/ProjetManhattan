@@ -31,6 +31,9 @@ public class CircuitDigital implements Circuit {
     private Thread thread;
     private final int delaiTic;
 
+    /**
+     * Crée le nouveau circuit digital et initialise les diverses variables*
+     */
     public CircuitDigital() {
         noeuds = new ArrayList<>();
         diodes = new ArrayList<>();
@@ -44,10 +47,20 @@ public class CircuitDigital implements Circuit {
         delaiTic = 25;
     }
 
+    /**
+     * Assigne un controleur à la variable controller
+     *
+     * @param controller le controleur de l'interface
+     */
     public void setController(FXMLDocumentController controller) {
         this.controller = controller;
     }
 
+    /**
+     * Part un thread qui simule le courant dans le circuit selon les connexions
+     * et les input des sourcesDigitales. Appelle aussi les méthodes qui
+     * actualisent les images
+     */
     @Override
     public void analyserCircuit() {
         run = true;
@@ -100,6 +113,9 @@ public class CircuitDigital implements Circuit {
         thread.start();
     }
 
+    /**
+     * Arrete l'analyse et prepare le circuit pour une prochaine "run"
+     */
     public void stopAnalyse() {
 
         run = false;
@@ -107,25 +123,49 @@ public class CircuitDigital implements Circuit {
         resetSourcesDigitales();
     }
 
+    /**
+     * Remet les sources digitales a zero pour les synchroniser en cas de
+     * modification du circuit.
+     */
     public void resetSourcesDigitales() {
         for (SourceDigitale source : sourcesDigitales) {
             source.remettreAZero();
         }
     }
 
+    /**
+     * Ajoute un élément à la liste de sources
+     *
+     * @param sourceDigitale L'élément à ajouter
+     */
     public void ajouterSourceDigitale(SourceDigitale sourceDigitale) {
         sourcesDigitales.add(sourceDigitale);
     }
 
+    /**
+     * Ajoute un élément à la liste de diodes
+     *
+     * @param diode La diode à ajouter
+     */
     public void ajouterDiode(Diode diode) {
         diodes.add(diode);
     }
 
+    /**
+     * ajoute un noeud à la liste de noeuds
+     *
+     * @param noeud Le noeud à ajouter
+     */
     @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 
+    /**
+     * Ajoute une lumière à la liste de lumières
+     *
+     * @param lumiere la lumière à ajouter
+     */
     public void ajouterLumiere(LumiereOutput lumiere) {
         lumieres.add(lumiere);
     }
@@ -136,6 +176,9 @@ public class CircuitDigital implements Circuit {
         }
     }
 
+    /**
+     * Remet la grille à zéro pour commencer un nouveau circuit.
+     */
     @Override
     public void wipe() {
         noeuds.clear();
@@ -156,6 +199,11 @@ public class CircuitDigital implements Circuit {
         }
     }
 
+    /**
+     * Ajoute une porte logque à la liste de portes
+     *
+     * @param gate le composant à ajouter
+     */
     public void ajouterGate(LogicGateAbstraite gate) {
         gates.add(gate);
     }

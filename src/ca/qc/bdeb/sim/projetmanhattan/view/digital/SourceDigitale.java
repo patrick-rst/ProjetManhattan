@@ -19,6 +19,9 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     private Noeud noeudSortie;
     private boolean actifTemp;
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
         listeOutput = new ArrayList<>();
@@ -30,6 +33,9 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         imageActive = listeImages.get(0);
     }
 
+    /**
+     * remet le cycle d'output au debut
+     */
     public void remettreAZero() {
         indexOutput = -1;
     }
@@ -38,6 +44,11 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         repeter = !repeter;
     }
 
+    /**
+     *
+     * @return l'état de la variable repeter, soit si la source doit rouler en
+     * boucle ou non
+     */
     public boolean isRepeter() {
         return repeter;
     }
@@ -54,10 +65,20 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         return actif;
     }
 
+    /**
+     *
+     * @param list la liste des intervalles ou la source émet un courant
+     * (on/off)
+     */
     public void setListeOutput(ArrayList<Boolean> list) {
         this.listeOutput = list;
     }
 
+    /**
+     *
+     * @param string la liste des intervalles ou la source émet un courant
+     * (on/off)
+     */
     public void setListeOutput(String string) {
         ArrayList<Character> liste = new ArrayList<>();
         for (int i = 0; i < string.length(); ++i) {

@@ -11,8 +11,11 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class LumiereOutput extends ImageChangeable implements ComposantDigital {
 
-    protected Noeud noeudEntree;
+    private Noeud noeudEntree;
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public LumiereOutput() {
         super(TypeComposant.LUMIERE_OUTPUT);
         cotesConnectes[3] = 1;

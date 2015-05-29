@@ -10,9 +10,20 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.Composant;
  */
 public interface ComposantDigital extends Composant {
 
+    /**
+     * Met à jour l'état du composant
+     */
     public void updateActif();
 
+    /**
+     *
+     * @param noeud ajoute un noeud qui envoie du courant à la liste
+     */
     public void ajouterNoeudEntree(Noeud noeud);
 
+    /**
+     *
+     * @param noeud ajoute un noeud qui recoit du courant à la liste
+     */
     public void ajouterNoeudSortie(Noeud noeud);
 }

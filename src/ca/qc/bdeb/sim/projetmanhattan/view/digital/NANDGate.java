@@ -9,6 +9,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class NANDGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public NANDGate() {
         super(TypeComposant.NAND_GATE);
         addImage("nand1.png");

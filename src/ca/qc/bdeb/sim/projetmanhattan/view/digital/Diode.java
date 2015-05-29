@@ -10,6 +10,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class Diode extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public Diode() {
         super(TypeComposant.DIODE);
         cotesConnectes[0] = 1;

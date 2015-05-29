@@ -30,9 +30,23 @@ public class AnalyseC {
     private Connectable[][] connectables;
     private boolean[][] connectablesPasses;
 
+    /**
+     * Création du controleur*
+     */
     public AnalyseC() {
     }
 
+    /**
+     * Prépare la grille de composants à être analysée avec les composants que
+     * l'utilisateur peut voir. Identifie ensuite le type de circuit (analogue
+     * ou digital) et appelle la méthode qui fait l'analyse.
+     *
+     *
+     * @param circuit La classe contenant toutes les données concernant les
+     * composants
+     * @param connectables La liste 2D correspondant au tableau sur lequel
+     * l'utilisateur place les composants
+     */
     public void preparerAnalyse(Circuit circuit, Connectable[][] connectables) {
         this.connectables = connectables;
         circuit.wipe();

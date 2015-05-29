@@ -37,6 +37,9 @@ public class CircuitAnalogue implements Circuit {
 
     private double[] matriceX;
 
+    /**
+     * Crée le nouveau circuit analogue et initialise les diverses variables*
+     */
     public CircuitAnalogue() {
         resistances = new ArrayList<>();
         noeuds = new ArrayList<>();
@@ -47,6 +50,10 @@ public class CircuitAnalogue implements Circuit {
 
     }
 
+    /**
+     * Efface le circuit créé par l'utilisateur en prévision du prochain. Évite
+     * les bugs.
+     */
     @Override
     public void wipe() {
         resistances.clear();
@@ -56,6 +63,13 @@ public class CircuitAnalogue implements Circuit {
         grounds.clear();
     }
 
+    /**
+     * Crée les matrices nécessaires à l'analyse du circuit en appelant les
+     * méthodes qui se basent sur la position et les connexions entre les
+     * composants. Appelle ensuite une méthode qui résout les matrices, avant de
+     * redistribuer l'information aux composants (courant, tension, etc) avec
+     * une dernière méthode.
+     */
     @Override
     public void analyserCircuit() {
         boolean grounde = selectionnerNoeudGround();
@@ -254,23 +268,48 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
+    /**
+     * Ajoute un élément à la liste de noeuds.
+     *
+     * @param noeud L'élément à ajouter
+     */
     @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 
+    /**
+     * Ajoute un élément à la liste de résistances.
+     *
+     * @param resistance L'élément à ajouter
+     */
     public void ajouterResistance(Resistance resistance) {
         resistances.add(resistance);
     }
 
+    /**
+     * Ajoute un élément à la liste de sourcesFEM.
+     *
+     * @param sourceFEM L'élément à ajouter
+     */
     public void ajouterSourceFEM(SourceFEM sourceFEM) {
         sourcesFEM.add(sourceFEM);
     }
 
+    /**
+     * Ajoute un élément à la liste de sourceCourant.
+     *
+     * @param sourceCourant L'élément à ajouter
+     */
     public void ajouterSourceCourant(SourceCourant sourceCourant) {
         sourcesCourant.add(sourceCourant);
     }
 
+    /**
+     * Ajoute un élément à la liste de grounds.
+     *
+     * @param g L'élément à ajouter
+     */
     public void ajouterGround(Ground g) {
         grounds.add(g);
     }

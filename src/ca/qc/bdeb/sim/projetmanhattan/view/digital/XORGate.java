@@ -9,6 +9,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class XORGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public XORGate() {
         super(TypeComposant.XOR_GATE);
         addImage("xor1.png");
