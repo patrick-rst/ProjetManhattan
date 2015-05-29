@@ -101,8 +101,16 @@ public class CircuitDigital implements Circuit {
     }
 
     public void stopAnalyse() {
+            
         run = false;
         resetGates();
+        resetSourcesDigitales();
+    }
+    
+    private void resetSourcesDigitales(){
+        for(SourceDigitale source: sourcesDigitales){
+            source.remettreAZero();
+        }
     }
 
     public void ajouterSourceDigitale(SourceDigitale sourceDigitale) {

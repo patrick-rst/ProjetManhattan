@@ -30,6 +30,10 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         imageActive = listeImages.get(0);
     }
 
+    public void remettreAZero() {
+        indexOutput = -1;
+    }
+
     public void flipRepeter() {
         repeter = !repeter;
     }

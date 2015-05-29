@@ -72,16 +72,15 @@ import org.controlsfx.control.PopOver;
 
 /**
  * Controlleur
+ *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
  */
 public class FXMLDocumentController implements Initializable {
 
- 
-    
     @FXML
     private BorderPane pane;
-    
+
     private Stage stage;
 
     @FXML
@@ -173,12 +172,11 @@ public class FXMLDocumentController implements Initializable {
         source.setId(null);
 
         event.consume();
-        
+
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
-        }      
-        
-        
+        }
+
     }
 
     @FXML
@@ -193,7 +191,7 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
-    
+
     public void updateCircuitNumerique() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -455,12 +453,12 @@ public class FXMLDocumentController implements Initializable {
 
         pane.setTop(mnuBar);
     }
-    
+
     private void wipe() {
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
         }
-        
+
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
@@ -468,19 +466,19 @@ public class FXMLDocumentController implements Initializable {
                 imgV.setId(null);
                 removeComposant(i, j);
             }
-        }        
+        }
     }
-    
+
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Circuit");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));        
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));
         File file = fileChooser.showSaveDialog(pane.getScene().getWindow());
-        if (file != null) {            
+        if (file != null) {
             writeFile(file);
         }
     }
-    
+
     private void fileOpener() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Circuit");
@@ -490,11 +488,11 @@ public class FXMLDocumentController implements Initializable {
             readFile(file);
         }
     }
-    
+
     private void writeFile(File file) {
         Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
- 
+
         try {
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
