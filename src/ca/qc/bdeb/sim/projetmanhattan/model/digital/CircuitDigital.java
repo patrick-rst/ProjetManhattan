@@ -101,14 +101,14 @@ public class CircuitDigital implements Circuit {
     }
 
     public void stopAnalyse() {
-            
+
         run = false;
         resetGates();
         resetSourcesDigitales();
     }
-    
-    private void resetSourcesDigitales(){
-        for(SourceDigitale source: sourcesDigitales){
+
+    public void resetSourcesDigitales() {
+        for (SourceDigitale source : sourcesDigitales) {
             source.remettreAZero();
         }
     }
@@ -130,7 +130,7 @@ public class CircuitDigital implements Circuit {
         lumieres.add(lumiere);
     }
 
-    public void resetGates() {
+    private void resetGates() {
         for (LogicGateAbstraite gate : gates) {
             gate.resetConnexions();
         }
@@ -145,7 +145,7 @@ public class CircuitDigital implements Circuit {
         gatesABoucler.clear();
     }
 
-    public void ajouterGatesABoucler() {
+    private void ajouterGatesABoucler() {
         for (LogicGateAbstraite gate : gates) {
             if (gate.isABoucler()) {
                 if (!gatesABoucler.contains(gate)) {

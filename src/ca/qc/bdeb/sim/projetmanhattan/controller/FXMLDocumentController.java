@@ -211,7 +211,7 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    public void changeImage() {
+    private void changeImage() {
         ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
 
         if (connectables2D[mouseRow][mouseColumn] instanceof ImageChangeable) {
@@ -703,11 +703,11 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public Connectable[][] getCircuit() {
+    private Connectable[][] getCircuit() {
         return connectables2D;
     }
 
-    public static void hackTooltipStartTiming(Tooltip tooltip) {
+    private static void hackTooltipStartTiming(Tooltip tooltip) {
         try {
             Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
             fieldBehavior.setAccessible(true);

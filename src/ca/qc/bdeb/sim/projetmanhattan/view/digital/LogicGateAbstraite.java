@@ -30,6 +30,7 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
 
     }
 
+    @Override
     public boolean isActif() {
         return actif;
     }

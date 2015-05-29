@@ -34,7 +34,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         indexOutput = -1;
     }
 
-    public void flipRepeter() {
+    private void flipRepeter() {
         repeter = !repeter;
     }
 

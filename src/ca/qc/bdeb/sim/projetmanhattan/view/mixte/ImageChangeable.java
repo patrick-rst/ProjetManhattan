@@ -26,11 +26,11 @@ public abstract class ImageChangeable extends Connectable {
 
     public abstract boolean isActif();
 
-    public void addImage(String filename) {
+    protected void addImage(String filename) {
         this.listeImages.add(new Image(this.imageFolder + filename));
     }
 
-    public void addImageActif(String filename) {
+    protected void addImageActif(String filename) {
         this.listeImagesActif.add(new Image(this.imageFolder + filename));
     }
 

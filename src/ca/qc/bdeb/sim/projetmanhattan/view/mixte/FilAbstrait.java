@@ -9,21 +9,22 @@ public abstract class FilAbstrait extends ImageChangeable {
 
     protected double tension;
 
-    public boolean isActif() {
-        return tension != 0;
-    }
-
     public FilAbstrait() {
         super(TypeComposant.FIL);
         this.cotesConnectes = new byte[4];
     }
 
-    public double getTension() {
+    private double getTension() {
         return tension;
     }
 
     public void setTension(double tension) {
         this.tension = tension;
+    }
+
+    @Override
+    public boolean isActif() {
+        return tension != 0;
     }
 
 }

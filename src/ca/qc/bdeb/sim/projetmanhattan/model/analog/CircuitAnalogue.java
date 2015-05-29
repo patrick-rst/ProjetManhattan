@@ -55,10 +55,6 @@ public class CircuitAnalogue implements Circuit {
         grounds.clear();
     }
 
-    public void ajouterGround(Ground g) {
-        grounds.add(g);
-    }
-
     @Override
     public void analyserCircuit() {
         boolean grounde = selectionnerNoeudGround();
@@ -92,7 +88,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void distribuerInfos() {
+    private void distribuerInfos() {
         for (int i = 0; i < nombreNoeuds; ++i) {
             noeuds.get(i).setTension(matriceX[i]);
         }
@@ -103,7 +99,7 @@ public class CircuitAnalogue implements Circuit {
         donnerCourantAuxResistances();
     }
 
-    public void donnerCourantAuxResistances() {
+    private void donnerCourantAuxResistances() {
         double v1 = 0;
         double v2 = 0;
 
@@ -127,7 +123,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void resoudreCircuitAnalogue() {
+    private void resoudreCircuitAnalogue() {
         DenseMatrix64F matA = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, nombreNoeuds + nombreSourcesFEM);
         for (int i = 0; i < matriceA.length; ++i) {
             for (int j = 0; j < matriceA[i].length; ++j) {
@@ -152,7 +148,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void construireMatriceZ() {
+    private void construireMatriceZ() {
         for (int i = 0; i < nombreNoeuds; ++i) {
             for (SourceCourant sourceCourant : noeuds.get(i).getSourcesCourant()) {
                 matriceZ[i] += sourceCourant.getCourant();
@@ -164,7 +160,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void construireMatriceBetC() {
+    private void construireMatriceBetC() {
         for (int i = 0; i < nombreSourcesFEM; ++i) {
             for (int j = 0; j < nombreNoeuds; ++j) {
                 if (noeuds.get(j).getSourcesFEMPos().contains(sourcesFEM.get(i))) {
@@ -179,7 +175,7 @@ public class CircuitAnalogue implements Circuit {
 
     }
 
-    public void construireMatriceG() {
+    private void construireMatriceG() {
         for (int i = 0; i < resistances.size(); ++i) {
             int n1 = -1;
             int n2 = -1;
@@ -205,7 +201,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public boolean selectionnerNoeudGround() {
+    private boolean selectionnerNoeudGround() {
         boolean enleve = false;
         for (int i = 0; i < noeuds.size(); ++i) {
             if (noeuds.get(i).getGround() != null) {
@@ -218,14 +214,14 @@ public class CircuitAnalogue implements Circuit {
         return enleve;
     }
 
-    public void combinerMatriceA() {
+    private void combinerMatriceA() {
         ajouterMatriceG();
         ajouterMatriceB();
         ajouterMatriceC();
         ajouterMatriceD();
     }
 
-    public void ajouterMatriceG() {
+    private void ajouterMatriceG() {
         for (int i = 0; i < matriceG.length; ++i) {
             for (int j = 0; j < matriceG[i].length; ++j) {
                 matriceA[i][j] = matriceG[i][j];
@@ -233,7 +229,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void ajouterMatriceB() {
+    private void ajouterMatriceB() {
         for (int i = 0; i < matriceB.length; ++i) {
             for (int j = 0; j < matriceB[i].length; ++j) {
                 matriceA[i][j + nombreNoeuds] = matriceB[i][j];
@@ -241,7 +237,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void ajouterMatriceC() {
+    private void ajouterMatriceC() {
         for (int i = 0; i < matriceC.length; ++i) {
             for (int j = 0; j < matriceC[i].length; ++j) {
                 matriceA[i + nombreNoeuds][j] = matriceC[i][j];
@@ -249,7 +245,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void ajouterMatriceD() {
+    private void ajouterMatriceD() {
         for (int i = 0; i < matriceD.length; ++i) {
             for (int j = 0; j < matriceD[i].length; ++j) {
                 matriceA[i + nombreNoeuds][j + nombreNoeuds] = matriceD[i][j];
@@ -272,6 +268,10 @@ public class CircuitAnalogue implements Circuit {
 
     public void ajouterSourceCourant(SourceCourant sourceCourant) {
         sourcesCourant.add(sourceCourant);
+    }
+
+    public void ajouterGround(Ground g) {
+        grounds.add(g);
     }
 
 }

@@ -61,9 +61,6 @@ public class Noeud {
         return resistances;
     }
 
-    /*public ArrayList<FilAbstrait> getFils() {
-     return fils;
-     }*/
     public ArrayList<SourceFEM> getSourcesFEMNeg() {
         return sourcesFEMNeg;
     }
