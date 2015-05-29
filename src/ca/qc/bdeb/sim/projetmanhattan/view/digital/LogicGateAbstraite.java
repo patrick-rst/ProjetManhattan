@@ -76,7 +76,7 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
         //showImage
     }
 
-    public abstract void calculerCourant();
+    protected abstract void calculerCourant();
 
     protected void transfererCourant() {
         passee = true;

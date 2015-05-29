@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 public abstract class Connectable implements Serializable {
 
     protected byte[] cotesConnectes;
-    private TypeComposant typeComposant;
+    private final TypeComposant typeComposant;
     protected transient Image imageActive;
 
     public Connectable(TypeComposant typeComposant) {

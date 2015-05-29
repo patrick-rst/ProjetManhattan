@@ -23,7 +23,7 @@ public class ANDGate extends LogicGateAbstraite {
     }
 
     @Override
-    public void calculerCourant() {
+    protected void calculerCourant() {
         actifTemp = actif;
         actif = noeudEntreeA != null && noeudEntreeA.isActif() && noeudEntreeB != null && noeudEntreeB.isActif();
 

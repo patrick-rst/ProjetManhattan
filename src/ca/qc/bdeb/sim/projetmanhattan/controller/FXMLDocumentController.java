@@ -103,7 +103,7 @@ public class FXMLDocumentController implements Initializable {
 
     private Connectable[][] connectables2D = new Connectable[10][10];
 
-    private PopOver composantEditor = new PopOver();
+    private final PopOver composantEditor = new PopOver();
 
     private CircuitAnalogue circuitAnalogue;
     private CircuitDigital circuitNumerique;
@@ -499,7 +499,7 @@ public class FXMLDocumentController implements Initializable {
             oos.writeObject(save);
             oos.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 
@@ -512,9 +512,8 @@ public class FXMLDocumentController implements Initializable {
             save = (Sauvegarde) ois.readObject();
             ois.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+
         }
 
         connectables2D = save.getCircuit();
@@ -720,7 +719,6 @@ public class FXMLDocumentController implements Initializable {
             objTimer.getKeyFrames().clear();
             objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

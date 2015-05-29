@@ -17,15 +17,15 @@ public class Noeud {
 
     private double tension;
 
-    private ArrayList<FilAbstrait> fils;
-    private ArrayList<SourceFEM> sourcesFEMNeg;
-    private ArrayList<SourceFEM> sourcesFEMPos;
-    private ArrayList<Resistance> resistances;
-    private ArrayList<SourceCourant> sourcesCourant;
+    private final ArrayList<FilAbstrait> fils;
+    private final ArrayList<SourceFEM> sourcesFEMNeg;
+    private final ArrayList<SourceFEM> sourcesFEMPos;
+    private final ArrayList<Resistance> resistances;
+    private final ArrayList<SourceCourant> sourcesCourant;
     private Ground ground;
 
-    private ArrayList<ComposantDigital> entrees;
-    private ArrayList<ComposantDigital> sorties;
+    private final ArrayList<ComposantDigital> entrees;
+    private final ArrayList<ComposantDigital> sorties;
 
     public Noeud() {
         fils = new ArrayList<>();

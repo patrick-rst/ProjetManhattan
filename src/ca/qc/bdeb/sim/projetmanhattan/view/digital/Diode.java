@@ -17,7 +17,7 @@ public class Diode extends LogicGateAbstraite {
     }
 
     @Override
-    public void calculerCourant() {
+    protected void calculerCourant() {
         actifTemp = actif;
         actif = noeudEntreeA != null && noeudEntreeA.isActif();
 

@@ -19,17 +19,17 @@ import javafx.application.Platform;
  */
 public class CircuitDigital implements Circuit {
 
-    private ArrayList<Noeud> noeuds;
-    private ArrayList<Diode> diodes;
-    private ArrayList<SourceDigitale> sourcesDigitales;
-    private ArrayList<LumiereOutput> lumieres;
-    private ArrayList<LogicGateAbstraite> gates;
-    private ArrayList<LogicGateAbstraite> gatesABoucler;
+    private final ArrayList<Noeud> noeuds;
+    private final ArrayList<Diode> diodes;
+    private final ArrayList<SourceDigitale> sourcesDigitales;
+    private final ArrayList<LumiereOutput> lumieres;
+    private final ArrayList<LogicGateAbstraite> gates;
+    private final ArrayList<LogicGateAbstraite> gatesABoucler;
     private FXMLDocumentController controller;
 
     private boolean run;
     private Thread thread;
-    private int delaiTic;
+    private final int delaiTic;
 
     public CircuitDigital() {
         noeuds = new ArrayList<>();

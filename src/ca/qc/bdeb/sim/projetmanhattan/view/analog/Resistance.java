@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  */
 public class Resistance extends Connectable implements Composant {
 
-    private String imgPath = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/resistance.png";
+    private final String imgPath = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/resistance.png";
 
     private double resistance;
     private double courant;

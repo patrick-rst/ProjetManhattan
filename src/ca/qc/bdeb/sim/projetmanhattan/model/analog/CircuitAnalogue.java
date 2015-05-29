@@ -17,12 +17,12 @@ import org.ejml.ops.CommonOps;
  */
 public class CircuitAnalogue implements Circuit {
 
-    private ArrayList<Resistance> resistances;
-    private ArrayList<Noeud> noeuds;
-    private ArrayList<SourceFEM> sourcesFEM;
-    private ArrayList<SourceCourant> sourcesCourant;
-    private ArrayList<Noeud> noeudsGround;
-    private ArrayList<Ground> grounds;
+    private final ArrayList<Resistance> resistances;
+    private final ArrayList<Noeud> noeuds;
+    private final ArrayList<SourceFEM> sourcesFEM;
+    private final ArrayList<SourceCourant> sourcesCourant;
+    private final ArrayList<Noeud> noeudsGround;
+    private final ArrayList<Ground> grounds;
 
     private int nombreNoeuds;
     private int nombreSourcesFEM;
@@ -47,6 +47,7 @@ public class CircuitAnalogue implements Circuit {
 
     }
 
+    @Override
     public void wipe() {
         resistances.clear();
         noeuds.clear();

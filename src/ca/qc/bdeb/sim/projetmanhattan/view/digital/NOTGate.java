@@ -28,7 +28,7 @@ public class NOTGate extends LogicGateAbstraite {
     }
 
     @Override
-    public void calculerCourant() {
+    protected void calculerCourant() {
         actifTemp = actif;
         if (noeudEntreeA == null) {
             actif = true;

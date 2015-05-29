@@ -48,7 +48,6 @@ public class AnalyseC {
             creerLiens(circuit);
         } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
-            e.printStackTrace();
         }
     }
 
