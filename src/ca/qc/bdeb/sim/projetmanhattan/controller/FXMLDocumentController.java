@@ -238,7 +238,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
-        
+
         if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null && source.getStyle().equals("")) {
             source.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
             if (lastSource == null) {
@@ -286,7 +286,7 @@ public class FXMLDocumentController implements Initializable {
         Menu mnuMode = new Menu("Mode");
         Menu mnuAction = new Menu("Action");
         Menu mnuAide = new Menu("Aide");
-        
+
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
         MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
@@ -298,7 +298,7 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemValue = new MenuItem("Modifier valeur");
         MenuItem mnuItemAide = new MenuItem("Aide");
         MenuItem mnuItemAbout = new MenuItem("À propos");
-        
+
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -496,7 +496,7 @@ public class FXMLDocumentController implements Initializable {
             }
 
         });
-        
+
         mnuItemAide.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -506,10 +506,10 @@ public class FXMLDocumentController implements Initializable {
                 dialog.setWidth(500);
                 Scene scene = new Scene(new Group(new Text(25, 25, "Hello World!")));
                 dialog.setScene(scene);
-                dialog.show();    
+                dialog.show();
             }
-        });  
-        
+        });
+
         mnuItemAbout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -517,19 +517,18 @@ public class FXMLDocumentController implements Initializable {
                 dialog.initStyle(StageStyle.UTILITY);
                 dialog.setHeight(200);
                 dialog.setWidth(500);
-                
+
                 Group group = new Group();
                 Scene scene = new Scene(group);
-                
-                Text title = new Text(25,25,"Projet Manhattan");
-                Text credits = new Text(25,50,"Marc-Antoine Lalonde\nPatrick Richer St-Onge");
+
+                Text title = new Text(25, 25, "Projet Manhattan");
+                Text credits = new Text(25, 50, "Marc-Antoine Lalonde\nPatrick Richer St-Onge");
                 group.getChildren().addAll(title, credits);
-                
-                
+
                 dialog.setScene(scene);
-                dialog.show();    
+                dialog.show();
             }
-        });         
+        });
 
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));

@@ -138,9 +138,9 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
 
         if (actifTemp != actif) {
             if (actif && noeudSortie != null) {
-                noeudSortie.augmenterTensionDigital();
+                noeudSortie.allumerNoeud();
             } else {
-                noeudSortie.diminuerTensionDigital();
+                noeudSortie.eteindreNoeud();
             }
         }
     }
@@ -183,7 +183,9 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
         if (passee) {
             aBoucler = true;
         } else {
+            actifTemp = actif;
             calculerCourant();
+            transfererCourant();
         }
     }
 

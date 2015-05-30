@@ -32,18 +32,17 @@ public class NOTGate extends LogicGateAbstraite {
 
     @Override
     protected void calculerCourant() {
-        actifTemp = actif;
         if (noeudEntreeA == null) {
             actif = true;
             System.out.println("actif");
         } else {
             actif = !noeudEntreeA.isActif();
         }
-        transfererCourant();
     }
 
     @Override
     public void ajouterNoeudEntree(Noeud noeud) {
+        System.out.println("ajout");
         if (noeudEntreeA == null) {
             noeudEntreeA = noeud;
         } else {

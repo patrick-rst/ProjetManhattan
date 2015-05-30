@@ -105,10 +105,10 @@ public class CircuitAnalogue implements Circuit {
 
     private void distribuerInfos() {
         for (int i = 0; i < nombreNoeuds; ++i) {
-            noeuds.get(i).setTension(matriceX[i]);
+            noeuds.get(i).setTension(Math.abs(matriceX[i]));
         }
         for (int i = 0; i < nombreSourcesFEM; ++i) {
-            sourcesFEM.get(i).setCourant(matriceX[nombreNoeuds + i]);
+            sourcesFEM.get(i).setCourant(Math.abs(matriceX[nombreNoeuds + i]));
         }
 
         donnerCourantAuxResistances();
