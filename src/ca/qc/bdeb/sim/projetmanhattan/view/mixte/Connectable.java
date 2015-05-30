@@ -16,6 +16,7 @@ public abstract class Connectable implements Serializable {
      */
     protected byte[] cotesConnectes;
     private final TypeComposant typeComposant;
+    private double rotation;
 
     /**
      * L'image visible par l'utilisateur.
@@ -72,4 +73,14 @@ public abstract class Connectable implements Serializable {
     public Image getImageActive() {
         return imageActive;
     }
+
+    public double getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(double rotation) {
+        this.rotation = rotation;
+    }
+    
+    
 }

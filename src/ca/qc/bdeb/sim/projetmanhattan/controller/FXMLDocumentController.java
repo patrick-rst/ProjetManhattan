@@ -40,7 +40,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -64,8 +66,10 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import org.controlsfx.control.PopOver;
@@ -226,12 +230,18 @@ public class FXMLDocumentController implements Initializable {
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
         if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
-            source.setRotate(source.getRotate() + 90);
+            
+            double rotation = source.getRotate() + 90;
+            
+            source.setRotate(rotation);
 
             int row = grid.getRowIndex(source);
             int column = grid.getColumnIndex(source);
 
-            ((Connectable) connectables2D[row][column]).rotater();
+            Connectable c = (Connectable) connectables2D[row][column];
+            
+            c.rotater();
+            c.setRotation(rotation);
 
         } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
             String id = source.getId();
@@ -341,14 +351,17 @@ public class FXMLDocumentController implements Initializable {
         Menu mnuFile = new Menu("File");
         Menu mnuMode = new Menu("Mode");
         Menu mnuAction = new Menu("Action");
-
+        Menu mnuAide = new Menu("Aide");
+        
         MenuItem mnuItemSave = new MenuItem("Save");
         MenuItem mnuItemLoad = new MenuItem("Load");
         MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
         MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/play.png")));
         MenuItem mnuItemWipe = new MenuItem("Wipe");
-
+        MenuItem mnuItemAide = new MenuItem("Aide");
+        MenuItem mnuItemAbout = new MenuItem("À propos");
+        
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -438,6 +451,40 @@ public class FXMLDocumentController implements Initializable {
             }
 
         });
+        
+        mnuItemAide.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                Stage dialog = new Stage();
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setHeight(500);
+                dialog.setWidth(500);
+                Scene scene = new Scene(new Group(new Text(25, 25, "Hello World!")));
+                dialog.setScene(scene);
+                dialog.show();    
+            }
+        });  
+        
+        mnuItemAbout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                Stage dialog = new Stage();
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setHeight(200);
+                dialog.setWidth(500);
+                
+                Group group = new Group();
+                Scene scene = new Scene(group);
+                
+                Text title = new Text(25,25,"Projet Manhattan");
+                Text credits = new Text(25,50,"Marc-Antoine Lalonde\nPatrick Richer St-Onge");
+                group.getChildren().addAll(title, credits);
+                
+                
+                dialog.setScene(scene);
+                dialog.show();    
+            }
+        });         
 
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
@@ -449,7 +496,8 @@ public class FXMLDocumentController implements Initializable {
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
         mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);
-        mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction);
+        mnuAide.getItems().addAll(mnuItemAide, mnuItemAbout);
+        mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction, mnuAide);
 
         pane.setTop(mnuBar);
     }
@@ -529,70 +577,70 @@ public class FXMLDocumentController implements Initializable {
                     Resistance r = (Resistance) c;
                     tmp.setImage(new Image(r.getImgPath()));
                     tmp.setId("resistance");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof SourceFEM) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "source_tension.png"));
                     tmp.setId("sourceTension");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof SourceCourant) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "source_courant.png"));
                     tmp.setId("sourceCourant");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof Ground) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "ground.png"));
                     tmp.setId("ground");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilDroit) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_droit.png"));
                     tmp.setId("filDroit");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilCoin) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_coin.png"));
                     tmp.setId("filCoin");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilT) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_t.png"));
                     tmp.setId("filT");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilCroix) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_croix.png"));
                     tmp.setId("filCroix");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof ANDGate) {
                     //ANDGate compAllumable = (ANDGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "and1.png"));
                     tmp.setId("andGate");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof ORGate) {
                     //ORGate compAllumable = (ORGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "or1.png"));
                     tmp.setId("orGate");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof NOTGate) {
                     //NOTGate compAllumable = (NOTGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "not1.png"));
                     tmp.setId("notGate");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 }
             }
@@ -600,7 +648,7 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    private void initializeImageView(ImageView imgv) {
+    private void initializeImageView(ImageView imgv, Connectable c) {
         imgv.setFitWidth(50);
         imgv.setFitHeight(50);
         imgv.setOnDragDetected(this::dragComposantFromGrid);
@@ -609,6 +657,7 @@ public class FXMLDocumentController implements Initializable {
         imgv.setOnMouseClicked(this::mouseClickCase);
         imgv.setPickOnBounds(true);
         imgv.setPreserveRatio(true);
+        imgv.setRotate(c.getRotation());
     }
 
     private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
