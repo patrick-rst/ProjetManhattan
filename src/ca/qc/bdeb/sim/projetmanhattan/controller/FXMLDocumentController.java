@@ -283,6 +283,7 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemRotate = new MenuItem("Tourner");
         MenuItem mnuItemChangeImage = new MenuItem("Changer l'image (Numérique)");
         MenuItem mnuItemValue = new MenuItem("Modifier la valeur");
+        MenuItem mnuItemEffaceConsole = new MenuItem("Effacer la console");
         
         MenuItem mnuItemAide = new MenuItem("Aide");
         MenuItem mnuItemAbout = new MenuItem("À propos");
@@ -315,7 +316,6 @@ public class FXMLDocumentController implements Initializable {
                         items.add(e.getMessage());
                     }
                     
-
                     int resistanceCount = 0;
                     int sourceFEMCount = 0;
                     
@@ -473,7 +473,13 @@ public class FXMLDocumentController implements Initializable {
             }
         });        
         
-        
+        mnuItemEffaceConsole.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                items.clear();
+            }
+
+        });        
         
 
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
@@ -538,16 +544,15 @@ public class FXMLDocumentController implements Initializable {
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R));
         mnuItemStop.setAccelerator(new KeyCodeCombination(KeyCode.A));
         mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W));
-        
         mnuItemRotate.setAccelerator(new KeyCodeCombination(KeyCode.T));
         mnuItemValue.setAccelerator(new KeyCodeCombination(KeyCode.E));
         mnuItemChangeImage.setAccelerator(new KeyCodeCombination(KeyCode.M));
-
+        mnuItemEffaceConsole.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
         
         
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
-        mnuAction.getItems().addAll(mnuItemRun, mnuItemStop, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue);
+        mnuAction.getItems().addAll(mnuItemRun, mnuItemStop, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue, mnuItemEffaceConsole);
         mnuAide.getItems().addAll(mnuItemAide, mnuItemAbout);
         mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction, mnuAide);
 
