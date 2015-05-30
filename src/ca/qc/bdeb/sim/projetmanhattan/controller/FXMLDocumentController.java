@@ -34,6 +34,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,6 +46,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -71,6 +73,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+
 import org.controlsfx.control.PopOver;
 
 /**
@@ -92,6 +95,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TitledPane numerique;
+    
+    @FXML
+    private ListView<String> list;
+    
+    ObservableList<String> items = FXCollections.observableArrayList("Bienvenue!");
 
     private Connectable[][] connectables2D = new Connectable[10][10];
 
@@ -237,6 +245,8 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
         numerique.setDisable(true);
+        
+        list.setItems(items);
     }
 
     public void setCircuitAnalogue(CircuitAnalogue c) {
@@ -261,14 +271,17 @@ public class FXMLDocumentController implements Initializable {
 
         MenuItem mnuItemSave = new MenuItem("Sauvegarder");
         MenuItem mnuItemLoad = new MenuItem("Ouvrir");
+        
         MenuItem mnuItemAnalogue = new MenuItem("Changer pour Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Changer pour Numérique");
+        
         MenuItem mnuItemRun = new MenuItem("Exécuter");
-        MenuItem mnuItemStop = new MenuItem("Arrêt");
+        MenuItem mnuItemStop = new MenuItem("Arrêt (Numérique)");
         MenuItem mnuItemWipe = new MenuItem("Effacer Tout");
         MenuItem mnuItemRotate = new MenuItem("Tourner");
-        MenuItem mnuItemChangeImage = new MenuItem("Changer l'image");
-        MenuItem mnuItemValue = new MenuItem("Modifier valeur");
+        MenuItem mnuItemChangeImage = new MenuItem("Changer l'image (Numérique)");
+        MenuItem mnuItemValue = new MenuItem("Modifier la valeur");
+        
         MenuItem mnuItemAide = new MenuItem("Aide");
         MenuItem mnuItemAbout = new MenuItem("À propos");
 
@@ -294,25 +307,28 @@ public class FXMLDocumentController implements Initializable {
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
                     circuitAnalogue.analyserCircuit();
 
+                    int resistanceCount = 0;
+                    int sourceFEMCount = 0;
+                    
                     for (int i = 0; i < 10; i++) {
                         for (int j = 0; j < 10; j++) {
                             ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
                             if (connectables2D[i][j] instanceof Resistance) {
                                 Resistance r = (Resistance) connectables2D[i][j];
-                                String info = String.format("Résistance: %.2f\nCourant: %.2f", r.getResistance(), r.getCourant());
+                                String info = String.format("Résistance %d\nRésistance: %.2f\nCourant: %.2f", resistanceCount+1, r.getResistance(), r.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
+                                items.add(info);
+                                resistanceCount = resistanceCount + 1;
                             } else if (connectables2D[i][j] instanceof SourceFEM) {
                                 SourceFEM s = (SourceFEM) connectables2D[i][j];
-                                String info = String.format("Tension: %.2f\nCourant: %.2f", s.getForceElectroMotrice(), s.getCourant());
+                                String info = String.format("Source FEM %d\nTension: %.2f\nCourant: %.2f", sourceFEMCount+1, s.getForceElectroMotrice(), s.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
-
-                            } else if (connectables2D[i][j] instanceof FilAbstrait) {
-                                FilAbstrait f = (FilAbstrait) connectables2D[i][j];
-
+                                items.add(info);
+                                sourceFEMCount = sourceFEMCount + 1;
                             }
                         }
                     }
@@ -405,7 +421,7 @@ public class FXMLDocumentController implements Initializable {
                         Resistance resistance = (Resistance) connectables2D[row][column];
                         txtValeur.setText(resistance.getResistance() + "");
                     } else {
-                        System.out.println("ERROR:Composant not implemented");
+                        items.add("Erreur : Composant pas implémenté");
                     }
 
                     HBox box = new HBox();
@@ -433,7 +449,7 @@ public class FXMLDocumentController implements Initializable {
                                     ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
                                 }
                             } catch (NumberFormatException e) {
-                                System.out.println("INPUT ERROR: Pas un nombre");
+                                items.add("Erreur : Pas un nombre");
                             }
                             composantEditor.hide();
 
@@ -506,16 +522,20 @@ public class FXMLDocumentController implements Initializable {
 
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
-        mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
-        mnuItemStop.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
-        mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
+        
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
         
-        mnuItemRotate.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN));
-        mnuItemValue.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
-        mnuItemChangeImage.setAccelerator(new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN));
+        mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R));
+        mnuItemStop.setAccelerator(new KeyCodeCombination(KeyCode.A));
+        mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W));
+        
+        mnuItemRotate.setAccelerator(new KeyCodeCombination(KeyCode.T));
+        mnuItemValue.setAccelerator(new KeyCodeCombination(KeyCode.E));
+        mnuItemChangeImage.setAccelerator(new KeyCodeCombination(KeyCode.M));
 
+        
+        
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
         mnuAction.getItems().addAll(mnuItemRun, mnuItemStop, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue);
@@ -550,6 +570,7 @@ public class FXMLDocumentController implements Initializable {
         if (file != null) {
             writeFile(file);
         }
+        items.add(String.format("Circuit sauvegardé : '%s'",file.getAbsolutePath()));
     }
 
     private void fileOpener() {
@@ -560,6 +581,7 @@ public class FXMLDocumentController implements Initializable {
         if (file != null) {
             readFile(file);
         }
+        items.add(String.format("Circuit ouvert : '%s'",file.getAbsolutePath()));
     }
 
     private void writeFile(File file) {
