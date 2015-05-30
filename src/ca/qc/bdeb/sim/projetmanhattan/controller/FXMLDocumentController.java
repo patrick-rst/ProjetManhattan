@@ -85,22 +85,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private BorderPane pane;
 
-    private Stage stage;
-
     @FXML
     private GridPane grid;
-
-    @FXML
-    private ImageView andGate;
 
     @FXML
     private TitledPane analogue;
 
     @FXML
     private TitledPane numerique;
-
-    @FXML
-    private TitledPane mixte;
 
     private Connectable[][] connectables2D = new Connectable[10][10];
 
@@ -238,6 +230,7 @@ public class FXMLDocumentController implements Initializable {
             }
         } else if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null && !source.getStyle().equals("")) {
             source.setStyle("");
+            lastSource = null;
         }
     }
 
@@ -606,7 +599,6 @@ public class FXMLDocumentController implements Initializable {
                 Connectable c = connectables2D[row][column];
                 if (c instanceof Resistance) {
                     ImageView tmp = new ImageView();
-                    //tmp.setImage(new Image(pathImg + "resistance.png"));
                     Resistance r = (Resistance) c;
                     tmp.setImage(new Image(r.getImgPath()));
                     tmp.setId("resistance");
