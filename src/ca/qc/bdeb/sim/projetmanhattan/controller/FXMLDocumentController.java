@@ -102,9 +102,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TitledPane mixte;
 
-    private int mouseRow;
-    private int mouseColumn;
-
     private Connectable[][] connectables2D = new Connectable[10][10];
 
     private final PopOver composantEditor = new PopOver();
@@ -194,14 +191,6 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    @FXML
-    private void keyPressed(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.P)) {
-            System.out.println("P pressed");
-            printCircuitArray();
-        }
-    }
-
     public void updateCircuitNumerique() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -252,15 +241,6 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    @FXML
-    private void mouseMoved(MouseEvent event) {
-        double x = event.getX();
-        double y = event.getY();
-
-        mouseRow = (int) y / 50;
-        mouseColumn = (int) x / 50;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
@@ -303,7 +283,6 @@ public class FXMLDocumentController implements Initializable {
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                //writeFile();
                 fileChooser();
             }
         });
@@ -311,7 +290,6 @@ public class FXMLDocumentController implements Initializable {
         mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                //readFile();
                 fileOpener();
             }
         });
@@ -333,22 +311,16 @@ public class FXMLDocumentController implements Initializable {
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
-                                //System.out.println("RESISTANCE");
-                                //System.out.println("Resistance:"+r.getResistance());
-                                //System.out.println("Courant:"+Math.abs(r.getCourant()));
                             } else if (connectables2D[i][j] instanceof SourceFEM) {
                                 SourceFEM s = (SourceFEM) connectables2D[i][j];
                                 String info = String.format("Tension: %.2f\nCourant: %.2f", s.getForceElectroMotrice(), s.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
-                                //System.out.println("SOURCE");
-                                //System.out.println("FEM:"+s.getForceElectroMotrice());
-                                //System.out.println("Courant:"+Math.abs(s.getCourant()));
+
                             } else if (connectables2D[i][j] instanceof FilAbstrait) {
                                 FilAbstrait f = (FilAbstrait) connectables2D[i][j];
-                                //System.out.println("FIL");
-                                //System.out.println("FEM:"+f.getTension());
+
                             }
                         }
                     }
@@ -791,24 +763,6 @@ public class FXMLDocumentController implements Initializable {
             connectables2D[row][column] = sourceDigitale;
         } else {
             System.out.println("ERROR:Composant not implemented");
-        }
-    }
-
-    private void printCircuitArray() {
-        for (Connectable[] tab : connectables2D) {
-            for (Connectable c : tab) {
-                System.out.print(String.format("%12s", c));
-            }
-            System.out.println("");
-        }
-    }
-
-    private void printCircuitArray(Connectable[][] array) {
-        for (Connectable[] tab : array) {
-            for (Connectable c : tab) {
-                System.out.print(String.format("%12s", c));
-            }
-            System.out.println("");
         }
     }
 
