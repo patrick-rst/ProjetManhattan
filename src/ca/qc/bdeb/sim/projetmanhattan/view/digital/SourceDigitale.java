@@ -17,7 +17,6 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     private boolean repeter;
 
     private Noeud noeudSortie;
-    private boolean actifTemp;
 
     /**
      * Initialise l'instance de la classe et ses variables si nécessaire.
@@ -102,15 +101,12 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
 
     @Override
     public void updateActif() {
-        actifTemp = actif;
         actif = lireOutput();
 
-        if (actifTemp != actif && noeudSortie != null) {
-            if (actif) {
-                noeudSortie.augmenterTensionDigital();
-            } else {
-                noeudSortie.diminuerTensionDigital();
-            }
+        if (actif) {
+            noeudSortie.allumerNoeud();
+        } else {
+            noeudSortie.eteindreNoeud();
         }
     }
 

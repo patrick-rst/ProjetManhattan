@@ -81,6 +81,5 @@ public abstract class Connectable implements Serializable {
     public void setRotation(double rotation) {
         this.rotation = rotation;
     }
-    
-    
+
 }

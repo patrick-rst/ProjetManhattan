@@ -44,7 +44,7 @@ public class CircuitDigital implements Circuit {
 
         thread = new Thread();
 
-        delaiTic = 25;
+        delaiTic = 50;
     }
 
     /**
@@ -59,7 +59,8 @@ public class CircuitDigital implements Circuit {
     /**
      * Part un thread qui simule le courant dans le circuit selon les connexions
      * et les input des sourcesDigitales. Appelle aussi les méthodes qui
-     * actualisent les images
+     * actualisent les images. A la fin du thread, reinitialise les composants
+     * sur le circuit pour qu'il ssoient prets a une nouvelle run.
      */
     @Override
     public void analyserCircuit() {
@@ -78,9 +79,16 @@ public class CircuitDigital implements Circuit {
                     compteBoucles %= nombreBouclesParCycle;
                     if (compteBoucles == 0) {
                         gatesABoucler.clear();
-                        for (SourceDigitale source : sourcesDigitales) {
-                            source.updateActif();
-                            ajouterGatesABoucler();
+
+                        if (!sourcesDigitales.isEmpty()) {
+                            for (SourceDigitale source : sourcesDigitales) {
+                                source.updateActif();
+                                ajouterGatesABoucler();
+                            }
+                        } else {
+                            for (LogicGateAbstraite gate : gates) {
+                                gate.updateActif();
+                            }
                         }
                     }
 
@@ -89,6 +97,9 @@ public class CircuitDigital implements Circuit {
                     }
 
                     ajouterGatesABoucler();
+                    for (Noeud noeud : noeuds) {
+                        noeud.assurerCourant();
+                    }
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -107,6 +118,8 @@ public class CircuitDigital implements Circuit {
                     }
 
                 }
+                resetGates();
+                resetSourcesDigitales();
             }
         };
         thread.setDaemon(true);
@@ -117,10 +130,7 @@ public class CircuitDigital implements Circuit {
      * Arrete l'analyse et prepare le circuit pour une prochaine "run"
      */
     public void stopAnalyse() {
-
         run = false;
-        resetGates();
-        resetSourcesDigitales();
     }
 
     /**
@@ -200,7 +210,7 @@ public class CircuitDigital implements Circuit {
     }
 
     /**
-     * Ajoute une porte logque à la liste de portes
+     * Ajoute une porte logique à la liste de portes
      *
      * @param gate le composant à ajouter
      */

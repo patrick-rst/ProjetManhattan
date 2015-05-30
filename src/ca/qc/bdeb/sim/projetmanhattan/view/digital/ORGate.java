@@ -26,10 +26,7 @@ public class ORGate extends LogicGateAbstraite {
 
     @Override
     protected void calculerCourant() {
-        actifTemp = actif;
         actif = (noeudEntreeA != null && noeudEntreeA.isActif()) || (noeudEntreeB != null && noeudEntreeB.isActif());
-
-        transfererCourant();
     }
 
 }

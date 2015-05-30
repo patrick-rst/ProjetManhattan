@@ -41,6 +41,18 @@ public class Noeud {
     }
 
     /**
+     * S'assure que le noeud est au bon statut. Utilise avant d'actualiser les
+     * images.
+     */
+    public void assurerCourant() {
+        for (int i = 0; i < entrees.size() && !isActif(); ++i) {
+            if (entrees.get(i).isActif()) {
+                allumerNoeud();
+            }
+        }
+    }
+
+    /**
      * Ajoute un composant qui envoie du courant dans le noeud à la liste de
      * composants qui envoient du courant dans le noeud
      *
@@ -156,8 +168,12 @@ public class Noeud {
      * Change le statut du noeud de off à on et change la tension dans les noeud
      * pour actualiser l'image
      */
-    public void augmenterTensionDigital() {
-        ++tension;
+    public void allumerNoeud() {
+        if (!isActif()) {
+            ++tension;
+        }
+
+        System.out.println(tension);
         setTension(tension);
         if (tension == 1) {
             for (ComposantDigital comp : sorties) {
@@ -171,8 +187,11 @@ public class Noeud {
      * pour actualiser l'image
      *
      */
-    public void diminuerTensionDigital() {
-        --tension;
+    public void eteindreNoeud() {
+        if (isActif()) {
+            --tension;
+        }
+        System.out.println(tension);
         setTension(tension);
         if (tension == 0) {
             for (ComposantDigital comp : sorties) {

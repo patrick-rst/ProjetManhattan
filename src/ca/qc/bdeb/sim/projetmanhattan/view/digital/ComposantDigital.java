@@ -26,4 +26,9 @@ public interface ComposantDigital extends Composant {
      * @param noeud ajoute un noeud qui recoit du courant à la liste
      */
     public void ajouterNoeudSortie(Noeud noeud);
+
+    /**
+     * Retourne l'etat du composant: on/off
+     */
+    public boolean isActif();
 }
