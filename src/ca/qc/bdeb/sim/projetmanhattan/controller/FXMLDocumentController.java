@@ -255,19 +255,19 @@ public class FXMLDocumentController implements Initializable {
 
     private void createMenu() {
         MenuBar mnuBar = new MenuBar();
-        Menu mnuFile = new Menu("File");
+        Menu mnuFile = new Menu("Fichier");
         Menu mnuMode = new Menu("Mode");
         Menu mnuAction = new Menu("Action");
         Menu mnuAide = new Menu("Aide");
 
-        MenuItem mnuItemSave = new MenuItem("Save");
-        MenuItem mnuItemLoad = new MenuItem("Load");
-        MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
-        MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
-        MenuItem mnuItemRun = new MenuItem("Run");
+        MenuItem mnuItemSave = new MenuItem("Sauvegarder");
+        MenuItem mnuItemLoad = new MenuItem("Ouvrir");
+        MenuItem mnuItemAnalogue = new MenuItem("Changer pour Analogue");
+        MenuItem mnuItemNumerique = new MenuItem("Changer pour Numérique");
+        MenuItem mnuItemRun = new MenuItem("Exécuter");
         MenuItem mnuItemStop = new MenuItem("Arrêt");
-        MenuItem mnuItemWipe = new MenuItem("Wipe");
-        MenuItem mnuItemRotate = new MenuItem("Rotate");
+        MenuItem mnuItemWipe = new MenuItem("Effacer Tout");
+        MenuItem mnuItemRotate = new MenuItem("Tourner");
         MenuItem mnuItemChangeImage = new MenuItem("Changer l'image");
         MenuItem mnuItemValue = new MenuItem("Modifier valeur");
         MenuItem mnuItemAide = new MenuItem("Aide");
@@ -545,7 +545,7 @@ public class FXMLDocumentController implements Initializable {
 
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Circuit");
+        fileChooser.setTitle("Sauvargarder circuit");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));
         File file = fileChooser.showSaveDialog(pane.getScene().getWindow());
         if (file != null) {
@@ -555,7 +555,7 @@ public class FXMLDocumentController implements Initializable {
 
     private void fileOpener() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Circuit");
+        fileChooser.setTitle("Ouvrir circuit");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));
         File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
         if (file != null) {
