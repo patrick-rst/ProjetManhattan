@@ -1,7 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
-import ca.qc.bdeb.sim.projetmanhattan.exception.AnalyseCircuitException;
-import ca.qc.bdeb.sim.projetmanhattan.exception.CircuitPasGroundException;
+import ca.qc.bdeb.sim.projetmanhattan.exceptions.AnalyseCircuitException;
+import ca.qc.bdeb.sim.projetmanhattan.exceptions.CircuitPasGroundException;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogue;
 import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigital;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
@@ -22,7 +22,6 @@ import ca.qc.bdeb.sim.projetmanhattan.view.digital.ORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.SourceDigitale;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XNORGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.XORGate;
-import ca.qc.bdeb.sim.projetmanhattan.view.mixte.FilAbstrait;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
 import java.io.File;

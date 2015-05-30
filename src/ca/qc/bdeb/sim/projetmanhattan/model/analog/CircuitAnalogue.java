@@ -1,7 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
-import ca.qc.bdeb.sim.projetmanhattan.exception.AnalyseCircuitException;
-import ca.qc.bdeb.sim.projetmanhattan.exception.CircuitPasGroundException;
+import ca.qc.bdeb.sim.projetmanhattan.exceptions.AnalyseCircuitException;
+import ca.qc.bdeb.sim.projetmanhattan.exceptions.CircuitPasGroundException;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;

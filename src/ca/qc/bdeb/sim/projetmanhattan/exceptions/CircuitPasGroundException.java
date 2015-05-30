@@ -1,4 +1,4 @@
-package ca.qc.bdeb.sim.projetmanhattan.exception;
+package ca.qc.bdeb.sim.projetmanhattan.exceptions;
 
 /**
  *
