@@ -115,8 +115,8 @@ public class CircuitAnalogue implements Circuit {
     }
 
     private void donnerCourantAuxResistances() {
-        double v1 = 0;
-        double v2 = 0;
+        double v1;
+        double v2;
 
         for (Resistance resistance : resistances) {
             v1 = 0;
