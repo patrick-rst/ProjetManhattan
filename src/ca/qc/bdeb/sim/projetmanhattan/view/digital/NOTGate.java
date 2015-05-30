@@ -16,12 +16,8 @@ public class NOTGate extends LogicGateAbstraite {
     public NOTGate() {
         super(TypeComposant.NOTGATE);
         addImage("not1.png");
-        addImage("not2.png");
-        addImage("not3.png");
 
         addImageActif("not1on.png");
-        addImageActif("not2on.png");
-        addImageActif("not3on.png");
         imageActive = listeImages.get(0);
 
         cotesConnectes[0] = 0;
