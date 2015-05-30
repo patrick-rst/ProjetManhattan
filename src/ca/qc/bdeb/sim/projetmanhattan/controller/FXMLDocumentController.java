@@ -1,5 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.controller;
 
+import ca.qc.bdeb.sim.projetmanhattan.exception.AnalyseCircuitException;
+import ca.qc.bdeb.sim.projetmanhattan.exception.CircuitPasGroundException;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogue;
 import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigital;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
@@ -305,7 +307,14 @@ public class FXMLDocumentController implements Initializable {
                 if (analogue.isDisabled() == false) {
                     //Analogue
                     circuitGraphique.preparerAnalyse(circuitAnalogue, connectables2D);
-                    circuitAnalogue.analyserCircuit();
+                    try {
+                        circuitAnalogue.analyserCircuit();
+                    } catch (CircuitPasGroundException e) {
+                        items.add(e.getMessage());
+                    } catch (AnalyseCircuitException e) {
+                        items.add(e.getMessage());
+                    }
+                    
 
                     int resistanceCount = 0;
                     int sourceFEMCount = 0;
@@ -775,12 +784,8 @@ public class FXMLDocumentController implements Initializable {
             SourceDigitale sourceDigitale = new SourceDigitale();
             connectables2D[row][column] = sourceDigitale;
         } else {
-            System.out.println("ERROR:Composant not implemented");
+            items.add("Erreur : Composant pas implémenté");
         }
-    }
-
-    private Connectable[][] getCircuit() {
-        return connectables2D;
     }
 
     private static void hackTooltipStartTiming(Tooltip tooltip) {

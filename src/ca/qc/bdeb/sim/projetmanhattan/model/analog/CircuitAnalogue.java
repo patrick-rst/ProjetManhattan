@@ -1,5 +1,7 @@
 package ca.qc.bdeb.sim.projetmanhattan.model.analog;
 
+import ca.qc.bdeb.sim.projetmanhattan.exception.AnalyseCircuitException;
+import ca.qc.bdeb.sim.projetmanhattan.exception.CircuitPasGroundException;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Circuit;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
@@ -97,9 +99,11 @@ public class CircuitAnalogue implements Circuit {
 
             } catch (Exception e) {
                 System.out.println("Erreur lors de l'analyse du circuit");
+                throw new AnalyseCircuitException("Erreur lors de l'analyse du circuit");
             }
         } else {
             System.out.println("Circuit non groundé!");
+            throw new CircuitPasGroundException("Circuit non groundé!");
         }
     }
 
