@@ -19,18 +19,21 @@ import javafx.application.Platform;
  */
 public class CircuitDigital implements Circuit {
 
-    private ArrayList<Noeud> noeuds;
-    private ArrayList<Diode> diodes;
-    private ArrayList<SourceDigitale> sourcesDigitales;
-    private ArrayList<LumiereOutput> lumieres;
-    private ArrayList<LogicGateAbstraite> gates;
-    private ArrayList<LogicGateAbstraite> gatesABoucler;
+    private final ArrayList<Noeud> noeuds;
+    private final ArrayList<Diode> diodes;
+    private final ArrayList<SourceDigitale> sourcesDigitales;
+    private final ArrayList<LumiereOutput> lumieres;
+    private final ArrayList<LogicGateAbstraite> gates;
+    private final ArrayList<LogicGateAbstraite> gatesABoucler;
     private FXMLDocumentController controller;
 
     private boolean run;
     private Thread thread;
-    private int delaiTic;
+    private final int delaiTic;
 
+    /**
+     * Crée le nouveau circuit digital et initialise les diverses variables*
+     */
     public CircuitDigital() {
         noeuds = new ArrayList<>();
         diodes = new ArrayList<>();
@@ -41,13 +44,24 @@ public class CircuitDigital implements Circuit {
 
         thread = new Thread();
 
-        delaiTic = 25;
+        delaiTic = 50;
     }
 
+    /**
+     * Assigne un controleur à la variable controller
+     *
+     * @param controller le controleur de l'interface
+     */
     public void setController(FXMLDocumentController controller) {
         this.controller = controller;
     }
 
+    /**
+     * Part un thread qui simule le courant dans le circuit selon les connexions
+     * et les input des sourcesDigitales. Appelle aussi les méthodes qui
+     * actualisent les images. A la fin du thread, reinitialise les composants
+     * sur le circuit pour qu'il ssoient prets a une nouvelle run.
+     */
     @Override
     public void analyserCircuit() {
         run = true;
@@ -65,9 +79,16 @@ public class CircuitDigital implements Circuit {
                     compteBoucles %= nombreBouclesParCycle;
                     if (compteBoucles == 0) {
                         gatesABoucler.clear();
-                        for (SourceDigitale source : sourcesDigitales) {
-                            source.updateActif();
-                            ajouterGatesABoucler();
+
+                        if (!sourcesDigitales.isEmpty()) {
+                            for (SourceDigitale source : sourcesDigitales) {
+                                source.updateActif();
+                                ajouterGatesABoucler();
+                            }
+                        } else {
+                            for (LogicGateAbstraite gate : gates) {
+                                gate.updateActif();
+                            }
                         }
                     }
 
@@ -76,6 +97,9 @@ public class CircuitDigital implements Circuit {
                     }
 
                     ajouterGatesABoucler();
+                    for (Noeud noeud : noeuds) {
+                        noeud.assurerCourant();
+                    }
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -94,40 +118,77 @@ public class CircuitDigital implements Circuit {
                     }
 
                 }
+                resetGates();
+                resetSourcesDigitales();
             }
         };
         thread.setDaemon(true);
         thread.start();
     }
 
+    /**
+     * Arrete l'analyse et prepare le circuit pour une prochaine "run"
+     */
     public void stopAnalyse() {
         run = false;
-        resetGates();
     }
 
+    /**
+     * Remet les sources digitales a zero pour les synchroniser en cas de
+     * modification du circuit.
+     */
+    public void resetSourcesDigitales() {
+        for (SourceDigitale source : sourcesDigitales) {
+            source.remettreAZero();
+        }
+    }
+
+    /**
+     * Ajoute un élément à la liste de sources
+     *
+     * @param sourceDigitale L'élément à ajouter
+     */
     public void ajouterSourceDigitale(SourceDigitale sourceDigitale) {
         sourcesDigitales.add(sourceDigitale);
     }
 
+    /**
+     * Ajoute un élément à la liste de diodes
+     *
+     * @param diode La diode à ajouter
+     */
     public void ajouterDiode(Diode diode) {
         diodes.add(diode);
     }
 
+    /**
+     * ajoute un noeud à la liste de noeuds
+     *
+     * @param noeud Le noeud à ajouter
+     */
     @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 
+    /**
+     * Ajoute une lumière à la liste de lumières
+     *
+     * @param lumiere la lumière à ajouter
+     */
     public void ajouterLumiere(LumiereOutput lumiere) {
         lumieres.add(lumiere);
     }
 
-    public void resetGates() {
+    private void resetGates() {
         for (LogicGateAbstraite gate : gates) {
             gate.resetConnexions();
         }
     }
 
+    /**
+     * Remet la grille à zéro pour commencer un nouveau circuit.
+     */
     @Override
     public void wipe() {
         noeuds.clear();
@@ -137,7 +198,7 @@ public class CircuitDigital implements Circuit {
         gatesABoucler.clear();
     }
 
-    public void ajouterGatesABoucler() {
+    private void ajouterGatesABoucler() {
         for (LogicGateAbstraite gate : gates) {
             if (gate.isABoucler()) {
                 if (!gatesABoucler.contains(gate)) {
@@ -148,6 +209,11 @@ public class CircuitDigital implements Circuit {
         }
     }
 
+    /**
+     * Ajoute une porte logique à la liste de portes
+     *
+     * @param gate le composant à ajouter
+     */
     public void ajouterGate(LogicGateAbstraite gate) {
         gates.add(gate);
     }

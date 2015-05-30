@@ -9,6 +9,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class XORGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public XORGate() {
         super(TypeComposant.XOR_GATE);
         addImage("xor1.png");
@@ -22,11 +25,9 @@ public class XORGate extends LogicGateAbstraite {
     }
 
     @Override
-    public void calculerCourant() {
-        actifTemp = actif;
+    protected void calculerCourant() {
         actif = (noeudEntreeA != null && noeudEntreeA.isActif() && (noeudEntreeB == null || !noeudEntreeB.isActif()))
                 || (noeudEntreeB != null && noeudEntreeB.isActif() && (noeudEntreeA == null || !noeudEntreeA.isActif()));
-        transfererCourant();
     }
 
 }

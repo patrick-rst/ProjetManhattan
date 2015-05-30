@@ -11,8 +11,11 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class LumiereOutput extends ImageChangeable implements ComposantDigital {
 
-    protected Noeud noeudEntree;
+    private Noeud noeudEntree;
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public LumiereOutput() {
         super(TypeComposant.LUMIERE_OUTPUT);
         cotesConnectes[3] = 1;
@@ -24,11 +27,7 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
 
     @Override
     public void updateActif() {
-        if (noeudEntree.isActif()) {
-            actif = true;
-        } else {
-            actif = false;
-        }
+        actif = noeudEntree.isActif();
     }
 
     @Override
@@ -41,11 +40,11 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void switchOn() {
+    private void switchOn() {
         actif = true;
     }
 
-    public void switchOff() {
+    private void switchOff() {
         actif = false;
     }
 

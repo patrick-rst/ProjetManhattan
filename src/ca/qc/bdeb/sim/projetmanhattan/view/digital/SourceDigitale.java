@@ -17,8 +17,10 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     private boolean repeter;
 
     private Noeud noeudSortie;
-    private boolean actifTemp;
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public SourceDigitale() {
         super(TypeComposant.SOURCE_DIGITALE);
         listeOutput = new ArrayList<>();
@@ -30,10 +32,22 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         imageActive = listeImages.get(0);
     }
 
-    public void flipRepeter() {
+    /**
+     * remet le cycle d'output au debut
+     */
+    public void remettreAZero() {
+        indexOutput = -1;
+    }
+
+    private void flipRepeter() {
         repeter = !repeter;
     }
 
+    /**
+     *
+     * @return l'état de la variable repeter, soit si la source doit rouler en
+     * boucle ou non
+     */
     public boolean isRepeter() {
         return repeter;
     }
@@ -50,10 +64,20 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         return actif;
     }
 
+    /**
+     *
+     * @param list la liste des intervalles ou la source émet un courant
+     * (on/off)
+     */
     public void setListeOutput(ArrayList<Boolean> list) {
         this.listeOutput = list;
     }
 
+    /**
+     *
+     * @param string la liste des intervalles ou la source émet un courant
+     * (on/off)
+     */
     public void setListeOutput(String string) {
         ArrayList<Character> liste = new ArrayList<>();
         for (int i = 0; i < string.length(); ++i) {
@@ -77,15 +101,12 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
 
     @Override
     public void updateActif() {
-        actifTemp = actif;
         actif = lireOutput();
 
-        if (actifTemp != actif && noeudSortie != null) {
-            if (actif) {
-                noeudSortie.augmenterTensionDigital();
-            } else {
-                noeudSortie.diminuerTensionDigital();
-            }
+        if (actif) {
+            noeudSortie.allumerNoeud();
+        } else {
+            noeudSortie.eteindreNoeud();
         }
     }
 

@@ -30,9 +30,23 @@ public class AnalyseC {
     private Connectable[][] connectables;
     private boolean[][] connectablesPasses;
 
+    /**
+     * Création du controleur*
+     */
     public AnalyseC() {
     }
 
+    /**
+     * Prépare la grille de composants à être analysée avec les composants que
+     * l'utilisateur peut voir. Identifie ensuite le type de circuit (analogue
+     * ou digital) et appelle la méthode qui fait l'analyse.
+     *
+     *
+     * @param circuit La classe contenant toutes les données concernant les
+     * composants
+     * @param connectables La liste 2D correspondant au tableau sur lequel
+     * l'utilisateur place les composants
+     */
     public void preparerAnalyse(Circuit circuit, Connectable[][] connectables) {
         this.connectables = connectables;
         circuit.wipe();
@@ -48,11 +62,10 @@ public class AnalyseC {
             creerLiens(circuit);
         } catch (Exception e) {
             System.out.println("Erreur: Circuit invalide");
-            e.printStackTrace();
         }
     }
 
-    public void preparerAnalyseAnalogue(CircuitAnalogue circuit, Connectable[][] connectables) {
+    private void preparerAnalyseAnalogue(CircuitAnalogue circuit, Connectable[][] connectables) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof Resistance) {
@@ -68,7 +81,7 @@ public class AnalyseC {
         }
     }
 
-    public void preparerAnalyseDigitale(CircuitDigital circuit, Connectable[][] connectables) {
+    private void preparerAnalyseDigitale(CircuitDigital circuit, Connectable[][] connectables) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof LogicGateAbstraite) {
@@ -82,7 +95,7 @@ public class AnalyseC {
         }
     }
 
-    public void creerLiensSansFil(Circuit circuit) {
+    private void creerLiensSansFil(Circuit circuit) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables.length; ++j) {
                 if (connectables[i][j] instanceof Composant) {
@@ -103,7 +116,7 @@ public class AnalyseC {
         }
     }
 
-    public void creerLiens(Circuit circuit) {
+    private void creerLiens(Circuit circuit) {
         for (int i = 0; i < connectables.length; ++i) {
             for (int j = 0; j < connectables[i].length; ++j) {
                 if (connectables[i][j] instanceof FilAbstrait && !connectablesPasses[i][j]) {
@@ -118,7 +131,7 @@ public class AnalyseC {
         }
     }
 
-    public void gererLienDetecte(int i, int j, Noeud noeud, int origine) {
+    private void gererLienDetecte(int i, int j, Noeud noeud, int origine) {
         if (connectables[i][j] instanceof FilAbstrait) {
 
             connectablesPasses[i][j] = true;
@@ -178,7 +191,7 @@ public class AnalyseC {
         }
     }
 
-    public void retournerEnfants(FilAbstrait fil, int i, int j, Noeud noeud) {
+    private void retournerEnfants(FilAbstrait fil, int i, int j, Noeud noeud) {
 
         if (fil.getCotesConnectes()[0] == 1 && i > 0 && connectables[i - 1][j] != null && connectables[i - 1][j].getCotesConnectes()[2] != 0 && !connectablesPasses[i - 1][j]) {
             gererLienDetecte((i - 1), j, noeud, 2);

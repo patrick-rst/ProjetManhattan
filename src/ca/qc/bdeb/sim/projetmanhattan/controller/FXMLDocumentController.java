@@ -40,7 +40,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -64,31 +66,27 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import org.controlsfx.control.PopOver;
 
 /**
  * Controlleur
+ *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
  */
 public class FXMLDocumentController implements Initializable {
 
- 
-    
     @FXML
     private BorderPane pane;
-    
-    private Stage stage;
 
     @FXML
     private GridPane grid;
-
-    @FXML
-    private ImageView andGate;
 
     @FXML
     private TitledPane analogue;
@@ -96,19 +94,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TitledPane numerique;
 
-    @FXML
-    private TitledPane mixte;
-
-    private int mouseRow;
-    private int mouseColumn;
-
     private Connectable[][] connectables2D = new Connectable[10][10];
 
-    private PopOver composantEditor = new PopOver();
+    private final PopOver composantEditor = new PopOver();
 
     private CircuitAnalogue circuitAnalogue;
     private CircuitDigital circuitNumerique;
     private AnalyseC circuitGraphique;
+    
+    private ImageView lastSource = null;
 
     @FXML
     private void dragComposant(MouseEvent event) {
@@ -119,7 +113,7 @@ public class FXMLDocumentController implements Initializable {
         content.putImage(source.getImage());
         content.putString(source.getId());
         db.setContent(content);
-
+        
         event.consume();
     }
 
@@ -148,11 +142,20 @@ public class FXMLDocumentController implements Initializable {
             target.setRotate(0);
             addComposant(id, row, column);
 
+            resetLastSource();
+            
             success = true;
         }
 
         event.setDropCompleted(success);
         event.consume();
+    }
+    
+    private void resetLastSource() {
+        if (lastSource != null) {
+            lastSource.setStyle("");
+        }
+        lastSource = null;
     }
 
     @FXML
@@ -173,27 +176,13 @@ public class FXMLDocumentController implements Initializable {
         source.setId(null);
 
         event.consume();
-        
+
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
-        }      
-        
-        
-    }
-
-    @FXML
-    private void keyPressed(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.P)) {
-            System.out.println("P pressed");
-            printCircuitArray();
-        } else if (event.getCode().equals(KeyCode.M)) {
-            System.out.println("M pressed");
-
-            changeImage();
-
         }
+
     }
-    
+
     public void updateCircuitNumerique() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -213,11 +202,14 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    public void changeImage() {
-        ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
+    private void changeImage() {
+        ImageView imgView = lastSource;
 
-        if (connectables2D[mouseRow][mouseColumn] instanceof ImageChangeable) {
-            ImageChangeable compAllumable = (ImageChangeable) connectables2D[mouseRow][mouseColumn];
+        int row = grid.getRowIndex(lastSource);
+        int column = grid.getColumnIndex(lastSource);
+        
+        if (connectables2D[row][column] instanceof ImageChangeable) {
+            ImageChangeable compAllumable = (ImageChangeable) connectables2D[row][column];
 
             compAllumable.nextImage();
             imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
@@ -227,96 +219,19 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
-        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
-            source.setRotate(source.getRotate() + 90);
 
-            int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);
-
-            ((Connectable) connectables2D[row][column]).rotater();
-
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
-            String id = source.getId();
-
-            int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);
-
-            Label lblComposant = new Label();
-            Label lblUnite = new Label();
-            TextField txtValeur = new TextField();
-            txtValeur.setPrefWidth(50);
-            Button btn = new Button("Ok");
-            btn.setId(row + "," + column);
-
-            if (id.equals("sourceTension")) {
-                lblComposant.setText("Source de tension");
-                lblUnite.setText("Volt");
-                SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
-                txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
-            } else if (id.equals("sourceCourant")) {
-                lblComposant.setText("Source de courant");
-                lblUnite.setText("Ampère");
-                SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
-                txtValeur.setText(sourceCourant.getCourant() + "");
-            } else if (id.equals("resistance")) {
-                lblComposant.setText("Resistance");
-                lblUnite.setText("Ohm");
-                Resistance resistance = (Resistance) connectables2D[row][column];
-                txtValeur.setText(resistance.getResistance() + "");
-            } else {
-                System.out.println("ERROR:Composant not implemented");
-            }
-
-            HBox box = new HBox();
-            box.setPadding(new Insets(15, 15, 15, 15));
-            box.setSpacing(10);
-            box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
-
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Button source = (Button) event.getSource();
-                    String id = source.getId();
-
-                    int row = Integer.parseInt(id.split(",")[0]);
-                    int column = Integer.parseInt(id.split(",")[1]);
-
-                    TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
-
-                    try {
-                        if (typeComposant == TypeComposant.RESISTANCE) {
-                            ((Resistance) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                        } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
-                            ((SourceFEM) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
-                        } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
-                            ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("INPUT ERROR: Pas un nombre");
-                    }
-                    composantEditor.hide();
-
-                }
-            });
-
-            composantEditor.setDetachable(false);
-            composantEditor.setContentNode(box);
-            composantEditor.show((ImageView) event.getSource(), 15);
-
-        } else if (event.getButton().equals(MouseButton.SECONDARY)) {
-
+        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null && source.getStyle().equals("")) {
             source.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
-
+            if (lastSource == null) {
+                lastSource = source;
+            } else if (lastSource != source) {
+                lastSource.setStyle("");
+                lastSource = source;
+            }
+        } else if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null && !source.getStyle().equals("")) {
+            source.setStyle("");
+            lastSource = null;
         }
-    }
-
-    @FXML
-    private void mouseMoved(MouseEvent event) {
-        double x = event.getX();
-        double y = event.getY();
-
-        mouseRow = (int) y / 50;
-        mouseColumn = (int) x / 50;
     }
 
     @Override
@@ -340,21 +255,27 @@ public class FXMLDocumentController implements Initializable {
 
     private void createMenu() {
         MenuBar mnuBar = new MenuBar();
-        Menu mnuFile = new Menu("File");
+        Menu mnuFile = new Menu("Fichier");
         Menu mnuMode = new Menu("Mode");
         Menu mnuAction = new Menu("Action");
+        Menu mnuAide = new Menu("Aide");
 
-        MenuItem mnuItemSave = new MenuItem("Save");
-        MenuItem mnuItemLoad = new MenuItem("Load");
-        MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
-        MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
-        MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/play.png")));
-        MenuItem mnuItemWipe = new MenuItem("Wipe");
+        MenuItem mnuItemSave = new MenuItem("Sauvegarder");
+        MenuItem mnuItemLoad = new MenuItem("Ouvrir");
+        MenuItem mnuItemAnalogue = new MenuItem("Changer pour Analogue");
+        MenuItem mnuItemNumerique = new MenuItem("Changer pour Numérique");
+        MenuItem mnuItemRun = new MenuItem("Exécuter");
+        MenuItem mnuItemStop = new MenuItem("Arrêt");
+        MenuItem mnuItemWipe = new MenuItem("Effacer Tout");
+        MenuItem mnuItemRotate = new MenuItem("Tourner");
+        MenuItem mnuItemChangeImage = new MenuItem("Changer l'image");
+        MenuItem mnuItemValue = new MenuItem("Modifier valeur");
+        MenuItem mnuItemAide = new MenuItem("Aide");
+        MenuItem mnuItemAbout = new MenuItem("À propos");
 
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                //writeFile();
                 fileChooser();
             }
         });
@@ -362,7 +283,6 @@ public class FXMLDocumentController implements Initializable {
         mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                //readFile();
                 fileOpener();
             }
         });
@@ -384,22 +304,16 @@ public class FXMLDocumentController implements Initializable {
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
-                                //System.out.println("RESISTANCE");
-                                //System.out.println("Resistance:"+r.getResistance());
-                                //System.out.println("Courant:"+Math.abs(r.getCourant()));
                             } else if (connectables2D[i][j] instanceof SourceFEM) {
                                 SourceFEM s = (SourceFEM) connectables2D[i][j];
                                 String info = String.format("Tension: %.2f\nCourant: %.2f", s.getForceElectroMotrice(), s.getCourant());
                                 Tooltip tooltip = new Tooltip(info);
                                 hackTooltipStartTiming(tooltip);
                                 Tooltip.install(imgV, tooltip);
-                                //System.out.println("SOURCE");
-                                //System.out.println("FEM:"+s.getForceElectroMotrice());
-                                //System.out.println("Courant:"+Math.abs(s.getCourant()));
+
                             } else if (connectables2D[i][j] instanceof FilAbstrait) {
                                 FilAbstrait f = (FilAbstrait) connectables2D[i][j];
-                                //System.out.println("FIL");
-                                //System.out.println("FEM:"+f.getTension());
+
                             }
                         }
                     }
@@ -413,6 +327,15 @@ public class FXMLDocumentController implements Initializable {
 
             }
         });
+        
+        mnuItemStop.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                if (numerique.isDisabled() == false) {
+                    circuitNumerique.stopAnalyse();
+                }                
+            }
+        });        
 
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -420,6 +343,114 @@ public class FXMLDocumentController implements Initializable {
                 wipe();
             }
         });
+        
+        mnuItemRotate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                if (lastSource != null) {
+                    ImageView source = lastSource;
+
+                    double rotation = source.getRotate() + 90;
+
+                    source.setRotate(rotation);
+
+                    int row = grid.getRowIndex(source);
+                    int column = grid.getColumnIndex(source);
+
+                    Connectable c = (Connectable) connectables2D[row][column];
+
+                    c.rotater();
+                    c.setRotation(rotation);                       
+                }
+             
+            }
+        });
+        
+        mnuItemChangeImage.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                changeImage();
+            }
+        });
+        
+        mnuItemValue.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                ImageView source = lastSource;
+                if (lastSource != null && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
+                    String id = source.getId();
+
+                    int row = grid.getRowIndex(source);
+                    int column = grid.getColumnIndex(source);
+
+                    Label lblComposant = new Label();
+                    Label lblUnite = new Label();
+                    TextField txtValeur = new TextField();
+                    txtValeur.setPrefWidth(50);
+                    Button btn = new Button("Ok");
+                    btn.setId(row + "," + column);
+
+                    if (id.equals("sourceTension")) {
+                        lblComposant.setText("Source de tension");
+                        lblUnite.setText("Volt");
+                        SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
+                        txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
+                    } else if (id.equals("sourceCourant")) {
+                        lblComposant.setText("Source de courant");
+                        lblUnite.setText("Ampère");
+                        SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
+                        txtValeur.setText(sourceCourant.getCourant() + "");
+                    } else if (id.equals("resistance")) {
+                        lblComposant.setText("Resistance");
+                        lblUnite.setText("Ohm");
+                        Resistance resistance = (Resistance) connectables2D[row][column];
+                        txtValeur.setText(resistance.getResistance() + "");
+                    } else {
+                        System.out.println("ERROR:Composant not implemented");
+                    }
+
+                    HBox box = new HBox();
+                    box.setPadding(new Insets(15, 15, 15, 15));
+                    box.setSpacing(10);
+                    box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
+
+                    btn.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            Button source = (Button) event.getSource();
+                            String id = source.getId();
+
+                            int row = Integer.parseInt(id.split(",")[0]);
+                            int column = Integer.parseInt(id.split(",")[1]);
+
+                            TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
+
+                            try {
+                                if (typeComposant == TypeComposant.RESISTANCE) {
+                                    ((Resistance) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                                } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
+                                    ((SourceFEM) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                                } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
+                                    ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("INPUT ERROR: Pas un nombre");
+                            }
+                            composantEditor.hide();
+
+                        }
+                    });
+
+                    composantEditor.setDetachable(false);
+                    composantEditor.setContentNode(box);
+                    composantEditor.show(source, 15);
+
+                }    
+            }
+        });        
+        
+        
+        
 
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -441,26 +472,65 @@ public class FXMLDocumentController implements Initializable {
 
         });
 
+        mnuItemAide.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                Stage dialog = new Stage();
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setHeight(500);
+                dialog.setWidth(500);
+                Scene scene = new Scene(new Group(new Text(25, 25, "Hello World!")));
+                dialog.setScene(scene);
+                dialog.show();
+            }
+        });
+
+        mnuItemAbout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                Stage dialog = new Stage();
+                dialog.initStyle(StageStyle.UTILITY);
+                dialog.setHeight(200);
+                dialog.setWidth(500);
+
+                Group group = new Group();
+                Scene scene = new Scene(group);
+
+                Text title = new Text(25, 25, "Projet Manhattan");
+                Text credits = new Text(25, 50, "Marc-Antoine Lalonde\nPatrick Richer St-Onge");
+                group.getChildren().addAll(title, credits);
+
+                dialog.setScene(scene);
+                dialog.show();
+            }
+        });
+
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
+        mnuItemStop.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        
+        mnuItemRotate.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN));
+        mnuItemValue.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
+        mnuItemChangeImage.setAccelerator(new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN));
 
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
-        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);
-        mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction);
+        mnuAction.getItems().addAll(mnuItemRun, mnuItemStop, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue);
+        mnuAide.getItems().addAll(mnuItemAide, mnuItemAbout);
+        mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction, mnuAide);
 
         pane.setTop(mnuBar);
     }
-    
+
     private void wipe() {
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
         }
-        
+
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
@@ -468,40 +538,42 @@ public class FXMLDocumentController implements Initializable {
                 imgV.setId(null);
                 removeComposant(i, j);
             }
-        }        
+        }
+        
+        resetLastSource();
     }
-    
+
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Circuit");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));        
+        fileChooser.setTitle("Sauvargarder circuit");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));
         File file = fileChooser.showSaveDialog(pane.getScene().getWindow());
-        if (file != null) {            
+        if (file != null) {
             writeFile(file);
         }
     }
-    
+
     private void fileOpener() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Circuit");
+        fileChooser.setTitle("Ouvrir circuit");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Serializable Object", "*.ser"));
         File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
         if (file != null) {
             readFile(file);
         }
     }
-    
+
     private void writeFile(File file) {
         Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
- 
+
         try {
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(save);
             oos.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 
@@ -514,9 +586,8 @@ public class FXMLDocumentController implements Initializable {
             save = (Sauvegarde) ois.readObject();
             ois.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+
         }
 
         connectables2D = save.getCircuit();
@@ -528,74 +599,73 @@ public class FXMLDocumentController implements Initializable {
                 Connectable c = connectables2D[row][column];
                 if (c instanceof Resistance) {
                     ImageView tmp = new ImageView();
-                    //tmp.setImage(new Image(pathImg + "resistance.png"));
                     Resistance r = (Resistance) c;
                     tmp.setImage(new Image(r.getImgPath()));
                     tmp.setId("resistance");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof SourceFEM) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "source_tension.png"));
                     tmp.setId("sourceTension");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof SourceCourant) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "source_courant.png"));
                     tmp.setId("sourceCourant");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof Ground) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "ground.png"));
                     tmp.setId("ground");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilDroit) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_droit.png"));
                     tmp.setId("filDroit");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilCoin) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_coin.png"));
                     tmp.setId("filCoin");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilT) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_t.png"));
                     tmp.setId("filT");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof FilCroix) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "fil_croix.png"));
                     tmp.setId("filCroix");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof ANDGate) {
                     //ANDGate compAllumable = (ANDGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "and1.png"));
                     tmp.setId("andGate");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof ORGate) {
                     //ORGate compAllumable = (ORGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "or1.png"));
                     tmp.setId("orGate");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof NOTGate) {
                     //NOTGate compAllumable = (NOTGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "not1.png"));
                     tmp.setId("notGate");
-                    initializeImageView(tmp);
+                    initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 }
             }
@@ -603,7 +673,7 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    private void initializeImageView(ImageView imgv) {
+    private void initializeImageView(ImageView imgv, Connectable c) {
         imgv.setFitWidth(50);
         imgv.setFitHeight(50);
         imgv.setOnDragDetected(this::dragComposantFromGrid);
@@ -612,6 +682,7 @@ public class FXMLDocumentController implements Initializable {
         imgv.setOnMouseClicked(this::mouseClickCase);
         imgv.setPickOnBounds(true);
         imgv.setPreserveRatio(true);
+        imgv.setRotate(c.getRotation());
     }
 
     private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
@@ -687,29 +758,11 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void printCircuitArray() {
-        for (Connectable[] tab : connectables2D) {
-            for (Connectable c : tab) {
-                System.out.print(String.format("%12s", c));
-            }
-            System.out.println("");
-        }
-    }
-
-    private void printCircuitArray(Connectable[][] array) {
-        for (Connectable[] tab : array) {
-            for (Connectable c : tab) {
-                System.out.print(String.format("%12s", c));
-            }
-            System.out.println("");
-        }
-    }
-
-    public Connectable[][] getCircuit() {
+    private Connectable[][] getCircuit() {
         return connectables2D;
     }
 
-    public static void hackTooltipStartTiming(Tooltip tooltip) {
+    private static void hackTooltipStartTiming(Tooltip tooltip) {
         try {
             Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
             fieldBehavior.setAccessible(true);
@@ -722,7 +775,6 @@ public class FXMLDocumentController implements Initializable {
             objTimer.getKeyFrames().clear();
             objTimer.getKeyFrames().add(new KeyFrame(new Duration(250)));
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

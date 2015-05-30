@@ -9,6 +9,9 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class NORGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public NORGate() {
         super(TypeComposant.NOR_GATE);
         addImage("nor1.png");
@@ -22,11 +25,8 @@ public class NORGate extends LogicGateAbstraite {
     }
 
     @Override
-    public void calculerCourant() {
-        actifTemp = actif;
+    protected void calculerCourant() {
         actif = !((noeudEntreeA != null && noeudEntreeA.isActif()) || (noeudEntreeB != null && noeudEntreeB.isActif()));
-
-        transfererCourant();
     }
 
 }

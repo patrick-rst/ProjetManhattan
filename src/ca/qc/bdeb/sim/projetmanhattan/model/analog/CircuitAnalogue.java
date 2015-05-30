@@ -17,12 +17,12 @@ import org.ejml.ops.CommonOps;
  */
 public class CircuitAnalogue implements Circuit {
 
-    private ArrayList<Resistance> resistances;
-    private ArrayList<Noeud> noeuds;
-    private ArrayList<SourceFEM> sourcesFEM;
-    private ArrayList<SourceCourant> sourcesCourant;
-    private ArrayList<Noeud> noeudsGround;
-    private ArrayList<Ground> grounds;
+    private final ArrayList<Resistance> resistances;
+    private final ArrayList<Noeud> noeuds;
+    private final ArrayList<SourceFEM> sourcesFEM;
+    private final ArrayList<SourceCourant> sourcesCourant;
+    private final ArrayList<Noeud> noeudsGround;
+    private final ArrayList<Ground> grounds;
 
     private int nombreNoeuds;
     private int nombreSourcesFEM;
@@ -37,6 +37,9 @@ public class CircuitAnalogue implements Circuit {
 
     private double[] matriceX;
 
+    /**
+     * Crée le nouveau circuit analogue et initialise les diverses variables*
+     */
     public CircuitAnalogue() {
         resistances = new ArrayList<>();
         noeuds = new ArrayList<>();
@@ -47,6 +50,11 @@ public class CircuitAnalogue implements Circuit {
 
     }
 
+    /**
+     * Efface le circuit créé par l'utilisateur en prévision du prochain. Évite
+     * les bugs.
+     */
+    @Override
     public void wipe() {
         resistances.clear();
         noeuds.clear();
@@ -55,10 +63,13 @@ public class CircuitAnalogue implements Circuit {
         grounds.clear();
     }
 
-    public void ajouterGround(Ground g) {
-        grounds.add(g);
-    }
-
+    /**
+     * Crée les matrices nécessaires à l'analyse du circuit en appelant les
+     * méthodes qui se basent sur la position et les connexions entre les
+     * composants. Appelle ensuite une méthode qui résout les matrices, avant de
+     * redistribuer l'information aux composants (courant, tension, etc) avec
+     * une dernière méthode.
+     */
     @Override
     public void analyserCircuit() {
         boolean grounde = selectionnerNoeudGround();
@@ -92,18 +103,18 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void distribuerInfos() {
+    private void distribuerInfos() {
         for (int i = 0; i < nombreNoeuds; ++i) {
-            noeuds.get(i).setTension(matriceX[i]);
+            noeuds.get(i).setTension(Math.abs(matriceX[i]));
         }
         for (int i = 0; i < nombreSourcesFEM; ++i) {
-            sourcesFEM.get(i).setCourant(matriceX[nombreNoeuds + i]);
+            sourcesFEM.get(i).setCourant(Math.abs(matriceX[nombreNoeuds + i]));
         }
 
         donnerCourantAuxResistances();
     }
 
-    public void donnerCourantAuxResistances() {
+    private void donnerCourantAuxResistances() {
         double v1 = 0;
         double v2 = 0;
 
@@ -127,7 +138,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void resoudreCircuitAnalogue() {
+    private void resoudreCircuitAnalogue() {
         DenseMatrix64F matA = new DenseMatrix64F(nombreNoeuds + nombreSourcesFEM, nombreNoeuds + nombreSourcesFEM);
         for (int i = 0; i < matriceA.length; ++i) {
             for (int j = 0; j < matriceA[i].length; ++j) {
@@ -152,7 +163,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void construireMatriceZ() {
+    private void construireMatriceZ() {
         for (int i = 0; i < nombreNoeuds; ++i) {
             for (SourceCourant sourceCourant : noeuds.get(i).getSourcesCourant()) {
                 matriceZ[i] += sourceCourant.getCourant();
@@ -164,7 +175,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void construireMatriceBetC() {
+    private void construireMatriceBetC() {
         for (int i = 0; i < nombreSourcesFEM; ++i) {
             for (int j = 0; j < nombreNoeuds; ++j) {
                 if (noeuds.get(j).getSourcesFEMPos().contains(sourcesFEM.get(i))) {
@@ -179,7 +190,7 @@ public class CircuitAnalogue implements Circuit {
 
     }
 
-    public void construireMatriceG() {
+    private void construireMatriceG() {
         for (int i = 0; i < resistances.size(); ++i) {
             int n1 = -1;
             int n2 = -1;
@@ -205,7 +216,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public boolean selectionnerNoeudGround() {
+    private boolean selectionnerNoeudGround() {
         boolean enleve = false;
         for (int i = 0; i < noeuds.size(); ++i) {
             if (noeuds.get(i).getGround() != null) {
@@ -218,14 +229,14 @@ public class CircuitAnalogue implements Circuit {
         return enleve;
     }
 
-    public void combinerMatriceA() {
+    private void combinerMatriceA() {
         ajouterMatriceG();
         ajouterMatriceB();
         ajouterMatriceC();
         ajouterMatriceD();
     }
 
-    public void ajouterMatriceG() {
+    private void ajouterMatriceG() {
         for (int i = 0; i < matriceG.length; ++i) {
             for (int j = 0; j < matriceG[i].length; ++j) {
                 matriceA[i][j] = matriceG[i][j];
@@ -233,7 +244,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void ajouterMatriceB() {
+    private void ajouterMatriceB() {
         for (int i = 0; i < matriceB.length; ++i) {
             for (int j = 0; j < matriceB[i].length; ++j) {
                 matriceA[i][j + nombreNoeuds] = matriceB[i][j];
@@ -241,7 +252,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void ajouterMatriceC() {
+    private void ajouterMatriceC() {
         for (int i = 0; i < matriceC.length; ++i) {
             for (int j = 0; j < matriceC[i].length; ++j) {
                 matriceA[i + nombreNoeuds][j] = matriceC[i][j];
@@ -249,7 +260,7 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
-    public void ajouterMatriceD() {
+    private void ajouterMatriceD() {
         for (int i = 0; i < matriceD.length; ++i) {
             for (int j = 0; j < matriceD[i].length; ++j) {
                 matriceA[i + nombreNoeuds][j + nombreNoeuds] = matriceD[i][j];
@@ -257,21 +268,50 @@ public class CircuitAnalogue implements Circuit {
         }
     }
 
+    /**
+     * Ajoute un élément à la liste de noeuds.
+     *
+     * @param noeud L'élément à ajouter
+     */
     @Override
     public void ajouterNoeud(Noeud noeud) {
         noeuds.add(noeud);
     }
 
+    /**
+     * Ajoute un élément à la liste de résistances.
+     *
+     * @param resistance L'élément à ajouter
+     */
     public void ajouterResistance(Resistance resistance) {
         resistances.add(resistance);
     }
 
+    /**
+     * Ajoute un élément à la liste de sourcesFEM.
+     *
+     * @param sourceFEM L'élément à ajouter
+     */
     public void ajouterSourceFEM(SourceFEM sourceFEM) {
         sourcesFEM.add(sourceFEM);
     }
 
+    /**
+     * Ajoute un élément à la liste de sourceCourant.
+     *
+     * @param sourceCourant L'élément à ajouter
+     */
     public void ajouterSourceCourant(SourceCourant sourceCourant) {
         sourcesCourant.add(sourceCourant);
+    }
+
+    /**
+     * Ajoute un élément à la liste de grounds.
+     *
+     * @param g L'élément à ajouter
+     */
+    public void ajouterGround(Ground g) {
+        grounds.add(g);
     }
 
 }

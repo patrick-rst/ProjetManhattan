@@ -7,6 +7,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
  */
 public class FilCoin extends FilAbstrait {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public FilCoin() {
         super();
         cotesConnectes[0] = 1;

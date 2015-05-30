@@ -10,7 +10,11 @@ import javafx.scene.image.Image;
  */
 public abstract class ImageChangeable extends Connectable {
 
+    /**
+     * Le chemin d'acces qui contient les images
+     */
     protected String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
+
     protected transient ArrayList<Image> listeImages;
     protected transient ArrayList<Image> listeImagesActif;
     protected int imageIndex;
@@ -24,13 +28,17 @@ public abstract class ImageChangeable extends Connectable {
         this.imageIndex = 0;
     }
 
+    /**
+     *
+     * @return l'état de la variable 'actif' (on/off)
+     */
     public abstract boolean isActif();
 
-    public void addImage(String filename) {
+    protected void addImage(String filename) {
         this.listeImages.add(new Image(this.imageFolder + filename));
     }
 
-    public void addImageActif(String filename) {
+    protected void addImageActif(String filename) {
         this.listeImagesActif.add(new Image(this.imageFolder + filename));
     }
 

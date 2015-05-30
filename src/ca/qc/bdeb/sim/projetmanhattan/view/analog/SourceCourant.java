@@ -14,6 +14,9 @@ public class SourceCourant extends Connectable implements Composant {
     private double forceElectroMotrice;
     private double courant;
 
+    /**
+     * Initialise la Source de Courant et ses variables si nécessaire*
+     */
     public SourceCourant() {
         super(TypeComposant.SOURCE_COURANT);
         imageActive = new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/source_courant.png");
@@ -22,18 +25,18 @@ public class SourceCourant extends Connectable implements Composant {
         cotesConnectes[2] = 1;
     }
 
-    public double getForceElectroMotrice() {
-        return forceElectroMotrice;
-    }
-
-    public void setForceElectroMotrice(double forceElectroMotrice) {
-        this.forceElectroMotrice = forceElectroMotrice;
-    }
-
+    /**
+     *
+     * @return le courant produit par la source
+     */
     public double getCourant() {
         return courant;
     }
 
+    /**
+     *
+     * @param courant attribue le courant produit par la source
+     */
     public void setCourant(double courant) {
         this.courant = courant;
     }

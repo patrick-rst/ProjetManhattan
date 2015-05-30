@@ -7,6 +7,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
  */
 public class FilT extends FilAbstrait {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public FilT() {
         super();
         cotesConnectes[0] = 1;

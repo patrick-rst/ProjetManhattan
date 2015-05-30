@@ -10,15 +10,14 @@ import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
  */
 public class NOTGate extends LogicGateAbstraite {
 
+    /**
+     * Initialise l'instance de la classe et ses variables si nécessaire.
+     */
     public NOTGate() {
         super(TypeComposant.NOTGATE);
         addImage("not1.png");
-        addImage("not2.png");
-        addImage("not3.png");
 
         addImageActif("not1on.png");
-        addImageActif("not2on.png");
-        addImageActif("not3on.png");
         imageActive = listeImages.get(0);
 
         cotesConnectes[0] = 0;
@@ -28,19 +27,18 @@ public class NOTGate extends LogicGateAbstraite {
     }
 
     @Override
-    public void calculerCourant() {
-        actifTemp = actif;
+    protected void calculerCourant() {
         if (noeudEntreeA == null) {
             actif = true;
             System.out.println("actif");
         } else {
             actif = !noeudEntreeA.isActif();
         }
-        transfererCourant();
     }
 
     @Override
     public void ajouterNoeudEntree(Noeud noeud) {
+        System.out.println("ajout");
         if (noeudEntreeA == null) {
             noeudEntreeA = noeud;
         } else {

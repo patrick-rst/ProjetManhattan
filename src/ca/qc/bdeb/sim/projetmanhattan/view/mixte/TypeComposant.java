@@ -4,6 +4,9 @@ package ca.qc.bdeb.sim.projetmanhattan.view.mixte;
  *
  * @author Marc-Antoine Lalonde
  * @author Patrick Richer St-Onge
+ *
+ * La liste de tous les types de composants utilisés dans le programme. Sert à
+ * la détection de la validité des composants dans l'interface.
  */
 public enum TypeComposant {
 
