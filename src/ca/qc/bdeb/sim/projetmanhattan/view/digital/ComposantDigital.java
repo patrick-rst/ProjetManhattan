@@ -29,6 +29,7 @@ public interface ComposantDigital extends Composant {
 
     /**
      * Retourne l'etat du composant: on/off
+     *
      * @return l'état de la variable actif
      */
     public boolean isActif();
