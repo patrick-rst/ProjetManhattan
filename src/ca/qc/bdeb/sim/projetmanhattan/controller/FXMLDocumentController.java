@@ -291,7 +291,8 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemLoad = new MenuItem("Load");
         MenuItem mnuItemAnalogue = new MenuItem("Switch to Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
-        MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/play.png")));
+        MenuItem mnuItemRun = new MenuItem("Run");
+        MenuItem mnuItemStop = new MenuItem("Arrêt");
         MenuItem mnuItemWipe = new MenuItem("Wipe");
         MenuItem mnuItemRotate = new MenuItem("Rotate");
         MenuItem mnuItemChangeImage = new MenuItem("Changer l'image");
@@ -361,6 +362,15 @@ public class FXMLDocumentController implements Initializable {
 
             }
         });
+        
+        mnuItemStop.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                if (numerique.isDisabled() == false) {
+                    circuitNumerique.stopAnalyse();
+                }                
+            }
+        });        
 
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -533,6 +543,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
+        mnuItemStop.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
@@ -543,7 +554,7 @@ public class FXMLDocumentController implements Initializable {
 
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
-        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue);
+        mnuAction.getItems().addAll(mnuItemRun, mnuItemStop, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue);
         mnuAide.getItems().addAll(mnuItemAide, mnuItemAbout);
         mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction, mnuAide);
 
