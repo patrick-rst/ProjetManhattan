@@ -172,8 +172,6 @@ public class Noeud {
         if (!isActif()) {
             ++tension;
         }
-
-        System.out.println(tension);
         setTension(tension);
         if (tension == 1) {
             for (ComposantDigital comp : sorties) {
@@ -191,7 +189,6 @@ public class Noeud {
         if (isActif()) {
             --tension;
         }
-        System.out.println(tension);
         setTension(tension);
         if (tension == 0) {
             for (ComposantDigital comp : sorties) {
