@@ -112,6 +112,8 @@ public class FXMLDocumentController implements Initializable {
     private CircuitAnalogue circuitAnalogue;
     private CircuitDigital circuitNumerique;
     private AnalyseC circuitGraphique;
+    
+    private ImageView lastSource = null;
 
     @FXML
     private void dragComposant(MouseEvent event) {
@@ -122,7 +124,7 @@ public class FXMLDocumentController implements Initializable {
         content.putImage(source.getImage());
         content.putString(source.getId());
         db.setContent(content);
-
+        
         event.consume();
     }
 
@@ -151,11 +153,20 @@ public class FXMLDocumentController implements Initializable {
             target.setRotate(0);
             addComposant(id, row, column);
 
+            resetLastSource();
+            
             success = true;
         }
 
         event.setDropCompleted(success);
         event.consume();
+    }
+    
+    private void resetLastSource() {
+        if (lastSource != null) {
+            lastSource.setStyle("");
+        }
+        lastSource = null;
     }
 
     @FXML
@@ -188,11 +199,6 @@ public class FXMLDocumentController implements Initializable {
         if (event.getCode().equals(KeyCode.P)) {
             System.out.println("P pressed");
             printCircuitArray();
-        } else if (event.getCode().equals(KeyCode.M)) {
-            System.out.println("M pressed");
-
-            changeImage();
-
         }
     }
 
@@ -216,10 +222,13 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void changeImage() {
-        ImageView imgView = (ImageView) getNodeByRowColumnIndex(grid, mouseRow, mouseColumn);
+        ImageView imgView = lastSource;
 
-        if (connectables2D[mouseRow][mouseColumn] instanceof ImageChangeable) {
-            ImageChangeable compAllumable = (ImageChangeable) connectables2D[mouseRow][mouseColumn];
+        int row = grid.getRowIndex(lastSource);
+        int column = grid.getColumnIndex(lastSource);
+        
+        if (connectables2D[row][column] instanceof ImageChangeable) {
+            ImageChangeable compAllumable = (ImageChangeable) connectables2D[row][column];
 
             compAllumable.nextImage();
             imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
@@ -229,92 +238,17 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
-        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null) {
-            
-            double rotation = source.getRotate() + 90;
-            
-            source.setRotate(rotation);
-
-            int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);
-
-            Connectable c = (Connectable) connectables2D[row][column];
-            
-            c.rotater();
-            c.setRotation(rotation);
-
-        } else if (event.getButton().equals(MouseButton.SECONDARY) && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
-            String id = source.getId();
-
-            int row = grid.getRowIndex(source);
-            int column = grid.getColumnIndex(source);
-
-            Label lblComposant = new Label();
-            Label lblUnite = new Label();
-            TextField txtValeur = new TextField();
-            txtValeur.setPrefWidth(50);
-            Button btn = new Button("Ok");
-            btn.setId(row + "," + column);
-
-            if (id.equals("sourceTension")) {
-                lblComposant.setText("Source de tension");
-                lblUnite.setText("Volt");
-                SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
-                txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
-            } else if (id.equals("sourceCourant")) {
-                lblComposant.setText("Source de courant");
-                lblUnite.setText("Ampère");
-                SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
-                txtValeur.setText(sourceCourant.getCourant() + "");
-            } else if (id.equals("resistance")) {
-                lblComposant.setText("Resistance");
-                lblUnite.setText("Ohm");
-                Resistance resistance = (Resistance) connectables2D[row][column];
-                txtValeur.setText(resistance.getResistance() + "");
-            } else {
-                System.out.println("ERROR:Composant not implemented");
-            }
-
-            HBox box = new HBox();
-            box.setPadding(new Insets(15, 15, 15, 15));
-            box.setSpacing(10);
-            box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
-
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Button source = (Button) event.getSource();
-                    String id = source.getId();
-
-                    int row = Integer.parseInt(id.split(",")[0]);
-                    int column = Integer.parseInt(id.split(",")[1]);
-
-                    TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
-
-                    try {
-                        if (typeComposant == TypeComposant.RESISTANCE) {
-                            ((Resistance) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                        } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
-                            ((SourceFEM) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
-                        } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
-                            ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("INPUT ERROR: Pas un nombre");
-                    }
-                    composantEditor.hide();
-
-                }
-            });
-
-            composantEditor.setDetachable(false);
-            composantEditor.setContentNode(box);
-            composantEditor.show((ImageView) event.getSource(), 15);
-
-        } else if (event.getButton().equals(MouseButton.SECONDARY)) {
-
+        
+        if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null && source.getStyle().equals("")) {
             source.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
-
+            if (lastSource == null) {
+                lastSource = source;
+            } else if (lastSource != source) {
+                lastSource.setStyle("");
+                lastSource = source;
+            }
+        } else if (event.getButton().equals(MouseButton.PRIMARY) && source.getImage() != null && !source.getStyle().equals("")) {
+            source.setStyle("");
         }
     }
 
@@ -359,6 +293,9 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemNumerique = new MenuItem("Switch to Numérique");
         MenuItem mnuItemRun = new MenuItem("Run", new ImageView(new Image("file:src/ca/qc/bdeb/sim/projetmanhattan/view/mixte/play.png")));
         MenuItem mnuItemWipe = new MenuItem("Wipe");
+        MenuItem mnuItemRotate = new MenuItem("Rotate");
+        MenuItem mnuItemChangeImage = new MenuItem("Changer l'image");
+        MenuItem mnuItemValue = new MenuItem("Modifier valeur");
         MenuItem mnuItemAide = new MenuItem("Aide");
         MenuItem mnuItemAbout = new MenuItem("À propos");
         
@@ -431,6 +368,114 @@ public class FXMLDocumentController implements Initializable {
                 wipe();
             }
         });
+        
+        mnuItemRotate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                if (lastSource != null) {
+                    ImageView source = lastSource;
+
+                    double rotation = source.getRotate() + 90;
+
+                    source.setRotate(rotation);
+
+                    int row = grid.getRowIndex(source);
+                    int column = grid.getColumnIndex(source);
+
+                    Connectable c = (Connectable) connectables2D[row][column];
+
+                    c.rotater();
+                    c.setRotation(rotation);                       
+                }
+             
+            }
+        });
+        
+        mnuItemChangeImage.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                changeImage();
+            }
+        });
+        
+        mnuItemValue.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                ImageView source = lastSource;
+                if (lastSource != null && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
+                    String id = source.getId();
+
+                    int row = grid.getRowIndex(source);
+                    int column = grid.getColumnIndex(source);
+
+                    Label lblComposant = new Label();
+                    Label lblUnite = new Label();
+                    TextField txtValeur = new TextField();
+                    txtValeur.setPrefWidth(50);
+                    Button btn = new Button("Ok");
+                    btn.setId(row + "," + column);
+
+                    if (id.equals("sourceTension")) {
+                        lblComposant.setText("Source de tension");
+                        lblUnite.setText("Volt");
+                        SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
+                        txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
+                    } else if (id.equals("sourceCourant")) {
+                        lblComposant.setText("Source de courant");
+                        lblUnite.setText("Ampère");
+                        SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
+                        txtValeur.setText(sourceCourant.getCourant() + "");
+                    } else if (id.equals("resistance")) {
+                        lblComposant.setText("Resistance");
+                        lblUnite.setText("Ohm");
+                        Resistance resistance = (Resistance) connectables2D[row][column];
+                        txtValeur.setText(resistance.getResistance() + "");
+                    } else {
+                        System.out.println("ERROR:Composant not implemented");
+                    }
+
+                    HBox box = new HBox();
+                    box.setPadding(new Insets(15, 15, 15, 15));
+                    box.setSpacing(10);
+                    box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
+
+                    btn.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            Button source = (Button) event.getSource();
+                            String id = source.getId();
+
+                            int row = Integer.parseInt(id.split(",")[0]);
+                            int column = Integer.parseInt(id.split(",")[1]);
+
+                            TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
+
+                            try {
+                                if (typeComposant == TypeComposant.RESISTANCE) {
+                                    ((Resistance) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                                } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
+                                    ((SourceFEM) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                                } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
+                                    ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("INPUT ERROR: Pas un nombre");
+                            }
+                            composantEditor.hide();
+
+                        }
+                    });
+
+                    composantEditor.setDetachable(false);
+                    composantEditor.setContentNode(box);
+                    composantEditor.show(source, 15);
+
+                }    
+            }
+        });        
+        
+        
+        
 
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -492,10 +537,14 @@ public class FXMLDocumentController implements Initializable {
         mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        
+        mnuItemRotate.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN));
+        mnuItemValue.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
+        mnuItemChangeImage.setAccelerator(new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN));
 
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
-        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe);
+        mnuAction.getItems().addAll(mnuItemRun, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue);
         mnuAide.getItems().addAll(mnuItemAide, mnuItemAbout);
         mnuBar.getMenus().addAll(mnuFile, mnuMode, mnuAction, mnuAide);
 
@@ -515,6 +564,8 @@ public class FXMLDocumentController implements Initializable {
                 removeComposant(i, j);
             }
         }
+        
+        resetLastSource();
     }
 
     private void fileChooser() {
