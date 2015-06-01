@@ -400,7 +400,8 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent t) {
                 ImageView source = lastSource;
-                if (lastSource != null && source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
+                
+                if (source != null) {
                     String id = source.getId();
 
                     int row = grid.getRowIndex(source);
@@ -411,64 +412,97 @@ public class FXMLDocumentController implements Initializable {
                     TextField txtValeur = new TextField();
                     txtValeur.setPrefWidth(50);
                     Button btn = new Button("Ok");
-                    btn.setId(row + "," + column);
+                    btn.setId(row + "," + column);  
 
-                    if (id.equals("sourceTension")) {
-                        lblComposant.setText("Source de tension");
-                        lblUnite.setText("Volt");
-                        SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
-                        txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
-                    } else if (id.equals("sourceCourant")) {
-                        lblComposant.setText("Source de courant");
-                        lblUnite.setText("Ampère");
-                        SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
-                        txtValeur.setText(sourceCourant.getCourant() + "");
-                    } else if (id.equals("resistance")) {
-                        lblComposant.setText("Resistance");
-                        lblUnite.setText("Ohm");
-                        Resistance resistance = (Resistance) connectables2D[row][column];
-                        txtValeur.setText(resistance.getResistance() + "");
-                    } else {
-                        items.add("Erreur : Composant pas implémenté");
-                    }
-
-                    HBox box = new HBox();
-                    box.setPadding(new Insets(15, 15, 15, 15));
-                    box.setSpacing(10);
-                    box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
-
-                    btn.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            Button source = (Button) event.getSource();
-                            String id = source.getId();
-
-                            int row = Integer.parseInt(id.split(",")[0]);
-                            int column = Integer.parseInt(id.split(",")[1]);
-
-                            TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
-
-                            try {
-                                if (typeComposant == TypeComposant.RESISTANCE) {
-                                    ((Resistance) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
-                                } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
-                                    ((SourceFEM) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
-                                } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
-                                    ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
-                                }
-                            } catch (NumberFormatException e) {
-                                items.add("Erreur : Pas un nombre");
-                            }
-                            composantEditor.hide();
-
+                    if (source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
+                        if (id.equals("sourceTension")) {
+                            lblComposant.setText("Source de tension");
+                            lblUnite.setText("Volt");
+                            SourceFEM sourceTension = (SourceFEM) connectables2D[row][column];
+                            txtValeur.setText(sourceTension.getForceElectroMotrice() + "");
+                        } else if (id.equals("sourceCourant")) {
+                            lblComposant.setText("Source de courant");
+                            lblUnite.setText("Ampère");
+                            SourceCourant sourceCourant = (SourceCourant) connectables2D[row][column];
+                            txtValeur.setText(sourceCourant.getCourant() + "");
+                        } else if (id.equals("resistance")) {
+                            lblComposant.setText("Resistance");
+                            lblUnite.setText("Ohm");
+                            Resistance resistance = (Resistance) connectables2D[row][column];
+                            txtValeur.setText(resistance.getResistance() + "");
+                        } else {
+                            items.add("Erreur : Composant pas implémenté");
                         }
-                    });
 
-                    composantEditor.setDetachable(false);
-                    composantEditor.setContentNode(box);
-                    composantEditor.show(source, 15);
+                        HBox box = new HBox();
+                        box.setPadding(new Insets(15, 15, 15, 15));
+                        box.setSpacing(10);
+                        box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
 
-                }    
+                        btn.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                Button source = (Button) event.getSource();
+                                String id = source.getId();
+
+                                int row = Integer.parseInt(id.split(",")[0]);
+                                int column = Integer.parseInt(id.split(",")[1]);
+
+                                TypeComposant typeComposant = connectables2D[row][column].getTypeComposant();
+
+                                try {
+                                    if (typeComposant == TypeComposant.RESISTANCE) {
+                                        ((Resistance) connectables2D[row][column]).setResistance(Double.parseDouble(txtValeur.getText()));
+                                    } else if (typeComposant == TypeComposant.SOURCE_TENSION) {
+                                        ((SourceFEM) connectables2D[row][column]).setForceElectroMotrice(Double.parseDouble(txtValeur.getText()));
+                                    } else if (typeComposant == TypeComposant.SOURCE_COURANT) {
+                                        ((SourceCourant) connectables2D[row][column]).setCourant(Double.parseDouble(txtValeur.getText()));
+                                    }
+                                } catch (NumberFormatException e) {
+                                    items.add("Erreur : Pas un nombre");
+                                }
+                                composantEditor.hide();
+
+                            }
+                        });
+
+                        composantEditor.setDetachable(false);
+                        composantEditor.setContentNode(box);
+                        composantEditor.show(source, 15);
+
+                    }
+                    else if (source.getImage() != null && source.getId().equals("sourceDigitale")) {
+                        lblComposant.setText("Source digitale");
+                        lblUnite.setText("");
+                        SourceDigitale sourceDigitale = (SourceDigitale) connectables2D[row][column];
+                        txtValeur.setText(sourceDigitale.getListeOutput());
+
+                        HBox box = new HBox();
+                        box.setPadding(new Insets(15, 15, 15, 15));
+                        box.setSpacing(10);
+                        box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);  
+                        
+                        btn.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                Button source = (Button) event.getSource();
+                                String id = source.getId();
+
+                                int row = Integer.parseInt(id.split(",")[0]);
+                                int column = Integer.parseInt(id.split(",")[1]);
+
+                                 ((SourceDigitale) connectables2D[row][column]).setListeOutput(txtValeur.getText());
+
+                                composantEditor.hide();
+                            }
+                        });
+
+                        composantEditor.setDetachable(false);
+                        composantEditor.setContentNode(box);
+                        composantEditor.show(source, 15);                        
+                    }                    
+                }
+
             }
         });        
         

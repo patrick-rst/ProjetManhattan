@@ -99,6 +99,25 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         }
     }
 
+    public String getListeOutput() {
+        String chaine = null;
+        for (boolean b : listeOutput) {
+            if (b) {
+                chaine = chaine + "1";
+            } else {
+                chaine = chaine + "0";
+            }
+        }
+        
+        if (chaine == null) {
+            return "";
+        } else {
+            return chaine;
+        } 
+    }
+    
+    
+
     @Override
     public void updateActif() {
         actif = lireOutput();
