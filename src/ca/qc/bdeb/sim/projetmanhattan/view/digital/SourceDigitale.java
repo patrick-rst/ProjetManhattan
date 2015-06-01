@@ -125,7 +125,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     public void updateActif() {
         actif = lireOutput();
 
-        if (actif) {
+        if (actif && noeudSortie != null) {
             noeudSortie.allumerNoeud();
         } else {
             noeudSortie.eteindreNoeud();
