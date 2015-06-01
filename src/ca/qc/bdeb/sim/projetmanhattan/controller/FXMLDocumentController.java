@@ -113,7 +113,11 @@ public class FXMLDocumentController implements Initializable {
     private AnalyseC circuitGraphique;
     
     
-    
+    /**
+     * Méthode nécessaire pour le controlleur (première méthode executé)
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
@@ -125,6 +129,10 @@ public class FXMLDocumentController implements Initializable {
         list.setItems(items);
     }    
     
+    /**
+     * Détecte lorsqu'on composant est "drag" de la boite
+     * @param event 
+     */
     @FXML
     private void dragComposant(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
@@ -138,6 +146,10 @@ public class FXMLDocumentController implements Initializable {
         event.consume();
     }
 
+    /**
+     * Détecte lorsqu'un composant se trouver au-dessus d'une zone qui peut etre "drop"
+     * @param event 
+     */
     @FXML
     private void overComposant(DragEvent event) {
         if (event.getDragboard().hasImage() && event.getDragboard().hasString()) {
@@ -147,6 +159,10 @@ public class FXMLDocumentController implements Initializable {
         event.consume();
     }
 
+    /**
+     * Détecte lorsqu'un composant est "drop" sur la grille
+     * @param event 
+     */
     @FXML
     private void dropComposant(DragEvent event) {
         Dragboard db = event.getDragboard();
@@ -172,6 +188,10 @@ public class FXMLDocumentController implements Initializable {
         event.consume();
     }
 
+    /**
+     * Détecte lorsqu'on composant est "drag" de la grille
+     * @param event 
+     */
     @FXML
     private void dragComposantFromGrid(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
@@ -197,6 +217,11 @@ public class FXMLDocumentController implements Initializable {
 
     }
     
+    /**
+     * Dérecte lorsqu'il a un click de la souris dans la grille
+     * Sélectionne le composant qui est clické
+     * @param event 
+     */
     @FXML
     private void mouseClickCase(MouseEvent event) {
         ImageView source = (ImageView) event.getSource();
@@ -215,6 +240,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }    
     
+    /**
+     * Reset la source qui est sélectionné
+     */
     private void resetLastSource() {
         if (lastSource != null) {
             lastSource.setStyle("");
@@ -222,6 +250,9 @@ public class FXMLDocumentController implements Initializable {
         lastSource = null;
     }    
 
+    /**
+     * Méthode appeller par le CircuitDigitale pour que le circuit numérique s'update en temps réel
+     */
     public void updateCircuitNumerique() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -241,6 +272,9 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     * Change l'image des gates numériques
+     */
     private void changeImage() {
         ImageView imgView = lastSource;
 
@@ -263,19 +297,12 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    public void setCircuitAnalogue(CircuitAnalogue c) {
-        this.circuitAnalogue = c;
-    }
-
-    public void setCircuitNumerique(CircuitDigital c) {
-        this.circuitNumerique = c;
-        circuitNumerique.setController(this);
-    }
-
-    public void setCircuitGraphique(AnalyseC cg) {
-        this.circuitGraphique = cg;
-    }
-
+    /**
+     * Méthode qui initialise le menu en entier
+     * Créer les titres des menus
+     * Associe les méthodes aux sous-menus
+     * Associe les raccouris claviers aux sous-menus
+     */
     private void createMenu() {
         MenuBar mnuBar = new MenuBar();
         Menu mnuFile = new Menu("Fichier");
@@ -478,6 +505,10 @@ public class FXMLDocumentController implements Initializable {
         pane.setTop(mnuBar);
     }
     
+    /**
+     * Execution de l'analyse sur un circuit analogue ou numérique
+     * Affichage des valeurs
+     */
     private void run() {
         if (analogue.isDisabled() == false) {
             //Analogue
@@ -524,6 +555,9 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    /**
+     * Tourne les composants sur la grille
+     */
     private void rotate() {
         if (lastSource != null) {
             ImageView source = lastSource;
@@ -542,6 +576,10 @@ public class FXMLDocumentController implements Initializable {
         }        
     }
     
+    /**
+     * Permet de modifier la valeur des composants, tel que Resistance, SourceTension et SourceCourant
+     * Modifie aussi les SourceDigitale pour entrer une chaine de 0 et 1
+     */
     private void modifierValeur() {
         ImageView source = lastSource;
                 
@@ -648,6 +686,9 @@ public class FXMLDocumentController implements Initializable {
         }        
     }
 
+    /**
+     * Efface au complet la grille et reset tout
+     */
     private void wipe() {
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
@@ -665,6 +706,9 @@ public class FXMLDocumentController implements Initializable {
         resetLastSource();
     }
 
+    /**
+     * Fenetre pour choisir le fichier pour sauvegarder
+     */
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sauvargarder circuit");
@@ -676,6 +720,9 @@ public class FXMLDocumentController implements Initializable {
         items.add(String.format("Circuit sauvegardé : '%s'",file.getAbsolutePath()));
     }
 
+    /**
+     * Fenetre pour choisir le fichier à ouvrir
+     */
     private void fileOpener() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Ouvrir circuit");
@@ -687,6 +734,10 @@ public class FXMLDocumentController implements Initializable {
         items.add(String.format("Circuit ouvert : '%s'",file.getAbsolutePath()));
     }
 
+    /**
+     * Écriture de la Sauvegarde comme object sérialisable
+     * @param file le fichier à utiliser pour la sauvegarde
+     */
     private void writeFile(File file) {
         Sauvegarde save = new Sauvegarde(10);
         save.setCircuit(connectables2D);
@@ -701,6 +752,11 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Lecture d'un fichier avec un object Sauvegarde
+     * Initialise tous les composants et l'affichage sur la grille
+     * @param file le fichier à lire
+     */
     private void readFile(File file) {
         Sauvegarde save = null;
 
@@ -797,6 +853,11 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     * Initialise les caractérisques nécessaire pour les ImageView contenu dans la grille
+     * @param imgv la case en question
+     * @param c le composant qui va dans la case
+     */
     private void initializeImageView(ImageView imgv, Connectable c) {
         imgv.setFitWidth(50);
         imgv.setFitHeight(50);
@@ -809,6 +870,13 @@ public class FXMLDocumentController implements Initializable {
         imgv.setRotate(c.getRotation());
     }
 
+    /**
+     * Retourne un Node selon la position
+     * @param grid l'objet Grid à utiliser
+     * @param row la position de la ligne
+     * @param column la position de la colonne
+     * @return 
+     */
     private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
         Node result = null;
         ObservableList<Node> childrens = grid.getChildren();
@@ -821,10 +889,21 @@ public class FXMLDocumentController implements Initializable {
         return result;
     }
 
+    /**
+     * Enlever un composant du tableau 2D
+     * @param row la position de la ligne
+     * @param column la position de la colonne
+     */
     private void removeComposant(int row, int column) {
         connectables2D[row][column] = null;
     }
 
+    /**
+     * Ajoute un composant dans le tableau 2D
+     * @param id le type de composant
+     * @param row le position de la ligne
+     * @param column la position de la colonne
+     */
     private void addComposant(String id, int row, int column) {
         if (id.equals("sourceTension")) {
             SourceFEM sourceTension = new SourceFEM();
@@ -881,6 +960,19 @@ public class FXMLDocumentController implements Initializable {
             items.add("Erreur : Composant pas implémenté");
         }
     }
+    
+    public void setCircuitAnalogue(CircuitAnalogue c) {
+        this.circuitAnalogue = c;
+    }
+
+    public void setCircuitNumerique(CircuitDigital c) {
+        this.circuitNumerique = c;
+        circuitNumerique.setController(this);
+    }
+
+    public void setCircuitGraphique(AnalyseC cg) {
+        this.circuitGraphique = cg;
+    }    
 
     
     /**
