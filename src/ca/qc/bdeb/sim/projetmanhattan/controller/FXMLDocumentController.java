@@ -213,14 +213,16 @@ public class FXMLDocumentController implements Initializable {
     private void changeImage() {
         ImageView imgView = lastSource;
 
-        int row = grid.getRowIndex(lastSource);
-        int column = grid.getColumnIndex(lastSource);
-        
-        if (connectables2D[row][column] instanceof ImageChangeable) {
-            ImageChangeable compAllumable = (ImageChangeable) connectables2D[row][column];
+        if (imgView != null) {
+            int row = grid.getRowIndex(lastSource);
+            int column = grid.getColumnIndex(lastSource);
 
-            compAllumable.nextImage();
-            imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
+            if (connectables2D[row][column] instanceof ImageChangeable) {
+                ImageChangeable compAllumable = (ImageChangeable) connectables2D[row][column];
+
+                compAllumable.nextImage();
+                imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
+            }
         }
     }
 

@@ -100,7 +100,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
     }
 
     public String getListeOutput() {
-        String chaine = null;
+        String chaine = "";
         for (boolean b : listeOutput) {
             if (b) {
                 chaine = chaine + "1";
@@ -108,12 +108,7 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
                 chaine = chaine + "0";
             }
         }
-        
-        if (chaine == null) {
-            return "";
-        } else {
-            return chaine;
-        } 
+        return chaine;
     }
     
     
