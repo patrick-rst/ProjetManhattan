@@ -33,6 +33,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -103,6 +105,9 @@ public class FXMLDocumentController implements Initializable {
     private ListView<String> list;
     
     ObservableList<String> items;
+    
+    Map<ImageView, Tooltip> toolTipMap = new HashMap<ImageView, Tooltip>();
+
 
     private final PopOver composantEditor = new PopOver();
     private ImageView lastSource = null;
@@ -144,6 +149,8 @@ public class FXMLDocumentController implements Initializable {
         db.setContent(content);
         
         event.consume();
+        
+        removeTooltip();
     }
 
     /**
@@ -214,6 +221,8 @@ public class FXMLDocumentController implements Initializable {
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
         }
+        
+        removeTooltip();
 
     }
     
@@ -368,6 +377,7 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent t) {
                 stop();
+                removeTooltip();
                 rotate();
             }
         });
@@ -384,6 +394,7 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent t) {
                 stop();
+                removeTooltip();
                 modifierValeur();
             }
         });        
@@ -391,6 +402,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemEffaceConsole.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                removeTooltip();
                 items.clear();
             }
 
@@ -538,6 +550,7 @@ public class FXMLDocumentController implements Initializable {
                         Tooltip.install(imgV, tooltip);
                         items.add(info);
                         resistanceCount = resistanceCount + 1;
+                        toolTipMap.put(imgV, tooltip);
                     } else if (connectables2D[i][j] instanceof SourceFEM) {
                         SourceFEM s = (SourceFEM) connectables2D[i][j];
                         String info = String.format("Source FEM %d\nTension: %.2f\nCourant: %.2f", sourceFEMCount+1, s.getForceElectroMotrice(), s.getCourant());
@@ -546,6 +559,7 @@ public class FXMLDocumentController implements Initializable {
                         Tooltip.install(imgV, tooltip);
                         items.add(info);
                         sourceFEMCount = sourceFEMCount + 1;
+                        toolTipMap.put(imgV, tooltip);
                     }
                 }
             }
@@ -584,6 +598,15 @@ public class FXMLDocumentController implements Initializable {
                 }
             }                    
         } 
+    }
+    
+    /**
+     * Enlever tous les tooltips sur la grille
+     */
+    private void removeTooltip() {
+        for (Map.Entry<ImageView, Tooltip> entry : toolTipMap.entrySet()) {
+		Tooltip.uninstall(entry.getKey(), entry.getValue());
+	}
     }
     
     /**
@@ -721,6 +744,7 @@ public class FXMLDocumentController implements Initializable {
      * Efface au complet la grille et reset tout
      */
     private void wipe() {
+        removeTooltip();
         stop();
 
         for (int i = 0; i < 10; i++) {
