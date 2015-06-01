@@ -97,14 +97,16 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
                 listeOutput.add(Boolean.FALSE);
             }
         }
-        
+
         if (listeOutput.size() == 0) {
             listeOutput.add(Boolean.FALSE);
         }
     }
 
     /**
-     * Retourne une chaine contenant la liste des intervalles ou la source émet un courant
+     * Retourne une chaine contenant la liste des intervalles ou la source émet
+     * un courant
+     *
      * @return une chaine de 0 et 1
      */
     public String getListeOutput() {
@@ -118,17 +120,16 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         }
         return chaine;
     }
-    
-    
 
     @Override
     public void updateActif() {
         actif = lireOutput();
-
-        if (actif && noeudSortie != null) {
-            noeudSortie.allumerNoeud();
-        } else {
-            noeudSortie.eteindreNoeud();
+        if (noeudSortie != null) {
+            if (actif) {
+                noeudSortie.allumerNoeud();
+            } else {
+                noeudSortie.eteindreNoeud();
+            }
         }
     }
 

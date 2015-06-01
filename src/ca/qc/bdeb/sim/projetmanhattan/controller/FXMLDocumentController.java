@@ -78,7 +78,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-
 import org.controlsfx.control.PopOver;
 
 /**
@@ -100,43 +99,43 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TitledPane numerique;
-    
+
     @FXML
     private ListView<String> list;
-    
-    ObservableList<String> items;
-    
-    Map<ImageView, Tooltip> toolTipMap = new HashMap<ImageView, Tooltip>();
 
+    ObservableList<String> items;
+
+    Map<ImageView, Tooltip> toolTipMap = new HashMap<ImageView, Tooltip>();
 
     private final PopOver composantEditor = new PopOver();
     private ImageView lastSource = null;
-    
+
     private Connectable[][] connectables2D;
     private CircuitAnalogue circuitAnalogue;
     private CircuitDigital circuitNumerique;
     private AnalyseC circuitGraphique;
-    
-    
+
     /**
      * Méthode nécessaire pour le controlleur (première méthode executé)
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createMenu();
         numerique.setDisable(true);
-        
+
         connectables2D = new Connectable[10][10];
-        
+
         items = FXCollections.observableArrayList("Bienvenue!");
         list.setItems(items);
-    }    
-    
+    }
+
     /**
      * Détecte lorsqu'on composant est "drag" de la boite
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void dragComposant(MouseEvent event) {
@@ -147,15 +146,17 @@ public class FXMLDocumentController implements Initializable {
         content.putImage(source.getImage());
         content.putString(source.getId());
         db.setContent(content);
-        
+
         event.consume();
-        
+
         removeTooltip();
     }
 
     /**
-     * Détecte lorsqu'un composant se trouver au-dessus d'une zone qui peut etre "drop"
-     * @param event 
+     * Détecte lorsqu'un composant se trouver au-dessus d'une zone qui peut etre
+     * "drop"
+     *
+     * @param event
      */
     @FXML
     private void overComposant(DragEvent event) {
@@ -168,7 +169,8 @@ public class FXMLDocumentController implements Initializable {
 
     /**
      * Détecte lorsqu'un composant est "drop" sur la grille
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void dropComposant(DragEvent event) {
@@ -187,7 +189,7 @@ public class FXMLDocumentController implements Initializable {
             addComposant(id, row, column);
 
             resetLastSource();
-            
+
             success = true;
         }
 
@@ -197,7 +199,8 @@ public class FXMLDocumentController implements Initializable {
 
     /**
      * Détecte lorsqu'on composant est "drag" de la grille
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void dragComposantFromGrid(MouseEvent event) {
@@ -221,15 +224,16 @@ public class FXMLDocumentController implements Initializable {
         if (numerique.isDisabled() == false) {
             circuitNumerique.stopAnalyse();
         }
-        
+
         removeTooltip();
 
     }
-    
+
     /**
-     * Dérecte lorsqu'il a un click de la souris dans la grille
-     * Sélectionne le composant qui est clické
-     * @param event 
+     * Dérecte lorsqu'il a un click de la souris dans la grille Sélectionne le
+     * composant qui est clické
+     *
+     * @param event
      */
     @FXML
     private void mouseClickCase(MouseEvent event) {
@@ -247,8 +251,8 @@ public class FXMLDocumentController implements Initializable {
             source.setStyle("");
             lastSource = null;
         }
-    }    
-    
+    }
+
     /**
      * Reset la source qui est sélectionné
      */
@@ -257,10 +261,11 @@ public class FXMLDocumentController implements Initializable {
             lastSource.setStyle("");
         }
         lastSource = null;
-    }    
+    }
 
     /**
-     * Méthode appeller par le CircuitDigitale pour que le circuit numérique s'update en temps réel
+     * Méthode appeller par le CircuitDigitale pour que le circuit numérique
+     * s'update en temps réel
      */
     public void updateCircuitNumerique() {
         for (int i = 0; i < 10; i++) {
@@ -295,22 +300,21 @@ public class FXMLDocumentController implements Initializable {
                 ImageChangeable compAllumable = (ImageChangeable) connectables2D[row][column];
 
                 compAllumable.nextImage();
-                
+
                 if (compAllumable instanceof LogicGateAbstraite) {
                     LogicGateAbstraite lga = (LogicGateAbstraite) compAllumable;
                     lga.switchGate();
                 }
-                
+
                 imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
             }
         }
     }
 
     /**
-     * Méthode qui initialise le menu en entier
-     * Créer les titres des menus
-     * Associe les méthodes aux sous-menus
-     * Associe les raccouris claviers aux sous-menus
+     * Méthode qui initialise le menu en entier Créer les titres des menus
+     * Associe les méthodes aux sous-menus Associe les raccouris claviers aux
+     * sous-menus
      */
     private void createMenu() {
         MenuBar mnuBar = new MenuBar();
@@ -321,10 +325,10 @@ public class FXMLDocumentController implements Initializable {
 
         MenuItem mnuItemSave = new MenuItem("Sauvegarder");
         MenuItem mnuItemLoad = new MenuItem("Ouvrir");
-        
+
         MenuItem mnuItemAnalogue = new MenuItem("Changer pour Analogue");
         MenuItem mnuItemNumerique = new MenuItem("Changer pour Numérique");
-        
+
         MenuItem mnuItemRun = new MenuItem("Exécuter");
         MenuItem mnuItemStop = new MenuItem("Arrêt (Numérique)");
         MenuItem mnuItemWipe = new MenuItem("Effacer Tout");
@@ -332,7 +336,7 @@ public class FXMLDocumentController implements Initializable {
         MenuItem mnuItemChangeImage = new MenuItem("Changer l'image (Numérique)");
         MenuItem mnuItemValue = new MenuItem("Modifier la valeur");
         MenuItem mnuItemEffaceConsole = new MenuItem("Effacer la console");
-        
+
         MenuItem mnuItemAide = new MenuItem("Aide");
         MenuItem mnuItemAbout = new MenuItem("À propos");
 
@@ -358,13 +362,13 @@ public class FXMLDocumentController implements Initializable {
                 run();
             }
         });
-        
+
         mnuItemStop.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
                 stop();
             }
-        });        
+        });
 
         mnuItemWipe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -372,7 +376,7 @@ public class FXMLDocumentController implements Initializable {
                 wipe();
             }
         });
-        
+
         mnuItemRotate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -381,7 +385,7 @@ public class FXMLDocumentController implements Initializable {
                 rotate();
             }
         });
-        
+
         mnuItemChangeImage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -389,7 +393,7 @@ public class FXMLDocumentController implements Initializable {
                 changeImage();
             }
         });
-        
+
         mnuItemValue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -397,8 +401,8 @@ public class FXMLDocumentController implements Initializable {
                 removeTooltip();
                 modifierValeur();
             }
-        });        
-        
+        });
+
         mnuItemEffaceConsole.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -406,8 +410,8 @@ public class FXMLDocumentController implements Initializable {
                 items.clear();
             }
 
-        });        
-        
+        });
+
         mnuItemAnalogue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -435,41 +439,40 @@ public class FXMLDocumentController implements Initializable {
                 dialog.initStyle(StageStyle.UTILITY);
                 dialog.setHeight(600);
                 dialog.setWidth(700);
-                
+
                 TextFlow group = new TextFlow();
                 Scene scene = new Scene(group);
-                
+
                 String general = "L'interface du programme est divisé en 4 parties. "
                         + "La barre de menu en haut permet d'effectuer plusieurs opérations décrites ci-dessus. "
                         + "Les onglets à gauche permettre d'utilser les différents composants disponibles en les drag and drop sur la grille. "
                         + "La grille au centre est la zone de travail ou on peut construire un circuit. "
-                        + "La boite en bas affiche le résultats de l'analyse et les messages d'information ou d'erreur.\n\n"; 
-                
+                        + "La boite en bas affiche le résultats de l'analyse et les messages d'information ou d'erreur.\n\n";
+
                 String sauvegarde = "Les circuits sur la grille peuvent être sauvegardé à l'aide du menu 'Fichier'. "
                         + "Il faut choisir l'emplacement du fichier de sauvegarde et son nom. "
                         + "Le fichier va avoir l'extension '.ser'. "
                         + "Il est par la suite possible de charger le circuit sur la grille en ouvrant le fichier sauvegardé. "
                         + "Les raccouris claviers sont 'Ctrl-S' pour sauvegarder et 'Ctrl-O' pour ouvrir.\n\n";
-                
+
                 String mode = "Deux modes sont disponibles, soit analogue et numérique. Chaque mode permet d'utiliser seulement les composant respectifs "
                         + "de cette mode. Lorsqu'on change de mode, la grille est effacé (il faut donc sauvegarder avant si on veut conserver son circuit). "
                         + "On peut changer de mode à l'aide du menu 'Mode' ou des raccouris claviers 'Ctrl-N' (pour numérique) et 'Crtl-A' (pour analogue).\n\n";
-                
+
                 String actionGenerale = "Pour analyser le circuit : Action > Exécuter ou appuyer sur la touche 'R'\n"
                         + "Pour effacer tous les composants sur la grille : Action > Effacer Tout ou appuyer sur la touche 'W'\n"
                         + "Pour arrêter l'analyse du circuit en numérique: Action > Arrêt ou appuyer sur la touche 'A'\n"
                         + "Pour effacer la console : Action > Effacer la console ou appuyer sur la touche 'Ctrl-W'\n\n";
-                
+
                 String actionComposant = "Afin d'utiliser les commandes suivantes, un composant sur la grille doit être sélectionné en appuyant dessus avec la souris.\n"
                         + "Pour tourner un composant : Action > Tourner ou appuyer sur la touche 'T'\n"
                         + "Pour modifier la valeur d'un composant : Action > Modifier la valeur ou appuyer sur la touche 'E'\n"
                         + "Pour changer l'image d'une porte numérique : Action > Changer l'image ou appuyer sur la touche 'M'\n\n";
-                
 
-                Text all = new Text(general+sauvegarde+mode+actionGenerale+actionComposant);
-                
-                group.getChildren().add(all);                
-                
+                Text all = new Text(general + sauvegarde + mode + actionGenerale + actionComposant);
+
+                group.getChildren().add(all);
+
                 dialog.setScene(scene);
                 dialog.show();
             }
@@ -498,10 +501,10 @@ public class FXMLDocumentController implements Initializable {
 
         mnuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         mnuItemLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
-        
+
         mnuItemAnalogue.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         mnuItemNumerique.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
-        
+
         mnuItemRun.setAccelerator(new KeyCodeCombination(KeyCode.R));
         mnuItemStop.setAccelerator(new KeyCodeCombination(KeyCode.A));
         mnuItemWipe.setAccelerator(new KeyCodeCombination(KeyCode.W));
@@ -509,8 +512,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemValue.setAccelerator(new KeyCodeCombination(KeyCode.E));
         mnuItemChangeImage.setAccelerator(new KeyCodeCombination(KeyCode.M));
         mnuItemEffaceConsole.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
-        
-        
+
         mnuFile.getItems().addAll(mnuItemSave, mnuItemLoad);
         mnuMode.getItems().addAll(mnuItemAnalogue, mnuItemNumerique);
         mnuAction.getItems().addAll(mnuItemRun, mnuItemStop, mnuItemWipe, mnuItemRotate, mnuItemChangeImage, mnuItemValue, mnuItemEffaceConsole);
@@ -519,10 +521,10 @@ public class FXMLDocumentController implements Initializable {
 
         pane.setTop(mnuBar);
     }
-    
+
     /**
-     * Execution de l'analyse sur un circuit analogue ou numérique
-     * Affichage des valeurs
+     * Execution de l'analyse sur un circuit analogue ou numérique Affichage des
+     * valeurs
      */
     private void run() {
         if (analogue.isDisabled() == false) {
@@ -544,7 +546,7 @@ public class FXMLDocumentController implements Initializable {
                     ImageView imgV = (ImageView) getNodeByRowColumnIndex(grid, i, j);
                     if (connectables2D[i][j] instanceof Resistance) {
                         Resistance r = (Resistance) connectables2D[i][j];
-                        String info = String.format("Résistance %d\nRésistance: %.2f\nCourant: %.2f", resistanceCount+1, r.getResistance(), r.getCourant());
+                        String info = String.format("Résistance %d\nRésistance: %.2f\nCourant: %.2f", resistanceCount + 1, r.getResistance(), r.getCourant());
                         Tooltip tooltip = new Tooltip(info);
                         hackTooltipStartTiming(tooltip);
                         Tooltip.install(imgV, tooltip);
@@ -553,7 +555,7 @@ public class FXMLDocumentController implements Initializable {
                         toolTipMap.put(imgV, tooltip);
                     } else if (connectables2D[i][j] instanceof SourceFEM) {
                         SourceFEM s = (SourceFEM) connectables2D[i][j];
-                        String info = String.format("Source FEM %d\nTension: %.2f\nCourant: %.2f", sourceFEMCount+1, s.getForceElectroMotrice(), s.getCourant());
+                        String info = String.format("Source FEM %d\nTension: %.2f\nCourant: %.2f", sourceFEMCount + 1, s.getForceElectroMotrice(), s.getCourant());
                         Tooltip tooltip = new Tooltip(info);
                         hackTooltipStartTiming(tooltip);
                         Tooltip.install(imgV, tooltip);
@@ -566,25 +568,25 @@ public class FXMLDocumentController implements Initializable {
 
         } else if (numerique.isDisabled() == false) {
             stop();
-            
+
             //Une ptit pause pour laisse le temps au thread d'arrêter
             try {
                 Thread.sleep(200);
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-            }            
-            
+            }
+
             circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
             circuitNumerique.analyserCircuit();
         }
     }
-    
+
     /**
      * Arrête l'analyse du circuit numérique
      */
     private void stop() {
         if (numerique.isDisabled() == false) {
-        circuitNumerique.stopAnalyse();
+            circuitNumerique.stopAnalyse();
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     ImageView img = (ImageView) getNodeByRowColumnIndex(grid, i, j);
@@ -596,19 +598,19 @@ public class FXMLDocumentController implements Initializable {
                     }
 
                 }
-            }                    
-        } 
+            }
+        }
     }
-    
+
     /**
      * Enlever tous les tooltips sur la grille
      */
     private void removeTooltip() {
         for (Map.Entry<ImageView, Tooltip> entry : toolTipMap.entrySet()) {
-		Tooltip.uninstall(entry.getKey(), entry.getValue());
-	}
+            Tooltip.uninstall(entry.getKey(), entry.getValue());
+        }
     }
-    
+
     /**
      * Tourne les composants sur la grille
      */
@@ -626,17 +628,18 @@ public class FXMLDocumentController implements Initializable {
             Connectable c = (Connectable) connectables2D[row][column];
 
             c.rotater();
-            c.setRotation(rotation);                       
-        }        
+            c.setRotation(rotation);
+        }
     }
-    
+
     /**
-     * Permet de modifier la valeur des composants, tel que Resistance, SourceTension et SourceCourant
-     * Modifie aussi les SourceDigitale pour entrer une chaine de 0 et 1
+     * Permet de modifier la valeur des composants, tel que Resistance,
+     * SourceTension et SourceCourant Modifie aussi les SourceDigitale pour
+     * entrer une chaine de 0 et 1
      */
     private void modifierValeur() {
         ImageView source = lastSource;
-                
+
         if (source != null) {
             String id = source.getId();
 
@@ -648,7 +651,7 @@ public class FXMLDocumentController implements Initializable {
             TextField txtValeur = new TextField();
             txtValeur.setPrefWidth(50);
             Button btn = new Button("Ok");
-            btn.setId(row + "," + column);  
+            btn.setId(row + "," + column);
 
             if (source.getImage() != null && !source.getId().matches("fil.+|.+Gate|light|sourceDigitale")) {
                 if (id.equals("sourceTension")) {
@@ -706,8 +709,7 @@ public class FXMLDocumentController implements Initializable {
                 composantEditor.setContentNode(box);
                 composantEditor.show(source, 15);
 
-            }
-            else if (source.getImage() != null && source.getId().equals("sourceDigitale")) {
+            } else if (source.getImage() != null && source.getId().equals("sourceDigitale")) {
                 lblComposant.setText("Source digitale");
                 lblUnite.setText("");
                 SourceDigitale sourceDigitale = (SourceDigitale) connectables2D[row][column];
@@ -716,7 +718,7 @@ public class FXMLDocumentController implements Initializable {
                 HBox box = new HBox();
                 box.setPadding(new Insets(15, 15, 15, 15));
                 box.setSpacing(10);
-                box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);  
+                box.getChildren().addAll(lblComposant, txtValeur, lblUnite, btn);
 
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -727,7 +729,7 @@ public class FXMLDocumentController implements Initializable {
                         int row = Integer.parseInt(id.split(",")[0]);
                         int column = Integer.parseInt(id.split(",")[1]);
 
-                         ((SourceDigitale) connectables2D[row][column]).setListeOutput(txtValeur.getText());
+                        ((SourceDigitale) connectables2D[row][column]).setListeOutput(txtValeur.getText());
 
                         composantEditor.hide();
                     }
@@ -735,9 +737,9 @@ public class FXMLDocumentController implements Initializable {
 
                 composantEditor.setDetachable(false);
                 composantEditor.setContentNode(box);
-                composantEditor.show(source, 15);                        
-            }                    
-        }        
+                composantEditor.show(source, 15);
+            }
+        }
     }
 
     /**
@@ -755,7 +757,7 @@ public class FXMLDocumentController implements Initializable {
                 removeComposant(i, j);
             }
         }
-        
+
         resetLastSource();
     }
 
@@ -769,9 +771,9 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showSaveDialog(pane.getScene().getWindow());
         if (file != null) {
             writeFile(file);
-            items.add(String.format("Circuit sauvegardé : '%s'",file.getAbsolutePath()));
+            items.add(String.format("Circuit sauvegardé : '%s'", file.getAbsolutePath()));
         }
-        
+
     }
 
     /**
@@ -784,13 +786,14 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
         if (file != null) {
             readFile(file);
-            items.add(String.format("Circuit ouvert : '%s'",file.getAbsolutePath()));
+            items.add(String.format("Circuit ouvert : '%s'", file.getAbsolutePath()));
         }
-        
+
     }
 
     /**
      * Écriture de la Sauvegarde comme object sérialisable
+     *
      * @param file le fichier à utiliser pour la sauvegarde
      */
     private void writeFile(File file) {
@@ -804,12 +807,13 @@ public class FXMLDocumentController implements Initializable {
             oos.close();
         } catch (IOException ex) {
 
-        }            
+        }
     }
 
     /**
-     * Lecture d'un fichier avec un object Sauvegarde
-     * Initialise tous les composants et l'affichage sur la grille
+     * Lecture d'un fichier avec un object Sauvegarde Initialise tous les
+     * composants et l'affichage sur la grille
+     *
      * @param file le fichier à lire
      */
     private void readFile(File file) {
@@ -892,57 +896,59 @@ public class FXMLDocumentController implements Initializable {
                     tmp.setId("orGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof NOTGate) { 
+                } else if (c instanceof NOTGate) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "not1.png"));
                     tmp.setId("notGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof NORGate) { 
+                } else if (c instanceof NORGate) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "nor1.png"));
                     tmp.setId("norGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof NANDGate) { 
+                } else if (c instanceof NANDGate) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "nand1.png"));
                     tmp.setId("nandGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof XORGate) { 
+                } else if (c instanceof XORGate) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "xor1.png"));
                     tmp.setId("xorGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof XNORGate) { 
+                } else if (c instanceof XNORGate) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "xnor1.png"));
                     tmp.setId("xnorGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof LumiereOutput) { 
+                } else if (c instanceof LumiereOutput) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "lightOff.png"));
                     tmp.setId("light");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof SourceDigitale) { 
+                } else if (c instanceof SourceDigitale) {
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "sourceDigitale.png"));
                     tmp.setId("sourceDigitale");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 }
-                
+
             }
         }
 
     }
 
     /**
-     * Initialise les caractérisques nécessaire pour les ImageView contenu dans la grille
+     * Initialise les caractérisques nécessaire pour les ImageView contenu dans
+     * la grille
+     *
      * @param imgv la case en question
      * @param c le composant qui va dans la case
      */
@@ -960,10 +966,11 @@ public class FXMLDocumentController implements Initializable {
 
     /**
      * Retourne un Node selon la position
+     *
      * @param grid l'objet Grid à utiliser
      * @param row la position de la ligne
      * @param column la position de la colonne
-     * @return 
+     * @return
      */
     private Node getNodeByRowColumnIndex(GridPane grid, int row, int column) {
         Node result = null;
@@ -979,6 +986,7 @@ public class FXMLDocumentController implements Initializable {
 
     /**
      * Enlever un composant du tableau 2D
+     *
      * @param row la position de la ligne
      * @param column la position de la colonne
      */
@@ -988,6 +996,7 @@ public class FXMLDocumentController implements Initializable {
 
     /**
      * Ajoute un composant dans le tableau 2D
+     *
      * @param id le type de composant
      * @param row le position de la ligne
      * @param column la position de la colonne
@@ -1048,7 +1057,7 @@ public class FXMLDocumentController implements Initializable {
             items.add("Erreur : Composant pas implémenté");
         }
     }
-    
+
     public void setCircuitAnalogue(CircuitAnalogue c) {
         this.circuitAnalogue = c;
     }
@@ -1060,11 +1069,12 @@ public class FXMLDocumentController implements Initializable {
 
     public void setCircuitGraphique(AnalyseC cg) {
         this.circuitGraphique = cg;
-    }    
+    }
 
-    
     /**
-     * Un petit hack pour diminuer le temps nécessaire pour faire apparaitre le tooltip
+     * Un petit hack pour diminuer le temps nécessaire pour faire apparaitre le
+     * tooltip
+     *
      * @param tooltip l'objet Tooltip en question
      */
     private static void hackTooltipStartTiming(Tooltip tooltip) {

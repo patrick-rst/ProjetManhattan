@@ -76,7 +76,8 @@ public abstract class Connectable implements Serializable {
 
     /**
      * Retourne la rotation du composant lorsqu'il est dans la grille
-     * @return 
+     *
+     * @return
      */
     public double getRotation() {
         return rotation;
@@ -84,7 +85,8 @@ public abstract class Connectable implements Serializable {
 
     /**
      * Ajoute la rotation de la case dans la grille au composant
-     * @param rotation 
+     *
+     * @param rotation
      */
     public void setRotation(double rotation) {
         this.rotation = rotation;
