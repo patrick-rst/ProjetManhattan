@@ -11,7 +11,5 @@ public class AnalyseCircuitException extends RuntimeException {
     public AnalyseCircuitException(String message) {
         super(message);
     }
-    
-    
-    
+
 }
