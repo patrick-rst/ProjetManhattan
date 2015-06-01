@@ -70,6 +70,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -390,9 +391,43 @@ public class FXMLDocumentController implements Initializable {
             public void handle(ActionEvent t) {
                 Stage dialog = new Stage();
                 dialog.initStyle(StageStyle.UTILITY);
-                dialog.setHeight(500);
-                dialog.setWidth(500);
-                Scene scene = new Scene(new Group(new Text(25, 25, "Hello World!")));
+                dialog.setHeight(600);
+                dialog.setWidth(700);
+                
+                TextFlow group = new TextFlow();
+                Scene scene = new Scene(group);
+                
+                String general = "L'interface du programme est divisé en 4 parties. "
+                        + "La barre de menu en haut permet d'effectuer plusieurs opérations décrites ci-dessus. "
+                        + "Les onglets à gauche permettre d'utilser les différents composants disponibles en les drag and drop sur la grille. "
+                        + "La grille au centre est la zone de travail ou on peut construire un circuit. "
+                        + "La boite en bas affiche le résultats de l'analyse et les messages d'information ou d'erreur.\n\n"; 
+                
+                String sauvegarde = "Les circuits sur la grille peuvent être sauvegardé à l'aide du menu 'Fichier'. "
+                        + "Il faut choisir l'emplacement du fichier de sauvegarde et son nom. "
+                        + "Le fichier va avoir l'extension '.ser'. "
+                        + "Il est par la suite possible de charger le circuit sur la grille en ouvrant le fichier sauvegardé. "
+                        + "Les raccouris claviers sont 'Ctrl-S' pour sauvegarder et 'Ctrl-O' pour ouvrir.\n\n";
+                
+                String mode = "Deux modes sont disponibles, soit analogue et numérique. Chaque mode permet d'utiliser seulement les composant respectifs "
+                        + "de cette mode. Lorsqu'on change de mode, la grille est effacé (il faut donc sauvegarder avant si on veut conserver son circuit). "
+                        + "On peut changer de mode à l'aide du menu 'Mode' ou des raccouris claviers 'Ctrl-N' (pour numérique) et 'Crtl-A' (pour analogue).\n\n";
+                
+                String actionGenerale = "Pour analyser le circuit : Action > Exécuter ou appuyer sur la touche 'R'\n"
+                        + "Pour effacer tous les composants sur la grille : Action > Effacer Tout ou appuyer sur la touche 'W'\n"
+                        + "Pour arrêter l'analyse du circuit en numérique: Action > Arrêt ou appuyer sur la touche 'A'\n"
+                        + "Pour effacer la console : Action > Effacer la console ou appuyer sur la touche 'Ctrl-W'\n\n";
+                
+                String actionComposant = "Afin d'utiliser les commandes suivantes, un composant sur la grille doit être sélectionné en appuyant dessus avec la souris.\n"
+                        + "Pour tourner un composant : Action > Tourner ou appuyer sur la touche 'T'\n"
+                        + "Pour modifier la valeur d'un composant : Action > Modifier la valeur ou appuyer sur la touche 'E'\n"
+                        + "Pour changer l'image d'une porte numérique : Action > Changer l'image ou appuyer sur la touche 'M'\n\n";
+                
+
+                Text all = new Text(general+sauvegarde+mode+actionGenerale+actionComposant);
+                
+                group.getChildren().add(all);                
+                
                 dialog.setScene(scene);
                 dialog.show();
             }
@@ -411,7 +446,8 @@ public class FXMLDocumentController implements Initializable {
 
                 Text title = new Text(25, 25, "Projet Manhattan");
                 Text credits = new Text(25, 50, "Marc-Antoine Lalonde\nPatrick Richer St-Onge");
-                group.getChildren().addAll(title, credits);
+                Text info = new Text(25, 100, "Ce programme a été créé dans le cadre du cours de projet d'intégration \nen Sciences informatiques et mathématiques au Collège de Bois-de-Boulogne.");
+                group.getChildren().addAll(title, credits, info);
 
                 dialog.setScene(scene);
                 dialog.show();
