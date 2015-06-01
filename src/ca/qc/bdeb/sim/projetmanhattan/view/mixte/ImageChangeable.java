@@ -15,9 +15,24 @@ public abstract class ImageChangeable extends Connectable {
      */
     protected String imageFolder = "file:src/ca/qc/bdeb/sim/projetmanhattan/view/img/";
 
+    /**
+     * Liste d'images qui n'ont pas de contour vert
+     */
     protected transient ArrayList<Image> listeImages;
+
+    /**
+     * Liste d'images avec un contour vert
+     */
     protected transient ArrayList<Image> listeImagesActif;
+
+    /**
+     * L'index de l'image en cours dans la liste
+     */
     protected int imageIndex;
+
+    /**
+     * L'image en cours doit être dans listeImages ou ListeImagesActif
+     */
     protected boolean actif;
 
     public ImageChangeable(TypeComposant typeComposant) {
