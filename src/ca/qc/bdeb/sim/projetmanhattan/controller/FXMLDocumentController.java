@@ -14,6 +14,7 @@ import ca.qc.bdeb.sim.projetmanhattan.view.analog.Resistance;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceCourant;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.SourceFEM;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.ANDGate;
+import ca.qc.bdeb.sim.projetmanhattan.view.digital.LogicGateAbstraite;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.LumiereOutput;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NANDGate;
 import ca.qc.bdeb.sim.projetmanhattan.view.digital.NORGate;
@@ -250,6 +251,12 @@ public class FXMLDocumentController implements Initializable {
                 ImageChangeable compAllumable = (ImageChangeable) connectables2D[row][column];
 
                 compAllumable.nextImage();
+                
+                if (compAllumable instanceof LogicGateAbstraite) {
+                    LogicGateAbstraite lga = (LogicGateAbstraite) compAllumable;
+                    lga.switchGate();
+                }
+                
                 imgView.setImage(compAllumable.getImage(compAllumable.isActif()));
             }
         }
