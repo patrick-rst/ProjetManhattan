@@ -97,6 +97,10 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
                 listeOutput.add(Boolean.FALSE);
             }
         }
+        
+        if (listeOutput.size() == 0) {
+            listeOutput.add(Boolean.FALSE);
+        }
     }
 
     /**
