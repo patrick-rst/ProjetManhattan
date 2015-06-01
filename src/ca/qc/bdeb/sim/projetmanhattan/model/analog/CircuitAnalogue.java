@@ -98,11 +98,9 @@ public class CircuitAnalogue implements Circuit {
                 distribuerInfos();
 
             } catch (Exception e) {
-                System.out.println("Erreur lors de l'analyse du circuit");
                 throw new AnalyseCircuitException("Erreur lors de l'analyse du circuit");
             }
         } else {
-            System.out.println("Circuit non groundé!");
             throw new CircuitPasGroundException("Circuit non groundé!");
         }
     }

@@ -2,6 +2,7 @@ package ca.qc.bdeb.sim.projetmanhattan.controller;
 
 import ca.qc.bdeb.sim.projetmanhattan.exceptions.AnalyseCircuitException;
 import ca.qc.bdeb.sim.projetmanhattan.exceptions.CircuitPasGroundException;
+import ca.qc.bdeb.sim.projetmanhattan.exceptions.LogicGateConnectionException;
 import ca.qc.bdeb.sim.projetmanhattan.model.analog.CircuitAnalogue;
 import ca.qc.bdeb.sim.projetmanhattan.model.digital.CircuitDigital;
 import ca.qc.bdeb.sim.projetmanhattan.view.analog.Ground;
@@ -565,6 +566,7 @@ public class FXMLDocumentController implements Initializable {
             }
 
         } else if (numerique.isDisabled() == false) {
+            //Numérique
             stop();
             
             //Une ptit pause pour laisse le temps au thread d'arrêter
@@ -573,8 +575,12 @@ public class FXMLDocumentController implements Initializable {
             } catch(InterruptedException e) {
                 Thread.currentThread().interrupt();
             }            
+            try {
+                circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
+            } catch (LogicGateConnectionException e) {
+                items.add(e.getMessage());
+            }
             
-            circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
             circuitNumerique.analyserCircuit();
         }
     }

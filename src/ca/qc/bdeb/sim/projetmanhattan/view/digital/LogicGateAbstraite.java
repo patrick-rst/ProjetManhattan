@@ -1,5 +1,6 @@
 package ca.qc.bdeb.sim.projetmanhattan.view.digital;
 
+import ca.qc.bdeb.sim.projetmanhattan.exceptions.LogicGateConnectionException;
 import ca.qc.bdeb.sim.projetmanhattan.model.mixte.Noeud;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.ImageChangeable;
 import ca.qc.bdeb.sim.projetmanhattan.view.mixte.TypeComposant;
@@ -91,7 +92,7 @@ public abstract class LogicGateAbstraite extends ImageChangeable implements Comp
         } else if (noeudEntreeB == null) {
             noeudEntreeB = noeud;
         } else {
-            System.out.println("Erreur: Logic Gate mal connectée");
+            throw new LogicGateConnectionException("Erreur: Logic Gate mal connectée");
         }
     }
 
