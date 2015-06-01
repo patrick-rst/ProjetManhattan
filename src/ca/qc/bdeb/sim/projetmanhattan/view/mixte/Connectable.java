@@ -74,10 +74,18 @@ public abstract class Connectable implements Serializable {
         return imageActive;
     }
 
+    /**
+     * Retourne la rotation du composant lorsqu'il est dans la grille
+     * @return 
+     */
     public double getRotation() {
         return rotation;
     }
 
+    /**
+     * Ajoute la rotation de la case dans la grille au composant
+     * @param rotation 
+     */
     public void setRotation(double rotation) {
         this.rotation = rotation;
     }

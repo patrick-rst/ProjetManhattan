@@ -99,6 +99,10 @@ public class SourceDigitale extends ImageChangeable implements ComposantDigital 
         }
     }
 
+    /**
+     * Retourne une chaine contenant la liste des intervalles ou la source émet un courant
+     * @return une chaine de 0 et 1
+     */
     public String getListeOutput() {
         String chaine = "";
         for (boolean b : listeOutput) {

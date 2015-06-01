@@ -40,14 +40,6 @@ public class LumiereOutput extends ImageChangeable implements ComposantDigital {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void switchOn() {
-        actif = true;
-    }
-
-    private void switchOff() {
-        actif = false;
-    }
-
     @Override
     public boolean isActif() {
         return actif;

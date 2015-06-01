@@ -34,18 +34,34 @@ public abstract class ImageChangeable extends Connectable {
      */
     public abstract boolean isActif();
 
+    /**
+     * Ajouter une image non-active (pas de contour vert) à la liste
+     * @param filename le nom de l'image
+     */
     protected void addImage(String filename) {
         this.listeImages.add(new Image(this.imageFolder + filename));
     }
 
+    /**
+     * Ajouter une image active (contour vert) à la liste
+     * @param filename le nom de l'image
+     */
     protected void addImageActif(String filename) {
         this.listeImagesActif.add(new Image(this.imageFolder + filename));
     }
 
+    /**
+     * Augmente l'index de 1 et retourne à 0 lorsque plus grand que le nombre d'image
+     */
     public void nextImage() {
         this.imageIndex = (this.imageIndex + 1) % this.listeImages.size();
     }
 
+    /**
+     * Retourne l'image qui doit être utilisé par l'interface
+     * @param actif true pour une image avec contour vert, false pour l'image sans contour
+     * @return l'image en question
+     */
     public Image getImage(boolean actif) {
         if (actif == true) {
             return this.listeImagesActif.get(this.imageIndex);
