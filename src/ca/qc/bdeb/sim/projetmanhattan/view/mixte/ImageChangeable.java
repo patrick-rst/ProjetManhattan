@@ -85,4 +85,14 @@ public abstract class ImageChangeable extends Connectable {
         }
 
     }
+
+    /**
+     * Permet de dire si le composant est actif
+     * @param actif true/false
+     */
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
+    
+    
 }

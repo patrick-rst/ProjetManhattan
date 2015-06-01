@@ -330,6 +330,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemSave.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                stop();
                 fileChooser();
             }
         });
@@ -337,6 +338,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemLoad.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                wipe();
                 fileOpener();
             }
         });
@@ -351,9 +353,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemStop.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
-                if (numerique.isDisabled() == false) {
-                    circuitNumerique.stopAnalyse();
-                }                
+                stop();
             }
         });        
 
@@ -367,6 +367,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemRotate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                stop();
                 rotate();
             }
         });
@@ -374,6 +375,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemChangeImage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                stop();
                 changeImage();
             }
         });
@@ -381,6 +383,7 @@ public class FXMLDocumentController implements Initializable {
         mnuItemValue.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
+                stop();
                 modifierValeur();
             }
         });        
@@ -548,11 +551,39 @@ public class FXMLDocumentController implements Initializable {
             }
 
         } else if (numerique.isDisabled() == false) {
-            //Numérique
-            circuitNumerique.stopAnalyse();
+            stop();
+            
+            //Une ptit pause pour laisse le temps au thread d'arrêter
+            try {
+                Thread.sleep(200);
+            } catch(InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }            
+            
             circuitGraphique.preparerAnalyse(circuitNumerique, connectables2D);
             circuitNumerique.analyserCircuit();
         }
+    }
+    
+    /**
+     * Arrête l'analyse du circuit numérique
+     */
+    private void stop() {
+        if (numerique.isDisabled() == false) {
+        circuitNumerique.stopAnalyse();
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    ImageView img = (ImageView) getNodeByRowColumnIndex(grid, i, j);
+
+                    if (connectables2D[i][j] instanceof ImageChangeable) {
+                        ImageChangeable ic = (ImageChangeable) connectables2D[i][j];
+                        ic.setActif(false);
+                        img.setImage(ic.getImage(false));
+                    }
+
+                }
+            }                    
+        } 
     }
     
     /**
@@ -690,9 +721,7 @@ public class FXMLDocumentController implements Initializable {
      * Efface au complet la grille et reset tout
      */
     private void wipe() {
-        if (numerique.isDisabled() == false) {
-            circuitNumerique.stopAnalyse();
-        }
+        stop();
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -716,8 +745,9 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showSaveDialog(pane.getScene().getWindow());
         if (file != null) {
             writeFile(file);
+            items.add(String.format("Circuit sauvegardé : '%s'",file.getAbsolutePath()));
         }
-        items.add(String.format("Circuit sauvegardé : '%s'",file.getAbsolutePath()));
+        
     }
 
     /**
@@ -730,8 +760,9 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
         if (file != null) {
             readFile(file);
+            items.add(String.format("Circuit ouvert : '%s'",file.getAbsolutePath()));
         }
-        items.add(String.format("Circuit ouvert : '%s'",file.getAbsolutePath()));
+        
     }
 
     /**
@@ -749,7 +780,7 @@ public class FXMLDocumentController implements Initializable {
             oos.close();
         } catch (IOException ex) {
 
-        }
+        }            
     }
 
     /**
@@ -779,8 +810,7 @@ public class FXMLDocumentController implements Initializable {
                 Connectable c = connectables2D[row][column];
                 if (c instanceof Resistance) {
                     ImageView tmp = new ImageView();
-                    Resistance r = (Resistance) c;
-                    tmp.setImage(new Image(r.getImgPath()));
+                    tmp.setImage(new Image(pathImg + "resistance.png"));
                     tmp.setId("resistance");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
@@ -827,27 +857,61 @@ public class FXMLDocumentController implements Initializable {
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof ANDGate) {
-                    //ANDGate compAllumable = (ANDGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "and1.png"));
                     tmp.setId("andGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
                 } else if (c instanceof ORGate) {
-                    //ORGate compAllumable = (ORGate) c; 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "or1.png"));
                     tmp.setId("orGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
-                } else if (c instanceof NOTGate) {
-                    //NOTGate compAllumable = (NOTGate) c; 
+                } else if (c instanceof NOTGate) { 
                     ImageView tmp = new ImageView();
                     tmp.setImage(new Image(pathImg + "not1.png"));
                     tmp.setId("notGate");
                     initializeImageView(tmp, c);
                     grid.add(tmp, column, row);
+                } else if (c instanceof NORGate) { 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "nor1.png"));
+                    tmp.setId("norGate");
+                    initializeImageView(tmp, c);
+                    grid.add(tmp, column, row);
+                } else if (c instanceof NANDGate) { 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "nand1.png"));
+                    tmp.setId("nandGate");
+                    initializeImageView(tmp, c);
+                    grid.add(tmp, column, row);
+                } else if (c instanceof XORGate) { 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "xor1.png"));
+                    tmp.setId("xorGate");
+                    initializeImageView(tmp, c);
+                    grid.add(tmp, column, row);
+                } else if (c instanceof XNORGate) { 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "xnor1.png"));
+                    tmp.setId("xnorGate");
+                    initializeImageView(tmp, c);
+                    grid.add(tmp, column, row);
+                } else if (c instanceof LumiereOutput) { 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "lightOff.png"));
+                    tmp.setId("light");
+                    initializeImageView(tmp, c);
+                    grid.add(tmp, column, row);
+                } else if (c instanceof SourceDigitale) { 
+                    ImageView tmp = new ImageView();
+                    tmp.setImage(new Image(pathImg + "sourceDigitale.png"));
+                    tmp.setId("sourceDigitale");
+                    initializeImageView(tmp, c);
+                    grid.add(tmp, column, row);
                 }
+                
             }
         }
 
